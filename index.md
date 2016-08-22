@@ -19,14 +19,14 @@ The aim of this course is to provide students with the skills necessary to tell 
 
 **Instructor**: [Nicholas Reich](http://reichlab.github.io)
 
-**TA**: Chu-Yuan Luo
+**TA**: TBD
 
-**Office hours**: Wednesdays 11:30-12:30 (Instructor), or Mondays 12-1pm (TA, in 211 Arnold House), or by appointment
+**Office hours**: TBD
 
 **Prerequisites**: <br> 
 One of any of the following introductory stats courses taught at UMass: BIOSTAT 391B, STAT 240, STAT 501, ResEcon 212, PSYCH 240. If you have not taken an intro stats course at UMass but still want to enroll in this course, you are encouraged to petition the instructor for permission, especially if any of the following apply: (a) you have taken AP Stats in high school, (b) you have taken a college-level intro stats course just not one of the ones listed above, or (c) you are confident in your quantitative skills and your ability to succeed in a fast-paced, advanced introductory course.
 
-**Lectures**: Tu/Th, 2:30pm&ndash;3:45pm
+**Lectures**: Tu/Th, 10:00am&ndash;11:15am
 
 **Required books** <br>
 &nbsp; &nbsp; Kaplan D. 2012. [Statistical Modeling: A Fresh Approach](http://www.mosaic-web.org/go/StatisticalModeling/). 
