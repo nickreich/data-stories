@@ -1,0 +1,46 @@
+---
+title: "Quiz: Interpreting Coefficients"
+author: "Nicholas Reich, adapted from Project MOSAIC"
+date: "February 14, 2016"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+The quiz is available at this link [http://goo.gl/forms/uEMm375GDj](http://goo.gl/forms/uEMm375GDj).
+
+## Overview
+
+We will load the data set JAMA-HR.csv which contains data from a report in the Journal of the American Medical Association.
+
+Each case is an individual person. The variables are 
+
+ - Temp: body temperature in degrees F 
+ - HR: heart rate in beats per minute
+ - Sex: coded as F and M
+
+Here are some initial commands to load and look at the dataset: 
+```{r, message=FALSE}
+jama = fetch::fetchData("JAMA-HR.csv")
+nrow(jama)
+head(jama)
+```
+
+## Models
+Here are several different model outputs for you to consider. Recall that the `coef()` function returns a named vector with the coefficients from the fitted model.
+
+```{r}
+mod1 = lm(HR ~ 1, data=jama) 
+coef(mod1)
+mod2 = lm(HR ~ Temp, data=jama) 
+coef(mod2)
+mod3 = lm(HR ~ Sex, data=jama) 
+coef(mod3)
+mod4 = lm(HR ~ Temp + Sex, data=jama) 
+coef(mod4)
+mod5 = lm(HR ~ Sex * Temp, data=jama) 
+coef(mod5)
+```
+

@@ -1,0 +1,91 @@
+---
+title: 'Quiz: Logistic Regression'
+author: "Nicholas Reich, adapted from Project MOSAIC"
+date: "April, 2016"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Overview
+
+The NASA space shuttle Challenger had a catastrophic accident during launch on January 28, 1986. Photographic evidence from the launch showed that the accident resulted from a plume of hot flame from the side of one of the booster rockets which cut into the main fuel tank. US President Reagan appointed a commission to investigate the accident. The commission concluded that the jet was due to the failure of an O-ring gasket between segments of the booster rocket.
+
+An important issue for the commission was whether the accident was avoidable. Attention focused on the fact that the ground temperature at the time of launch was 31 degrees Fahrenheit, much lower than for any previous launch. Commission member and Nobel laureate physicist Richard Feynman famously demonstrated, using a glass of ice water and a C-clamp, that the O-rings were very inflexible when cold. But did the data available to NASA before the launch indicate a high risk of an O-ring failure?
+
+Here are some initial commands to load and look at the dataset, which has 23 observations, shown below sorted by temperature: 
+```{r, message=FALSE, echo=FALSE}
+library(pander)
+oring = fetch::fetchData("oring-damage.csv")
+oring_srted <- oring[order(oring$temp),]
+row.names(oring_srted) <- NULL #seq_along(1:nrow(oring))
+pander(oring_srted)
+```
+
+We fit a model to predict booster rocket damage as a function of temperature at launch. Before fitting the model, we centered our temperature variable by subtracting 60 from each observation so the model we fit is:
+
+$$ logit[Pr(damage==1|temp)] = \beta_0 + \beta_1 \cdot (temp - 60). $$
+
+This is the fitted model output from R.
+```{r, echo=FALSE}
+oring$temp_ctr <- oring$temp - 60
+mod = glm(damage ~ temp_ctr, data = oring, family = "binomial")
+pander(round(summary(mod)$coef,2))
+```
+
+
+
+```{r, echo=FALSE, include=FALSE}
+cm <- coef(mod)
+round(exp(cm),2)
+```
+We also note that $e^{`r round(cm[1], 2)`}$=`r round(exp(cm[1]), 2)`, and $e^{`r round(cm[2], 2)`}$=`r round(exp(cm[2]), 2)`.
+
+And here are a few graphs illustrating possible fitted models to the data.
+
+```{r, echo=FALSE}
+library(ggplot2)
+dat <- dplyr::data_frame(x = 30:90,
+                  y1 = boot::inv.logit(cm[1] + (x-60)*cm[2]),
+                  y2 = boot::inv.logit(cm[1] + (x-60)*-cm[2]),
+                  y3 = boot::inv.logit(cm[1] + (x-45)*cm[2]))
+p1 <- ggplot(dat, aes(x)) +
+    geom_line(aes(y=y1)) + ylab(NULL) + xlab("temp.") + #geom_rug(aes(jitter(temp)), data=oring) +
+    ggtitle("Figure B")
+    #stat_smooth(aes(y=y1), se=FALSE, method='glm', method.args=list(family='binomial')) + ylab("prob. of damage") + xlab("temp.")
+p2 <- ggplot(dat, aes(x)) +
+    geom_line(aes(y=y2)) + ylab("prob. of damage") + xlab("temp.") +
+    ggtitle("Figure A")
+    #stat_smooth(aes(y=y2), se=FALSE, method='glm', method.args=list(family='binomial')) + ylab("prob. of damage") + xlab("temp.")
+p3 <- ggplot(dat, aes(x)) +
+    geom_line(aes(y=y3)) + ylab(NULL) + xlab("temp.") +
+    ggtitle("Figure C")
+    #stat_smooth(aes(y=y3), se=FALSE, method='glm', method.args=list(family='binomial')) + ylab("prob. of damage") + xlab("temp.")
+gridExtra::grid.arrange(p2, p1, p3, ncol=3)
+```
+
+
+<!--
+Question 1: what is the interpretation of $\beta_0$ in this model?
+
+Question: What is the model estimated probability of booster rocket damage associated with a temperature of 70 degrees. Hint: inv.logit() is the inverse of the logit function or logit^{-1}()
+
+ - 1.11 - 0.23 * 70
+ - 1.11 - 0.23 * 10
+ - inv.logit(1.11 - 0.23 * 10)
+ - inv.logit(1.11 - 0.23 * 70)
+  - - 0.23 + 1.11 * 10
+ - inv.logit(- 0.23 + 1.11 * 70)
+
+
+Question 2: Which graph shows the predicted probabilities of damage from the fitted model shown above?
+
+Question: What are reasons for using the logit link function in logistic regression? 
+
+ - prevents fitted probabilities from being outside the interval (0,1)
+ - it gives you coefficients that have the (reasonably) intuitive interpretation of odds ratios
+ - it is the only reasonable link function for binary data
+
+-->
