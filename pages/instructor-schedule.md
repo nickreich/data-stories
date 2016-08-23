@@ -18,25 +18,26 @@ _Thursday, week 1_
 _Tuesday, week 2_
 
  - wrap-up of random shuffle activity: they developed a classification model! classical train/validate/test methodology implemented.
- - lecture on Principles of Analytic Data Graphics (25 min)
+ - What is data lecture, with key ideas: 
+    - data are our imperfect measures of the world, statistics helps us make sense of noisy observations (e.g. single binary outcome: polls, relationship with 2 or more variables: correlation, what fraction of earth's surface is covered in water?)
+    - randomness prevents us from seeing things perfectly, statistics are our glasses that reduce the blur
+    - appropriate understanding/use of uncertainty can be INFORMATIVE
+    - We can use math or algorithms to help us understand uncertainty
+    - data collection lab: In teams, design a data collection experiment collecting ANONYMOUS data on UMass students. To start, ignore let's think about what kind of data we could collect on students just by watching. (clothes color/shape/style/type, gender, glasses, hat, skin color, hair color, location/setting, time of day, data collector, ...) Limit data collection to 5-6 variables, design a question and a mechanism for collecting data.
 
 _Thursday, week 2_
 
- - check-ins: post reproducible code on Piazza for help!
- - data-viz lecture: ggplot
- - ggplot/mplot lab with NHANES data
+ - lecture on Principles of Analytic Data Graphics: relate to analyses of their data (25 min)
 
 _Tuesday, week 3_
 
- - blog post presentations
- - multivariate data visualization lecture
+ - New lecture on data summaries, data variation
+ - perception discussion
+
 
 _Thurs, week 3_
 
- - quiz
- - table plot review
- - perception discussion
- - 20 minutes for project planning
+ - Data experiment presentations
  
 _Tues, week 4_
  

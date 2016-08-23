@@ -11,14 +11,14 @@ tagline:
 Week |       |     | Topic   | Notes | HW Due | Reading
 ---- | ----- | --- | ------- | ----- |:------:| -------
  1   | Sep | 6, 8  | Intro, motivation | [Lec 1](../assets/lectures/lecture1-intro-regression/lecture1-intro-regression.pdf), iPod lab [ind](../assets/labs/lab1-ipod-shuffle/lab1-ipod-shuffle-individual.html), [grp](../assets/labs/lab1-ipod-shuffle/lab1-ipod-shuffle-group.html) | | [Syllabus](../assets/syllabus/data-stories-reich-syllabus.pdf), Kaplan 1.
- 2   |     | 13, 15  &nbsp;| What is data? | | | Kaplan 2.  
- 3   |     | 20, 22 | Data visualization | |  | [Data viz reading list](data-viz-reading-list.html)
+ 2   |     | 13, 15  &nbsp;| What is data? | | Lab 1 | Kaplan 2.  
+ 3   |     | 20, 22 | Data visualization and summary | | Lab 2 | [Data viz reading list](data-viz-reading-list.html), Kaplan 3
  4   |     | 27, 29 | Language of Models | [Lec 2](../assets/lectures/data-viz-NHANES/Presentation-NHANES.html) | |  Kaplan Ch. 6, 7
  5   | Oct | 4, 6   | Fitting Linear Models | | |  Kaplan Ch. 8
  6   |     | 13     | Linear Regression | [Lec 3](../assets/lectures/lecture3-slr/lec3-slr.pdf) | [Lab 2](../assets/labs/lab2-slr/lab2-slr.pdf) |  OpenIntro Ch. 7
  7   |     | 18, 20 | Multiple Linear Regression | [Lec 4](../assets/lectures/lecture4-mlr/lec4-mlr.pdf) | [Project 1](project1.html) | OpenIntro Ch. 8
  8   |     | 25, 27   | Multiple Linear Regression | [Lec 5](../assets/lectures/lecture5-mlr-inference/lecture5-mlr-inference.pdf) | [Lab 3](../assets/labs/lab3-mlr-practice/lab3-mlr-practice.pdf) |  Kaplan Ch. 11, 12 
-     | Nov | 1, 3 | Career Fair, MLR | [Lec 6](../assets/lectures/lecture6-confidence/lady-slides.html) | | 
+     | Nov | 1, 3 | MLR | [Lec 6](../assets/lectures/lecture6-confidence/lady-slides.html) | | 
  9   |     | 8, 10 |  Hypothesis testing | [Lec 7](../assets/lectures/lecture7-model-confidence/lecture7-model-confidence.pdf) | [Lab 4](../assets/labs/lab4-fev/lab4-fev.pdf) | Kaplan Ch. 11-15
  10  |     | 15, 17 | Logistic regression | [Lec 8](../assets/lectures/lecture8-logistic-regression/lecture8-logistic-regression.pdf)| [Lab 5](../assets/labs/lab5-inference/lab5.pdf) | Kaplan Ch 16, _OI_ Ch 8
  11  |     | 22, 24 | Thanksgiving recess. | |  |
