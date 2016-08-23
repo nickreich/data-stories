@@ -11,8 +11,8 @@ tagline:
 Week |       |     | Topic   | Notes | HW Due | Reading
 ---- | ----- | --- | ------- | ----- |:------:| -------
  1   | Sep | 6, 8  | Intro, motivation | [Lec 1](../assets/lectures/lecture1-intro-regression/lecture1-intro-regression.pdf), iPod lab [ind](../assets/labs/lab1-ipod-shuffle/lab1-ipod-shuffle-individual.html), [grp](../assets/labs/lab1-ipod-shuffle/lab1-ipod-shuffle-group.html) | | [Syllabus](../assets/syllabus/data-stories-reich-syllabus.pdf), Kaplan 1.
- 2   |     | 13, 15  &nbsp;| Data visualization | | |  [Data viz reading list](data-viz-reading-list.html)
- 3   |     | 20, 22 | Data visualization | |  |
+ 2   |     | 13, 15  &nbsp;| What is data? | | | Kaplan 2.  
+ 3   |     | 20, 22 | Data visualization | |  | [Data viz reading list](data-viz-reading-list.html)
  4   |     | 27, 29 | Language of Models | [Lec 2](../assets/lectures/data-viz-NHANES/Presentation-NHANES.html) | |  Kaplan Ch. 6, 7
  5   | Oct | 4, 6   | Fitting Linear Models | | |  Kaplan Ch. 8
  6   |     | 13     | Linear Regression | [Lec 3](../assets/lectures/lecture3-slr/lec3-slr.pdf) | [Lab 2](../assets/labs/lab2-slr/lab2-slr.pdf) |  OpenIntro Ch. 7

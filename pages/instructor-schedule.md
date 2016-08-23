@@ -7,17 +7,16 @@ tagline:
 _Tuesday, week 1_
 
  - Welcome, introductions, review course website and course goals (15 min)
- - Wits and wagers (10 min)
- - Lecture: Intro to telling stories with data (30 min)
+ - Wits and wagers (15 min)
+ - Lecture: Intro to telling stories with data (45 min)
  
 _Thursday, week 1_
 
  - course technology intro: website, piazza, Google Drive (20 min)
- - iPod lab (40 min)
+ - iPod lab (50 min)
  
 _Tuesday, week 2_
 
- - R check-in, Q&A
  - wrap-up of random shuffle activity: they developed a classification model! classical train/validate/test methodology implemented.
  - lecture on Principles of Analytic Data Graphics (25 min)
 
