@@ -27,9 +27,14 @@ The source code and PDF files associated with the lectures will be posted below 
 
 * [Lab 1: iPod shuffle](../assets/labs/lab1-ipod-shuffle/lab1-ipod-shuffle-individual.html)
 * Lab 2: Data collection and experiment
+* Lab 3: Reproducing a blog post
+* Lab 4: Regression (both SLR and MLR)
+* [Lab 5: Analyzing FEV data](../assets/labs/lab4-fev/lab4-fev.pdf)
+
+
 * [Lab 3: Linear Regression](../assets/labs/lab2-slr/lab2-slr.pdf)
 * [Lab 4: Multiple Linear Regression](../assets/labs/lab3-mlr-practice/lab3-mlr-practice.pdf)
-* [Lab 5: Analyzing FEV data](../assets/labs/lab4-fev/lab4-fev.pdf)
+* [Lab 5: Model selection in analyzing forced expiratory volume](../assets/labs/lab4-fev/lab4-fev.pdf)
 * [Lab 6: Hypothesis testing in linear regression models](../assets/labs/lab5-inference/lab5.pdf)
 * [Lab 7: Analyzing the Titanic data](../assets/labs/lab6-titanic/lab6-titanic.pdf)
 

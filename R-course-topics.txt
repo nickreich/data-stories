@@ -1,0 +1,7 @@
+Topics listed for a given week are the R skills covered by the homework due on the Friday of that week.
+Week 1: Intro to R (history, installation)
+Week 2: Reading in data, simple data operations, basic R, different ways to run R (RMarkdown reports vs interactive session).
+Week 3: Data visualization (ggplot2)
+Week 4: Data manipulation (dplyr + tidyr)
+Week 5: Linear Regression 
+Week 6: 
