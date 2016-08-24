@@ -1,0 +1,64 @@
+\documentclass{article}
+
+\input{../../slide-includes/statsTeachR-preamble-labs}
+
+\begin{document}
+
+
+\license{This is a product of \href{http://statsteachr.org}{statsTeachR} that is released under a \href{http://creativecommons.org/licenses/by-sa/3.0}{Creative Commons Attribution-ShareAlike 3.0 Unported}.}
+
+\section*{Lab 1: Let's collect some data!}
+
+This lab will guide you and your group through the process of designing and collecting some data on your fellow students at UMass. The main goals of this lab are to get you to think carefully about what the process of moving from a specific question, to data collection, to preparing the data for analysis.
+
+Lab writeup for the group is due on Wednesday, September 14 at 5pm. Each group will give a 3-5 minute presentation (strict limit!) on Thursday September 15th summarizing their hypothesis, the data collection process, and qualitative results (NOTE: I do not expect quantitative summaries of your data in this presentation). Each team can, optionally, use 1-2 slides to describe the study.
+
+\subsection*{Questions to answer on your own}
+
+\begin{exercise}
+Look around the room at your classmates. What characteristics and features can you reliably and quickly identify about them? 
+\end{exercise}
+
+\bigskip
+
+\begin{exercise}
+Pick three of these features, and sketch out below a table where you collect data on a few of your classmates. 
+\end{exercise}
+
+\clearpage
+
+\begin{exercise}
+Take a minute and reflect on the choices that you made when creating this table. What defines a row and column in your small dataset? What types of variables were you collecting and how did you ``encode'' them in your table?
+\end{exercise}
+
+\subsection*{Questions to answer with your group}
+
+
+\begin{exercise}
+Give each member of the group 2-3 minutes to present the data they collected and how they organized their table. Discuss similarities and differences between how you each collected data.
+\end{exercise}
+
+\begin{exercise}
+As a group, brainstorm different settings on campus where you might expect the composition of students or groups of students (according to features that you think you can measure accurately) will be different. Write down a few below. 
+\end{exercise}
+
+\vspace{7em}
+
+\begin{exercise}
+Take the list you just wrote down and turn it into a series of hypotheses, with a proposed mechanism. For example, ``we hypothesize that group A is different from group B because XX.''.
+\end{exercise}
+
+\vspace{7em}
+
+\begin{exercise}
+Plan out, as a group, how you will collect data to test one or two of the hypotheses you define above. This should include logistics (when and where will each member collect data? what data will they collect?) and technical details (how will you create a dataset that you all can work from and enter data into?).
+\end{exercise}
+
+
+\subsection*{Things to hand in and present}
+
+Each group should prepare a brief written report (no more than 2 pages) describing their study. The report should include a description of the hypothesis and the data collection protocol. Figures or diagrams may be included for illustrative purposes. Additionally, include a description of the data collected as well as a proposal for how this data could be used to evaluate the hypothesis.
+
+
+\end{document}
+

@@ -1,0 +1,75 @@
+---
+title: "How Random is the iPod's shuffle?"
+author: ''
+date: "January 20, 2016"
+output: pdf_document
+---
+
+### Is the iPod's shuffle random?
+[The following narrative is excerpts from an article by Carl Bialik in the Wall Street Journal (9-21-2006), the iPod User’s Manual, and a Keynote Address by Steve Jobs.]
+
+At the original iPod product launch, Steve Jobs, CEO of Apple, Inc. stated "...iPod, a thousand songs in your pocket. This is a major, major breakthrough." One of the amazing aspects about storing 1000 songs in your pocket is the ability to become your own disc jockey. A feature built into the iPod software called "shuffle" further enhances this aspect. The shuffle feature takes a list of songs, called a playlist, and rearranges them in a random order. Each song will appear in the shuffled playlist only once.
+
+<img src="ipod-image.jpg" alt="ipod" style="width: 300px; float: right"/>
+
+Earlier this week, Mads Haahr ordered a customized iPod with "God Plays Dice" engraved on its back. Mr. Haahr -- a random-number enthusiast, lecturer in computer science at Trinity College in Dublin and keeper of the Web site Random.org, a popular source of random numbers -- intends to answer a question that has long bedeviled users of Apple's popular music player: Does the shuffle function really play users' songs in random order?
+Since Apple Computer Inc. added the shuffle function to the main menu of iPods two years ago, the question has been raised by the New York Times and Newsweek; debated on Slashdot and other Web sites; and inspired a regular feature in the Onion.
+
+The iPod's shuffle feature also has sparked interest from a cadre of random-number experts and enthusiasts such as Mr. Haahr.  
+
+Just what makes a string of numbers random?  Say you have ten songs in your iPod, numbered one to ten. A random sequence must contain each number in equal frequency, so that, in the iPod example, none of your songs plays much more than any other in the long run. Also, it must be impossible to predict which number comes next, so song No. 5 can't always follow song No. 3.
+
+How would you know if your sequence of numbers is random? Just looking at them wouldn't help. "People are notoriously bad at being a random number generator or recognizing something as random," said Landon Curt Noll, one of the creators of LavaRnd.org. People tend to seek patterns and order where none exist – perhaps even in a shuffled iPod playlist, where they might pay more attention when their favorite songs are playing, and thus assume that those songs are in heavier rotation.
+ 
+
+### Questions to answer on your own
+
+1.	Do you have an iPod or some other digital music player? Have you used the shuffle feature? If you have used the shuffle feature, have you ever wondered how truly random it is?
+
+\bigskip &nbsp;
+
+\bigskip &nbsp;
+
+\bigskip &nbsp;
+
+\bigskip &nbsp;
+
+\clearpage
+
+2.	What comes to mind when you hear the word, “random”?
+
+\bigskip &nbsp;
+
+\bigskip &nbsp;
+
+\bigskip &nbsp;
+
+\bigskip &nbsp;
+
+3.	If the iPod shuffle feature is not producing a random sequence of songs, then what might the sequence of songs look like? What would you expect to see?
+
+\bigskip &nbsp;
+
+\bigskip &nbsp;
+
+\bigskip &nbsp;
+
+\bigskip &nbsp;
+
+
+4.	Do you think you can be 100% certain that a sequence of songs was not randomly generated? Explain your answer.
+
+\bigskip &nbsp;
+
+\bigskip &nbsp;
+
+\bigskip &nbsp;
+
+\bigskip &nbsp;
+
+
+Share and discuss your responses to each of the 4 questions with your group.
+
+
+
+*This activity has been adapted by Nicholas Reich from [CATALST teaching materials availble under a CC-BY-NC-SA license](https://www.causeweb.org/workshop/uscots09_catalyst4change/), and are made available under the same license.* 

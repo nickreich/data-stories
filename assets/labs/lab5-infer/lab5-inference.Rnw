@@ -1,0 +1,64 @@
+\documentclass{article}
+
+\input{../../slide-includes/statsTeachR-preamble-labs}
+
+\begin{document}
+
+
+\license{This is a product of \href{http://statsteachr.org}{statsTeachR} that is released under a \href{http://creativecommons.org/licenses/by-sa/3.0}{Creative Commons Attribution-ShareAlike 3.0 Unported}.}
+
+\section*{Lab 5: Drawing conclusions in linear regression models}
+
+Create a short reproducible report answering the questions below, The report should be less than 3 pages, including all figures, and should be submitted as both PDF and Rmd formats. You do not need to show your code in the PDF report.  
+
+\subsection*{Introduction to Hypothesis Testing}
+
+A central question in regression analysis is ``How can we formally evaluate statistical evidence about associations between the observed variables, while controlling for the presence of other factors?''
+
+One important method to evaluating evidence is using confidence intervals. This approach allows us to give an interval of possible values (often centered on our ``best guess'' of a parameter) that we think is likely to cover the true value. However, another common approach used to assess models is to use hypothesis testing. Hypothesis testing is described in nice intuitive detail in Kaplan, Chapters 13-15, and this lab will highlight some of the key points covered in those chapters.
+
+Hypothesis testing relies on a certain logic that enables us to weigh evidence present in our dataset. In particular, we end up calculating p-values, which represent the probability of observing the data that we did observe, given that a particular hypothesis (our null hypothesis, or $H_0$) is true. Oftentimes, statistical theory can gives us tidy results that help us determine what the world would look like if $H_0$ were true. Othertimes, we might need to rely on our intuition and computation to show us what the $H_0$ version of the world would look like.
+
+Let's start with a simple example, using the computational version of hypothesis testing.
+
+
+
+<<load-data, message=FALSE, warning=FALSE>>=
+library("Hmisc")
+getHdata(FEV)
+@
+
+\begin{exercise}
+Before looking at the data, what types of relationships do you expect to see between each of these variables and FEV? Justify your answers briefly. 
+\end{exercise}
+
+\begin{exercise}
+Think about the different measures variables that you have at your disposal. Hypothesize at least two possible interactions, and come up with a plausible justification about why such an ineraction might exist. 
+\end{exercise}
+
+\begin{exercise}
+Generate a few simple plots of the data to evaluate the possible bivariate relationships that exist. Based on these plots, do you think that linear relationships will be sufficient to explain the data? 
+\end{exercise}
+
+Recall (from lecture 5) that when you have a large sample size relative to the number of possible covariates (which we do), one justifiable way to build a model is to 
+\begin{itemize}
+    \item􏰆 Include key covariates of interest.
+    \item􏰆 Include covariates needed because they might be confounders.
+    \item􏰆 Include covariates that your colleagues/reviewers/collaborators will demand be included for face validity.
+    \item Test a reasonable/limited number of interaction terms if it seems appropriate. 
+\end{itemize}
+
+
+\begin{exercise}
+Before fitting any models, identify somewhere between 2 and 6 multiple linear regression models that you think follow the rules above, i.e. write down what each model is, and which covariates and/or interactions it includes. Fit each model. Compare the coefficients from each of the models as well as the adjusted $R^2$ values. For the 2-3 models with the best adjusted $R^2$ values, look at residual plots. Do you see any worrisome patterns that suggest the model assumptions aren't met? If so, do something to try to improve it.
+\end{exercise}
+
+
+
+\begin{exercise}
+Based on your work above, pick one model that represents what you think is the ``best'' model for this data. Justify your choice, and interpret what you think are the most important or interesting relationships with the covariates and FEV.  Illustrate one of these relationships with a figure. If you were to collect similar data like this in a new study, what additional variables would you be interested in collecting and why? 
+\end{exercise}
+
+
+\end{document}
+

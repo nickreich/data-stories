@@ -4,11 +4,6 @@ title: Class schedules, instructor page
 tagline: 
 ---
 
-Concepts:
- - Understanding randomness and uncertainty
- - What is data?
- - 
-
 Units:
  - Data/design of experiments/collecting data to tell a story
     - duration: 2 weeks
@@ -41,13 +36,14 @@ _Tuesday, week 1_
  - Welcome, introductions, review course website and course goals (15 min)
  - Wits and wagers (15 min)
  - Lecture: Intro to telling stories with data (45 min)
- http://r4ds.had.co.nz/diagrams/data-science-program.png
+ - 5 minute clip of Hadley's talk
  https://channel9.msdn.com/Events/useR-international-R-User-conference/useR2016/Towards-a-grammar-of-interactive-graphics
+ http://r4ds.had.co.nz/diagrams/data-science-program.png
  
 _Thursday, week 1_
 
  - course technology intro: website, piazza, Google Drive (20 min)
- - iPod lab (50 min)
+ - Lab 1 (50 min)
  
 _Tuesday, week 2_
 

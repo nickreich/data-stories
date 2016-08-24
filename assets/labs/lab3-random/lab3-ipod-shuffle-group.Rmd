@@ -1,0 +1,80 @@
+---
+title: "How Random is the iPod's shuffle?"
+author: ''
+date: "January 20, 2016"
+output: html_document
+---
+
+##Group Task
+
+Albert Hoffman, an iPod owner, has written a letter to Apple to complain about the iPod shuffle feature.  He writes that every day he takes an hour-long walk and listens to his iPod using the shuffle feature. He believes that the shuffle feature is producing playlists in which some artists are played too often and others are not played enough. 
+
+He has claimed that the iPod Shuffle feature is not generating random playlists. As evidence, Mr. Hoffman has provided both his [music library](https://github.com/nickreich/data-stories-2016/blob/gh-pages/assets/labs/lab1-ipod-shuffle/Albert-Hoffman-Music-Library.csv) (8 artists with 10 songs each) and three playlists (20 songs each) that his iPod generated using the shuffle feature.
+
+Tim Cook, the CEO of Apple, Inc., has contacted your group to respond to Mr. Hoffman’s complaint. He has provided your group with several playlists of 20 songs each using the same songs as Mr. Hoffman’s library but generating them using a genuine random number generation method.
+
+To help your group respond to Mr. Hoffman, the next four parts of the problem are designed to help your group explore properties of the randomly generated lists to develop rules that could help determine whether a set of playlists provide evidence that the shuffle feature is not producing randomly selected songs.
+  
+###PART I: Explore and Describe
+
+Examine the [randomly generated playlists](https://github.com/nickreich/data-stories-2016/raw/gh-pages/assets/labs/lab1-ipod-shuffle/25-Random-Playlists.pdf) (your group will be given 25) to get an idea of the characteristics of these lists. Write down and number two or more characteristics of a randomly generated playlist in the space below.
+ 
+\bigskip &nbsp;
+
+\bigskip &nbsp;
+
+\bigskip &nbsp;
+
+\bigskip &nbsp;
+
+###PART II: Develop Rules
+Use the set of characteristics that your group wrote down to describe randomly generated playlists in Part I to create a set of one or more rules that flag playlists that do not appear to have been randomly generated. (Be sure that each of the characteristics in Part I is included in a rule.) These rules should be clearly stated so that another person could easily use them. 
+
+\bigskip &nbsp;
+
+\bigskip &nbsp;
+
+\bigskip &nbsp;
+
+\bigskip &nbsp;
+
+
+###PART III: Try out rules
+Your group will be given five additional randomly generated playlists on which to test your rules. See whether the set of rules your group generated would lead someone to (incorrectly) question whether these playlists are not randomly generated. Based on the performance of your group’s set of rules, adapt or change the rules as your group feels necessary.
+
+\bigskip &nbsp;
+
+\bigskip &nbsp;
+
+\bigskip &nbsp;
+
+\bigskip &nbsp;
+
+
+###PART IV: Evaluate
+Your group will be provided with Mr. Hoffman’s original three playlists. Apply your group’s rules to these three playlists to judge whether there is convincing evidence that Mr. Hoffman’s iPod Shuffle feature is producing playlists which do not seem to be randomly generated.  
+
+\bigskip &nbsp;
+
+\bigskip &nbsp;
+
+\bigskip &nbsp;
+
+\bigskip &nbsp;
+
+
+###PART V: Summarize
+Your group will now write a letter to Mr. Hoffman that includes the following:
+1.	Your group’s set of rules, used to judge whether a playlist does not appear to have been randomly generated. In your letter the rules need to be clearly stated so that another person could apply them to a playlist of 20 songs from Mr. Hoffman’s music library;
+2.	A response to Mr. Hoffman’s claim that the shuffle feature is not random because it produces playlists in which some artists are played too often and others are not played enough.
+
+\bigskip &nbsp;
+
+\bigskip &nbsp;
+
+\bigskip &nbsp;
+
+\bigskip &nbsp;
+
+
+*This activity has been adapted by Nicholas Reich from [CATALST teaching materials availble under a CC-BY-NC-SA license](https://www.causeweb.org/workshop/uscots09_catalyst4change/), and are made available under the same license.* 
