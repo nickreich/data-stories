@@ -4,11 +4,45 @@ title: Class schedules, instructor page
 tagline: 
 ---
 
+Concepts:
+ - Understanding randomness and uncertainty
+ - What is data?
+ - 
+
+Units:
+ - Data/design of experiments/collecting data to tell a story
+    - duration: 2 weeks
+    - reading: Kaplan 1-2
+    - assignment: Lab 1 - experiment design and data collection on students
+ - Summarizing and visualizing data 
+    - duration: 1 week
+    - reading: Kaplan 3, data viz readings
+    - assignment: Lab 2 - something new?
+ - Introduction to models 
+    - duration: 2 weeks
+    - reading: Kaplan 4, 6
+    - assignment: Lab 3 - iPod lab
+ - Modeling data relationships: linear regression (Kaplan 7-10, OI XX)
+    - duration: 2 weeks
+    - reading: Kaplan 7-10, OI XX
+    - assignment: Lab 4  - mix of adapted SLR/MLR/fev labs from OI
+ - Testing Hypotheses with models / Weighing evidence from models (Kaplan 11-15)
+    - duration: 2 weeks
+    - reading: Kaplan 11-15
+    - assignment: Lab 5 - inference 
+ - Modeling data relationships: logistic regression (Kaplan 16, OI XX)
+    - duration: 2 weeks
+    - reading: Kaplan 16, OI XX
+    - assignment: Lab 6 - titanic
+
+
 _Tuesday, week 1_
 
  - Welcome, introductions, review course website and course goals (15 min)
  - Wits and wagers (15 min)
  - Lecture: Intro to telling stories with data (45 min)
+ http://r4ds.had.co.nz/diagrams/data-science-program.png
+ https://channel9.msdn.com/Events/useR-international-R-User-conference/useR2016/Towards-a-grammar-of-interactive-graphics
  
 _Thursday, week 1_
 
@@ -23,7 +57,7 @@ _Tuesday, week 2_
     - randomness prevents us from seeing things perfectly, statistics are our glasses that reduce the blur
     - appropriate understanding/use of uncertainty can be INFORMATIVE
     - We can use math or algorithms to help us understand uncertainty
-    - data collection lab: In teams, design a data collection experiment collecting ANONYMOUS data on UMass students. To start, ignore let's think about what kind of data we could collect on students just by watching. (clothes color/shape/style/type, gender, glasses, hat, skin color, hair color, location/setting, time of day, data collector, ...) Limit data collection to 5-6 variables, design a question and a mechanism for collecting data.
+    - data collection lab: In teams, design a data collection experiment collecting ANONYMOUS data on UMass students. To start, ignore let's think about what kind of data we could collect on students just by watching. (clothes color/shape/style/type, gender, glasses, hat, skin color, hair color, location/setting, time of day, data collector, ...) Limit data collection to 5-6 variables, design a question and a mechanism for collecting data.  
 
 _Thursday, week 2_
 
