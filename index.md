@@ -6,7 +6,7 @@ tagline:
 
 
 #### Course summary
-The aim of this course is to provide students with the skills necessary to tell interesting and useful stories in real-world encounters with data. Students will learn fundamental concepts and tools relevant to the practice of summarizing, visualizing, modeling, and analyzing data. Students will learn how to build statistical models that can be used to describe multidimensional relationships that exist in the real world. Specific methods covered will include linear, logistic, and Poisson regression. This course will introduce students to the R statistical computing language and by the end of the course will require substantial independent programming. To the extent possible, the course will draw on real datasets from biological and biomedical applications. This course is designed for students who are looking for a second course in applied statistics/biostatistics (e.g. beyond BIOSTATS 391B or STAT 240), or an accelerated introduction to statistics and modern statistical computing. 
+The aim of this course is to provide students with the skills necessary to tell interesting and useful stories in real-world encounters with data. Students will learn fundamental concepts and tools relevant to the practice of summarizing, visualizing, modeling, and analyzing data. Students will learn how to build statistical models that can be used to describe multidimensional relationships that exist in the real world. Specific methods covered will include linear and logistic regression. Students will work with the R statistical computing language and by the end of the course will require substantial independent programming. The course will not provide explicit or detailed training in R programming. To the extent possible, the course will draw on real datasets from biological and biomedical applications. This course is designed for students who are looking for a second course in applied statistics/biostatistics (e.g. beyond BIOSTATS 391B or STAT 240), or an accelerated introduction to statistics and modern statistical computing. 
 
 <img src="cover-image.png" width="600"/>
 
@@ -19,7 +19,7 @@ The aim of this course is to provide students with the skills necessary to tell 
 
 **Instructor**: [Nicholas Reich](http://reichlab.github.io)
 
-**TA**: TBD
+**TA**: Zhenning Kang
 
 **Office hours**: TBD
 
@@ -36,15 +36,12 @@ One of any of the following introductory stats courses taught at UMass: BIOSTAT 
 
 
 **Topics covered**<br>
+
+&nbsp; &nbsp; Summarizing and visualizing data<br>
 &nbsp; &nbsp; Simple and multiple linear regression <br>
 &nbsp; &nbsp; Least squares estimation, interpretation and inference about linear regression <br>
-&nbsp; &nbsp; Goodness of fit, model diagnostics<br>
-&nbsp; &nbsp; Model selection<br>
 &nbsp; &nbsp; Inference using bootstrapping<br>
-&nbsp; &nbsp; Smooth splines<br>
 &nbsp; &nbsp; Logistic regression (introduction)<br>
-&nbsp; &nbsp; Longitudinal data analysis (introduction)<br>
-&nbsp; &nbsp; Poisson regression (introduction, time permitting)<br>
 
 ---
 

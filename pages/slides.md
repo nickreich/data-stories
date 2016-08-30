@@ -10,7 +10,7 @@ The source code and PDF files associated with the lectures will be posted below 
 
 \[S=Slides \| A=Annotated Slides \]
 
-* Lecture 1: Introduction to Regression \[  [S](../assets/lectures/lecture1-intro-regression/lecture1-intro-regression.pdf) \]
+<!--* Lecture 1: Introduction to Regression \[  [S](../assets/lectures/lecture1-intro-regression/lecture1-intro-regression.pdf) \]
 * Lecture 2: The Language of Models \[  [S](../assets/lectures/lecture2-model-language/lecture2-model-language.pdf) \]
 * Lecture 3: Simple Linear Regression \[ [S](../assets/lectures/lecture3-slr/lec3-slr.pdf) \]
 * Lecture 4: Multiple Linear Regression \[ [S](../assets/lectures/lecture4-mlr/lec4-mlr.pdf) \]
@@ -37,6 +37,9 @@ The source code and PDF files associated with the lectures will be posted below 
 * [Lab 5: Model selection in analyzing forced expiratory volume](../assets/labs/lab4-fev/lab4-fev.pdf)
 * [Lab 6: Hypothesis testing in linear regression models](../assets/labs/lab5-inference/lab5.pdf)
 * [Lab 7: Analyzing the Titanic data](../assets/labs/lab6-titanic/lab6-titanic.pdf)
+
+-->
+
 
 <!--  \|  [A](../assets/lectures/lecture1-intro-regression/lecture1-intro-regression-annotated.pdf) \]
 * Lecture 2: Simple Linear Regression and Least Squares \[  [S](../assets/lectures/lecture2-slr-basics/lecture2-slr-basics.pdf) \| [A](../assets/lectures/lecture2-slr-basics/lecture2-slr-basics-annotated.pdf)  \]
