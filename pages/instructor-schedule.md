@@ -12,7 +12,7 @@ Units:
  - Summarizing and visualizing data 
     - duration: 1 week
     - reading: Kaplan 3, data viz readings
-    - assignment: Lab 2 - something new?
+    - assignment: Lab 2 - Blog post exercise.
  - Introduction to models 
     - duration: 2 weeks
     - reading: Kaplan 4, 6
@@ -47,22 +47,25 @@ _Thursday, week 1_
  
 _Tuesday, week 2_
 
- - wrap-up of random shuffle activity: they developed a classification model! classical train/validate/test methodology implemented.
- - What is data lecture, with key ideas: 
+ - What is data lecture, with key ideas: (20 min)
     - data are our imperfect measures of the world, statistics helps us make sense of noisy observations (e.g. single binary outcome: polls, relationship with 2 or more variables: correlation, what fraction of earth's surface is covered in water?)
     - randomness prevents us from seeing things perfectly, statistics are our glasses that reduce the blur
     - appropriate understanding/use of uncertainty can be INFORMATIVE
     - We can use math or algorithms to help us understand uncertainty
     - data collection lab: In teams, design a data collection experiment collecting ANONYMOUS data on UMass students. To start, ignore let's think about what kind of data we could collect on students just by watching. (clothes color/shape/style/type, gender, glasses, hat, skin color, hair color, location/setting, time of day, data collector, ...) Limit data collection to 5-6 variables, design a question and a mechanism for collecting data.  
-
+ - continue group work on project (50 min)
+ 
 _Thursday, week 2_
 
- - lecture on Principles of Analytic Data Graphics: relate to analyses of their data (25 min)
-
+ - presentations on data collection exercises (50 min)
+ - wrap-up discussion on data collection moving towards data analysis
+ 
 _Tuesday, week 3_
 
  - New lecture on data summaries, data variation
  - perception discussion
+ - lecture on Principles of Analytic Data Graphics: relate to analyses of their data (25 min)
+ - wrap-up of random shuffle activity: they developed a classification model! classical train/validate/test methodology implemented.
 
 
 _Thurs, week 3_
