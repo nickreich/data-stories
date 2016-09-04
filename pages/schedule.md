@@ -10,10 +10,10 @@ tagline:
 
 Week |       |     | Topic   | Notes | HW Due | Reading
 ---- | ----- | --- | ------- | ----- |:------:| -------
- 1   | Sep | 6, 8  | Intro, motivation | [Lec 1](../assets/lectures/lecture1-intro-regression/lecture1-intro-regression.pdf) | | [Syllabus](../assets/syllabus/data-stories-reich-syllabus.pdf), Kaplan 1.
- 2   |     | 13, 15  &nbsp;| What is data? | Lec 2 | [Lab 1](../assets/labs/lab1-data/lab1-data.pdf) | Kaplan 2.  
- 3   |     | 20, 22 | Data visualization and summary | | Lab 2 | [Data viz reading list](data-viz-reading-list.html), Kaplan 3
- 4   |     | 27, 29 | Language of Models |  | |  Kaplan Ch. 6, 7
+ 1   | Sep | 6, 8  | Intro, motivation | [Lec 1](../assets/lectures/lecture1-intro-regression/lecture1-intro-regression.pdf) | | [Syllabus](../assets/syllabus/data-stories-reich-syllabus.pdf), Kaplan 1
+ 2   |     | 13, 15  &nbsp;| What is data? | Lec 2 | [Lab 1](../assets/labs/lab1-data/lab1-data.pdf) | Kaplan 2
+ 3   |     | 20, 22 | Data visualization and summary | | | [Data viz reading list](data-viz-reading-list.html), Kaplan 3
+ 4   |     | 27, 29 | Language of Models |  | Lab 2 |  Kaplan Ch. 6, 7
  5   | Oct | 4, 6   | Fitting Linear Models | | |  Kaplan Ch. 8
  6   |     | 13     | Linear Regression |  |  |  OpenIntro Ch. 7
  7   |     | 18, 20 | Multiple Linear Regression |  |  | OpenIntro Ch. 8
