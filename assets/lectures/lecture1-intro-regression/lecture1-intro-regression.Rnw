@@ -164,6 +164,17 @@ Telling stories with data requires
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+\begin{frame}{The tidy-verse: a process for data analysis}
+
+\includegraphics[width=\textwidth]{../../slide-includes/data-science-program.png}
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \begin{frame}{A common modeling tool: regression}
 
 \bi
@@ -371,15 +382,7 @@ The process of using data to describe the relationship between outcomes and pred
 
 \begin{frame}{Things to come}
 
-\bi
-	\myitem Tools to help tell stories with data.
-	\bi 
-	    \item Software 
-	    \item Intuition
-	    \item Statistical methods
-	\ei
-	\myitem Practice developing and conceiving models/stories.
-\ei
+\includegraphics[width=\textwidth]{../../slide-includes/data-science-program.png}
 
 \end{frame}
 

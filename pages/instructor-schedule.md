@@ -36,9 +36,14 @@ _Tuesday, week 1_
  - Welcome, introductions, review course website and course goals (15 min)
  - Wits and wagers (15 min)
  - Lecture: Intro to telling stories with data (45 min)
- - 5 minute clip of Hadley's talk
+ - Minute 1-5 of Hadley's talk:
  https://channel9.msdn.com/Events/useR-international-R-User-conference/useR2016/Towards-a-grammar-of-interactive-graphics
  http://r4ds.had.co.nz/diagrams/data-science-program.png
+ 
+ From Hadley:
+  - models are fundamentally computational, the computer does it for you and that means that they scale
+  - every model has to make assumptions, and a model by its very nature cannot question those assumptions
+  - models can never fundamentally surprise you because they cannot question their own assumptions, but they do scale.
  
 _Thursday, week 1_
 
@@ -52,7 +57,6 @@ _Tuesday, week 2_
     - randomness prevents us from seeing things perfectly, statistics are our glasses that reduce the blur
     - appropriate understanding/use of uncertainty can be INFORMATIVE
     - We can use math or algorithms to help us understand uncertainty
-    - data collection lab: In teams, design a data collection experiment collecting ANONYMOUS data on UMass students. To start, ignore let's think about what kind of data we could collect on students just by watching. (clothes color/shape/style/type, gender, glasses, hat, skin color, hair color, location/setting, time of day, data collector, ...) Limit data collection to 5-6 variables, design a question and a mechanism for collecting data.  
  - continue group work on project (50 min)
  
 _Thursday, week 2_
