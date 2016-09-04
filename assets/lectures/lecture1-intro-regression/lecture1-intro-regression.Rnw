@@ -1,0 +1,422 @@
+%% beamer/knitr slides 
+%% for Statistical Modeling and Data Visualization course @ UMass
+%% Nicholas Reich: nick [at] schoolph.umass.edu
+
+
+\documentclass[table]{beamer}
+
+
+\input{../../slide-includes/standard-knitr-beamer-preamble}
+
+%	The following variables are assumed by the standard preamble:
+%	Global variable containing module name:
+\title{Introduction to \\ Telling Stories with Data}
+%	Global variable containing module shortname:
+%		(Currently unused, may be used in future.)
+\newcommand{\ModuleShortname}{introRegression}
+%	Global variable containing author name:
+\author{Nicholas G Reich}
+%	Global variable containing text of license terms:
+\newcommand{\LicenseText}{Made available under the Creative Commons Attribution-ShareAlike 3.0 Unported License: http://creativecommons.org/licenses/by-sa/3.0/deed.en\textunderscore US }
+%	Instructor: optional, can leave blank.
+%		Recommended format: {Instructor: Jane Doe}
+\newcommand{\Instructor}{}
+%	Course: optional, can leave blank.
+%		Recommended format: {Course: Biostatistics 101}
+\newcommand{\Course}{}
+
+
+\input{../../slide-includes/shortcuts}
+
+\hypersetup{colorlinks,linkcolor=,urlcolor=MainColor}
+
+
+%	******	Document body begins here	**********************
+
+\begin{document}
+
+%	Title page
+\begin{frame}[plain]
+	\titlepage
+\end{frame}
+
+%	******	Everything through the above line must be placed at
+%		the top of any TeX file using the statsTeachR standard
+%		beamer preamble. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+
+\begin{centering}
+{\em Newton showed that the book of nature is written in the language of mathematics. Some chapters ... boil down to a clear-cut equation; but scholars who attempted to reduce biology, economics, and psychology to neat Newtonian equations \\ have discovered that these fields have a level of complexity \\ that makes such an aspiration futile. \\
+This did not mean, however, that they gave up on mathematics. \\
+{\bf A new branch of mathematics was developed over the last 200 years to deal with the more complex aspects of reality: statistics.}}
+
+- Yuval Noah Harari \\ 
+\em Sapiens: A Brief History of Humankind
+
+\end{centering}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}{Communicating ideas with evidence}
+
+\begin{block}{What is a narrative? [From the OED]}
+
+\em An account of a series of events, facts, etc., given in order and with the establishing of connections between them; a narration, a story, an account.
+
+\end{block}
+
+\bigskip
+
+\begin{block}{What is data? [From Google: literally, ``what is data'']}
+
+\vspace{1em}
+
+\includegraphics[width=.5\textwidth]{figure-static/data-definition.png}
+\includegraphics[width=.5\textwidth]{figure-static/data-usage-over-time.png}
+
+\end{block}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+
+\begin{centering}
+\includegraphics[width=.5\textwidth]{figure-static/bialikfischer-uber-header.png}
+
+\includegraphics[width=.8\textwidth]{figure-static/bialikfischer-uber-title.png}
+
+\includegraphics[width=1\textwidth]{figure-static/uber-seasonalchange-22.png}
+\end{centering}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+
+\includegraphics[width=.8\textwidth]{figure-static/bialikfischerbaum-title.png}
+
+\includegraphics[width=.5\textwidth]{figure-static/bialikfischerbaum-ubertime-1.png}
+\includegraphics[width=.5\textwidth]{figure-static/bialikfischerbaum-ubertime-2.png}
+
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}
+
+\includegraphics[width=.8\textwidth]{figure-static/wolfers-women-credit-title.png}
+
+\includegraphics[width=.6\textwidth]{figure-static/wolfers-women-credit-1.png}
+
+\includegraphics[width=.6\textwidth]{figure-static/wolfers-women-credit-2.png}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}{Trump's tweets: from varianceexplained.org}
+
+\includegraphics[width=.8\textwidth]{figure-static/drob-trump-tweets-0.png}
+
+\end{frame}
+
+\begin{frame}{Trump's tweets: from varianceexplained.org}
+
+\includegraphics[width=.8\textwidth]{figure-static/drob-trump-tweets-1.png}
+
+\end{frame}
+
+\begin{frame}{Trump's tweets: from varianceexplained.org}
+
+\includegraphics[width=\textwidth]{figure-static/drob-trump-tweets-2.png}
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}{How to tell a story using data}
+Telling stories with data requires
+\begin{itemize}
+    \item detective work
+    \item creativity, both scientific and artistic
+    \item experimentation with different storylines
+    \item good data, (good data does not nescessarily equal ``big data'')
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{A common modeling tool: regression}
+
+\bi
+        \myitem The goal is to learn about the relationship between two variables: a ``covariate'' (or ``predictor'') of interest and an ``outcome'' of interest.
+	\bi
+		\myitem Some models focus on prediction.
+		\myitem Other models focus on description.
+	\ei
+	\myitem Regression is an exercise in inferential statistics: we are drawing evidence and conclusions from data about ``complex aspects of reality'', i.e. ``noisy'' systems.
+\ei
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{State-level SAT score data (1994-95)}
+
+<<sat1, echo=FALSE, message=FALSE, fig.height=5>>=
+library(mosaicData)
+library(ggplot2)
+theme_set(theme_bw())
+data(SAT)
+SAT$fracgrp = cut(SAT$frac, breaks=c(0, 22, 49, 81), 
+                  labels=c("low", "medium", "high"))
+ggplot(SAT) + 
+    geom_text(aes(x=salary, y=sat, label=state), size=4, show.legend=FALSE) +
+    xlab("est. average public school teacher salary") + 
+    ylab("average total SAT score")
+
+@
+
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]{State-level SAT score data (1994-95)}
+
+<<sat1a, echo=FALSE, message=FALSE, fig.height=5>>=
+qplot(salary, sat, data=SAT) + xlab("est. average public school teacher salary") + ylab("average total SAT score")
+
+@
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\begin{frame}[fragile]{State-level SAT score data (1994-95)}
+
+<<sat2, echo=FALSE, message=FALSE, fig.height=5>>=
+ggplot(aes(salary, sat), data=SAT) +
+    geom_point() +
+    geom_smooth(method="lm", se=FALSE) + 
+    xlab("est. average public school teacher salary") + 
+    ylab("average total SAT score")
+@
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{The SAT example}
+
+\begin{block}{What is the outcome variable?}
+\vskip3em
+\end{block}
+
+\begin{block}{What is the covariate or predictor variable?}
+\vskip3em
+\end{block}
+
+\begin{block}{What other data might be part of this story?}
+\vskip3em
+\end{block}
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\begin{frame}[fragile]{State-level SAT score data (1994-95)}
+
+<<sat3, echo=FALSE, message=FALSE, fig.height=5>>=
+qplot(salary, frac, data=SAT)+
+    xlab("est. average public school teacher salary") + 
+    ylab("percentage of all eligible students taking the SAT")
+@
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{State-level SAT score data (1994-95)}
+
+<<sat4, echo=FALSE, message=FALSE, fig.height=5>>=
+qplot(salary, frac, color=fracgrp, data=SAT)+
+    xlab("est. average public school teacher salary") + 
+    ylab("percentage of all eligible students taking the SAT") +
+    geom_hline(yintercept=c(22, 49), linetype=2, color="grey") +
+    guides(color=guide_legend(title="% taking SAT"))
+@
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{State-level SAT score data (1994-95)}
+
+<<sat4a, echo=FALSE, message=FALSE, fig.height=5>>=
+qplot(salary, sat, color=fracgrp, data=SAT) + 
+    xlab("est. average public school teacher salary") + 
+    ylab("average total SAT score")+
+    guides(color=guide_legend(title="% taking SAT"))
+@
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{State-level SAT score data (1994-95)}
+
+<<sat5, echo=FALSE, message=FALSE, fig.height=5>>=
+qplot(salary, sat, color=fracgrp, facets=.~fracgrp, data=SAT) + 
+    xlab("est. average public school teacher salary") + 
+    ylab("average total SAT score")+
+    guides(color=guide_legend(title="% taking SAT"))
+@
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{State-level SAT score data (1994-95)}
+
+<<sat6, echo=FALSE, message=FALSE, fig.height=5>>=
+ggplot(aes(salary, sat, color=fracgrp), data=SAT) +
+    geom_point() + geom_smooth(method="lm", se=FALSE) + 
+    xlab("est. average public school teacher salary") + 
+    ylab("average total SAT score")+
+    guides(color=guide_legend(title="% taking SAT"))
+@
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{State-level SAT score data (1994-95)}
+
+<<sat7, echo=FALSE, message=FALSE, fig.height=5>>=
+ggplot(SAT, aes(x=salary, y=sat)) +
+    geom_text(aes(color=fracgrp, label=state), size=4, show.legend=FALSE)+
+    geom_smooth(aes(color=fracgrp), method="lm", se=FALSE) +
+    geom_smooth(method="lm", se=FALSE, color="black") + 
+    xlab("est. average public school teacher salary") + 
+    ylab("average total SAT score") +
+    guides(color=guide_legend(title="% taking SAT"))
+@
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{State-level SAT score data (1994-95)}
+
+What can we conclude from all of this? (BTW, this is an example of \href{http://en.wikipedia.org/wiki/Simpson%27s_paradox}{"Simpson's Paradox"}.)
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Regression modeling}
+
+The process of using data to describe the relationship between outcomes and predictors is called modeling.
+\bi
+	\myitem Models are models, not reality.
+	\myitem ``All models are wrong, but some are useful."
+	\myitem Introduce structure to our model that balances realism with ``goodness of fit''. \ei
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Things to come}
+
+\bi
+	\myitem Tools to help tell stories with data.
+	\bi 
+	    \item Software 
+	    \item Intuition
+	    \item Statistical methods
+	\ei
+	\myitem Practice developing and conceiving models/stories.
+\ei
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Beware of correlation!}
+
+\begin{figure}[t]
+    \includegraphics[width=\textwidth]{us-spending-on-science-space-and-technology_suicides-by-hanging-strangulation-and-suffocation}  
+\end{figure}
+
+\end{frame}
+
+\begin{frame}[fragile]{Beware of correlation!}
+
+\begin{figure}[t]
+    \includegraphics[width=\textwidth]{number-people-who-drowned-by-falling-into-a-swimming-pool_number-of-films-niclas-cage-appeared-in}  
+\end{figure}
+
+\footnotesize{Hat tip to \href{http://www.tylervigen.com}{www.tylervigen.com}}
+\end{frame}
+
+
+
+\begin{frame}[fragile]
+
+\begin{figure}[t]
+    \includegraphics[width=\textwidth]{figure-static/correlation.png}  
+\end{figure}
+
+\footnotesize{https://xkcd.com/552/}
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\end{document}
