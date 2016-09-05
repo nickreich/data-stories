@@ -104,18 +104,70 @@ Plot of M/D heights data?
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\begin{frame}{Whence the noise?}
+\begin{frame}{Statistics brings noisy data into focus}
 
 
- - randomness prevents us from seeing things perfectly, statistics are our glasses that reduce the blur
+<<sat1, echo=FALSE, message=FALSE, fig.height=5, fig.width=8, fig.show='hide', dev='png'>>=
+library(mosaicData)
+library(ggplot2)
+theme_set(theme_bw())
+data(SAT)
+SAT$fracgrp = cut(SAT$frac, breaks=c(0, 22, 49, 81), 
+                  labels=c("low", "medium", "high"))
 
-Plot with blurry data (without statistics)
-Plot with points coalescing into a straight line (not what statistics does)
-Plot with a smooth curve through a line, with SE (what statistics does)
+ggplot(aes(salary, sat, color=fracgrp), data=SAT) +
+    geom_point() + #geom_smooth(method="lm") + 
+    xlab("est. average public school teacher salary") + 
+    ylab("average total SAT score") +
+    guides(color=FALSE) 
+@
+
+<<blur-figure, message=FALSE, echo=FALSE, fig.height=6, fig.width=8>>=
+library(imager)
+im <- load.image("figure/sat1-1.png")
+im.blurry <- isoblur(im,10) 
+par(mar=c(0,0,0,0))
+plot(im.blurry, yaxt="n")
+@
 
 
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}{Statistics does not eliminate noise}
+
+
+<<sat2, echo=FALSE, message=FALSE, fig.height=5>>=
+fm <- lm(sat ~ salary, data=SAT)
+xpred <- seq(min(SAT$salary), max(SAT$salary), length.out = nrow(SAT))
+ypred <- predict(fm, newdata=data.frame(salary=xpred))
+tmp <- data.frame(xpred, ypred, fracgrp=SAT$fracgrp)
+ggplot(aes(xpred, ypred, color=fracgrp), data=tmp) +
+    geom_point() +  
+    xlab("est. average public school teacher salary") + 
+    ylab("average total SAT score") +
+    guides(color=FALSE) 
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}{Statistics speaks the language of uncertainty}
+
+
+<<sat3, echo=FALSE, message=FALSE, fig.height=5>>=
+ggplot(aes(salary, sat, color=fracgrp), data=SAT) +
+    geom_point() + geom_smooth(method="lm") + 
+    xlab("est. average public school teacher salary") + 
+    ylab("average total SAT score") +
+    guides(color=FALSE) 
+@
+
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
