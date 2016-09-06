@@ -5,27 +5,28 @@ tagline:
 ---
 
 Units:
- - Data/design of experiments/collecting data to tell a story
+ - Week 1-2: Data/design of experiments/collecting data to tell a story
     - duration: 2 weeks
     - reading: Kaplan 1-2
     - assignment: Lab 1 - experiment design and data collection on students
- - Summarizing and visualizing data 
+ - Week 3: Summarizing and visualizing data 
     - duration: 1 week
     - reading: Kaplan 3, data viz readings
     - assignment: Lab 2 - Blog post exercise.
- - Introduction to models 
+ - Week 4-5: Introduction to models 
     - duration: 2 weeks
     - reading: Kaplan 4, 6
     - assignment: Lab 3 - iPod lab
- - Modeling data relationships: linear regression (Kaplan 7-10, OI XX)
+ - Week 6-7: Modeling data relationships: linear regression (Kaplan 7-10, OI XX)
     - duration: 2 weeks
     - reading: Kaplan 7-10, OI XX
     - assignment: Lab 4  - mix of adapted SLR/MLR/fev labs from OI
- - Testing Hypotheses with models / Weighing evidence from models (Kaplan 11-15)
+ - Week 8: Exam and catch-up
+ - Week 9-10: Testing Hypotheses with models / Weighing evidence from models (Kaplan 11-15)
     - duration: 2 weeks
     - reading: Kaplan 11-15
     - assignment: Lab 5 - inference 
- - Modeling data relationships: logistic regression (Kaplan 16, OI XX)
+ - Week 11-12: Modeling data relationships: logistic regression (Kaplan 16, OI XX)
     - duration: 2 weeks
     - reading: Kaplan 16, OI XX
     - assignment: Lab 6 - titanic

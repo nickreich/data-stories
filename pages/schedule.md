@@ -13,18 +13,18 @@ Week |       |     | Topic   | Notes | HW Due | Reading
  1   | Sep | 6, 8  | Intro, motivation | [Lec 1](../assets/lectures/lecture1-intro-regression/lecture1-intro-regression.pdf) | | [Syllabus](../assets/syllabus/data-stories-reich-syllabus.pdf), Kaplan 1
  2   |     | 13, 15  &nbsp;| What is data? | Lec 2 | [Lab 1](../assets/labs/lab1-data/lab1-data.pdf) | Kaplan 2
  3   |     | 20, 22 | Data visualization and summary | | | [Data viz reading list](data-viz-reading-list.html), Kaplan 3
- 4   |     | 27, 29 | Language of Models |  | Lab 2 |  Kaplan Ch. 6, 7
- 5   | Oct | 4, 6   | Fitting Linear Models | | |  Kaplan Ch. 8
- 6   |     | 13     | Linear Regression |  |  |  OpenIntro Ch. 7
- 7   |     | 18, 20 | Multiple Linear Regression |  |  | OpenIntro Ch. 8
- 8   |     | 25, 27   | Multiple Linear Regression |  |  |  Kaplan Ch. 11, 12 
-     | Nov | 1, 3 | MLR |  | | 
- 9   |     | 8, 10 |  Hypothesis testing |  |  | Kaplan Ch. 11-15
- 10  |     | 15, 17 | Logistic regression | |  | Kaplan Ch 16, _OI_ Ch 8
- 11  |     | 22, 24 | Thanksgiving recess. | |  |
- 12  | Dec | 29, 1 | Logistic regression |  |  | 
- 13  |     | 6, 8 | Missing data |  | | 
- 14  |     | 13     | Final projects | | | 
+ 4   |     | 27, 29 | Language of Models |  | Lab 2 |  Kaplan 6, 7
+ 5   | Oct | 4, 6   | Language of Models | | Lab 3 |  
+ 6   |     | 13     | Linear Regression |  |  |  Kaplan 8, OI 7
+ 7   |     | 18, 20 | Linear Regression |  | Lab 4  | Kaplan 8, OI 7
+ 8   |     | 25, 27 | Midterm exam |  |  |  
+ 9   | Nov | 1, 3   | Evidence in data |  | | Kaplan 11, 12 
+ 10  |     | 8, 10  | Evidence in data |  | Lab 5 | Kaplan 13-15
+ 11  |     | 15, 17 | Logistic regression | |  | Kaplan 16, OI 8
+ 12  |     | 22, 24 | Thanksgiving recess. | |  |
+ 13  | Dec | 29, 1  | Logistic regression |  | Lab 6 | Kaplan 16, OI 8 
+ 14  |     | 6, 8   | Missing data/Projects |  | | 
+ 15  |     | 13     | Final projects | | | 
 
 
  
