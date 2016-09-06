@@ -45,22 +45,6 @@
 %		beamer preamble. 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-
-\begin{centering}
-{\em Newton showed that the book of nature is written in the language of mathematics. Some chapters ... boil down to a clear-cut equation; but scholars who attempted to reduce biology, economics, and psychology to neat Newtonian equations \\ have discovered that these fields have a level of complexity \\ that makes such an aspiration futile. \\
-This did not mean, however, that they gave up on mathematics. \\
-{\bf A new branch of mathematics was developed over the last 200 years to deal with the more complex aspects of reality: statistics.}}
-
-- Yuval Noah Harari \\ 
-\em Sapiens: A Brief History of Humankind
-
-\end{centering}
-
-\end{frame}
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

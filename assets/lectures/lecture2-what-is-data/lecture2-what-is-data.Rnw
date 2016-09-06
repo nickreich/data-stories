@@ -56,6 +56,22 @@
   % - populations vs. samples (types of samples)
   % - how to organize data in a tidy fashion?
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+
+\begin{centering}
+{\em Newton showed that the book of nature is written in the language of mathematics. Some chapters ... boil down to a clear-cut equation; but scholars who attempted to reduce biology, economics, and psychology to neat Newtonian equations \\ have discovered that these fields have a level of complexity \\ that makes such an aspiration futile. \\
+This did not mean, however, that they gave up on mathematics. \\
+{\bf A new branch of mathematics was developed over the last 200 years to deal with the more complex aspects of reality: statistics.}}
+
+- Yuval Noah Harari \\ 
+\em Sapiens: A Brief History of Humankind
+
+\end{centering}
+
+\end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -63,14 +79,14 @@
 
 
 \begin{center}
-\Large
+\huge
 Data are measurements from our \\ imperfect, noisy world.
 \end{center}
 
 \vspace{2em}
 
 \begin{center}
-In practice, what are some sources of the noise?
+\Large In practice, what are some sources of the noise?
 \end{center}
 
 
@@ -104,7 +120,7 @@ Plot of M/D heights data?
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\begin{frame}{Statistics brings noisy data into focus}
+\begin{frame}{Statistics brings data into focus}
 
 
 <<sat1, echo=FALSE, message=FALSE, fig.height=5, fig.width=8, fig.show='hide', dev='png'>>=
@@ -156,7 +172,7 @@ ggplot(aes(xpred, ypred, color=fracgrp), data=tmp) +
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\begin{frame}{Statistics speaks the language of uncertainty}
+\begin{frame}{Statistics speaks a language of uncertainty}
 
 
 <<sat3, echo=FALSE, message=FALSE, fig.height=5>>=
@@ -166,6 +182,16 @@ ggplot(aes(salary, sat, color=fracgrp), data=SAT) +
     ylab("average total SAT score") +
     guides(color=FALSE) 
 @
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}
+
+\Huge \center
+Your project
 
 \end{frame}
 
