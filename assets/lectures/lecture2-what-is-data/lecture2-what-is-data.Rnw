@@ -72,6 +72,7 @@ This did not mean, however, that they gave up on mathematics. \\
 \end{centering}
 
 \end{frame}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -83,10 +84,29 @@ This did not mean, however, that they gave up on mathematics. \\
 Data are measurements from our \\ imperfect, noisy world.
 \end{center}
 
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}{Key questions for any data analysis}
+
+
+\begin{center}
+\Large What population do your cases represent? 
+\end{center}
+
 \vspace{2em}
 
 \begin{center}
-\Large In practice, what are some sources of the noise?
+\Large What variables do you have measurements on? 
+\end{center}
+
+\vspace{2em}
+
+\begin{center}
+\Large What are some sources of noise/variability?
 \end{center}
 
 
@@ -96,25 +116,33 @@ Data are measurements from our \\ imperfect, noisy world.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\begin{frame}{Whence the noise?}
+\begin{frame}{Where does the noise come from?}
 
-
-Plot of M/D heights data?
-
-
-\end{frame}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-\begin{frame}{Whence the noise?}
-
-
-\includegraphics[width=\textwidth]{figure-static/polls-plot-20160904.png}
-
+<<showHeights, message=FALSE, echo=FALSE, fig.height=5>>=
+library(alr3)
+library(ggplot2)
+data(heights)
+qplot(Mheight, Dheight, data=heights, col="red", alpha=.5) +
+    xlab("Mother's height (inches)") +
+    ylab("Daughter's height (inches)") +
+    theme_bw() + theme(legend.position="none") 
+@
 
 \end{frame}
+
+
+% 
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 
+% 
+% \begin{frame}{Where does the noise come from?}
+% 
+% 
+% \includegraphics[width=\textwidth]{figure-static/polls-plot-20160904.png}
+% 
+% 
+% \end{frame}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -187,37 +215,45 @@ ggplot(aes(salary, sat, color=fracgrp), data=SAT) +
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\begin{frame}[fragile]{Sampling in a small population}
 
-\begin{frame}
-
-\Huge \center
-Your project
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-\begin{frame}{What types of variables are you collecting?}
-
+<<resample>>=
+groupA <- c("A", "A", "A", "A", "A", "A", "A")
+groupB <- c("B", "B", "B")
+population <- c(groupA, groupB)
+sample(population, size = 5, replace=FALSE)
+sample(population, size = 5, replace=FALSE)
+sample(population, size = 5, replace=FALSE)
+@
 
 
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\begin{frame}[fragile]{Sampling in a large population}
 
-\begin{frame}{Who are you collecting data on?}
-
+<<resample-large-sample>>=
+groupA <- rep("A", 1000)
+groupB <- rep("B", 500)
+population <- c(groupA, groupB)
+sample1 <- sample(population, size = 100, replace=FALSE)
+table(sample1)
+@
 
 
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\begin{frame}[fragile]{Sampling in a large population (with bias)}
 
-\begin{frame}{What population are you trying to draw conclusions about?}
-
+<<resample-large-sample-bias>>=
+## with a biased sample
+weights <- c(rep(1,1000), rep(3, 500))
+sample2 <- sample(population, size = 100, prob=weights, replace=FALSE)
+table(sample2)
+@
 
 
 \end{frame}
@@ -225,10 +261,39 @@ Your project
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\begin{frame}{Tidy Data}
 
-\begin{frame}{Sample vs. Population}
+\includegraphics[width=\textwidth]{figure-static/tidy1.png}
 
-Do you expect your sample to be representative of the population? Why or why not?
+\vspace{2em}
+
+\footnotesize \href{https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf}{dplyr and tidyr cheatsheet}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Tidy Data}
+
+\includegraphics[width=\textwidth]{figure-static/tidy2.png}
+
+\vspace{2em}
+
+\footnotesize \href{https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf}{dplyr and tidyr cheatsheet}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}{Your project}
+
+\begin{itemize}
+    \item What types of variables are you collecting?
+    \item Who are you collecting data on?
+    \item What population are you trying to draw conclusions about?
+    \item Do you expect your sample to be representative of the population? Why or why not?
+\end{itemize}
 
 \end{frame}
 
