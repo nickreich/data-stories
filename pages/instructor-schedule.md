@@ -68,8 +68,8 @@ _Thursday, week 2_
 _Tuesday, week 3_
 
  - go over a few items with the presentations: not tidy data, 3D pie charts
- - New lecture on data summaries, data variation
- - exercise with visualizing dengue data
+ - Lecture 3: exploratory data analysis/ intro to data viz.
+ - exercise with visualizing NHANES data
 
 _Thurs, week 3_
 

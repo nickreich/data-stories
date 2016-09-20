@@ -12,7 +12,7 @@ Week |       |     | Topic   | Notes | HW Due | Reading
 ---- | ----- | --- | ------- | ----- |:------:| -------
  1   | Sep | 6, 8  | Intro, motivation | [Lec 1](../assets/lectures/lecture1-intro-regression/lecture1-intro-regression.pdf) | | [Syllabus](../assets/syllabus/data-stories-reich-syllabus.pdf), Kaplan 1
  2   |     | 13, 15  &nbsp;| What is data? | [Lec 2](../assets/lectures/lecture2-what-is-data/lecture2-what-is-data.pdf), [code](../assets/lectures/lecture2-what-is-data/sampling-code.R) | [Lab 1](../assets/labs/lab1-data/lab1-data.pdf) | Kaplan 2
- 3   |     | 20, 22 | Data visualization and summary | | [Lec 3](../assets/lectures/lecture3-data-viz/lecture3-data-viz.pdf) | [Data viz reading list](data-viz-reading-list.html), Kaplan 3
+ 3   |     | 20, 22 | Data visualization and summary | [Lec 3](../assets/lectures/lecture3-data-viz/lecture3-data-viz.pdf) | | [Data viz reading list](data-viz-reading-list.html), Kaplan 3
  4   |     | 27, 29 | Language of Models |  | Lab 2 |  Kaplan 6, 7
  5   | Oct | 4, 6   | Language of Models | | Lab 3 |  
  6   |     | 13     | Linear Regression |  |  |  Kaplan 8, OI 7
