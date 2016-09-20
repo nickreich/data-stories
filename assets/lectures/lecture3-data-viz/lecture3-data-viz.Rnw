@@ -1,0 +1,155 @@
+%% beamer/knitr slides 
+%% for Statistical Modeling and Data Visualization course @ UMass
+%% Nicholas Reich: nick [at] schoolph.umass.edu
+
+
+\documentclass[table]{beamer}
+
+
+\input{../../slide-includes/standard-knitr-beamer-preamble}
+
+%	The following variables are assumed by the standard preamble:
+%	Global variable containing module name:
+\title{Introduction to Data Visualization}
+%	Global variable containing module shortname:
+%		(Currently unused, may be used in future.)
+\newcommand{\ModuleShortname}{introRegression}
+%	Global variable containing author name:
+\author{Nicholas G Reich}
+%	Global variable containing text of license terms:
+\newcommand{\LicenseText}{Made available under the Creative Commons Attribution-ShareAlike 3.0 Unported License: http://creativecommons.org/licenses/by-sa/3.0/deed.en\textunderscore US }
+%	Instructor: optional, can leave blank.
+%		Recommended format: {Instructor: Jane Doe}
+\newcommand{\Instructor}{}
+%	Course: optional, can leave blank.
+%		Recommended format: {Course: Biostatistics 101}
+\newcommand{\Course}{}
+
+
+\input{../../slide-includes/shortcuts}
+
+\hypersetup{colorlinks,linkcolor=,urlcolor=MainColor}
+
+
+%	******	Document body begins here	**********************
+
+\begin{document}
+
+%	Title page
+\begin{frame}[plain]
+	\titlepage
+\end{frame}
+
+%	******	Everything through the above line must be placed at
+%		the top of any TeX file using the statsTeachR standard
+%		beamer preamble. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% KEY POINTS/OUTLINE
+  % - show a few data visualizations, in pairs critique them (2 things you like, 2 you don't), then discuss as a class
+  % - why do we viz our data? exploratory, hypothesis generating, describe results, summarize models, show patterns
+  % - key principles
+  % - lessons about how we perceive features of data graphics
+  % - Exploratory graphics in R: demo code on NHANES data?
+  % - more pairs critiques, including 1-2 of the same from earlier
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+
+\begin{centering}
+For each of the following graphics, work in pairs to \\  (1) identify the variables displayed, and \\ (2) establish two features of the graphic that you like and two that you don't.
+\end{centering}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Trump tweets\footnote{http://varianceexplained.org/r/trump-tweets/}}
+
+\includegraphics[width=\textwidth]{../lecture1-intro-regression/figure-static/drob-trump-tweets-2.png}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Dengue cases in Thailand\footnote{adapted from \href{http://journals.plos.org/plosntds/article?id=10.1371/journal.pntd.0004761}{Reich et al, 2016}.}}
+
+% dengue heatmap
+\includegraphics[width=1.1\textwidth]{figure-static/dengue-cases.png}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{RAP analysis}
+
+% dengue heatmap
+\includegraphics[width=\textwidth]{figure-static/northeast.png}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{RAP analysis\footnote{from \href{http://www.pnas.org/content/112/16/4999.full.pdf}{``Cities, traffic, and CO2: A multidecadal assessment of trends, drivers, and scaling relationships'', Gately et al, PNAS, 2015.}}}
+
+% dengue heatmap
+\includegraphics[width=\textwidth]{figure-static/pollution.png}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+
+\Huge Why do we visualize data?
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Visualization excellence}
+
+In Tufte's words: 
+
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{itemize}
+     \item consists of complex ideas communicated with clarity, precision, and efficiency.
+     \item is that which gives to the viewer the greatest number of ideas in the shortest time with the least ink in the smallest space.
+     \item is nearly always multivariate.
+     \item requires telling the truth about the data.
+\end{itemize}
+\end{column}
+\begin{column}{0.5\textwidth}
+\includegraphics[width=\textwidth]{figure-static/tufte-cover.jpg}
+\end{column}
+\end{columns}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}{Key principles of data graphics}
+
+\begin{itemize}
+    \item ``{\bf Show} the data''
+    \item ``encourage the eye to {\bf compare} different pieces of data''
+    \item {\bf Simplify} by maximizing the ``data-ink ratio.''
+    \item Leverage color, shapes, facets to highlight multivariate data.
+    \item Annotate your figures with context.
+\end{itemize}
+
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+\end{document}
