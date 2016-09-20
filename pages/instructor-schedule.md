@@ -67,6 +67,7 @@ _Thursday, week 2_
  
 _Tuesday, week 3_
 
+ - clarify grading of labs/HW (50 pts, 30 group 20 ind for Lab 1)
  - go over a few items with the presentations: not tidy data, 3D pie charts
  - Lecture 3: exploratory data analysis/ intro to data viz.
  - exercise with visualizing NHANES data
