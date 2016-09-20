@@ -67,10 +67,9 @@ _Thursday, week 2_
  
 _Tuesday, week 3_
 
+ - go over a few items with the presentations: not tidy data, 3D pie charts
  - New lecture on data summaries, data variation
- - perception discussion
- - lecture on Principles of Analytic Data Graphics: relate to analyses of their data (25 min)
-
+ - exercise with visualizing dengue data
 
 _Thurs, week 3_
 

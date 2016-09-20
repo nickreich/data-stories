@@ -56,60 +56,6 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
-
-\begin{centering}
-For each of the following graphics, work in pairs to \\  (1) identify the variables displayed, and \\ (2) establish two features of the graphic that you like and two that you don't.
-\end{centering}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{Trump tweets\footnote{http://varianceexplained.org/r/trump-tweets/}}
-
-\includegraphics[width=\textwidth]{../lecture1-intro-regression/figure-static/drob-trump-tweets-2.png}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{Dengue cases in Thailand\footnote{adapted from \href{http://journals.plos.org/plosntds/article?id=10.1371/journal.pntd.0004761}{Reich et al, 2016}.}}
-
-% dengue heatmap
-\includegraphics[width=1.1\textwidth]{figure-static/dengue-cases.png}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{RAP analysis}
-
-% dengue heatmap
-\includegraphics[width=\textwidth]{figure-static/northeast.png}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{RAP analysis\footnote{from \href{http://www.pnas.org/content/112/16/4999.full.pdf}{``Cities, traffic, and CO2: A multidecadal assessment of trends, drivers, and scaling relationships'', Gately et al, PNAS, 2015.}}}
-
-% dengue heatmap
-\includegraphics[width=\textwidth]{figure-static/pollution.png}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-
-\Huge Why do we visualize data?
-
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \begin{frame}[fragile]{Visualization excellence}
 
 In Tufte's words: 
@@ -131,18 +77,164 @@ In Tufte's words:
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\begin{frame}{Warm up}
 
-\begin{frame}{Key principles of data graphics}
+\Large 
+For each of the following graphics, work in pairs to
+
+\begin{enumerate}
+    \item identify the variables displayed;
+    \item identify 2 features that you like and 2 that you don't;
+    \item sketch out the tidy data represented in the figure.
+\end{enumerate}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Trump tweets\footnote{http://varianceexplained.org/r/trump-tweets/}}
+
+\includegraphics[width=\textwidth]{../lecture1-intro-regression/figure-static/drob-trump-tweets-2.png}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Dengue cases in Thailand\footnote{adapted from \href{http://journals.plos.org/plosntds/article?id=10.1371/journal.pntd.0004761}{Reich et al, 2016}.}}
+
+% dengue heatmap
+\includegraphics[width=1.1\textwidth]{figure-static/dengue-cases.png}
+
+\end{frame}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{RAP analysis}
+
+\includegraphics[width=\textwidth]{figure-static/northeast.png}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{``Cities, traffic and CO2''\footnote{from \href{http://www.pnas.org/content/112/16/4999.full.pdf}{``Cities, traffic, and CO2: A multidecadal assessment of trends, drivers, and scaling relationships'', Gately et al, PNAS, 2015.}}}
+
+% dengue heatmap
+\includegraphics[width=\textwidth]{figure-static/pollution.png}
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+
+\centering
+\Huge Why do we visualize data?
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Exploratory graphics}
 
 \begin{itemize}
-    \item ``{\bf Show} the data''
-    \item ``encourage the eye to {\bf compare} different pieces of data''
-    \item {\bf Simplify} by maximizing the ``data-ink ratio.''
-    \item Leverage color, shapes, facets to highlight multivariate data.
-    \item Annotate your figures with context.
+    \item The most valuable graphics are often the simple ones you make for yourself.
+    \item Exploratory graphics can introduce you to a dataset.
+    \item Key goal: understand the variation.
+    \item What do you want to know about these data?
 \end{itemize}
 
 
+<<>>=
+data(airquality)
+head(airquality)
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Exploratory summaries: airquality data}
+
+Some quick text-based/tabular summaries
+<<eval=FALSE>>=
+nrow(airquality)
+
+summary(airquality)
+
+table(airquality$Month)
+
+with(airquality, table(Month, Day))
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Univariate graphics: airquality data}
+
+<<eval=FALSE>>=
+library(ggplot2)
+
+p <- ggplot(airquality)
+
+## better or worse than the table?
+p + geom_bar(aes(x=factor(Month)))
+
+## which of these do you prefer and why?
+p + geom_density(aes(Ozone))
+p + geom_histogram(aes(x=Ozone))
+@
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Multivariate graphics: airquality data}
+
+<<eval=FALSE>>=
+p + geom_boxplot(aes(x=factor(Month), y=Ozone))
+
+p2 <- ggplot(airquality, aes(x=Temp, y=Ozone)) 
+p2 + geom_point()
+p2 + geom_point() + geom_smooth()
+p2 + geom_point() + geom_smooth(se=FALSE)
+
+p3 <- ggplot(airquality, 
+             aes(x=Temp, y=Ozone, color=factor(Month))) 
+p3 + geom_point() + geom_smooth(se=FALSE)
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Multivariate graphics: pairs plots!}
+
+Pairs plots are sweet, but can take some time to render (especially for big-datasets).
+<<eval=FALSE>>=
+library(GGally)
+ggpairs(airquality)
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Your turn!}
+
+Try visualizing some of the NHANES data
+<<eval=FALSE>>=
+library(NHANES)
+data(NHANES)
+?NHANES
+@
 
 \end{frame}
 
