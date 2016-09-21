@@ -78,7 +78,6 @@ _Thurs, week 3_
 _Tues, week 4_
  
  - Language of models
- - Nick out of town
  - optional work session for projects
  - Minute 1-5 of Hadley's talk:
  https://channel9.msdn.com/Events/useR-international-R-User-conference/useR2016/Towards-a-grammar-of-interactive-graphics
@@ -94,7 +93,8 @@ _Thurs, week 4_
  - presentations from Lab 2: blog post exercise.
 
 _Tues, week 5_
- 
+ - Nick out of town
+
 
 _Thurs, week 5_
  
