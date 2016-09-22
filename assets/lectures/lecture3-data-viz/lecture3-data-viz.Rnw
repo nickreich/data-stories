@@ -77,6 +77,16 @@ In Tufte's words:
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\begin{frame}
+
+\centering
+\Huge Components of data graphics
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \begin{frame}{Warm up}
 
 \Large 
@@ -88,6 +98,17 @@ For each of the following graphics, work in pairs to
     \item sketch out the tidy data represented in the figure.
 \end{enumerate}
 \end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{``Cities, traffic and CO2''\footnote{from \href{http://www.pnas.org/content/112/16/4999.full.pdf}{``Cities, traffic, and CO2: A multidecadal assessment of trends, drivers, and scaling relationships'', Gately et al, PNAS, 2015.}}}
+
+% dengue heatmap
+\includegraphics[width=\textwidth]{figure-static/pollution.png}
+
+\end{frame}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -105,27 +126,6 @@ For each of the following graphics, work in pairs to
 \includegraphics[width=1.1\textwidth]{figure-static/dengue-cases.png}
 
 \end{frame}
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{RAP analysis}
-
-\includegraphics[width=\textwidth]{figure-static/northeast.png}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{``Cities, traffic and CO2''\footnote{from \href{http://www.pnas.org/content/112/16/4999.full.pdf}{``Cities, traffic, and CO2: A multidecadal assessment of trends, drivers, and scaling relationships'', Gately et al, PNAS, 2015.}}}
-
-% dengue heatmap
-\includegraphics[width=\textwidth]{figure-static/pollution.png}
-
-\end{frame}
-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -237,6 +237,150 @@ data(NHANES)
 @
 
 \end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+
+\centering
+\Huge \tt ggplot2
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Choices for R graphics}
+
+You have three central choices for making graphics in R:
+
+\begin{itemize}
+    \item "Base graphics"
+    \item ggplot2
+    \item lattice
+\end{itemize}
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Understanding the ``grammar'' of ggplot2}
+
+The grammar ...
+
+\begin{itemize}
+    \item geom 
+    \item aesthetics (`aes`)
+    \item scales
+    \item facets
+    \item data
+    \item ... and more here: \href{http://docs.ggplot2.org/current/}{http://docs.ggplot2.org/current/}
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{What is a ``geom''?}
+
+From \href{http://ggplot2.org/resources/2007-vanderbilt.pdf}{Hadley}:
+
+\begin{itemize}
+    \item Geoms define the basic ``shape'' of the elements on the plot
+    \item Basics: point, line, bar, text, hline, vline
+    \item Statistics: histogram, smooth, density
+    \item Others: boxplot, pointrange, linerange, ribbon
+\end{itemize}
+
+For more info check out the documentation: \href{http://docs.ggplot2.org/current/}{http://docs.ggplot2.org/current}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{What are ``aesthetics''?}
+
+Aesthetics define a mapping between data and the display.\footnote{Figure credits: \href{http://ggplot2.org/resources/2007-vanderbilt.pdf}{Hadley Wickham}}
+
+\includegraphics[width=\textwidth]{figure-static/aes.png}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{\tt{geom\_point}}
+
+
+Each geom has a different set of aesthetics.
+
+What aesthetics do we need for {\tt geom\_point}?
+
+\uncover<2>{
+\begin{itemize}
+    \item x (required)
+    \item y (required)
+    \item alpha
+    \item color
+    \item fill
+    \item shape
+    \item size
+\end{itemize}
+}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{\tt{geom\_line}}
+
+
+What aesthetics do we need for {\tt geom\_line}?
+
+\uncover<2>{
+\begin{itemize}
+    \item x (required)
+    \item y (required)
+    \item alpha
+    \item color
+    \item linetype
+    \item size
+\end{itemize}
+}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Try mplot for learning ggplot2 syntax}
+
+<<eval=FALSE>>=
+library(mosaic)
+## downsample the dataset to make it smaller
+NHANES_samp <- sample(NHANES, size = 1000)
+mplot(NHANES_samp)
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}{Summary: Key principles of data graphics}
+
+\begin{itemize}
+    \item ``{\bf Show} the data''
+    \item ``Encourage the eye to {\bf compare} different pieces of data''
+    \item {\bf Simplify} by maximizing the ``data-ink ratio.''
+    \item Leverage color, shapes, facets to highlight multivariate data.
+    \item Annotate your figures with context.
+\end{itemize}
+
+\end{frame}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
