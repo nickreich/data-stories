@@ -1,0 +1,410 @@
+%% beamer/knitr slides 
+%% for Statistical Modeling and Data Visualization course @ UMass
+%% Nicholas Reich: nick [at] schoolph.umass.edu
+
+
+\documentclass[table]{beamer}
+
+
+\input{../../slide-includes/standard-knitr-beamer-preamble}
+
+%        The following variables are assumed by the standard preamble:
+%        Global variable containing module name:
+
+\title{The Language of Models}
+%	Global variable containing module shortname:
+%		(Currently unused, may be used in future.)
+\newcommand{\ModuleShortname}{modeling}
+%	Global variable containing author name:
+\author{Nicholas G Reich}
+%	Global variable containing text of license terms:
+\newcommand{\LicenseText}{Made available under the Creative Commons Attribution-ShareAlike 3.0 Unported License: http://creativecommons.org/licenses/by-sa/3.0/deed.en\textunderscore US }
+%	Instructor: optional, can leave blank.
+%		Recommended format: {Instructor: Jane Doe}
+\newcommand{\Instructor}{}
+%	Course: optional, can leave blank.
+%		Recommended format: {Course: Biostatistics 101}
+\newcommand{\Course}{}
+
+
+\input{../../slide-includes/shortcuts}
+\usepackage{bbm}
+
+\hypersetup{colorlinks,linkcolor=,urlcolor=MainColor}
+
+
+%	******	Document body begins here	**********************
+
+\begin{document}
+
+%	Title page
+\begin{frame}[plain]
+	\titlepage
+\end{frame}
+
+%	******	Everything through the above line must be placed at
+%		the top of any TeX file using the statsTeachR standard
+%		beamer preamble. 
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\begin{frame}{Today's topics}
+
+\bi
+    \myitem The language of models
+    \myitem Model formulas and coefficients 
+\ei
+
+\bigskip
+
+{\bf Example:} predicting respiratory disease severity (``lung'' dataset)
+
+\bigskip
+
+{\bf Reading:} Kaplan, Chapters 6 and 7.
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}%{Warm up}
+
+\begin{figure}[h]
+    \includegraphics[width=\textwidth]{mostError.png}  
+\end{figure}
+
+\tiny{Figure acknowledgements to \href{http://stat405.had.co.nz/lectures/23-modelling.pdf}{Hadley Wickham}.}
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}%{Warm up}
+
+ Watch the first five minutes of \href{https://channel9.msdn.com/Events/useR-international-R-User-conference/useR2016/Towards-a-grammar-of-interactive-graphics}{Hadley's UseR! 2016 talk}
+
+\vspace{1cm} 
+
+\centering
+\em
+%  - models are fundamentally computational, the computer does it for you and that means that they scale
+  `` ... every model has to make assumptions, and a model by its very nature cannot question those assumptions...
+
+\vspace{1cm} 
+  
+ models can never fundamentally surprise you because they cannot question their own assumptions.'' %, but they do scale.'''
+
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[t]{Lung Data Example}
+
+99 observations on patients who have sought treatment for the relief of respiratory disease symptoms. 
+
+The variables are:
+\bi
+    \myitem {\tt disease} measure of disease severity (larger values indicates more serious condition).
+    \myitem {\tt education} highest grade completed
+    \myitem {\tt crowding} measure of crowding of living quarters (larger values indicate more crowding)
+    \myitem {\tt airqual} measure of air quality at place of residence (larger number indicates poorer quality)
+    \myitem {\tt nutrition} nutritional status (larger number indicates better nutrition)
+    \myitem {\tt smoking} smoking status (1 if smoker, 0 if non-smoker)
+\ei
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Lung Data Example: terms defined}
+
+<<loadData, echo=FALSE>>=
+library(ggplot2)
+theme_set(theme_bw())
+opts_chunk$set(size = 'footnotesize')
+options(width=60)
+@
+
+
+<<lung-plots, tidy=FALSE, fig.height=3.7>>=
+dat <- read.table("lungc.txt", header=TRUE)
+ggplot(dat, aes(crowding, disease)) + geom_point() + 
+    geom_smooth(method="lm", se=FALSE)
+@
+
+Things to point out: response variable? explanatory variable? model value? residual?
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Models are functions}
+
+Definition: ``a {\bf function} is a relation between a set of inputs and a set of permissible outputs with the property that each input is related to exactly one output''.\footnote{Wikipedia, \href{https://en.wikipedia.org/wiki/Function_(mathematics)}{https://en.wikipedia.org/wiki/Function\_(mathematics)}}
+
+[INSERT FUNCTION IMAGE]
+
+In statistical models, inputs are explanatory variables and outputs are ``typical'' or ``expected'' values of response variables. There is always residual variation. The key challenge is judging whether the structure of a particular model is supported by evidence in the data.
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Lung Data Example: what is the model?}
+
+<<lung-plotsb, tidy=FALSE, fig.height=4>>=
+ggplot(dat, aes(crowding, disease)) + geom_point() + 
+    geom_smooth(method="lm", se=FALSE)
+@
+
+What is the approximate model function description the relationship of crowding on disease status? What is the expected value of disease when crowding = 20? 30? Interpret the slope in real-world terms.
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Lung Data Example: what is the model?}
+
+<<lung-plotsc, tidy=FALSE, fig.height=4>>=
+ggplot(dat, aes(crowding, disease)) + geom_point() + 
+    geom_smooth(method="lm", se=FALSE)
+@
+
+What do you like/dislike about this statement: ``Based on this data, disease status worsens when crowding increases.''
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Which representation of education is better and why?}
+
+<<lung-plots1, tidy=FALSE, fig.height=2>>=
+ggplot(dat, aes(education, disease)) + geom_point()
+@
+
+<<lung-plots1a, tidy=FALSE, fig.height=2>>=
+ggplot(dat, aes(factor(education), disease)) + geom_boxplot()
+@
+
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Model terms}
+
+\begin{itemize}
+    \item intercept term
+    \item main terms
+    \item interaction terms
+    \item transformation terms
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Lung Data Example: what is the model?}
+
+<<lung-plotsd, tidy=FALSE, fig.height=4>>=
+ggplot(dat, aes(crowding, disease)) + geom_point() + 
+    geom_smooth(method="lm", se=FALSE)
+@
+
+What model syntax is implied by the above figure?
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Lung Data Example: what is the model?}
+
+<<lung-plotsa, tidy=FALSE, fig.height=4>>=
+ggplot(dat, aes(airqual, disease, color=factor(smoking))) + 
+    geom_point() 
+@
+
+What is one possible model syntax implied by the above figure?
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Lung Data Example}
+
+<<lungMLR, tidy=FALSE>>=
+mlr1 <- lm(disease ~ crowding, data=dat)
+kable(summary(mlr1)$coef, digits=2, format="latex")
+mlr2 <- lm(disease ~ crowding + airqual, data=dat)
+kable(summary(mlr2)$coef, digits=2, format="latex")
+@
+
+\bigskip
+
+Why are the coefficients different?
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Lung Data Example}
+
+<<lungMLR2, tidy=FALSE, echo=FALSE>>=
+kable(summary(mlr2)$coef, digits=2, format="latex")
+@
+
+\bigskip
+
+What are the interpretations of the coefficients? 
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Example data}
+
+\bi
+    \myitem D = a quantitative variable
+    \myitem A = a quantitative variable
+    \myitem G = a categorical variable with two levels, S and K
+\ei
+
+<<simData, tidy=FALSE, echo=FALSE, message=FALSE, fig.height=4>>=
+library(dplyr)
+n=20
+A <- seq(0, 10, length.out = n)
+G <- rep(c("S", "K"), each=n/2)
+b0 = 5; b1 = 2; b2 = 12; b3 = -3
+D <- b0 + b1*A + b2*(G=="S") + b3*A*(G=="S") + rnorm(n)
+m <- data_frame(A, G, D)
+p <- ggplot(m, aes(x=A, y=D, color=factor(G))) + geom_text(aes(label=as.character(G))) + theme(legend.position="none") + scale_color_manual(values=c("#e41a1c", "#377eb8"))
+p
+@
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Draw the model...}
+
+<<simData4, tidy=FALSE, echo=FALSE, message=FALSE, fig.height=4>>=
+p + annotate("text", x=2, y=23, label="D ~ 1", size=10)
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Draw the model...}
+
+<<simData5, tidy=FALSE, echo=FALSE, message=FALSE, fig.height=4>>=
+p + annotate("text", x=2, y=23, label="D ~ G", size=10)
+@
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Draw the model...}
+
+<<simData1, tidy=FALSE, echo=FALSE, message=FALSE, fig.height=4>>=
+p + annotate("text", x=2, y=23, label="D ~ A", size=10)
+@
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Draw the model...}
+
+<<simData2, tidy=FALSE, echo=FALSE, message=FALSE, fig.height=4>>=
+p + annotate("text", x=2, y=23, label="D ~ A - 1", size=10)
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Draw the model...}
+
+<<simData3, tidy=FALSE, echo=FALSE, message=FALSE, fig.height=4>>=
+p + annotate("text", x=2, y=23, label="D ~ A + G", size=10)
+@
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Draw the model...}
+
+<<simData6, tidy=FALSE, echo=FALSE, message=FALSE, fig.height=4>>=
+p + annotate("text", x=2, y=23, label="D ~ A*G", size=10)
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Draw the model...}
+
+<<simData7, tidy=FALSE, echo=FALSE, message=FALSE, fig.height=4>>=
+p + annotate("text", x=2, y=23, label="D ~ poly(A, 2)", size=10)
+@
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Parting wisdom}
+
+\begin{figure}[t]
+    \includegraphics[width=\textwidth]{correlation.png}  
+\end{figure}
+
+
+\bigskip
+
+Up next: the mechanics and math of fitting models to data!
+
+\bigskip
+
+{\footnotesize * Image credits: XKCD, \url{http://xkcd.com/552/}}
+
+\end{frame}
+
+
+\end{document}

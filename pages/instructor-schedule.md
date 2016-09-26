@@ -74,11 +74,12 @@ _Tuesday, week 3_
 
 _Thurs, week 3_
 
+ - finish lecture 3
+ - lab time working on ggplot figures and lab 2.
 
 _Tues, week 4_
  
- - Language of models
- - optional work session for projects
+ - Lecture 4: Language of models
  - Minute 1-5 of Hadley's talk:
  https://channel9.msdn.com/Events/useR-international-R-User-conference/useR2016/Towards-a-grammar-of-interactive-graphics
 
@@ -90,7 +91,7 @@ _Tues, week 4_
 
 _Thurs, week 4_
 
- - presentations from Lab 2: blog post exercise.
+ - Lab 3 work session, more on Lecture 4.
 
 _Tues, week 5_
  - Nick out of town
