@@ -149,7 +149,7 @@ ggplot(dat, aes(crowding, disease)) + geom_point() +
     geom_smooth(method="lm", se=FALSE)
 @
 
-Things to point out: response variable? explanatory variable? model value? residual?
+Identify: response variable, explanatory variable, model value, residual.
 
 \end{frame}
 
@@ -160,49 +160,63 @@ Things to point out: response variable? explanatory variable? model value? resid
 
 Definition: ``a {\bf function} is a relation between a set of inputs and a set of permissible outputs with the property that each input is related to exactly one output''.\footnote{Wikipedia, \href{https://en.wikipedia.org/wiki/Function_(mathematics)}{https://en.wikipedia.org/wiki/Function\_(mathematics)}}
 
-[INSERT FUNCTION IMAGE]
+\includegraphics[width=.5\textwidth]{Function_machine2}  
 
-In statistical models, inputs are explanatory variables and outputs are ``typical'' or ``expected'' values of response variables. There is always residual variation. The key challenge is judging whether the structure of a particular model is supported by evidence in the data.
+In statistical models, inputs are explanatory variables and outputs are ``typical'' or ``expected'' values of response variables. %There is always residual variation. The key challenge is judging whether the structure of a particular model is supported by evidence in the data.
 
 \end{frame}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[fragile]{Lung Data Example: what is the model?}
+\begin{frame}[fragile]{Reading model values}
 
-<<lung-plotsb, tidy=FALSE, fig.height=4>>=
+What is the expected value of disease when crowding = 20? 30? 
+
+<<lung-plotsb, tidy=FALSE, fig.height=4, echo=FALSE>>=
 ggplot(dat, aes(crowding, disease)) + geom_point() + 
     geom_smooth(method="lm", se=FALSE)
 @
 
-What is the approximate model function description the relationship of crowding on disease status? What is the expected value of disease when crowding = 20? 30? Interpret the slope in real-world terms.
 
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\begin{frame}[fragile]{Characterize the relationship}
+
+Broadly speaking, is there a relationship between crowding and disease?
+
+<<lung-plotsd, tidy=FALSE, fig.height=4, echo=FALSE>>=
+ggplot(dat, aes(crowding, disease)) + geom_point() + 
+    geom_smooth(method="lm", se=FALSE)
+@
+
+
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}[fragile]{Lung Data Example: what is the model?}
-
-<<lung-plotsc, tidy=FALSE, fig.height=4>>=
-ggplot(dat, aes(crowding, disease)) + geom_point() + 
-    geom_smooth(method="lm", se=FALSE)
-@
 
 What do you like/dislike about this statement: ``Based on this data, disease status worsens when crowding increases.''
 
+<<lung-plotsc, tidy=FALSE, fig.height=4, echo=FALSE>>=
+ggplot(dat, aes(crowding, disease)) + geom_point() + 
+    geom_smooth(method="lm", se=FALSE)
+@
+
 \end{frame}
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[fragile]{Which representation of education is better and why?}
+\begin{frame}[fragile]{Difference between these representations of education?}
 
 <<lung-plots1, tidy=FALSE, fig.height=2>>=
-ggplot(dat, aes(education, disease)) + geom_point()
+ggplot(dat, aes(education, disease)) + geom_point() + 
+    geom_smooth(method="lm", se=FALSE)
 @
 
 <<lung-plots1a, tidy=FALSE, fig.height=2>>=
@@ -213,47 +227,143 @@ ggplot(dat, aes(factor(education), disease)) + geom_boxplot()
 \end{frame}
 
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[fragile]{Model terms}
+\begin{frame}[fragile]{Formulas for Statistical Models}
 
+
+\begin{eqnarray*}
+\mbox{ [ explanatory variable ] } & \sim & \mbox{intercept + terms} \\
+Y & = & a + b \cdot X \\
+Y & = & \beta_0 + \beta_1 \cdot X + \epsilon
+\end{eqnarray*}
+
+Types of terms
 \begin{itemize}
-    \item intercept term
-    \item main terms
+    \item intercept
+    \item main effects
     \item interaction terms
-    \item transformation terms
+    \item transformations
+    \item smooth terms
 \end{itemize}
 
 \end{frame}
 
 
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[fragile]{Lung Data Example: what is the model?}
+\begin{frame}[fragile]{Model terms: intercept}
 
-<<lung-plotsd, tidy=FALSE, fig.height=4>>=
+$$ \mbox{model: \ }  disease \sim 1 $$
+
+<<intercept-term, tidy=FALSE, fig.height=4, echo=FALSE>>=
 ggplot(dat, aes(crowding, disease)) + geom_point() + 
-    geom_smooth(method="lm", se=FALSE)
+    geom_hline(yintercept=mean(dat$disease), color="red")
 @
 
-What model syntax is implied by the above figure?
 
 \end{frame}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[fragile]{Lung Data Example: what is the model?}
+\begin{frame}[fragile]{Model terms: main effects}
 
-<<lung-plotsa, tidy=FALSE, fig.height=4>>=
-ggplot(dat, aes(airqual, disease, color=factor(smoking))) + 
-    geom_point() 
+$$ \mbox{ model: \ }  disease \sim 1 + crowding $$
+
+<<main-term-crowding, tidy=FALSE, fig.height=4, echo=FALSE>>=
+ggplot(dat, aes(crowding, disease)) + geom_point() + 
+    geom_smooth(method="lm", se=FALSE, color="red")
 @
-
-What is one possible model syntax implied by the above figure?
 
 \end{frame}
 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Model terms: main effects}
+
+$$ {\mbox model: }  disease \sim 1 + smoking $$
+
+<<main-term-smoking, tidy=FALSE, fig.height=4, echo=FALSE>>=
+ggplot(dat, aes(factor(smoking), disease)) + #geom_point() + 
+    geom_boxplot()
+@
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%' \begin{frame}[fragile]{Model terms: main effects}
+%' 
+%' $$ {\mbox model: }  disease \sim crowding + smoking $$
+%' 
+%' <<main-term-interaction, tidy=FALSE, fig.height=4, echo=FALSE>>=
+%' ggplot(dat, aes(crowding, disease, color=factor(smoking))) + geom_point() + 
+%'     geom_smooth(se=FALSE, method="lm")
+%' @
+%' 
+%' \end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Model terms: main effects}
+
+$$ {\mbox model: }  disease \sim 1 + crowding * smoking $$
+
+<<interaction-term, tidy=FALSE, fig.height=4, echo=FALSE>>=
+ggplot(dat, aes(crowding, disease, color=factor(smoking))) + geom_point() + 
+    geom_smooth(se=FALSE, method="lm")
+@
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Model terms: smooth effects}
+
+$$ {\mbox model: }  disease \sim 1 + s(education) $$
+
+<<smooth-terms, tidy=FALSE, fig.height=4>>=
+ggplot(dat, aes(education, disease)) + geom_point() + 
+    geom_smooth( se=FALSE, span=2)
+@
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%' \begin{frame}[fragile]{Lung Data Example: what is the model?}
+%' 
+%' <<lung-plotse, tidy=FALSE, fig.height=4>>=
+%' ggplot(dat, aes(crowding, disease)) + geom_point() + 
+%'     geom_smooth(method="lm", se=FALSE)
+%' @
+%' 
+%' What model syntax is implied by the above figure?
+%' 
+%' \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%' \begin{frame}[fragile]{Lung Data Example: what is the model?}
+%' 
+%' <<lung-plotsa, tidy=FALSE, fig.height=4>>=
+%' ggplot(dat, aes(airqual, disease, color=factor(smoking))) + 
+%'     geom_point() 
+%' @
+%' 
+%' What is one possible model syntax implied by the above figure?
+%' 
+%' \end{frame}
+%' 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -318,6 +428,12 @@ p
 
 \begin{frame}[fragile]{Draw the model...}
 
+\bi
+    \myitem D = a quantitative variable
+    \myitem A = a quantitative variable
+    \myitem G = a categorical variable with two levels, S and K
+\ei
+
 <<simData4, tidy=FALSE, echo=FALSE, message=FALSE, fig.height=4>>=
 p + annotate("text", x=2, y=23, label="D ~ 1", size=10)
 @
@@ -328,6 +444,12 @@ p + annotate("text", x=2, y=23, label="D ~ 1", size=10)
 
 \begin{frame}[fragile]{Draw the model...}
 
+\bi
+    \myitem D = a quantitative variable
+    \myitem A = a quantitative variable
+    \myitem G = a categorical variable with two levels, S and K
+\ei
+
 <<simData5, tidy=FALSE, echo=FALSE, message=FALSE, fig.height=4>>=
 p + annotate("text", x=2, y=23, label="D ~ G", size=10)
 @
@@ -336,6 +458,12 @@ p + annotate("text", x=2, y=23, label="D ~ G", size=10)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}[fragile]{Draw the model...}
+
+\bi
+    \myitem D = a quantitative variable
+    \myitem A = a quantitative variable
+    \myitem G = a categorical variable with two levels, S and K
+\ei
 
 <<simData1, tidy=FALSE, echo=FALSE, message=FALSE, fig.height=4>>=
 p + annotate("text", x=2, y=23, label="D ~ A", size=10)
@@ -348,6 +476,12 @@ p + annotate("text", x=2, y=23, label="D ~ A", size=10)
 
 \begin{frame}[fragile]{Draw the model...}
 
+\bi
+    \myitem D = a quantitative variable
+    \myitem A = a quantitative variable
+    \myitem G = a categorical variable with two levels, S and K
+\ei
+
 <<simData2, tidy=FALSE, echo=FALSE, message=FALSE, fig.height=4>>=
 p + annotate("text", x=2, y=23, label="D ~ A - 1", size=10)
 @
@@ -357,6 +491,12 @@ p + annotate("text", x=2, y=23, label="D ~ A - 1", size=10)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}[fragile]{Draw the model...}
+
+\bi
+    \myitem D = a quantitative variable
+    \myitem A = a quantitative variable
+    \myitem G = a categorical variable with two levels, S and K
+\ei
 
 <<simData3, tidy=FALSE, echo=FALSE, message=FALSE, fig.height=4>>=
 p + annotate("text", x=2, y=23, label="D ~ A + G", size=10)
@@ -370,6 +510,12 @@ p + annotate("text", x=2, y=23, label="D ~ A + G", size=10)
 
 \begin{frame}[fragile]{Draw the model...}
 
+\bi
+    \myitem D = a quantitative variable
+    \myitem A = a quantitative variable
+    \myitem G = a categorical variable with two levels, S and K
+\ei
+
 <<simData6, tidy=FALSE, echo=FALSE, message=FALSE, fig.height=4>>=
 p + annotate("text", x=2, y=23, label="D ~ A*G", size=10)
 @
@@ -379,6 +525,12 @@ p + annotate("text", x=2, y=23, label="D ~ A*G", size=10)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}[fragile]{Draw the model...}
+
+\bi
+    \myitem D = a quantitative variable
+    \myitem A = a quantitative variable
+    \myitem G = a categorical variable with two levels, S and K
+\ei
 
 <<simData7, tidy=FALSE, echo=FALSE, message=FALSE, fig.height=4>>=
 p + annotate("text", x=2, y=23, label="D ~ poly(A, 2)", size=10)
