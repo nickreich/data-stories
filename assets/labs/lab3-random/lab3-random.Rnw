@@ -1,0 +1,105 @@
+\documentclass{article}
+
+\input{../../slide-includes/statsTeachR-preamble-labs}
+
+\usepackage{wrapfig}
+
+\begin{document}
+
+
+\license{This activity has been adapted by Nicholas Reich from \href{https://www.causeweb.org/workshop/uscots09_catalyst4change/}{CATALST teaching materials availble under a CC-BY-NC-SA license}, and are made available under the same license.}
+
+\section*{Lab 3: Is an iPod's shuffle random?}
+
+\subsection*{Overview}
+This is an assignment that you will work on first individually, then in groups of 4-5 students. The overall goal is to develop and validate a set of rules (a model!) for determining whether a given playlist of songs is ``random'' or not.
+
+\subsection*{The assignment}
+The deliverable for this lab is a single page writeup in the form of a letter to Mr. Hoffman (more details are given in Part V on page 4 of this assignment). The single page should contain all group members' full names and be submitted to the instructors via Piazza by 5pm on Thursday, October 6. All group members will receive the same number of points (out of 50), based on the letter.
+
+\subsection*{Introduction}
+[The following narrative is excerpts from an article by Carl Bialik in the Wall Street Journal (9-21-2006), the iPod User’s Manual, and a Keynote Address by Steve Jobs.]
+
+At the original iPod product launch, Steve Jobs, CEO of Apple, Inc. stated "...iPod, a thousand songs in your pocket. This is a major, major breakthrough." One of the amazing aspects about storing 1000 songs in your pocket is the ability to become your own disc jockey. A feature built into the iPod software called "shuffle" further enhances this aspect. The shuffle feature takes a list of songs, called a playlist, and rearranges them in a random order. Each song will appear in the shuffled playlist only once.
+
+\begin{wrapfigure}{r}{0.5\textwidth}
+\includegraphics[width=0.48\textwidth]{ipod-image.jpg}
+\end{wrapfigure}
+
+Earlier this week, Mads Haahr ordered a customized iPod with "God Plays Dice" engraved on its back. Mr. Haahr -- a random-number enthusiast, lecturer in computer science at Trinity College in Dublin and keeper of the Web site Random.org, a popular source of random numbers -- intends to answer a question that has long bedeviled users of Apple's popular music player: Does the shuffle function really play users' songs in random order?
+Since Apple Computer Inc. added the shuffle function to the main menu of iPods two years ago, the question has been raised by the New York Times and Newsweek; debated on Slashdot and other Web sites; and inspired a regular feature in the Onion.
+
+The iPod's shuffle feature also has sparked interest from a cadre of random-number experts and enthusiasts such as Mr. Haahr.  
+
+Just what makes a string of numbers random?  Say you have ten songs in your iPod, numbered one to ten. A random sequence must contain each number in equal frequency, so that, in the iPod example, none of your songs plays much more than any other in the long run. Also, it must be impossible to predict which number comes next, so song No. 5 can't always follow song No. 3.
+
+How would you know if your sequence of numbers is random? Just looking at them wouldn't help. "People are notoriously bad at being a random number generator or recognizing something as random," said Landon Curt Noll, one of the creators of LavaRnd.org. People tend to seek patterns and order where none exist -- perhaps even in a truly shuffled iPod playlist -- where they might pay more attention when their favorite songs are playing, and thus assume that those songs are in heavier rotation.
+
+
+\clearpage
+
+\subsection*{Questions to answer on your own}
+
+1.	Do you have an iPod or some other digital music player? Have you used the shuffle feature? If you have used the shuffle feature, have you ever wondered how truly random it is?
+
+\vspace{4cm}
+
+2.	What comes to mind when you hear the word, “random”?
+
+\vspace{4cm}
+
+3.	If the iPod shuffle feature is not producing a random sequence of songs, then what might the sequence of songs look like? What would you expect to see?
+
+\vspace{4cm}
+
+
+4.	Do you think you can be 100\% certain that a sequence of songs was not randomly generated? Explain your answer.
+
+\vspace{4cm}
+
+Share and discuss your responses to each of the 4 questions with your group.
+
+\clearpage
+
+\subsection*{Group Tasks}
+
+Albert Hoffman, an iPod owner, has written a letter to Apple to complain about the iPod shuffle feature.  He writes that every day he takes an hour-long walk and listens to his iPod using the shuffle feature. He believes that the shuffle feature is producing playlists in which some artists are played too often and others are not played enough. 
+
+He has claimed that the iPod Shuffle feature is not generating random playlists. As evidence, Mr. Hoffman has provided both his \href{https://raw.githubusercontent.com/nickreich/data-stories/gh-pages/assets/labs/lab3-random/Albert-Hoffman-Music-Library.csv}{music library} (8 artists with 10 songs each) and three playlists (20 songs each) that his iPod generated using the shuffle feature.
+
+Tim Cook, the CEO of Apple, Inc., has contacted your group to respond to Mr. Hoffman’s complaint. He has provided your group with several playlists of 20 songs each using the same songs as Mr. Hoffman’s library but generating them using a genuine random number generation method.
+
+To help your group respond to Mr. Hoffman, the next four parts of the problem are designed to help your group explore properties of the randomly generated lists to develop rules that could help determine whether a set of playlists provide evidence that the shuffle feature is not producing randomly selected songs.
+  
+\subsubsection*{PART I: Explore and Describe}
+
+Examine the \href{https://github.com/nickreich/data-stories/raw/gh-pages/assets/labs/lab3-random/Albert-Hoffman-Playlists.pdf}{25 randomly generated playlists} to get an idea of the characteristics of these lists. Write down and number two or more characteristics of a randomly generated playlist in the space below.
+ 
+\vspace{4cm}
+
+\subsubsection*{PART II: Develop Rules}
+Use the set of characteristics that your group wrote down to describe randomly generated playlists in Part I to create a set of one or more rules that flag playlists that do not appear to have been randomly generated. (Be sure that each of the characteristics in Part I is included in a rule.) These rules should be clearly stated so that another person could easily use them. 
+
+\vspace{4cm}
+
+\clearpage
+
+\subsubsection*{PART III: Try out rules}
+Your group will be given five additional randomly generated playlists on which to test your rules. See whether the set of rules your group generated would lead someone to (incorrectly) question whether these playlists are not randomly generated. Based on the performance of your group’s set of rules, adapt or change the rules as your group feels necessary.
+
+\vspace{4cm}
+
+
+\subsubsection*{PART IV: Evaluate}
+Your group will be provided with Mr. Hoffman’s original three playlists. Apply your group’s rules to these three playlists to judge whether there is convincing evidence that Mr. Hoffman’s iPod Shuffle feature is producing playlists which do not seem to be randomly generated.  
+
+\vspace{4cm}
+
+
+\subsubsection*{PART V: Summarize}
+Your group will now write a letter to Mr. Hoffman that includes the following:
+1.	Your group’s set of rules, used to judge whether a playlist does not appear to have been randomly generated. In your letter the rules need to be clearly stated so that another person could apply them to a playlist of 20 songs from Mr. Hoffman’s music library;
+2.	A response to Mr. Hoffman’s claim that the shuffle feature is not random because it produces playlists in which some artists are played too often and others are not played enough.
+
+\end{document}
+

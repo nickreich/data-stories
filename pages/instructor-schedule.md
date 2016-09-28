@@ -83,18 +83,13 @@ _Tues, week 4_
  - Minute 1-5 of Hadley's talk:
  https://channel9.msdn.com/Events/useR-international-R-User-conference/useR2016/Towards-a-grammar-of-interactive-graphics
 
- From Hadley:
-  - models are fundamentally computational, the computer does it for you and that means that they scale
-  - every model has to make assumptions, and a model by its very nature cannot question those assumptions
-  - models can never fundamentally surprise you because they cannot question their own assumptions, but they do scale.
-
-
 _Thurs, week 4_
 
- - Lab 3 work session, more on Lecture 4.
+ - Additional notes about not all models being linear models!
+ - Lab 3 (ipod) work session.
 
 _Tues, week 5_
- - Nick out of town
+ - More on language of models?
 
 
 _Thurs, week 5_
