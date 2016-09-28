@@ -23,6 +23,7 @@
 
 ## remove unneeded files associated with lectures
 assets/lectures/*/*.tex
+assets/labs/*/*.tex
 figure/
 cache/
 
