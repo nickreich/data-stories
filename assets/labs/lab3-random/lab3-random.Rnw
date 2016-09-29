@@ -73,7 +73,7 @@ To help your group respond to Mr. Hoffman, the next four parts of the problem ar
   
 \subsubsection*{PART I: Explore and Describe}
 
-Examine the \href{https://github.com/nickreich/data-stories/raw/gh-pages/assets/labs/lab3-random/25-Random-Paylists.pdf}{25 randomly generated playlists} to get an idea of the characteristics of these lists. Write down and number two or more characteristics of a randomly generated playlist in the space below.
+Examine the \href{https://github.com/nickreich/data-stories/raw/gh-pages/assets/labs/lab3-random/25-Random-Playlists.pdf}{25 randomly generated playlists} to get an idea of the characteristics of these lists. Write down and number two or more characteristics of a randomly generated playlist in the space below.
  
 \vspace{4cm}
 
