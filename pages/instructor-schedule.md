@@ -89,11 +89,12 @@ _Thurs, week 4_
  - Lab 3 (ipod) work session.
 
 _Tues, week 5_
- - More on language of models?
-
+ - Lecture 5: Linear regression intro
+ - lab 3 wrap-up
 
 _Thurs, week 5_
- 
+ - Lecture 5 continued, 
+ - interactive linear regression
 
 _Tues, week 6_
 
