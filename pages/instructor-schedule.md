@@ -102,13 +102,16 @@ _Tues, week 6_
 
 _Thurs, week 6_
 
+ - Lecture 6
+ - linear regression sum of squares game from Lab 4
 
 _Tues, week 7_
 
  - nick out of town
 
 _Thurs, week 7_
-
+ 
+ - lecture 7 
 
 _Tues, week 8_
 
