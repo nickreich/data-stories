@@ -17,12 +17,12 @@ Week |       |     | Topic   | Notes | HW Due | Reading
  5   | Oct | 4, 6   | Linear Regression | [Lec 5](../assets/lectures/lecture5-slr/lecture5-slr.pdf) | [Lab 3](../assets/labs/lab3-random/lab3-random.pdf) | Kaplan 8, OI 7 
  6   |     | 13     | Linear Regression |  |  |  Kaplan 8, OI 7
  7   |     | 18, 20 | Linear Regression |  | Lab 4  | Kaplan 8, OI 7
- 8   |     | 25, 27 | Midterm exam |  |  |  
- 9   | Nov | 1, 3   | Evidence in data |  | | Kaplan 11, 12 
- 10  |     | 8, 10  | Evidence in data |  | Lab 5 | Kaplan 13-15
+ 8   |     | 25, 27 | Linear Regression |  | Lab 5 |  Kaplan 11, 12 
+ 9   | Nov | 1, 3   | Midterm exam |  | | 
+ 10  |     | 8, 10  | Evidence in data |  | Lab 6 | Kaplan 13-15
  11  |     | 15, 17 | Logistic regression | |  | Kaplan 16, OI 8
  12  |     | 22, 24 | Thanksgiving recess. | |  |
- 13  | Dec | 29, 1  | Logistic regression |  | Lab 6 | Kaplan 16, OI 8 
+ 13  | Dec | 29, 1  | Logistic regression |  | Lab 7 | Kaplan 16, OI 8 
  14  |     | 6, 8   | Missing data/Projects |  | | 
  15  |     | 13     | Final projects | | | 
 
