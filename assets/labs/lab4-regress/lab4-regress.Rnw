@@ -28,10 +28,7 @@ The data set presented here is taken from the 3rd edition of \emph{Statistics fo
 Engineering and the Sciences} by Mendenhall and Sincich (1992) and is a subset of the data produced by the Federal Trade Commission. This data was found through the American Statistical Association website, and a fuller description of the data can be found at \web{http://www.amstat.org/publications/jse/datasets/cigarettes.txt}. Let's load the data and look at summary of the variables. Be sure to install the package \emph{RCurl} in order to obtain the data from the internet.
 
 <<load-data,eval=FALSE>>=
-library(RCurl)
-URL <-getURL("http://www.amstat.org/publications/jse/datasets/cigarettes.dat.txt",
-             ssl.verifypeer=FALSE)
-cigs <-read.table(text=URL)
+cigs = read.table("https://ww2.amstat.org/publications/jse/datasets/cigarettes.dat.txt")
 names(cigs)<-c("brand","tar","nicotene","weight","CO")
 
 summary(cigs)
