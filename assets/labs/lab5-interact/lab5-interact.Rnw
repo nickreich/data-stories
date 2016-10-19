@@ -7,13 +7,15 @@
 
 \license{This is a product of \href{http://statsteachr.org}{statsTeachR} that is released under a \href{http://creativecommons.org/licenses/by-sa/3.0}{Creative Commons Attribution-ShareAlike 3.0 Unported}.}
 
-\section*{Lab 5: Model selection for the FEV data}
+\section*{Lab 5: Modeling predictors of lung health}
 
 
-Create a short reproducible report answering the questions below, The report should be less than 3 pages, including all figures, and should be submitted as both PDF and Rmd formats. You do not need to show your code in the PDF report.  
+Create a short reproducible report answering the questions below. The report should be less than 3 pages, including all figures. You do not need to show your code in the PDF report.  
+
+This lab is due at 5pm on Thursday, October 27th. You should submit your assignment, in the form of both a knitted RMarkdown PDF as well as the .Rmd file that created the PDF, by uploading them to your personal Google Drive folder that is shared with the TA and the instructor. While you may collaborate with other students on this assignment, you must write up your own code and answers to the questions. Absolutely no cutting and pasting of any portion of the answers. This assignment, like the others, will be worth 50 points.
 
 \subsection*{Data exploration}
-This lab will cover model selection and checking for multiple linear regression using the FEV dataset (found in the \href{http://biostat.mc.vanderbilt.edu/wiki/Main/DataSets}{Vanderbilt Datasets repository}). This dataset contains 654 observations on 6 variables, including a continuous outcome variable, forced expiratory volume (FEV) which is a measure of lung health and strength. To begin, load (install if necessary) the Hmisc package to load the dataset from the Vanderbilt website. The brief FEV dataset codebook can be found on \href{http://biostat.mc.vanderbilt.edu/wiki/pub/Main/DataSets/FEV.html}{this webpage}. 
+This lab will cover model selection and checking for multiple linear regression using the FEV dataset (found in the \href{http://biostat.mc.vanderbilt.edu/wiki/Main/DataSets}{Vanderbilt Datasets repository}). This dataset contains 654 observations on 6 variables, including a continuous outcome variable, forced expiratory volume (FEV) which is a measure of lung health and strength, age, height, sex, and smoking status. To begin, load (install if necessary) the Hmisc package to load the dataset from the Vanderbilt website. The brief FEV dataset codebook can be found on \href{http://biostat.mc.vanderbilt.edu/wiki/pub/Main/DataSets/FEV.html}{this webpage}. 
 
 <<load-data, message=FALSE, warning=FALSE>>=
 library("Hmisc")
@@ -48,8 +50,19 @@ Before fitting any models, identify somewhere between 2 and 6 multiple linear re
 
 
 \begin{exercise}
-Based on your work above, pick one model that represents what you think is the ``best'' model for this data. Justify your choice, and interpret what you think are the most important or interesting relationships with the covariates and FEV.  Illustrate one of these relationships with a figure. If you were to collect similar data like this in a new study, what additional variables would you be interested in collecting and why? 
+Based on your work above, pick one model that represents what you think is the ``best'' model for this data. Justify your choice, and interpret what you think are the most important or interesting relationships with the covariates and FEV.  Illustrate one of these relationships with a figure.
 \end{exercise}
+
+
+\begin{exercise}
+Based on your thinking about this dataset and correlates of lung health more generally, if you were to collect similar data like this in a new study, what additional variables would you be interested in collecting and why? 
+\end{exercise}
+
+
+\begin{exercise}
+Ensure that your entire report is reproducible. That means that the instructors should be able to run your .Rmd file and have it generate the same PDF that you handed in. Note that you can assume that we have the Hmisc package installed on our machine but you should not rely on us having any particular filepath or directory structure when running the file. (In other words, don't try to load the data from a local file whose path is specific to your computer.)
+\end{exercise}
+
 
 
 \end{document}
