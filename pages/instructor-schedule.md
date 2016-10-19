@@ -111,25 +111,37 @@ _Tues, week 7_
 
 _Thurs, week 7_
  
- - lecture 7 
+ Regression Topics remaining: adj R^2, model parsimony, model selection, collinearity, splines, interactions
+ 
+ - lecture 7: 
+ - ask students whether they want to be able to bring notes to exam?
 
 _Tues, week 8_
 
+ - Lecture 8
 
 _Thurs, week 8_
 
+ - Review of key regression topics
 
  _Tues, week 9_
 
+ - midterm exam
 
  _Thurs, week 9_
 
+ - lecture about evidence in data?
+ - go over exam?
+ - Introdue Project?
 
  _Tues, week 10_
 
+  - give this lecture, maybe do coin flipping? http://nickreich.github.io/data-stories-2016/assets/lectures/lecture6-confidence/lady-slides.html#15
+
 
  _Thurs, week 10_
-
+ 
+ - adapt this exercise for fivethirtyeight (or other) election predictions. 
 
  _Tues, week 11_
 
