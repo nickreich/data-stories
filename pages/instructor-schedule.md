@@ -113,7 +113,7 @@ _Thurs, week 7_
  
  Regression Topics remaining: adj R^2, model parsimony, model selection, collinearity, splines, interactions
  
- - lecture 7: 
+ - lecture 7: model syntax (Lec 4), R^2 and R^2_adj (Lec 6), outliers (Lec 5), model selection (Lec 5 spring), dummy variables (Lec 5 fall)
  - ask students whether they want to be able to bring notes to exam?
 
 _Tues, week 8_
@@ -122,7 +122,7 @@ _Tues, week 8_
 
 _Thurs, week 8_
 
- - Review of key regression topics
+ - Review of key regression topics: geometry of fit, residuals, sums of squares, coefficient interpretations, adj R^2, model parsimony, model selection, collinearity, splines, interactions
 
  _Tues, week 9_
 

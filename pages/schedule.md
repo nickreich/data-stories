@@ -16,7 +16,7 @@ Week |       |     | Topic   | Notes | HW Due | Reading
  4   |     | 27, 29 | Language of Models | [Lec 4](../assets/lectures/lecture4-models/lecture4-model-language.pdf)  | [Lab 2](../assets/labs/lab2-blog/lab2-blog.pdf) |  Kaplan 6, 7
  5   | Oct | 4, 6   | Linear Regression | [Lec 5](../assets/lectures/lecture5-slr/lecture5-slr.pdf) | [Lab 3](../assets/labs/lab3-random/lab3-random.pdf) | Kaplan 8, OI 7 
  6   |     | 13     | Linear Regression | [Lec 6](../assets/lectures/lecture6-mlr/lecture6-mlr-sweave.pdf) |  |  Kaplan 8-10, OI 7
- 7   |     | 18, 20 | Linear Regression |  | [Lab 4](../assets/labs/lab4-regress/lab4-regress.pdf) | Kaplan 9-10
+ 7   |     | 18, 20 | Linear Regression | [Lec 7](../assets/lectures/lecture7-regress/lecture7-regress.pdf)  | [Lab 4](../assets/labs/lab4-regress/lab4-regress.pdf) | Kaplan 9-10
  8   |     | 25, 27 | Linear Regression |  | [Lab 5](../assets/labs/lab5-interact/lab5-interact.pdf) |  Kaplan 11, 12 
  9   | Nov | 1, 3   | Midterm exam |  | | 
  10  |     | 8, 10  | Evidence in data |  | Lab 6 | Kaplan 13-15
