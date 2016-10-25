@@ -27,6 +27,14 @@ Week |       |     | Topic   | Notes | HW Due | Reading
  15  |     | 13     | Final projects | | | 
 
 
+### Annotated Slides
+
+ - [Lecture 3](../assets/lectures-annotated/lecture3-slr.pdf)
+ - [Lecture 5](../assets/lectures-annotated/lecture5-slr.pdf)
+ - [Lecture 6](../assets/lectures-annotated/lecture6-mlr-sweave.pdf)
+ - [Lecture 7](../assets/lectures-annotated/lecture7-regress.pdf)
+ - [Lecture 8](../assets/lectures-annotated/lecture8-interact.pdf)
+
  
 <!--
 
