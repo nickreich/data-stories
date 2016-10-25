@@ -132,7 +132,7 @@ _Thurs, week 8_
 
  - lecture about evidence in data?
  - go over exam?
- - Introdue Project?
+ - Introduce Project?
 
  _Tues, week 10_
 

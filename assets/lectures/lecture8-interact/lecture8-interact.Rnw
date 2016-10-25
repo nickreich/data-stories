@@ -1,0 +1,562 @@
+%% beamer/knitr slides 
+%% for Statistical Modeling and Data Visualization course @ UMass
+%% Nicholas Reich: nick [at] schoolph.umass.edu
+
+
+\documentclass[table]{beamer}
+
+
+\input{../../slide-includes/standard-knitr-beamer-preamble}
+
+%	The following variables are assumed by the standard preamble:
+%	Global variable containing module name:
+\title{Regression: Interactions and dummy variables}
+%	Global variable containing module shortname:
+%		(Currently unused, may be used in future.)
+\newcommand{\ModuleShortname}{introRegression}
+%	Global variable containing author name:
+\author{Nicholas G Reich}
+%	Global variable containing text of license terms:
+\newcommand{\LicenseText}{Made available under the Creative Commons Attribution-ShareAlike 3.0 Unported License: http://creativecommons.org/licenses/by-sa/3.0/deed.en\textunderscore US }
+%	Instructor: optional, can leave blank.
+%		Recommended format: {Instructor: Jane Doe}
+\newcommand{\Instructor}{}
+%	Course: optional, can leave blank.
+%		Recommended format: {Course: Biostatistics 101}
+\newcommand{\Course}{}
+
+
+% leftovers from openintro slides
+
+
+
+\input{../../slide-includes/shortcuts}
+\usepackage{bbm}
+
+
+%	******	Document body begins here	**********************
+
+\begin{document}
+
+%	Title page
+\begin{frame}[plain]
+	\titlepage
+\end{frame}
+
+%	******	Everything through the above line must be placed at
+%		the top of any TeX file using the statsTeachR standard
+%		beamer preamble. 
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Outline}
+
+<<simData, tidy=FALSE, echo=FALSE, message=FALSE, fig.height=4>>=
+library(ggplot2)
+theme_set(theme_bw())
+dat <- read.table("lungc.txt", header=TRUE)
+opts_chunk$set(size = 'footnotesize')
+options(width=60)
+@
+
+\bi
+  \myitem Dummy variables for categorical covariates
+  \myitem Modeling interactions
+  %\myitem Categorical variable representation via dummy variables
+\ei
+	
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ 
+ 
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Categorical predictors}
+
+\bi
+	\myitem Assume $X$ is a categorical / nominal / factor variable with $k$ levels
+	\myitem Can't use a single predictor with levels $1, 2, \ldots, K$ -- this has the wrong interpretation
+	\myitem Need to create {\it indicator} or {\it dummy} variables
+\ei
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Categorical predictor example: lung data}
+
+<<education-as-continuous, tidy=FALSE, message=FALSE, fig.height=4>>=
+qplot(education, disease, data=dat) + geom_point() +
+  geom_smooth(method="lm", se=FALSE)
+@ 
+ 
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Indicator variables}
+
+\bi
+	\myitem Let $x$ be a categorical variable with $k$ levels (e.g. with $k=3$ ``red'', ``green'', ``blue'').
+        \myitem Choose one group as the baseline (e.g. ``red'')
+	\myitem Create $(k-1)$ binary terms to include in the model:
+\begin{eqnarray*}
+        x_{1,i} & = &  \\
+        &&\\
+        x_{2,i} & = & 
+\end{eqnarray*}
+	%\myitem For a model with no additional predictors, pose the model 
+	%$$ y_i = \beta_0 + \beta_1 x_{1,i} + \ldots + \beta_{k-1} x_{k-1,i} + \epsilon_{i}$$
+	%and estimate parameters using least squares
+	%\myitem Note distinction between {\it predictors} and {\it terms}
+\ei
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Categorical predictor example: lung data}
+
+<<education-boxplot, tidy=FALSE, message=FALSE, fig.height=4>>=
+qplot(factor(education), disease, geom="boxplot", data=dat)
+@ 
+ 
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[t]{Standard model interpretation}
+
+Using the model $ y_i = \beta_0 + \beta_1 x_{1,i} + \ldots + \beta_{k-1} x_{k-1,i} + \epsilon_{i}$, interpret
+
+\bigskip
+
+$\beta_0 = $
+
+\vspace{1.5cm}
+
+$\beta_1 = $
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[t]{Equivalent model}
+
+Define the model $y_i = \beta_1 x_{i1} + \ldots + \beta_{k} x_{i, k} + \epsilon_{i}$ where there are indicators for each possible group
+
+\bigskip
+
+$\beta_1 = $
+
+\vspace{1.5cm}
+
+$\beta_2 = $
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Categorical predictor example: lung data}
+
+<<lungMLREducCat, tidy=FALSE, message=FALSE, fig.height=4>>=
+qplot(factor(education), disease, geom="boxplot", data=dat)
+@ 
+ 
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Categorical predictor example: lung data}
+
+$$ dis_i = \beta_0 + \beta_1 educ_{6,i} + \beta_2 educ_{7,i} + \dots + \beta_{9} educ_{14,i} $$
+
+\small
+<<lungMLRCategorical, tidy=FALSE>>=
+mlr7 <- lm(disease ~ factor(education), data=dat)
+summary(mlr7)$coef
+@
+ 
+ 
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Categorical predictor releveling}
+
+
+$$ dis_i = \beta_0 + \beta_1 educ_{5,i} + \beta_2 educ_{6,i} + \beta_1 educ_{7,i} + \beta_2 educ_{9,i} + \dots + \beta_{14} educ_{14,i} $$
+
+\small
+<<lungMLRRelevel, tidy=FALSE>>=
+dat$educ_new <- relevel(factor(dat$education), ref="8") 
+mlr8 <- lm(disease ~ educ_new, data=dat)
+summary(mlr8)$coef
+@
+ 
+ 
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Categorical predictor: no baseline group}
+
+$$ dis_i = \beta_1 educ_{5,i} + \beta_2 educ_{6,i} + \dots + \beta_{14} educ_{14,i} $$
+
+\small
+<<lungMLRNoBaseline, tidy=FALSE>>=
+mlr9 <- lm(disease ~ factor(education) - 1, data=dat)
+summary(mlr9)$coef
+@
+ 
+ 
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]{Creating categories using {\tt cut()}}
+
+$$ dis_i = \beta_1 educ_{low,i} + \beta_2 educ_{med,i} + \dots + \beta_{14} educ_{hi,i} $$
+
+\small
+<<cut, tidy=FALSE, fig.height=2>>=
+dat$educ_3cat <- cut(dat$education, breaks=3, 
+                     labels=c("low", "med", "hi"))
+mlr10 <- lm(disease ~ educ_3cat - 1, data=dat)
+coef(mlr10)
+qplot(educ_3cat, disease, geom="boxplot", data=dat)
+@
+ 
+ 
+\end{frame}
+
+
+ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\begin{frame}
+
+\centering
+\Huge
+interaction 
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{What is interaction?}
+
+\begin{block}{Definition of interaction}
+Interaction occurs when the relationship between two variables depends on the value of a third variable.
+
+\end{block}
+
+<<intModel, echo=FALSE, fig.height=3>>=
+x1 <- runif(100)
+x2 <- rep(0:1, each=50)
+y <- 3 + 2*x1 + 4*x1*x2 + rnorm(50)
+qplot(x1, y, color=factor(x2)) + geom_point() + geom_smooth(method="lm", se=FALSE)
+@
+
+
+
+
+%[Good overview: KNN pp. 306--313]
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Interaction vs. confounding}
+
+\begin{block}{Definition of interaction}
+Interaction occurs when the relationship between two variables depends on the value of a third variable. E.g. you could hypothesize that the true relationship between physical activity level and cancer risk may be different for men and women.
+\end{block}
+
+\begin{block}{Definition of confounding}
+Confounding occurs when the measurable association between two variables is distorted by the presence of another variable. Confounding can lead to biased estimates of a true relationship between variables.
+\end{block}
+
+\bi
+    \myitem It is important to include confounding variables (if possible!) when they may be biasing your results.
+    \myitem Unmodeled interactions do not lead to ``biased'' estimates in the same way that confounding does, but it can lead to a richer and more detailed description of the data at hand. 
+\ei
+
+%[Good overview: KNN pp. 306--313]
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Some real world examples?}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{How to include interaction in a MLR}
+
+
+Model A: $ y_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \epsilon_i$
+
+
+Model B: $ y_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \beta_3 x_{i1}\cdot x_{i2} + \epsilon_i$
+
+\vspace{4em}
+
+\begin{block}{Key points}
+\bi
+        \myitem ``easily'' conceptualized with 1 continuous, 1 categorical variable
+        \myitem models possible with other variable combinations, but interpretation/visualization harder 
+        \myitem two variable interactions are considered ``first-order'' interactions 
+        \myitem still a {\bf linear} model, but no longer a strictly {\bf additive} model
+\ei
+\end{block}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{How to interpret an interaction model}
+
+For now, assume $x_1$ is continuous, $x_2$ is 0/1 binary.
+
+Model A: $ y_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \epsilon_i$
+
+Model B: $ y_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \beta_3 x_{i1}\cdot x_{i2} + \epsilon_i$
+
+\vspace{12em}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{How to interpret an interaction model}
+
+For now, assume $x_1$ is continuous, $x_2$ is 0/1 binary.
+
+Model A: $ y_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \epsilon_i$
+
+Model B: $ y_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \beta_3 x_{i1}\cdot x_{i2} + \epsilon_i$
+
+\vspace{1em}
+
+$\beta_3$ is the change in the slope of the line that describes the relationship of $y \sim x_1$ comparing the groups defined by $x_2=0$ and $x_2=1$.
+
+$\beta_1 + \beta_3$ is the expected change in $y$ for a one-unit increase in $x_1$ in the group $x_2=1$.
+
+$\beta_0 + \beta_2$ is the expected value of $y$ in the group $x_2=1$ when $x_1=0$ .
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Example interaction model with lung data}
+
+<<lung-plots, results='hold'>>=
+ggplot(dat, aes(nutrition, disease, color=factor(smoking))) + 
+    geom_point() 
+@
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Example interaction model with lung data}
+
+\vspace{-2em}
+$$ dis_i = \beta_0 + \beta_1 nutrition_{i} + \beta_2 smoking_{i} + \beta_3 nutrition\cdot smoking_{i} + \epsilon_i$$
+
+<<intModels, results='hold'>>=
+mi1 <- lm(disease ~ nutrition + smoking, data=dat)
+mi2 <- lm(disease ~ nutrition*smoking, data=dat)
+c(summary(mi1)$adj.r.squared, summary(mi2)$adj.r.squared)
+round(summary(mi2)$coef,2)
+@
+
+\uncover<2> {
+\scriptsize
+Among non-smokers there is little evidence to support an association between nutrition and disease status. For every 10 units increase in nutrition score, the expected disease score increases by 0.3 points. The models find evidence that this relationship is significantly different for smokers, estimating that for every 10 unit increase in nutrition, disease score would decrease by 0.5 points. 
+}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Example interaction model with FEV data}
+
+<<fevPlot1, fig.height=4, tidy=FALSE>>=
+ggplot(dat, aes(nutrition, disease, color=factor(smoking))) + 
+    geom_point() + geom_smooth(method="lm")
+@
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Example interaction model with lung data}
+
+<<>>=
+dat$smoking_relevel <- factor(dat$smoking, levels=c(1,0))
+mi3 <- lm(disease ~ nutrition*smoking_relevel, data=dat)
+round(summary(mi3)$coef, 2)
+@
+
+Indeed, we see that there is a 'significant' negative slope for smokers.
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Checking influential points}
+
+We note that these results are sensitive to the inclusion of an influential outlying observation which had a much higher value of nutrition than any other observation.
+<<fig.height=3, results='hold'>>=
+plot(mi2, which=5)
+dat[69,]
+@
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Results sensitivity}
+
+<<>>=
+round(summary(mi2)$coef, 2)
+mi2a <- lm(disease ~ nutrition*smoking, data=dat, subset=-69)
+round(summary(mi2a)$coef, 2)
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Results sensitivity}
+
+<<>>=
+round(summary(mi2)$coef, 2)
+mi2a <- lm(disease ~ nutrition*smoking, data=dat, subset=-69)
+round(summary(mi2a)$coef, 2)
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+
+\centering
+\Huge
+model selection
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\begin{frame}{Model selection}
+
+\begin{block}{Why are you building a model in the first place?}
+\end{block}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Model selection: considerations}
+
+\begin{block}{Things to keep in mind...}
+\bi
+    \myitem {\bf Why am I building a model?} Some common answers
+    \bi
+        	\item Estimate an association
+		\item Test a particular hypothesis
+		\item Predict new values
+	\ei
+	\myitem What predictors will I allow?
+    \myitem What predictors are needed?
+\ei
+
+Different answers to these questions will yield different final models.
+
+\end{block}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}{Model selection: realities}
+
+\centering {\em All models are wrong. Some are more useful than others.} \\ - George Box
+
+
+\bi
+	\myitem In practice, issues with sample size, collinearity, and available predictors are real problems.
+	\myitem There is not a single best algorithm for model selection! It pretty much always requires thoughful reasoning and knowledge about the data at hand. 
+	\myitem When in doubt (unless you are specifically ``data mining''), err on the side creating a process that does not require choices being made (by you or the computer) about which covariates to include.
+\ei
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Basic ideas for model selection}
+
+\begin{block}{For association studies, when your sample size is large}
+\bi
+        \myitem Include key covariates of interest.
+        \myitem Include covariates needed because they might be confounders.
+        \myitem Include covariates that your colleagues/reviewers/collaborators will demand be included for face validity.
+        \myitem Do NOT go on a fishing expedition for significant results!
+        \myitem Do NOT use ``stepwise selection'' methods!
+        \myitem Subject the selected model to model checking/diagnostics, possibly adjust model structure (i.e. include non-linear relationships with covariates) as needed.
+\ei
+\end{block}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Basic ideas for model selection}
+
+\begin{block}{For association studies, when your sample size is small}
+\bi
+        \myitem Same as above, but may need to be more frugal with how many predictors you include.
+        \myitem Rule of thumb for multiple linear regression is to have at least 15 observations for each covariate you include in your model.
+\ei
+\end{block}
+
+
+\end{frame}
+
+
+
+\end{document}
