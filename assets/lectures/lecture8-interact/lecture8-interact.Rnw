@@ -66,6 +66,7 @@ options(width=60)
 \bi
   \myitem Dummy variables for categorical covariates
   \myitem Modeling interactions
+  \myitem Model selection
   %\myitem Categorical variable representation via dummy variables
 \ei
 	
@@ -73,7 +74,17 @@ options(width=60)
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- 
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\begin{frame}
+
+\centering
+\Huge
+dummy variables 
+
+\end{frame}
  
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -446,7 +457,7 @@ dat[69,]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[fragile]{Results sensitivity}
+\begin{frame}[fragile]{Results sensitivity to outlier}
 
 <<>>=
 round(summary(mi2)$coef, 2)
@@ -458,13 +469,19 @@ round(summary(mi2a)$coef, 2)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[fragile]{Results sensitivity}
+\begin{frame}[fragile]{Interaction modeling summary}
 
-<<>>=
-round(summary(mi2)$coef, 2)
-mi2a <- lm(disease ~ nutrition*smoking, data=dat, subset=-69)
-round(summary(mi2a)$coef, 2)
-@
+\bi
+
+  \myitem Interactions can give you a more detailed story about your data.
+  
+  \myitem They are 'easier' to interpret/visualize with a binary and continuous variable interaction.
+  
+  \myitem They are also valid for continuous x continuous variables: as the value of variable $A$ increases, the association between $B$ and $Y$ changes.
+  
+  \myitem Interaction is sometimes referred to as 'effect modification'.
+
+\ei
 
 \end{frame}
 
@@ -549,8 +566,8 @@ Different answers to these questions will yield different final models.
 
 \begin{block}{For association studies, when your sample size is small}
 \bi
-        \myitem Same as above, but may need to be more frugal with how many predictors you include.
-        \myitem Rule of thumb for multiple linear regression is to have at least 15 observations for each covariate you include in your model.
+        \myitem Same as above, but may need to be more frugal with how many predictors/parameters you include.
+        \myitem Rule of thumb for multiple linear regression is to have at least 15 observations for each regression coefficient you include in your model.
 \ei
 \end{block}
 
