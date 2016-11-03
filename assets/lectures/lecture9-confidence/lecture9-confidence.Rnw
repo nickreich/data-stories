@@ -27,7 +27,9 @@
 
 
 \input{../../slide-includes/shortcuts}
-\usepackage{bbm}
+
+% for conditional cases formulas 
+\usepackage{amsmath}
 
 
 %	******	Document body begins here	**********************
@@ -183,5 +185,95 @@ qplot(heads, data=Ladies, binwidth=1)
   \myitem Rumor has it that the original Lady (described by Fisher) correctly guessed all 10 cups of tea. 
 \ei
 \end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Extension to election predictions}
+
+\begin{block}{Binary outcome: the $i^{th}$ guess about a cup of tea}
+\[
+    X_i = 
+\begin{cases}
+    1,   & \text{if Lady guesses right about the $i^{th}$ cup of tea} \\
+    0,   & \text{if Lady guesses right about the $i^{th}$ cup of tea}
+\end{cases}
+\]
+\end{block}
+
+\begin{block}{Binary outcome: the election outcome in the $i^{th}$ state}
+\[
+    X_i = 
+\begin{cases}
+    1,   & \text{if Clinton wins} \\
+    0,   & \text{if Clinton loses}
+\end{cases}
+\]
+\end{block}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Code to simulate election results}
+
+The function {\tt rbinom()} is similar to {\tt rflip()} but it allows each state/cup of tea to have a different probability of `success'. \\ Note: {\bf all flips are independent!}
+
+\scriptsize
+<<>>=
+rbinom(n = 50, size = 1, prob = rep(.5, 52))
+do(2) * rbinom(n = 50, size = 1, prob = rep(.5, 52))
+@
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Some data to help us simulate elections}
+
+<<>>=
+elect <- read.csv("https://goo.gl/HCHzui")
+head(elect)
+@
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Some data to help us simulate elections}
+
+<<>>=
+nsims <- 10
+sims <- do(nsims) * rbinom(n = 50, size = 1, 
+                           prob = elect$HRC.win.prob)
+tsims <- t(sims)
+HRC_votes <- elect$electoral.votes*tsims
+HRC_totals <- colSums(HRC_votes)
+@
+
+Plot the results!
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{An election simulation of your own}
+
+Assuming all states were an even coinflip (p=0.5) and independent, what is the probability that Clinton gets 270 or more electoral votes? Run the simulation a lot of times to find out!
+
+\vspace{2em}
+
+Instead of assuming even probabilities, let's input probabilities from one of the online prediction models and then run it again. Remember, unless we do something more complicated, we are assuming that each state outcome is independent from all the others, which may not be a valid assumption.
+
+\vspace{2em}
+
+\href{http://www.nytimes.com/interactive/2016/upshot/presidential-polls-forecast.html#other-forecasts}{Link to state-by-state win probabilites.}
+
+
+\end{frame}
+
 
 \end{document}
