@@ -18,9 +18,9 @@ Week |       |     | Topic   | Notes | HW Due | Reading
  6   |     | 13     | Linear Regression | [Lec 6](../assets/lectures/lecture6-mlr/lecture6-mlr-sweave.pdf) |  |  Kaplan 8-10, OI 7
  7   |     | 18, 20 | Linear Regression | [Lec 7](../assets/lectures/lecture7-regress/lecture7-regress.pdf)  | [Lab 4](../assets/labs/lab4-regress/lab4-regress.pdf) | Kaplan 9-10
  8   |     | 25, 27 | Linear Regression | [Lec 8](../assets/lectures/lecture8-interact/lecture8-interact.pdf) | [Lab 5](../assets/labs/lab5-interact/lab5-interact.pdf) |  Kaplan 9-10
- 9   | Nov | 1, 3   | Midterm exam |  | | 
- 10  |     | 8, 10  | Evidence in data |  | Lab 6 | Kaplan 11-15
- 11  |     | 15, 17 | Logistic regression | |  | Kaplan 16, OI 8
+ 9   | Nov | 1, 3   | Midterm exam | [Lec 8](../assets/lectures/lecture9-confidence/lecture9-confidence.pdf) | | 
+ 10  |     | 8, 10  | Evidence in data |  | | Kaplan 11-15
+ 11  |     | 15, 17 | Logistic regression | |  Lab 6 | Kaplan 16, OI 8
  12  |     | 22, 24 | Thanksgiving recess. | |  |
  13  | Dec | 29, 1  | Logistic regression |  | Lab 7 | Kaplan 16, OI 8 
  14  |     | 6, 8   | Missing data/Projects |  | | 

@@ -1,0 +1,186 @@
+%% beamer/knitr slides 
+%% for Statistical Modeling and Data Visualization course @ UMass
+%% Nicholas Reich: nick [at] schoolph.umass.edu
+
+
+\documentclass[table]{beamer}
+
+
+\input{../../slide-includes/standard-knitr-beamer-preamble}
+
+%	The following variables are assumed by the standard preamble:
+%	Global variable containing module name:
+\title{Confidence and Hypotheses}
+%	Global variable containing module shortname:
+%		(Currently unused, may be used in future.)
+\newcommand{\ModuleShortname}{introRegression}
+%	Global variable containing author name:
+\author{Nicholas G Reich}
+%	Global variable containing text of license terms:
+\newcommand{\LicenseText}{This exercise has been adapted from materials from the mosaic R package, and is released under the  GPL (>=2) license.}
+%	Instructor: optional, can leave blank.
+%		Recommended format: {Instructor: Jane Doe}
+\newcommand{\Instructor}{}
+%	Course: optional, can leave blank.
+%		Recommended format: {Course: Biostatistics 101}
+\newcommand{\Course}{}
+
+
+\input{../../slide-includes/shortcuts}
+\usepackage{bbm}
+
+
+%	******	Document body begins here	**********************
+
+\begin{document}
+
+%	Title page
+\begin{frame}[plain]
+	\titlepage
+\end{frame}
+
+%	******	Everything through the above line must be placed at
+%		the top of any TeX file using the statsTeachR standard
+%		beamer preamble. 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{A story: The Lady Tasting Tea}
+
+
+\bi
+   \myitem In this famous statistical fable, an aristocratic British Lady claims she can tell whether milk has been poured into tea or vice versa. This story was first documented by Ronald Fisher in 1935. More details \href{https://en.wikipedia.org/wiki/Lady_tasting_tea}{here}.
+   \myitem Question: How do we test this claim?
+   \myitem One Possible Answer: Think about each guess about a cup of tea as a flip of a coin with a given probability ($p$) of being heads (or the guess being right).
+   \myitem What would $p$=0.1 mean in the context of the tea-tasting lady? $p$=.5? $p$=.8?
+\ei	
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Let's turn the Lady into a computer}
+
+
+We can use {\tt rflip()} to simulate flipping coins (or tea-tasting ladies):
+
+<<>>=
+library(mosaic)
+rflip()
+@
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Let's have the Lady try 10 cups of tea}
+
+
+Rather than flip each coin separately, we can flip multiple coins at once. {\tt rflip(10)} simulates 1 lady tasting 10 cups of tea 1 time each time with a 50\% chance of getting it `right'.
+
+<<>>=
+rflip(10, prob=0.5)
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{And then create a swarm of Ladies}
+ 
+We can do that `many' times to see how multiple guessing ladies do:
+<<>>=
+do(2) * rflip(10, prob=0.5)
+@
+
+\bi
+ \myitem `do()` is a function within the `mosaic` package that is clever about what it remembers (in many common situations).
+ \myitem 2 isn't many Ladies -- we'll do many in a minute -- but it is a good idea to take a look at a small example before generating a lot of random data.
+ \myitem What kind of R object does the command `do(2) * rflip(10)` return?
+\ei
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Now let's simulate 5000 `imposter' tea-tasting ladies}
+ 
+<<cache=TRUE>>=
+Ladies <- do(5000) * rflip(10)
+head(Ladies, 8)
+@
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{The results of our experiment...}
+
+This is what natural randomness looks like if the ladies are guessing randomly, i.e. can't tell the difference between the cups of tea.
+
+<<fig.height=4>>=
+library(ggplot2)
+qplot(heads, data=Ladies, binwidth=1)
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{The results of our experiment...}
+
+What would convince you that the original Lady can tell the difference between cups of tea?
+
+<<echo=FALSE,fig.height=4>>=
+qplot(heads, data=Ladies, binwidth=1)
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Framing this in terms of hypotheses}
+
+\begin{center}
+In statistical parlance, a hypothesis is a statement about the world that can be supported or refuted with data.
+\end{center}
+
+\begin{block}{Classical hypothesis testing in statistics has a few ingredients}
+\bi
+  \myitem A ``Null Hypothesis'' ($H_0$, or `H-naught'): a proposition of ``no difference'' between groups or that deviations are due to sampling error. In our tea-tasting example, $H_0: p=0.5$.
+  \myitem One or more ``Alternative Hypotheses'' ($H_A$): a proposition that there is a difference between groups, or a significant ``effect''. 
+\ei
+\end{block}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Null distributions characterize expected variability}
+
+This is an example of a ``null distribution'': it characterizes expected variability when $H_0$ is true. Values far from 0.5 indicate evidence against $H_0$.
+
+<<echo=FALSE,fig.height=4>>=
+qplot(heads, data=Ladies, binwidth=1)
+@
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{}
+
+\bi
+  \myitem What proportion of your Ladies Tasting Tea guessed 9 or 10? (Note that this is the same as asking that, assuming we are flipping a fair coin, how often do we see 9 or 10 heads?)
+  \myitem There are formal ties to the Binomial Distribution that we will talk about later...
+  \myitem Rumor has it that the original Lady (described by Fisher) correctly guessed all 10 cups of tea. 
+\end{frame}
+
+\end{document}
