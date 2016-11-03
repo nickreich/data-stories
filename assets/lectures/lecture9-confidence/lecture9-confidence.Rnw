@@ -67,7 +67,7 @@
 
 We can use {\tt rflip()} to simulate flipping coins (or tea-tasting ladies):
 
-<<>>=
+<<message=FALSE>>=
 library(mosaic)
 rflip()
 @
@@ -175,12 +175,13 @@ qplot(heads, data=Ladies, binwidth=1)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[fragile]{}
+\begin{frame}[fragile]{Conclusions}
 
 \bi
   \myitem What proportion of your Ladies Tasting Tea guessed 9 or 10? (Note that this is the same as asking that, assuming we are flipping a fair coin, how often do we see 9 or 10 heads?)
   \myitem There are formal ties to the Binomial Distribution that we will talk about later...
   \myitem Rumor has it that the original Lady (described by Fisher) correctly guessed all 10 cups of tea. 
+\ei
 \end{frame}
 
 \end{document}
