@@ -147,10 +147,100 @@ Using all the data, i.e. the entire ``population''
 \scriptsize
 <<>>=
 fm <- lm(net ~ age + sex, data=race)
-coef(fm)
+summary(fm)$coef
 @
 
 \end{frame} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Let's talk about SEs!}
+
+\bi
+    \item We can use ``statistical inference'' to gauge our uncertainty about our estimated $\beta$s.
+    \item Intuitively, we want to estimate how much uncertainty we expect to have about each $\beta$ in our model. 
+    \item Out of the box, R gives you p-values to test hypothses of the form: $H_0: \beta_k=0$. 
+    \item The more uncertainty we have about a specific $\hat\beta_k$, the less likely we are to reject the null hypothesis.
+\ei
+
+\scriptsize
+<<>>=
+summary(fm)$coef
+@
+
+\end{frame} 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Factors influencing our uncertainty about $\hat\beta_k$}
+
+\begin{block}{How do each of these factors influence uncertainty about $\hat\beta_k$}
+\bi
+    \item Increased sample size: 
+    \vspace{3em}
+    \item Increased variability in $y$;
+    \vspace{3em}
+    \item Increased variability in $x$:
+\ei
+\end{block}
+
+\end{frame} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Sampling distribution terminology}
+
+\begin{block}{Really important vocabulary!}
+
+\bi
+    \myitem {\bf sampling distribution}: the distribution of an estimated parameter, reflecting the randomness of the sampling (data collection) process. 
+    \myitem {\bf standard error}: the standard deviation of a sampling distribution, measures the precision of our estimate or the amount of information we have about the parameter.
+    \myitem {\bf margin of error}: the half-width of the confidence interval 
+    \myitem {\bf point estimate}: the exact numerical value that represents our best guess at the true parameter value. (In regression, this is the least-squares estimate of our $\beta$.)
+    \myitem {\bf p-value}: the probability of observing a value of as or more extreme as what you did observe in your data, assuming the null hypothesis is true.
+\ei
+
+\end{block}
+\end{frame} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Standard inference about $\beta_k$ in R}
+
+Assuming $H_0:\beta_{age} = 0$ is true we can use the estimated SE to approximate the sampling distribution as a t-distribution
+
+\scriptsize
+<<echo=FALSE, fig.height=3>>=
+curve(dnorm(x, mean=0, sd=summary(fm)$coef["age", "Std. Error"]), from=-5, to=18,
+    ylab="density", xlab=expression(beta[age]))
+abline(v=summary(fm)$coef["age", "Estimate"], col="red")
+summary(fm)$coef
+@
+
+
+\end{frame} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Different inference techniques}
+
+\begin{block}{Standard inference}
+Uses a mathematical approximation to the sampling distribution that gets more reliable with larger sample sizes. In many practical data analysis situations, this standard inference procedure works just fine. 
+\end{block}
+
+\begin{block}{Permutation-based inference}
+Uses numerical/simulated approximation to the sampling distribution under the null hypothesis. This is what we did for the Lady Tasting Tea example.
+\end{block}
+
+\begin{block}{Bootstrap inference}
+Similar to permutation based inference but it does not permute the data and simulate when $H_0$ is true. Instead, it resamples your data to estimate the standard error.
+\end{block}
+
+Permutation and bootstrap inference can be particularly useful when you have a procedure that does not have a tidy, closed-form solution, unlike regression which does.
+
+\end{frame} 
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -164,7 +254,7 @@ coef(fm)
 @
 
 
-Using a sample of 100 times from the population:
+Using a sample of 100 observations from the population:
 \scriptsize
 <<message=FALSE>>=
 library(mosaic)
@@ -202,21 +292,7 @@ ggplot(s, aes(x=age, y=sexM)) +
 \end{frame} 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[fragile]{Sampling distribution terminology}
-
-\begin{block}{Really important vocabulary!}
-
-\bi
-    \myitem {\bf sampling distribution}: the distribution of an estimated parameter, reflecting the randomness of the sampling (data collection) process. 
-    \myitem {\bf standard error}: the standard deviation of a sampling distribution, measures the precision of our estimate or the amount of information we have about the parameter.
-    \myitem {\bf margin of error}: the half-width of the confidence interval 
-    \myitem {\bf point estimate}: the exact numerical value that represents our best guess at the true parameter value. (In regression, this is the least-squares estimate of our $\beta$.)
-\ei
-
-\end{block}
-\end{frame} 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
