@@ -1,0 +1,412 @@
+%% beamer/knitr slides 
+%% for Statistical Modeling and Data Visualization course @ UMass
+%% Nicholas Reich: nick [at] schoolph.umass.edu
+
+
+\documentclass[table]{beamer}
+
+
+\input{../../slide-includes/standard-knitr-beamer-preamble}
+
+%        The following variables are assumed by the standard preamble:
+%        Global variable containing module name:
+
+\title{Confidence in Models}
+%	Global variable containing module shortname:
+%		(Currently unused, may be used in future.)
+\newcommand{\ModuleShortname}{multRegression}
+%	Global variable containing author name:
+\author{Nicholas G Reich}
+%	Global variable containing text of license terms:
+\newcommand{\LicenseText}{Made available under the Creative Commons Attribution-ShareAlike 3.0 Unported License: http://creativecommons.org/licenses/by-sa/3.0/deed.en\textunderscore US }
+%	Instructor: optional, can leave blank.
+%		Recommended format: {Instructor: Jane Doe}
+\newcommand{\Instructor}{}
+%	Course: optional, can leave blank.
+%		Recommended format: {Course: Biostatistics 101}
+\newcommand{\Course}{}
+
+
+\input{../../slide-includes/shortcuts}
+\usepackage{bbm}
+
+\hypersetup{colorlinks,linkcolor=,urlcolor=MainColor}
+
+
+%	******	Document body begins here	**********************
+
+\begin{document}
+
+%	Title page
+\begin{frame}[plain]
+	\titlepage
+\end{frame}
+
+%	******	Everything through the above line must be placed at
+%		the top of any TeX file using the statsTeachR standard
+%		beamer preamble. 
+
+
+<<ggplot2, echo=FALSE, message=FALSE>>=
+library(ggplot2)
+theme_set(theme_bw())
+library(knitr)
+opts_chunk$set(fig.align='center',fig.show='hold',size='footnotesize')
+@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% acutal slides
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Today's Lecture}
+
+\begin{center}
+{\em It ain’t what you don’t know that gets you into trouble. It’s what you know for sure that just ain’t so.}
+-Mark Twain
+\end{center}
+
+
+\begin{block}{Today's central question}
+What do linear regression models tell us about what we know and do not know about a particular dataset?
+\end{block}
+
+Based loosely on Kaplan, Chapter 12.
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Process of building a statistical model}
+
+\begin{figure}[t]
+    \includegraphics[width=\textwidth]{modeling-process-1.jpg}  
+\end{figure}
+
+\end{frame} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Process of building a statistical model}
+
+\begin{figure}[t]
+    \includegraphics[width=\textwidth]{modeling-process-2.jpg}  
+\end{figure}
+
+\end{frame} 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Circle of Life}
+
+\begin{figure}[t]
+    \includegraphics[width=.8\textwidth]{../../slide-includes/CircleOfLife.pdf}  
+\end{figure}
+
+\end{frame} 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{How much will a sample tell us about the population}
+
+In practice we can very rarely sample the entire population of interest.
+
+We can create a simple example of a population as a illustration.
+
+E.g. 8636 running times for the Cherry Blossom Ten Mile race in Washington DC in 2005:
+
+<<message=FALSE, eval=FALSE>>=
+race <- fetch::fetchData("ten-mile-race.csv")
+head(race)
+@
+
+<<echo=FALSE>>=
+race <- read.csv("ten-mile-race.csv")
+head(race)
+@
+
+
+\end{frame} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{A simple model for the race data}
+
+$$ net \sim age + sex $$
+\centering 
+or
+$$ net  = \beta_0 + \beta_1\cdot age + \beta_2 \cdot sex$$
+
+Using all the data, i.e. the entire ``population''
+\scriptsize
+<<>>=
+fm <- lm(net ~ age + sex, data=race)
+coef(fm)
+@
+
+\end{frame} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{A sample of the race data gives different results}
+
+$$ net  = \beta_0 + \beta_1\cdot age + \beta_2 \cdot sex$$
+
+\scriptsize
+<<>>=
+coef(fm)
+@
+
+
+Using a sample of 100 times from the population:
+\scriptsize
+<<message=FALSE>>=
+library(mosaic)
+s <- do(500) * lm(net ~ age + sex, data=sample(race, 100))
+head(s[,1:5])
+@
+
+\end{frame} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{The sampling distribution of the $\beta$s}
+
+<<message=FALSE, fig.height=3>>=
+library(gridExtra)
+p1 <- ggplot(s) + geom_density(aes(x=age)) + 
+    geom_vline(xintercept=coef(fm)["age"])
+p2 <- ggplot(s) + geom_density(aes(x=sexM)) + 
+    geom_vline(xintercept=coef(fm)["sexM"])
+grid.arrange(p1, p2, nrow=1)
+@
+
+\end{frame} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{The sampling distribution of the $\beta$s}
+
+Important to note that the sampling distributions may be correlated with each other.
+<<message=FALSE, fig.height=3>>=
+ggplot(s, aes(x=age, y=sexM)) + 
+    geom_point() + geom_density_2d(color='red')
+@
+
+\end{frame} 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Sampling distribution terminology}
+
+\begin{block}{Really important vocabulary!}
+
+\bi
+    \myitem {\bf sampling distribution}: the distribution of an estimated parameter, reflecting the randomness of the sampling (data collection) process. 
+    \myitem {\bf standard error}: the standard deviation of a sampling distribution, measures the precision of our estimate or the amount of information we have about the parameter.
+    \myitem {\bf margin of error}: the half-width of the confidence interval 
+    \myitem {\bf point estimate}: the exact numerical value that represents our best guess at the true parameter value. (In regression, this is the least-squares estimate of our $\beta$.)
+\ei
+
+\end{block}
+\end{frame} 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{The standard error depends on...}
+
+\begin{block}{The quality of the data}
+
+\bi
+
+    \myitem If your data collection process involves a measurement process that contains a lot of error, how will that impact the standard errors? 
+
+    \myitem In the setting of the race, what measurement procedures might lead to less or more error?
+    
+\ei
+
+\end{block}
+\end{frame} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{The standard error depends on...}
+
+\begin{block}{The quality of the model}
+
+Models with lower residual error tend to have \_\_\_\_\_\_\_\_ standard errors than ones with larger residual error. 
+
+
+\end{block}
+\end{frame} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{The standard error depends on...}
+
+\begin{block}{The sample size}
+
+As the sample size increases, what happens to the standard error?
+
+\end{block}
+\end{frame} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{The standard error and sample size}
+
+<<fig.height=3.5>>=
+s100 <- do(100) * lm(net ~ age + sex, data=sample(race, 100))
+s1000 <- do(100) * lm(net ~ age + sex, data=sample(race, 1000))
+ggplot() + geom_density(aes(x=age), fill="red", alpha=.5, data=s100) +
+    geom_density(aes(x=age), fill="blue", alpha=.5, data=s1000)
+@
+
+\end{frame} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{The standard error and sample size (con't)}
+
+The formula for the standard error is proportional to $1/\sqrt{n}$. This is kind of a slow decrease: ``to make the standard error 10 times smaller you need to make the dataset 100 times larger''!
+
+\end{frame} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{And now, back to our true sample}
+
+\begin{block}{In reality, we don't have the luxury of measuring the entire population!}
+\bi
+    \myitem We can use information in the original sample to make a good guess at what the sampling distribution is (see Kaplan Ch 5.2).
+    \myitem The guess is based on an approximation that has good properties when the assumptions of our model aren't broken.
+\ei
+\end{block}
+
+<<>>=
+fm <- lm(net ~ age + sex, data=race)
+summary(fm)$coef
+@
+
+
+\end{frame} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Full data vs. partial data sampling distribution}
+
+Our estimated sampling distribution for 1000 observations (in blue) vs. the estimated sampling distribution for all data (in red). 
+
+<<fig.height=4>>=
+ggplot(s1000, aes(x=age)) + geom_density(fill='blue') +
+    stat_function(fun = dnorm, lwd = 2, col = 'red',
+                  args = list(mean = mean(s1000$age), sd = sd(s1000$age)))
+@
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Confidence Interval}
+
+
+\begin{block}{A confidence interval summarizes our uncertainty about a point estimate.}
+\bi
+    \myitem  For example: ``our analysis suggests that the age coefficient in the model is 17 $\pm$ 2, with 95\% confidence.'' 
+    \myitem More precisely, we could do the calculation as: 16.9 $\pm$ 2*0.94.
+    \myitem We multiply the standard error by two because this approximates a 95\% coverage interval of the sampling distribution.
+    \myitem NOTE: when your sample size is very small (e.g. $n<20$) the multiplier of 2 is misleading, and larger values should be used. See, e.g. Table 12.1 in Kaplan.
+\ei
+\end{block}
+
+<<>>=
+summary(fm)$coef["age",]
+@
+
+\end{frame} 
+
+
+\begin{frame}[fragile]{Confidence in predictions}
+
+{\bf Confidence intervals are not appropriate for making predictions about individual data-points!}
+<<fig.height=3.5>>=
+r <- sample(race, 500)
+qplot(age, net, data=r) + geom_smooth(method="lm")
+@
+E.g. 95\% of 60-year-olds will not have times within $\pm$ 200 of the predicted value ($\sim$ 5900?).
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Confidence in predictions}
+
+Confidence intervals for regression coefficients represent the uncertainty in the coefficient, but not in the predictions at certain, fixed values. Recall that the line has to pass through the point $(\bar x, \bar y)$. Small changes in slope/intercept will have minimal changes to where the line passes near that fulcrum, and larger changes at the fringes.
+
+<<fig.height=3.5, echo=FALSE>>=
+s100a <- do(100) * lm(net ~ age, data=resample(r))
+p <- ggplot(r, aes(age, net)) + geom_blank() + 
+    annotate("point", x=mean(r$age), y=mean(r$net), color="red")
+for(i in 1:100) p <- p + geom_abline(slope=s100a[i,'age'], 
+                                     intercept=s100a[i,'Intercept'], 
+                                     alpha=.1)
+p + annotate("point", x=mean(r$age), y=mean(r$net), color="red")
+@
+
+\end{frame}
+
+\begin{frame}[fragile]{Making predictions}
+
+<<fig.height=3.5, warning=FALSE>>=
+head(predict(fm, interval="confidence"))
+head(predict(fm, interval="prediction"))
+@
+
+\end{frame}
+
+\begin{frame}[fragile]{Making predictions}
+
+<<fig.height=3.5, warning=FALSE>>=
+predict(fm, newdata = data.frame(age=c(20, 50, 60),
+                                 sex=c("M", "M", "M")), 
+        interval="prediction")
+@
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Prediction vs. confidence interval, race data}
+
+<<fig.height=4, echo=FALSE, message=FALSE, warning=FALSE>>=
+fm1 <- lm(net~age, data=race)
+racep <-  cbind(race, predict(fm1, interval="prediction"))
+ggplot(racep, aes(x=age, y=net)) +
+    geom_ribbon(aes(ymin=lwr, ymax=upr, fill='prediction'), alpha=0.3) +
+    geom_point() +
+    geom_smooth(method="lm", aes(fill='confidence'),alpha=0.8) +
+    geom_smooth(method="lm", se=FALSE, color='blue') +
+    scale_fill_manual('Interval', values = c('red', 'darkgray')) 
+@
+
+\end{frame}
+
+\begin{frame}[fragile]{Today's key topics}
+
+\bi
+    \myitem Sampling distributions
+    \myitem Standard error
+    \myitem Confidence errors and intervals for coefficients
+    \myitem Prediction intervals for future observations
+\ei
+
+\end{frame}
+
+
+
+\end{document}
