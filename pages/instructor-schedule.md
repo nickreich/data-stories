@@ -130,14 +130,13 @@ _Thurs, week 8_
 
  _Thurs, week 9_
 
- - lecture about evidence in data?
- - go over exam?
- - Introduce Project?
+ - lecture about evidence in data: lady tasting tea example
+ - Election in-class simulations
 
  _Tues, week 10_
 
-  - give this lecture, maybe do coin flipping? http://nickreich.github.io/data-stories-2016/assets/lectures/lecture6-confidence/lady-slides.html#15
-
+  - do two-sided coin flipping? 
+  - lecture on hypothesis testing
 
  _Thurs, week 10_
  
