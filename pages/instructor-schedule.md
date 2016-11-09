@@ -135,12 +135,16 @@ _Thurs, week 8_
 
  _Tues, week 10_
 
-  - do two-sided coin flipping? 
   - lecture on hypothesis testing
 
  _Thurs, week 10_
  
  - adapt this exercise for fivethirtyeight (or other) election predictions. 
+ - project description
+ - Biostats pitch.
+ - do two-sided coin flipping? 
+ - Binomial likelihood: http://shiny.stat.calpoly.edu/MLE_Binomial/
+ - Bayesian version: https://r.amherst.edu/apps/nhorton/Shiny-Bayes/
 
  _Tues, week 11_
 
