@@ -22,8 +22,8 @@ Week |       |     | Topic   | Notes | HW Due | Reading
  10  |     | 8, 10  | Evidence in data | [Lec 10](../assets/lectures/lecture10-intervals/lecture10-intervals.pdf) | | Kaplan 11-15
  11  |     | 15, 17 | Logistic regression | [Lec 11](../assets/lectures/lecture11-logistic/lecture11-logistic.pdf) |  [Lab 6](../assets/labs/lab6-infer/lab6-infer.pdf) | Kaplan 16, OI 8
  12  |     | 22, 24 | Thanksgiving recess. | |  |
- 13  | Dec | 29, 1  | Logistic regression |  | Lab 7 | Kaplan 16, OI 8 
- 14  |     | 6, 8   | Missing data/Projects |  | | 
+ 13  | Dec | 29, 1  | Logistic regression |  | | Kaplan 16, OI 8 
+ 14  |     | 6, 8   | Missing data/Projects | | [Lab 7](../assets/labs/lab7-logit/lab7-logit.pdf) | 
  15  |     | 13     | Final projects | | | 
 
 

@@ -148,9 +148,11 @@ _Thurs, week 8_
 
  _Tues, week 11_
 
+ - no class, nick out of town
 
  _Thurs, week 11_
 
+ - lecture on logistic regression
 
  _Tues, week 12_
 
