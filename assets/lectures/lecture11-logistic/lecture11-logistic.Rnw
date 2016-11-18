@@ -191,7 +191,7 @@ mod1 <- lm(LCnum ~ FM, data=birds)
 round(summary(mod1)$coef, 3)
 @
 
-What is this model's estimated probability of lunc cancer for men? for women?
+What is this model's estimated probability of lung cancer for men? for women?
 
 \end{frame}
 
