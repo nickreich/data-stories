@@ -1,0 +1,459 @@
+%% Module 2 beamer/knitr slides
+%% Biostatistics in Practice workshop, January 2014
+%% Nicholas Reich: nick [at] schoolph.umass.edu
+
+
+\documentclass[table]{beamer}
+
+
+\input{../../slide-includes/standard-knitr-beamer-preamble}
+
+%        The following variables are assumed by the standard preamble:
+%	Global variable containing module name:
+\title{Missing Data}
+%	Global variable containing module shortname:
+%		(Currently unused, may be used in future.)
+\newcommand{\ModuleShortname}{simPar}
+%	Global variable containing author name:
+\author{Nicholas G Reich}
+%	Global variable containing text of license terms:
+\newcommand{\LicenseText}{Made available under the Creative Commons Attribution-ShareAlike 3.0 Unported License: http://creativecommons.org/licenses/by-sa/3.0/deed.en\_US }
+%	Instructor: optional, can leave blank.
+%		Recommended format: {Instructor: Jane Doe}
+\newcommand{\Instructor}{}
+%	Course: optional, can leave blank.
+%		Recommended format: {Course: Biostatistics 101}
+\newcommand{\Course}{}
+
+\input{../../slide-includes/shortcuts}
+\usepackage{bbm}
+\hypersetup{colorlinks=TRUE, urlcolor=blue}
+
+%%%%%%%% IMPORTANT -- MUST HAVE [fragile] for some/all frames chunks to have output work correctly. 
+
+\begin{document}
+
+<<setup, include=FALSE>>=
+library(knitr)
+opts_chunk$set(fig.path='figure/beamer-',fig.align='center',fig.show='hold',size='scriptsize', message=FALSE, warning=FALSE)
+@
+
+
+\begin{frame}[plain]
+        \titlepage
+\end{frame}
+
+<<ggplot2, echo=FALSE, message=FALSE>>=
+require(ggplot2)
+theme_set(theme_bw())
+@
+
+\begin{frame}{Today's Lecture}
+
+\bi
+    \myitem Types of missing data
+    \myitem Ways to describe missing data
+    \myitem Multiple imputation
+\ei
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{}
+
+\centering \includegraphics[width=.6\linewidth]{meme.jpg}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}{Best practices}
+
+\begin{block}{Hard to argue with an approach that does the following:}
+\bi
+    \myitem quantify the completeness of covariate data
+    \myitem present and discuss patterns of or reasons for missing data
+    \myitem provide details about your approach for handling missing data in the analysis
+\ei
+\end{block}
+
+\tiny{Proposed guidelines for reporting missing covariate data (Burton and Altman 2004)}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]{Quantifying missing data}
+
+<<fig.height=4>>=
+library(Hmisc)
+getHdata(titanic)
+colnames(titanic)
+na.pattern(titanic)
+@
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]{Quantifying missing data}
+
+<<fig.height=4.5>>=
+library(Amelia)
+missmap(titanic)
+@
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]{Quantifying missing data}
+
+What percentage of each variable's observations are missing?
+<<fig.height=4.5>>=
+nrow(titanic)
+colSums(is.na(titanic))
+@
+
+
+\end{frame}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Formal Missing Data Classifications}
+
+\begin{block}{Missing Completely at Random (MCAR)}
+\bi
+    \myitem No data, observed or unobserved, are related to missingness.
+\ei
+\end{block}
+
+
+\begin{block}{Missing at Random (MAR)}
+\bi
+    \myitem No unobserved data are related to missingness, but missingness may depend on observed data.
+\ei
+\end{block}
+
+\begin{block}{Missing Not at Random (MNAR) or unignorable missingness}
+\bi
+    \myitem Missingness relationship cannot be simplified: it depends on unobserved data!
+\ei
+\end{block}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{What kind of missingness did the titanic dataset have?}
+
+\begin{block}{Missing Completely at Random (MCAR)}
+\bi
+    \myitem No data, observed or unobserved, are related to missingness.
+\ei
+\end{block}
+
+
+\begin{block}{Missing at Random (MAR)}
+\bi
+    \myitem No unobserved data are related to missingness, but missingness may depend on observed data.
+\ei
+\end{block}
+
+\begin{block}{Missing Not at Random (MNAR) or unignorable missingness}
+\bi
+    \myitem Missingness relationship cannot be simplified: it depends on unobserved data!
+\ei
+\end{block}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{What kind of missingness did the titanic dataset have?}
+
+<<echo=FALSE, fig.height=4.5>>=
+library(Hmisc)
+library(dplyr)
+getHdata(titanic)
+titanic$age_mis <- factor(is.na(titanic$age))
+
+t2 <- titanic %>% 
+  group_by(sex, age_mis) %>% 
+  summarise(count=n()) %>% 
+  mutate(perc=count/sum(count))
+
+ggplot(t2, aes(x = sex, y = perc*100, fill = age_mis)) +
+  geom_bar(stat="identity", width = 0.7) +
+  labs(x = NULL, y = "percent", fill = "missing") +
+  theme_minimal(base_size = 14)
+@
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{What kind of missingness did the titanic dataset have?}
+
+<<echo=FALSE, fig.height=4.5>>=
+t3 <- titanic %>% 
+  group_by(pclass, age_mis) %>% 
+  summarise(count=n()) %>% 
+  mutate(perc=count/sum(count))
+
+ggplot(t3, aes(x = pclass, y = perc*100, fill = age_mis)) +
+  geom_bar(stat="identity", width = 0.7) +
+  labs(x = "class", y = "percent", fill = "missing") +
+  theme_minimal(base_size = 14)
+@
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Example code used to create the last graphic}
+
+Harder than it should be, it felt like... Code adapted from \href{http://stackoverflow.com/questions/24776200/ggplot-replace-count-with-percentage-in-geom-bar}{this page}.
+
+<<eval=FALSE>>=
+t3 <- titanic %>% 
+  group_by(pclass, age_mis) %>% 
+  summarise(count=n()) %>% 
+  mutate(perc=count/sum(count))
+
+ggplot(t3, aes(x = pclass, y = perc*100, fill = age_mis)) +
+  geom_bar(stat="identity", width = 0.7) +
+  labs(x = "class", y = "percent", fill = "missing") +
+  theme_minimal(base_size = 14)
+@
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]{Testing for the different types of data}
+
+\begin{block}{Tests about the type of data you have}
+\bi
+    \myitem MAR vs. MNAR: Not a definitive test here. Best option is to use your domain-specific knowledge about the data.
+    \myitem MCAR vs. MAR: Little's test can weigh evidence for/against these two settings.
+\ei
+\end{block}
+
+\begin{block}{Little's $H_0$: The data is MCAR}
+Low p-values suggest that the data are MAR; high p-values suggest they are MCAR.
+\end{block}
+
+<<littles-test, message=FALSE, warning=FALSE>>=
+test <- BaylorEdPsych::LittleMCAR(titanic[,c("pclass", "survived", "age", "sex")])
+test$p.value
+@
+
+\end{frame}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}{Types of analyses for missing data}
+
+\begin{block}{Analysis strategies (in rough order of desirability, low to high)}
+\bi
+    \myitem MCAR only: Complete case a.k.a. ``listwise deletion''
+    \myitem Ad-hoc methods (e.g. mean imputation)
+    \myitem Weighting methods
+    \myitem MAR: Likelihood-based approaches (e.g. EM algorithm)
+    \myitem MAR: Multiple Imputation (many flavors)
+    \myitem MAR: Bayesian methods
+\ei
+\end{block}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}{Multiple imputation}
+
+\begin{block}{General approach}
+\bi
+    \myitem For each missingness pattern, a model is built to use the available covariates to estimate the missing covariates. 
+    \myitem Random samples are taken from the predictive distribution to create multiple ``complete'' datasets.
+    \myitem Typically, 10-15 datasets is seen as being sufficient.
+    \myitem Coefficient and SE estimates are combined across datasets.
+\ei
+\end{block}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}{Multiple imputation: example}
+
+\centering
+\includegraphics[width=.8\linewidth]{imputations_1.pdf}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}{Multiple imputation: example}
+
+\centering
+\includegraphics[width=.8\linewidth]{imputations_4.pdf}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}{Multiple imputation results}
+
+\includegraphics[width=.9\linewidth]{mitable.jpg}
+
+\tiny{DC Howell, \href{https://www.uvm.edu/~dhowell/StatPages/More_Stuff/Missing_Data/Missing-Part-Two.html}{Treatment of Missing Data -- Part II}.}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]{Multiple imputation results}
+
+The final estimated sampling distribution for each $\beta$ is an average of the sampling distributions from each imputed dataset.
+
+<<mi-results, fig.height=5, echo=FALSE>>=
+# values for b1 on table on last slide
+dat <- data.frame(b1=c(-2.78, -4.149, -5.038, -6.920, -1.115),
+                  vb=c(3.323, 2.680, 3.301, 1.796, 2.362))
+## cumulative values for b1 on last slide
+curve(dnorm(x, -4.00, sd=sqrt(8.523)), -12, 4, ylim=c(0, .25), ylab="density", 
+      xlab="beta_1",
+      lwd=4, main="sampling distributions for imputed datasets", col="red")
+for(i in 1:nrow(dat)) {
+  curve(dnorm(x, dat[i,"b1"], dat[i,"vb"]), add=TRUE)
+}
+@
+
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]{Multiple imputation software}
+
+There are two commonly used implementations of multiple imputation in R:
+
+\bi
+  \myitem MICE: \href{http://www.stefvanbuuren.nl/mi/}{http://www.stefvanbuuren.nl/mi/}
+  \myitem To be used together: Amelia (runs the MI) and Zelig (fits models to, among other things, MI datasets): \href{http://gking.harvard.edu/amelia}{http://gking.harvard.edu/amelia} and \href{http://zeligproject.org/}{http://zeligproject.org/}
+\ei
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]{Multiple imputation for titanic data}
+
+<<results='hide', fig.height=4>>=
+t2 <- titanic[,c("pclass", "survived", "age", "sex")]
+imp_titanic <- amelia(x = t2, m = 10, noms=c("sex", "pclass"))
+missmap(imp_titanic$imputations$imp1)
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]{Multiple imputation for titanic data}
+
+<<fig.height=4.5>>=
+plot(imp_titanic, which.vars = "age")
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]{Multiple imputation for titanic data}
+
+<<>>=
+t2 <- t2[complete.cases(t2),] ## only include complete cases
+m_full <- glm(survived~sex+age+pclass, data=t2, family=binomial)
+summary(m_full)$coef
+@
+
+
+<<results='hide'>>=
+library(Zelig)
+m_imp <- zelig(survived~sex+age+pclass, model="logit", data=imp_titanic)
+@
+
+<<>>=
+summary(m_imp)
+@
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}{Best practices}
+
+\begin{block}{Hard to argue with an approach that does the following:}
+\bi
+    \myitem quantify the completeness of covariate data
+    \myitem present and discuss patterns of or reasons for missing data
+    \myitem provide details about your approach for handling missing data
+\ei
+\end{block}
+
+\tiny{Proposed guidelines for reporting missing covariate data (Burton and Altman 2004)}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]{Bonus: ROC for Titanic data}
+
+<<fig.height=4.5>>=
+library(ROCR)
+pred <- prediction(predict(m_full, type="response"), t2$survived)
+perf <- performance(pred, measure = "tpr", x.measure = "fpr") 
+plot(perf)
+@
+
+\end{frame}
+
+
+\end{document}

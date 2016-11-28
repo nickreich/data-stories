@@ -156,17 +156,23 @@ _Thurs, week 8_
 
  _Tues, week 12_
 
+ - exam review
+ - titanic lab/group project work
 
  _Thurs, week 12_
 
+ - Missing data lecture
 
  _Tues week 13_
  
+ - Projects?
 
 _Thurs week 13_
 
+ - Poisson regression lecture?
 
 _tues week 14_
 
+ - Wrap up activity? CI activity?
 
 
