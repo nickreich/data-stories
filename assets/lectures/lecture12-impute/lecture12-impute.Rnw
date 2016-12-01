@@ -43,6 +43,13 @@ opts_chunk$set(fig.path='figure/beamer-',fig.align='center',fig.show='hold',size
         \titlepage
 \end{frame}
 
+
+\begin{frame}
+
+\centering \includegraphics[width=\linewidth]{campus-survey.png}
+
+\end{frame}
+
 <<ggplot2, echo=FALSE, message=FALSE>>=
 require(ggplot2)
 theme_set(theme_bw())
