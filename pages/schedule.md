@@ -36,6 +36,7 @@ Week |       |     | Topic   | Notes | HW Due | Reading
  - [Lecture 8](../assets/lectures-annotated/lecture8-interact.pdf)
  - [Lecture 10](../assets/lectures-annotated/lecture10-intervals.pdf)
  - [Lecture 11](../assets/lectures-annotated/lecture11-logistic.pdf)
+ - [Lecture 12](../assets/lectures-annotated/lecture12-impute.pdf)
 
  
 <!--
