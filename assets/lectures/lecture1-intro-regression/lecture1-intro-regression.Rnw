@@ -406,6 +406,24 @@ The process of using data to describe the relationship between outcomes and pred
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\begin{frame}[fragile]{Appendix: Code for plotting}
 
+\scriptsize
+<<eval=FALSE>>=
+library(mosaicData)
+library(ggplot2)
+theme_set(theme_bw())
+data(SAT)
+SAT$fracgrp = cut(SAT$frac, breaks=c(0, 22, 49, 81), 
+                  labels=c("low", "medium", "high"))
+ggplot(SAT) + 
+    geom_text(aes(x=salary, y=sat, label=state), size=4, show.legend=FALSE) +
+    xlab("est. average public school teacher salary") + 
+    ylab("average total SAT score")
+@
+
+More plotting code available \href{https://github.com/nickreich/data-stories/blob/gh-pages/assets/lectures/lecture1-intro-regression/lecture1-intro-regression.Rnw#L254}{here}.
+
+\end{frame}
 
 \end{document}
