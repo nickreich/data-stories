@@ -101,32 +101,34 @@
 
 \begin{frame}
 
-\includegraphics[width=.8\textwidth]{figure-static/wolfers-women-credit-title.png}
+\centering 
 
-\includegraphics[width=.6\textwidth]{figure-static/wolfers-women-credit-1.png}
+\includegraphics[width=.8\textwidth]{figure-static/koeze-hickey-bachelor-title.png}
 
-\includegraphics[width=.6\textwidth]{figure-static/wolfers-women-credit-2.png}
+\includegraphics[width=.6\textwidth]{figure-static/koeze-hickey-bachelor-1.png}
+
+\end{frame}
+
+
+
+\begin{frame}
+
+\centering 
+
+\includegraphics[width=.6\textwidth]{figure-static/koeze-hickey-bachelor-5.png}
 
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\begin{frame}{Trump's tweets: from varianceexplained.org}
+\begin{frame}
 
-\includegraphics[width=.8\textwidth]{figure-static/drob-trump-tweets-0.png}
+\begin{center}
+\includegraphics[width=.9\textwidth]{figure-static/koeze-american-death.png}
+\end{center}
 
-\end{frame}
-
-\begin{frame}{Trump's tweets: from varianceexplained.org}
-
-\includegraphics[width=.8\textwidth]{figure-static/drob-trump-tweets-1.png}
-
-\end{frame}
-
-\begin{frame}{Trump's tweets: from varianceexplained.org}
-
-\includegraphics[width=\textwidth]{figure-static/drob-trump-tweets-2.png}
+\footnotesize \href{https://projects.fivethirtyeight.com/mortality-rates-united-states/}{fivethirtyeight.com}
 
 \end{frame}
 
