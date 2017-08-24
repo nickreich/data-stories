@@ -52,7 +52,7 @@ _Tuesday, week 1_
  
 _Thursday, week 1_
 
- - course technology intro: website, piazza, Google Drive (20 min)
+ - course technology intro: website, slack, Google Drive (20 min)
  - Lab 1 (50 min)
  
 _Tuesday, week 2_
