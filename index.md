@@ -18,10 +18,10 @@ The aim of this course is to provide students with the skills necessary to tell 
 **Course number**: PUBHLTH 490ST 
 
 **Instructor**: [Nicholas Reich](http://reichlab.github.io)\\
-Office hours: 1-2pm Mondays
+Office hours: TBD
 
-**TA**: Zhenning Kang\\
-Office hours: 2:00 - 3:30 pm Mondays and Wednesdays, Arnold House Room 9
+**TAs**: Bianca Doone, Brittany Pine, Ilina Shah, Evan Moore\\
+Office hours: TBD
 
 **Prerequisites**: <br> 
 One of any of the following introductory stats courses taught at UMass: BIOSTAT 391B, STAT 240, STAT 501, ResEcon 212, PSYCH 240. If you have not taken an intro stats course at UMass but still want to enroll in this course, you are encouraged to petition the instructor for permission, especially if any of the following apply: (a) you have taken AP Stats in high school, (b) you have taken a college-level intro stats course just not one of the ones listed above, or (c) you are confident in your quantitative skills and your ability to succeed in a fast-paced, advanced introductory course.
