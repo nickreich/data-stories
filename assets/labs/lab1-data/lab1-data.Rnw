@@ -12,12 +12,12 @@
 This lab will guide you and your group through the process of designing and collecting some data on your fellow students at UMass. The main goals of this lab are to get you to think carefully about what the process of moving from a specific question, to data collection, to preparing the data for analysis.
 
 {\bf Deliverable 1:}
-(30 points) The lab writeup and any slides that you will present are due on Wednesday, September 14 at 5pm. The file(s) should posted to the TA and the instructor on Piazza. Each group will give a 3-5 minute presentation (strict limit!) on Thursday September 15th summarizing their hypothesis, the data collection process, and qualitative results. Since we have not covered yet how to efficiently summarize or display your data, it is not required for this presentation. Although you should give us some basic quantitative information about your process: how long did you collect for? how much data did you collect? ... Tell us a complete (but brief) story about what data you collected and why. I encourage each team to use 1-2 slides to describe the study.
+(30 points) The lab writeup and any slides that you will present are due on Wednesday, September 13 at 5pm. The file(s) should posted to the TA and the instructor on Slack. Each group will give a 3-5 minute presentation (strict limit!) on Thursday September 14th summarizing their hypothesis, the data collection process, and qualitative results. Since we have not covered yet how to efficiently summarize or display your data, it is not required for this presentation. Although you should give us some basic quantitative information about your process: how long did you collect for? how much data did you collect? ... Tell us a complete (but brief) story about what data you collected and why. I encourage each team to use 1-2 slides to describe the study.
 
 {\bf Deliverable 2:} 
 (20 points) Each student will write and submit a 1/2 page critique of the group project. This must be submitted by 5pm on Thursday, September 15 and via the student's Google Drive folder that is shared with the instructors. This should describe 1-2 key weaknesses of the experiment you conducted and address something that you would do differently if you were to do the same experiment again.
 
-\subsection*{Questions to answer on your own}
+\subsection*{Questions to answer on your own (not for handing in)}
 
 \begin{exercise}
 Look around the room at your classmates. What characteristics and features can you reliably and quickly identify about them? 
@@ -32,10 +32,12 @@ Pick three of these features, and sketch out below a table and collect some data
 \clearpage
 
 \begin{exercise}
-Take a minute and reflect on the choices that you made when creating this table. What defines a row and column in your small dataset? What types of variables were you collecting and how did you ``encode'' them in your table?
+We will talk in future classes about what ``tidy data'' means. In brief, it is a way of organizing data where each row represents a single observation (e.g. one row per student you observed) and each column represents a variable that you are making an observation on (e.g. hair color, eye color, etc...). Take a minute and reflect on the choices that you made when creating the table in the previous exercise. What defines a row and column in your small dataset? What types of variables were you collecting and how did you encode them in your table?
 \end{exercise}
 
-\subsection*{Questions to answer with your group}
+\vspace{5em}
+
+\subsection*{Questions to answer with your group (not for handing in)}
 
 
 \begin{exercise}
@@ -55,7 +57,7 @@ Take the list you just wrote down and turn it into a series of hypotheses, with 
 \vspace{7em}
 
 \begin{exercise}
-Plan out, as a group, how you will collect data to test one or two of the hypotheses you define above. This should include logistics (when and where will each member collect data? what data will they collect?) and technical details (how will you create a dataset that you all can work from and enter data into?).
+Plan out, as a group, how you will collect data to test one or two of the hypotheses you define above. This should include logistics (when and where will each member collect data? what technology [if any] will you use to collect data? what data will they collect?) and technical details (how will you create a dataset that you all can work from and enter data into?).
 \end{exercise}
 
 
