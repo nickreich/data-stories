@@ -13,4 +13,5 @@ _Due Thursday, 9/8_
 
  - Read syllabus
  - Install R, RStudio
- - register on Piazza site, complete pre-semester survey
+ - register on Slack, complete pre-semester survey
+ - Create GoogleDrive folder with name "[lastname]-[firstname]-PUBHLTH490ST", for example, "Reich-Nick-PUBHLTH490ST", and share with bdoone@umass.edu.

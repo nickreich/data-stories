@@ -120,6 +120,16 @@ For each of the following graphics, work in pairs to
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\begin{frame}{The Bachelorette\footnote{https://fivethirtyeight.com/features/the-bachelorette/}}
+
+\centering 
+
+\includegraphics[width=\textwidth]{../lecture1-intro-regression/figure-static/koeze-hickey-bachelor-5-edited.png}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \begin{frame}{Dengue cases in Thailand\footnote{adapted from \href{http://journals.plos.org/plosntds/article?id=10.1371/journal.pntd.0004761}{Reich et al, 2016}.}}
 
 % dengue heatmap
@@ -278,7 +288,7 @@ The grammar ...
     \item scales
     \item facets
     \item data
-    \item ... and more here: \href{http://docs.ggplot2.org/current/}{http://docs.ggplot2.org/current/}
+    \item ... and more here: \href{http://ggplot2.tidyverse.org/reference/}{http://ggplot2.tidyverse.org/reference/}
 \end{itemize}
 
 \end{frame}

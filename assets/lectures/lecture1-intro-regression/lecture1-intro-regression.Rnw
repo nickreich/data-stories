@@ -115,7 +115,7 @@
 
 \centering 
 
-\includegraphics[width=.6\textwidth]{figure-static/koeze-hickey-bachelor-5.png}
+\includegraphics[width=\textwidth]{figure-static/koeze-hickey-bachelor-5-edited.png}
 
 \end{frame}
 
