@@ -39,6 +39,7 @@ cache/
 *.out
 *-concordance.tex
 *.synctex.gz
+*framed.sty
 
 ## specific files
 _site/

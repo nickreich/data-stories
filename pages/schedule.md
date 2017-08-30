@@ -7,8 +7,25 @@ tagline:
 
 *This is the working schedule for the course. It is subject to change.*
 
-
 Week |       |     | Topic   | Notes | HW Due | Reading
+---- | ----- | --- | ------- | ----- |:------:| -------
+ 1   | Sep | 5, 7   | Intro, motivation | || [Syllabus](../assets/syllabus/data-stories-reich-syllabus.pdf), Kaplan 1
+ 2   |     | 12, 14  &nbsp;| What is data? | || Kaplan 2
+ 3   |     | 19, 21 | Data visualization and summary | || [Data viz reading list](data-viz-reading-list.html), Kaplan 3
+ 4   |     | 26, 28 | Language of Models | || Kaplan 6, 7
+ 5   | Oct | 3, 5   | Linear Regression | || Kaplan 8, OI 7
+ 6   |     | 12     | Linear Regression | || Kaplan 8-10, OI 7
+ 7   |     | 17, 19 | Linear Regression | || Kaplan 9-10
+ 8   |     | 24, 26 | Linear Regression | || Kaplan 9-10
+ 9   | Nov | 31, 2  | Midterm exam | | |
+ 10  |     | 7, 9   | Midterm review and exam | || 
+ 11  |     | 14, 16 | Evidence in data | || Kaplan 11-15
+     |     | 21, 23 | Thanksgiving | || 
+ 12  |     | 28, 30 | Logistic regression/Missing data | || Kaplan 16, OI 8
+ 13  | Dec | 5, 7   | Projects/Poisson regression? | || 
+ 14  |     | 12     | Final Projects | || 
+
+<!-- Week |       |     | Topic   | Notes | HW Due | Reading
 ---- | ----- | --- | ------- | ----- |:------:| -------
  1   | Sep | 6, 8  | Intro, motivation | [Lec 1](../assets/lectures/lecture1-intro-regression/lecture1-intro-regression.pdf) | | [Syllabus](../assets/syllabus/data-stories-reich-syllabus.pdf), Kaplan 1
  2   |     | 13, 15  &nbsp;| What is data? | [Lec 2](../assets/lectures/lecture2-what-is-data/lecture2-what-is-data.pdf), [code](../assets/lectures/lecture2-what-is-data/sampling-code.R) | [Lab 1](../assets/labs/lab1-data/lab1-data.pdf) | Kaplan 2
@@ -25,10 +42,11 @@ Week |       |     | Topic   | Notes | HW Due | Reading
  13  | Dec | 29, 1  | Logistic regression/Missing data | [Lec 12](../assets/lectures/lecture12-impute/lecture12-impute.pdf) | | Kaplan 16, OI 8 
  14  |     | 6, 8   | Projects/Poisson regression? | | [Lab 7](../assets/labs/lab7-logit/lab7-logit.pdf) | 
  15  |     | 13     | Final projects | | | 
-
+-->
 
 ### Annotated Slides
 
+<!--
  - [Lecture 3](../assets/lectures-annotated/lec3-slr.pdf)
  - [Lecture 5](../assets/lectures-annotated/lecture5-slr.pdf)
  - [Lecture 6](../assets/lectures-annotated/lecture6-mlr-sweave.pdf)
@@ -36,7 +54,8 @@ Week |       |     | Topic   | Notes | HW Due | Reading
  - [Lecture 8](../assets/lectures-annotated/lecture8-interact.pdf)
  - [Lecture 10](../assets/lectures-annotated/lecture10-intervals.pdf)
  - [Lecture 11](../assets/lectures-annotated/lecture11-logistic.pdf)
-
+ - [Lecture 12](../assets/lectures-annotated/lecture12-impute.pdf)
+-- >
  
 <!--
 
