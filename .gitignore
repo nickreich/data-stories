@@ -1,6 +1,8 @@
 *.Rproj
 .Rproj.user
 
+*_site/
+
 *_cache/
 *_files/
 
