@@ -17,8 +17,8 @@ The aim of this course is to provide students with the skills necessary to tell 
 
 **Course number**: PUBHLTH 490ST 
 
-**Instructor**: [Nicholas Reich](http://reichlab.github.io)\\
-Office hours: TBD
+**Instructor**: [Nicholas Reich](http://reichlab.io)\\
+Office hours: Tuesday 3-4pm
 
 **TAs**: Bianca Doone, Brittany Pine, Ilina Shah, Evan Moore\\
 Office hours: TBD
