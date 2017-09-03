@@ -46,13 +46,20 @@ Units:
 
 _Tuesday, week 1_
 
- - Welcome, introductions, review course website and course goals (15 min)
- - Wits and wagers (15 min)
+ - Welcome & overview of course  (15 min)
+    - expectations of team-based learning: not all TBL, still some standard lectures, some team projects
+    - expectations of individual students: I have high expectations for what students will achieve in the course. requires both individual effort and collaboration.
+    - review course website and course goals
+    - trajectory of course: starts out squishy, gets tough fast
+ - Wits and wagers (15 min):
+    `qplot(x, geom="dotplot") + geom_vline(xintercept=9, color="red")`
+
  - Lecture: Intro to telling stories with data (45 min)
  
 _Thursday, week 1_
 
  - course technology intro: website, slack, Google Drive (20 min)
+ - Expectations and behavioral norms: what do we expect of our teammates? How will teammates make each other successful? 
  - Lab 1 (50 min)
  
 _Tuesday, week 2_
