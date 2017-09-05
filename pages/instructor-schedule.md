@@ -49,7 +49,7 @@ _Tuesday, week 1_
  - Welcome & overview of course  (15 min)
     - expectations of team-based learning: not all TBL, still some standard lectures, some team projects
     - expectations of individual students: I have high expectations for what students will achieve in the course. requires both individual effort and collaboration.
-    - R: I will use it and teach with it. If you need help learning it, take Steve's class, or do online modules. We will assume working knowledge that is developing over the semester.
+    - R: I will use it and teach with it. If you need help learning it, take Steve's class (PUBHLTH 497D), or do online modules. We will assume working knowledge that is developing over the semester.
     - review course website and course goals
     - trajectory of course: starts out squishy, gets tough fast
  - Wits and wagers (15 min):
