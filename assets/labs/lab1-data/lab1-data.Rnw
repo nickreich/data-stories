@@ -41,7 +41,7 @@ We will talk in future classes about what ``tidy data'' means. In brief, it is a
 
 
 \begin{exercise}
-Give each member of the group 2-3 minutes to present the data they collected and how they organized their table. Discuss similarities and differences between how you each collected data.
+Give each member of the group 1-2 minutes to present the data they collected and how they organized their table. Discuss similarities and differences between how you each collected data. Can you reach a consensus on the "best" way (most clear, simplest, easiest to enter data into, most easily imported for analyses) to store data like this?
 \end{exercise}
 
 \begin{exercise}
@@ -63,7 +63,7 @@ Plan out, as a group, how you will collect data to test one or two of the hypoth
 
 \subsection*{Things to hand in and present}
 
-Each group should prepare a brief written report (no more than 2 pages) describing their study. The report should include a description of the hypothesis and the data collection protocol. Figures or diagrams may be included for illustrative purposes. Additionally, include a description of the data collected as well as a proposal for how this data could be used to evaluate the hypothesis.
+Each group should prepare a brief written report (no more than 2 pages) describing their study. The report should include a description of the hypothesis and the data collection protocol. Figures or diagrams may be included for illustrative purposes. Additionally, include a description of the data collected as well as a proposal for how this data could be used to evaluate the hypothesis. Note that it is not required to actually do any formal statistical analyses here, just to discuss how you could do them. 
 
 
 \end{document}

@@ -47,15 +47,21 @@ Units:
 _Tuesday, week 1_
 
  - Welcome & overview of course  (15 min)
+    - review course website and course goals
+    - open vs. closed computers/phones/devices
+    - introduce book, refer to website
+    - introduce TAs (that are here)
     - expectations of team-based learning: not all TBL, still some standard lectures, some team projects
     - expectations of individual students: I have high expectations for what students will achieve in the course. requires both individual effort and collaboration.
     - R: I will use it and teach with it. If you need help learning it, take Steve's class (PUBHLTH 497D), or do online modules. We will assume working knowledge that is developing over the semester.
-    - review course website and course goals
     - trajectory of course: starts out squishy, gets tough fast
+
  - Wits and wagers (15 min):
     `qplot(x, geom="dotplot") + geom_vline(xintercept=9, color="red")`
 
  - Lecture: Intro to telling stories with data (45 min)
+ 
+ - HW: Install R, RStudio, register for Slack, read syllabus
  
 _Thursday, week 1_
 
