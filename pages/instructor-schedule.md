@@ -66,8 +66,14 @@ _Tuesday, week 1_
 _Thursday, week 1_
 
  - course technology intro: website, slack, Google Drive (20 min)
+ - TA office hours 
  - Expectations and behavioral norms: what do we expect of our teammates? How will teammates make each other successful? 
- - Lab 1 (50 min)
+ - Lab 1 (50 min): talk about how to share roles...
+ 
+ - HW:
+   - Work as a group on Lab1 (start slack channels? or other modes)
+   - complete pre-semester student survey: https://goo.gl/forms/qI1qRl77rBT9uuBB2
+   - create and share a google drive folder (see slack for directions)
  
 _Tuesday, week 2_
 
