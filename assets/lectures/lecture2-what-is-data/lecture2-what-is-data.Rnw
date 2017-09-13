@@ -243,12 +243,23 @@ qplot(Mheight, Dheight, data=heights, col="red", alpha=.5) +
 \begin{frame}[fragile]{Sampling in a small population}
 
 <<resample>>=
-groupA <- c("A", "A", "A", "A", "A", "A", "A")
+groupA <- c("A", "A", "A", "A", "A", "A")
 groupB <- c("B", "B", "B")
 population <- c(groupA, groupB)
 sample(population, size = 5, replace=FALSE)
 sample(population, size = 5, replace=FALSE)
 sample(population, size = 5, replace=FALSE)
+@
+
+
+<<eval=FALSE, include=FALSE>>=
+nsim <- 1000
+sample_props <- rep(NA, nsim)
+for(i in 1:nsim) {
+  tmp <- sample(population, size = 5, replace=FALSE)
+  sample_props[i] <- sum(tmp=="A")
+}
+hist(sample_props, breaks=20)
 @
 
 
@@ -259,8 +270,8 @@ sample(population, size = 5, replace=FALSE)
 \begin{frame}[fragile]{Sampling in a large population}
 
 <<resample-large-sample>>=
-groupA <- rep("A", 1000)
-groupB <- rep("B", 500)
+groupA <- rep("A", 600)
+groupB <- rep("B", 300)
 population <- c(groupA, groupB)
 sample1 <- sample(population, size = 100, 
                   replace=FALSE)

@@ -77,6 +77,7 @@ _Thursday, week 1_
  
 _Tuesday, week 2_
 
+ - confirm everyone on slack, clarify google drive name format, office hour update
  - Lecture 2: What is data, including showing some R work (45 min)
  - continue group work on project (30 min)
  
@@ -84,6 +85,8 @@ _Thursday, week 2_
 
  - presentations on data collection exercises (50 min)
  - wrap-up discussion on data collection moving towards data analysis
+ - point towards HW of reading about data visualization
+ - introduce Lab 2
  
 _Tuesday, week 3_
 
