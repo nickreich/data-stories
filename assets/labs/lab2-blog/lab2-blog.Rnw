@@ -12,7 +12,7 @@
 \subsection*{Overview}
 For this lab, you will work with a partner at your table to reproduce a published data analysis (blog, academic paper, etc...). If your table has an odd number of people, you may work in groups of three.
 
-Spend some time browsing some data science and statistics blogs (e.g. \href{http://www.statsblogs.com/}{Stats Blogs}, \href{https://www.r-bloggers.com/}{R-Bloggers}, \href{http://fivethirtyeight.com/}{FiveThirtyEight}, \href{http://varianceexplained.org/}{Variance Explained}, ...) or an academic journal that has a reproducible analysis. Pick an article/entry that you both find interesting. You will need to find an analysis that has made both data and code publicly available. You should fill out this Google Form (link to come soon!) with info about your selected article by 5pm Thursday, September 21.
+Spend some time browsing some data science and statistics blogs (e.g. \href{http://www.statsblogs.com/}{Stats Blogs}, \href{https://www.r-bloggers.com/}{R-Bloggers}, \href{http://fivethirtyeight.com/}{FiveThirtyEight}, \href{http://varianceexplained.org/}{Variance Explained}, ...) or an academic journal that has a reproducible analysis. Pick an article/entry that you both find interesting. You will need to find an analysis that has made both data and code publicly available. You should fill out \href{https://goo.gl/forms/PwnNsDonBAHxlx1r1}{this Google Form} with info about your selected article by 5pm Thursday, September 21.
 
 \subsection*{The assignment}
 The deliverable for this lab a ``blog post'' (i.e. an html page, knitted with RMarkdown) of your own. All code should be shown in the post. The post must contain the following sections:
@@ -26,7 +26,7 @@ The deliverable for this lab a ``blog post'' (i.e. an html page, knitted with RM
 
 
 \subsection*{Handing in files for this project}
-To hand in the draft of your reproducible analysis, one member of your team will need to use RMarkdown to create an HTML document. Note that when you create/"knit" the file in RStudio, you will see a little "publish" button on the top right corner of the file. Click this button. You will be prompted to create an "RPubs" account (please do so) and then the file can be shared via a public URL. Once the file has been uploaded, verify the link and send the link to the instructors/TAs via the Google Form. Please note, if you would rather not use your full names on the documents, please either just use your first names or your team name. You must send the link by 5pm on Friday, September 29.
+To hand in the draft of your reproducible analysis, one member of your team will need to use RMarkdown to create an HTML document. Note that when you create/"knit" the file in RStudio, you will see a little "publish" button on the top right corner of the file. Click this button. You will be prompted to create an "RPubs" account (please do so) and then the file can be shared via a public URL. Once the file has been uploaded, verify the link and send the link to the instructors/TAs via \href{https://goo.gl/forms/PwnNsDonBAHxlx1r1}{the Google Form}. Please note, if you would rather not use your full names on the documents, please either just use your first names or your team name. You must send the link by 5pm on Friday, September 29.
 
 \end{document}
 
