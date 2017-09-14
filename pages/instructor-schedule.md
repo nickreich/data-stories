@@ -85,6 +85,7 @@ _Thursday, week 2_
 
  - presentations on data collection exercises (50 min)
  - wrap-up discussion on data collection moving towards data analysis
+ - group discussions about what went well/poorly in terms of group communication/working together.
  - point towards HW of reading about data visualization
  - introduce Lab 2
  
