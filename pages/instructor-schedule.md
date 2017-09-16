@@ -85,12 +85,14 @@ _Thursday, week 2_
 
  - presentations on data collection exercises (50 min)
  - wrap-up discussion on data collection moving towards data analysis
+ - talk more about sampling, gay face study, etc...
  - group discussions about what went well/poorly in terms of group communication/working together.
  - point towards HW of reading about data visualization
  - introduce Lab 2
  
 _Tuesday, week 3_
 
+ - NYT graphic interpretation
  - go over a few items with the presentations: not tidy data, 3D pie charts
  - Lecture 3: exploratory data analysis/ intro to data viz.
  - exercise with visualizing NHANES data
