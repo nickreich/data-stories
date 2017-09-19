@@ -92,8 +92,9 @@ _Thursday, week 2_
  
 _Tuesday, week 3_
 
+ - not being grammar-picky today, but later...
+ - slack is an app, notifications can be customized
  - NYT graphic interpretation
- - go over a few items with the presentations: not tidy data, 3D pie charts
  - Lecture 3: exploratory data analysis/ intro to data viz.
  - exercise with visualizing NHANES data
 
