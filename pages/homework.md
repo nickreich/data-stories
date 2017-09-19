@@ -17,6 +17,7 @@ _Due Tuesday, 9/19_
 _Due Thursday, 9/21, 5pm_ 
 
  - Topic for Lab 2 must be entered in [this Google Form](https://goo.gl/forms/PwnNsDonBAHxlx1r1) by 5pm.
+ - On your own, complete the in-class visualization exercise for slide 7 of [Lecture 3](../assets/lectures/lecture3-data-viz/lecture3-data-viz.pdf)  (The Bachelorette visualization). You should write down the variables displayed, 2 things you like about the graphic, 2 things you don't like, and sketch out the tidy data you think could have been used to create this data graphic.
 
 _Due Friday, 9/29, 5pm_ 
 
