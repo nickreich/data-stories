@@ -138,8 +138,9 @@ The variables are:
 <<loadData, echo=FALSE>>=
 library(ggplot2)
 theme_set(theme_bw())
-opts_chunk$set(size = 'footnotesize')
+opts_chunk$set(size = 'footnotesize', message=FALSE, warning=FALSE)
 options(width=60)
+library(gridExtra)
 @
 
 
@@ -153,6 +154,18 @@ Identify: response variable, explanatory variable, model value, residual.
 
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Lung Data Example: terms defined}
+
+What are the ``model values'' for the model implied by this figure?
+
+<<lung-plots-fac-smoke, tidy=FALSE, fig.height=3.7>>=
+ggplot(dat, aes(factor(smoking), disease)) + geom_boxplot()
+@
+
+
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -166,12 +179,24 @@ In statistical models, inputs are explanatory variables and outputs are ``typica
 
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Characterize the relationship}
+
+Broadly speaking, what kind of model could describe the relationship between crowding and disease? How well would you say this model fits the data? Or predicts new observations?
+
+<<lung-plotsd, tidy=FALSE, fig.height=4, echo=FALSE>>=
+ggplot(dat, aes(crowding, disease)) + geom_point()
+@
+
+
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[fragile]{Reading model values}
+\begin{frame}[fragile]{Reading model values: predicting new observations}
 
-What is the expected value of disease when crowding = 20? 30? 
+What is the expected value of disease when crowding = 20? 30? What range would you expect a new observation with crowding=20 to fall into?
 
 <<lung-plotsb, tidy=FALSE, fig.height=4, echo=FALSE>>=
 ggplot(dat, aes(crowding, disease)) + geom_point() + 
@@ -181,19 +206,6 @@ ggplot(dat, aes(crowding, disease)) + geom_point() +
 
 \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}[fragile]{Characterize the relationship}
-
-Broadly speaking, is there a relationship between crowding and disease?
-
-<<lung-plotsd, tidy=FALSE, fig.height=4, echo=FALSE>>=
-ggplot(dat, aes(crowding, disease)) + geom_point() + 
-    geom_smooth(method="lm", se=FALSE)
-@
-
-
-\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -229,16 +241,22 @@ ggplot(dat, aes(factor(education), disease)) + geom_boxplot()
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[fragile]{Formulas for Statistical Models}
+\begin{frame}[fragile]{Formulas for Statistical Models (Linear Regression)}
 
-
+In general, models can be expressed in this form:
 \begin{eqnarray*}
 \mbox{ [ explanatory variable ] } & \sim & \mbox{intercept + terms} \\
-Y & = & a + b \cdot X \\
+\mbox{ [ explanatory variable ] } & = & \mbox{intercept + terms + error} \\
+\end{eqnarray*}
+
+
+With a single predictor variable, this is simply a line:
+\begin{eqnarray*}
+Y & = & a + b \cdot X + \epsilon\\
 Y & = & \beta_0 + \beta_1 \cdot X + \epsilon
 \end{eqnarray*}
 
-Types of terms
+Different types of ``terms''
 \begin{itemize}
     \item intercept
     \item main effects
@@ -271,7 +289,7 @@ ggplot(dat, aes(crowding, disease)) + geom_point() +
 
 \begin{frame}[fragile]{Model terms: main effects}
 
-$$ \mbox{ model: \ }  disease \sim 1 + crowding $$
+$$ \mbox{model: \ }  disease \sim 1 + crowding $$
 
 <<main-term-crowding, tidy=FALSE, fig.height=4, echo=FALSE>>=
 ggplot(dat, aes(crowding, disease)) + geom_point() + 
@@ -286,11 +304,18 @@ ggplot(dat, aes(crowding, disease)) + geom_point() +
 
 \begin{frame}[fragile]{Model terms: main effects}
 
-$$ {\mbox model: }  disease \sim 1 + smoking $$
+$$ \mbox{model: }  disease \sim 1 + smoking $$
+$$vs.$$
+$$ \mbox{model: }  disease \sim 1 + smoking_{cat} $$
 
-<<main-term-smoking, tidy=FALSE, fig.height=4, echo=FALSE>>=
-ggplot(dat, aes(factor(smoking), disease)) + #geom_point() + 
+
+<<main-term-smoking-comp, tidy=FALSE, fig.height=4, echo=FALSE>>=
+a <- ggplot(dat, aes(smoking, disease)) + #geom_point() + 
+    geom_point() + geom_smooth(method="lm", se=FALSE)
+b <- ggplot(dat, aes(factor(smoking), disease)) + #geom_point() + 
     geom_boxplot()
+grid.arrange(a, b, nrow=1)
+
 @
 
 \end{frame}
@@ -314,7 +339,7 @@ ggplot(dat, aes(factor(smoking), disease)) + #geom_point() +
 
 \begin{frame}[fragile]{Model terms: main effects}
 
-$$ {\mbox model: }  disease \sim 1 + crowding * smoking $$
+$$ \mbox{model: }  disease \sim 1 + crowding * smoking_{cat} $$
 
 <<interaction-term, tidy=FALSE, fig.height=4, echo=FALSE>>=
 ggplot(dat, aes(crowding, disease, color=factor(smoking))) + geom_point() + 
@@ -328,7 +353,7 @@ ggplot(dat, aes(crowding, disease, color=factor(smoking))) + geom_point() +
 
 \begin{frame}[fragile]{Model terms: smooth effects}
 
-$$ {\mbox model: }  disease \sim 1 + s(education) $$
+$$ \mbox{model: }  disease \sim 1 + s(education) $$
 
 <<smooth-terms, tidy=FALSE, fig.height=4>>=
 ggplot(dat, aes(education, disease)) + geom_point() + 
