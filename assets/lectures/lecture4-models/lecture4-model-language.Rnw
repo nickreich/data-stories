@@ -365,9 +365,151 @@ ggplot(dat, aes(education, disease)) + geom_point() +
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[fragile]{}
+\begin{frame}[fragile]{Lung Data Example}
 
-Linear models are not the only kind of models!
+<<lungMLR, tidy=FALSE>>=
+mlr1 <- lm(disease ~ crowding, data=dat)
+kable(summary(mlr1)$coef, digits=2, format="latex")
+mlr2 <- lm(disease ~ crowding + airqual, data=dat)
+kable(summary(mlr2)$coef, digits=2, format="latex")
+@
+
+\bigskip
+
+Why are the coefficients different?
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Lung Data Example}
+
+<<lungMLR2, tidy=FALSE, echo=FALSE>>=
+kable(summary(mlr2)$coef, digits=2, format="latex")
+@
+
+\bigskip
+
+What are the interpretations of the coefficients? 
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Example data}
+
+\bi
+    \myitem D = a quantitative variable
+    \myitem A = a quantitative variable
+    \myitem G = a categorical variable with two levels, S and K
+\ei
+
+<<simData, tidy=FALSE, echo=FALSE, message=FALSE, fig.height=4>>=
+library(dplyr)
+n=20
+A <- seq(0, 10, length.out = n)
+G <- rep(c("S", "K"), each=n/2)
+b0 = 5; b1 = 2; b2 = 12; b3 = -3
+D <- b0 + b1*A + b2*(G=="S") + b3*A*(G=="S") + rnorm(n)
+m <- data_frame(A, G, D)
+p <- ggplot(m, aes(x=A, y=D, color=factor(G))) + geom_text(aes(label=as.character(G))) + theme(legend.position="none") + scale_color_manual(values=c("#e41a1c", "#377eb8"))
+p
+@
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Draw the model...}
+
+<<simData4, tidy=FALSE, echo=FALSE, message=FALSE, fig.height=4>>=
+p + annotate("text", x=2, y=23, label="D ~ 1", size=10)
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Draw the model...}
+
+<<simData5, tidy=FALSE, echo=FALSE, message=FALSE, fig.height=4>>=
+p + annotate("text", x=2, y=23, label="D ~ G", size=10)
+@
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Draw the model...}
+
+<<simData1, tidy=FALSE, echo=FALSE, message=FALSE, fig.height=4>>=
+p + annotate("text", x=2, y=23, label="D ~ A", size=10)
+@
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Draw the model...}
+
+<<simData2, tidy=FALSE, echo=FALSE, message=FALSE, fig.height=4>>=
+p + annotate("text", x=2, y=23, label="D ~ A - 1", size=10)
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Draw the model...}
+
+<<simData3, tidy=FALSE, echo=FALSE, message=FALSE, fig.height=4>>=
+p + annotate("text", x=2, y=23, label="D ~ A + G", size=10)
+@
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Draw the model...}
+
+<<simData6, tidy=FALSE, echo=FALSE, message=FALSE, fig.height=4>>=
+p + annotate("text", x=2, y=23, label="D ~ A*G", size=10)
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Draw the model...}
+
+<<simData7, tidy=FALSE, echo=FALSE, message=FALSE, fig.height=4>>=
+p + annotate("text", x=2, y=23, label="D ~ poly(A, 2)", size=10)
+@
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Parting wisdom}
+
+\begin{figure}[t]
+    \includegraphics[width=\textwidth]{correlation.png}  
+\end{figure}
+
+
+\bigskip
+
+Up next: the mechanics and math of fitting models to data!
+
+\bigskip
+
+{\footnotesize * Image credits: XKCD, \url{http://xkcd.com/552/}}
 
 \end{frame}
 
