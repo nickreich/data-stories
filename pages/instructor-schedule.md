@@ -113,8 +113,8 @@ _Tues, week 4_
 
 _Thurs, week 4_
 
- - Additional notes about not all models being linear models!
- - Lab 3 (ipod) work session.
+ - Lecture 5: Linear regression basics
+ - Lab 3 (slr) work session.
 
 _Tues, week 5_
  - Lecture 5: Linear regression intro

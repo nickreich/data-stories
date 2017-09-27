@@ -14,18 +14,17 @@ knit_hooks$set(source = function(x, options) {
 
 \license{This is a product of \href{http://statsteachr.org}{statsTeachR} that is released under a \href{http://creativecommons.org/licenses/by-sa/3.0}{Creative Commons Attribution-ShareAlike 3.0 Unported}. This lab was adapted for \href{http://statsteachr.org}{statsTeachR} by Sara Nu\~nez, Nicholas Reich and Andrea Foulkes from an \href{http://www.openintro.org/stat/}{OpenIntro Statistics} lab written by Andrew Bray and Mine \c{C}etinkaya-Rundel.}
 
-\section*{Lab 4: Introduction to linear regression}
+\section*{Lab 3: Introduction to linear regression}
 
 \subsection*{Cigarettes and carbon monoxide emissions}
 
 An abundance of research has been done to assess the direct health impacts of cigarette smoke. Studies have also investigated the effects that different cigarette brands have on the environment based on their chemical make-ups. While each chemical in cigarettes are considered hazardous to the smoker's health by the United States Surgeon General, in this lab we will be interested in seeing if there is an association between the amount of chemicals and the amount of carbon monoxide emitted into the environment. 
 
-This lab is due at 5pm on October 20th. You should submit your assignment, in the form of a knitted RMarkdown PDF file by uploading it to your personal Google Drive folder that is shared with the TA and the instructor. While you may collaborate with other students on this assignment, you must write up your own code and answers to the questions. Absolutely no cutting and pasting of any portion of the answers. Please note that to generate the PDF file directly from RStudio, you will need to install LaTeX, a PDF typesetting program. This will allow the RMarkdown file to generate the PDF directly. This assignment, like the others, will be worth 50 points.
+This lab is due at 5pm on Tuesday, October 10th. You should submit your assignment, in the form of a knitted RMarkdown PDF file by uploading it to your personal Google Drive folder that is shared with the TAs and the instructor. While you may collaborate with other students on this assignment, you must write up your own code and answers to the questions. Absolutely no cutting and pasting of any portion of the answers. Please note that to generate the PDF file directly from RStudio, you will need to install LaTeX, a PDF typesetting program. This will allow the RMarkdown file to generate the PDF directly. This assignment, like the others, will be worth 50 points.
 
 \subsection*{The data (5 points)}
 
-The data set presented here is taken from the 3rd edition of \emph{Statistics for
-Engineering and the Sciences} by Mendenhall and Sincich (1992) and is a subset of the data produced by the Federal Trade Commission. This data was found through the American Statistical Association website, and a fuller description of the data can be found at \web{http://www.amstat.org/publications/jse/datasets/cigarettes.txt}. Let's load the data and look at summary of the variables. Be sure to install the package \emph{RCurl} in order to obtain the data from the internet.
+The data set presented here is taken from the 3rd edition of \emph{Statistics for Engineering and the Sciences} by Mendenhall and Sincich (1992) and is a subset of the data produced by the Federal Trade Commission. This data was found through the American Statistical Association website, and a fuller description of the data can be found at \web{http://www.amstat.org/publications/jse/datasets/cigarettes.txt}. Let's load the data and look at summary of the variables. Be sure to install the package \emph{RCurl} in order to obtain the data from the internet.
 
 <<load-data,eval=FALSE>>=
 cigs = read.table("https://ww2.amstat.org/publications/jse/datasets/cigarettes.dat.txt")
@@ -54,10 +53,10 @@ Looking at your plot from the previous exercise, describe the relationship betwe
 Just as we used the mean and standard deviation to summarize a single variable, we can summarize the relationship between these two variables by finding the line that best follows their association.  Use the following interactive function to select the line that you think does the best job of going through the cloud of points.
 \newline
 \newline
-\textbf{Note:} You need to access this function by sourcing a function on GitHub using the following commands:
+\textbf{Note:} You need to access this function by sourcing a function that lives on GitHub. To do this, you need a function from the RCurl packaage. Note that when you just need a single function from a package, rather than using `library()` to load all the functions from that package, you can use the `package::function()` syntax below to call a single function one time. Use the following commands to load an interactive interface in R:
 <<plotss-atbats-runs, eval=FALSE>>=
 u <- "https://raw.githubusercontent.com/nickreich/stat-modeling-2015/gh-pages/assets/labs/plot_ss.R"
-script <- getURL(u, ssl.verifypeer = FALSE)
+script <- RCurl::getURL(u, ssl.verifypeer = FALSE)
 eval(parse(text = script))
 plot_ss(x = cigs$tar, y = cigs$CO)
 @
