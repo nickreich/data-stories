@@ -113,7 +113,8 @@ _Tues, week 4_
 
 _Thurs, week 4_
 
- - Lecture 5: Linear regression basics
+ - announcements: (reminder: Linear regression basics lectures on youtube), (introduction: challenges), 
+ - SLR basic concepts overview
  - Lab 3 (slr) work session.
 
 _Tues, week 5_
