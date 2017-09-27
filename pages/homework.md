@@ -8,6 +8,11 @@ Homework assignments will be posted here, in general organized by due date. Unle
 
 <!-- **Collaboration on homework is expected and encouraged, although you must write up your own assignment. No copying or cutting and pasting.** -->
 
+_Due Tuesday, 10/10, 5pm_ 
+
+ - [Lab 3](../assets/labs/lab3-regress/lab3-regress.pdf) must be handed in by 5pm.
+
+
 _Due Friday, 9/29, 5pm_ 
 
  - Link to final Lab 2 document must be entered in [this Google Form](https://goo.gl/forms/PwnNsDonBAHxlx1r1) by 5pm.

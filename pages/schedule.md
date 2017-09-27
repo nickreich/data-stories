@@ -14,9 +14,9 @@ Week |       |     | Topic   | Notes | HW Due | Reading
  3   |     | 19, 21 | Data visualization and summary | [Lec 3](../assets/lectures/lecture3-data-viz/lecture3-data-viz.pdf) |  | [Data viz reading list](data-viz-reading-list.html), Kaplan 3
  4   |     | 26, 28 | Language of Models | [Lec 4](../assets/lectures/lecture4-models/lecture4-model-language.pdf) | [Lab 2](../assets/labs/lab2-blog/lab2-blog.pdf) | Kaplan 6, 7
  5   | Oct | 3, 5   | Linear Regression | || Kaplan 8, OI 7
- 6   |     | 12     | Linear Regression | || Kaplan 8-10, OI 7
- 7   |     | 17, 19 | Linear Regression | || Kaplan 9-10
- 8   |     | 24, 26 | Linear Regression | || Kaplan 9-10
+ 6   |     | 12     | Linear Regression | | [Lab 3](../assets/labs/lab3-regress/lab3-regress.pdf) | Kaplan 8-10, OI 7
+ 7   |     | 17, 19 | Beyond regression models | || Kaplan 9-10
+ 8   |     | 24, 26 | Beyond regression models | || Kaplan 9-10
  9   | Nov | 31, 2  | Midterm exam | | |
  10  |     | 7, 9   | Midterm review and exam | || 
  11  |     | 14, 16 | Evidence in data | || Kaplan 11-15
