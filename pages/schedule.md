@@ -4,9 +4,46 @@ title: Class schedules
 tagline: 
 ---
 
+<!---Updated restructuring--->
+Month| Day   |     | Topic |  Notes  | HW Due | Reading | Bi-Weekly Challenge Due
+---- | ----- | --- | ----- |  -----  | ------ | ------- | -----------------------  
+ Sep | Tu, 5 |     | Intro, motivation | [Lec 1](../assets/lectures/lecture1-intro-regression/lecture1-intro-regression.pdf) ||Kaplan 1, [Syllabus](../assets/syllabus/data-stories-reich-syllabus.pdf) |  
+     | Th,  7|     |  
+     | Tu, 12|     | What is data?     | [Lec 2](../assets/lectures/lecture2-what-is-data/lecture2-what-is-data.pdf) | [Lab 1](../assets/labs/lab1-data/lab1-data.pdf) | Kaplan 2 |  
+     | Th, 14|     |  
+     | Tu, 19|     | Data visualization and summary | [Lec 3](../assets/lectures/lecture3-data-viz/lecture3-data-viz.pdf) |  | [Data viz reading list](data-viz-reading-list.html), Kaplan 3 |  
+     | Th, 14|     |  
+     | Tu, 26|     | Language of Models | [Lec 4](../assets/lectures/lecture4-models/lecture4-model-language.pdf) || Kaplan 6, 7  
+     | Th, 28|     |  
+     | Fr, 29|     ||| [Lab 2](../assets/labs/lab2-blog/lab2-blog.pdf)  
+ Oct | Tu,  3|     | Linear Regression | || Kaplan 8, OI 7 |  
+     | Th,  5|     |  
+     | Fr,  6|     |||||Challenge 1  
+     | Tu, 10|     | _No Class_ |  
+     | Th, 12|     | Linear Regression | || Kaplan 8-10, OI 7 |  
+     | Tu, 17|     | Linear Regression | || Kaplan 9-10 |  
+     | Th, 19|     |  
+     | Tu, 24|     | Linear Regression | || Kaplan 9-10 |  
+     | Th, 26|     |  
+     | Tu, 31|     | Midterm exam | | |  
+ Nov | Th,  2|     |  
+     | Tu,  7|     | Midterm review and exam | ||  
+     | Th,  9|     |  
+     | Tu, 14|     | Evidence in data | || Kaplan 11-15 |  
+     | Th, 16|     |  
+     | Tu, 21|     | _Thanksgiving_  
+     | Th, 23|     | _Thanksgiving_  
+     | Tu, 28|     | Logistic regression/Missing data | || Kaplan 16, OI 8 |  
+     | Th, 30|     |  
+ Dec | Tu,  5|     | Projects/Poisson regression? | ||  
+     | Th,  7|     |  
+     | Tu, 12|     | Final Projects | ||  
+
+
 
 *This is the working schedule for the course. It is subject to change.*
 
+<!---
 Week |       |     | Topic   | Notes | HW Due | Reading
 ---- | ----- | --- | ------- | ----- |:------:| -------
  1   | Sep | 5, 7   | Intro, motivation | [Lec 1](../assets/lectures/lecture1-intro-regression/lecture1-intro-regression.pdf) || [Syllabus](../assets/syllabus/data-stories-reich-syllabus.pdf), Kaplan 1
@@ -24,6 +61,7 @@ Week |       |     | Topic   | Notes | HW Due | Reading
  12  |     | 28, 30 | Logistic regression/Missing data | || Kaplan 16, OI 8
  13  | Dec | 5, 7   | Projects/Poisson regression? | || 
  14  |     | 12     | Final Projects | || 
+--->
 
 <!-- Week |       |     | Topic   | Notes | HW Due | Reading
 ---- | ----- | --- | ------- | ----- |:------:| -------
