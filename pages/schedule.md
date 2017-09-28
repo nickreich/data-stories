@@ -5,6 +5,7 @@ tagline:
 ---
 
 <!---Updated restructuring--->
+
 Month| Day   |     | Topic |  Notes  | HW Due | Reading | Bi-Weekly Challenge Due
 ---- | ----- | --- | ----- |  -----  | ------ | ------- | -----------------------  
  Sep | Tu, 5 |     | Intro, motivation | [Lec 1](../assets/lectures/lecture1-intro-regression/lecture1-intro-regression.pdf) ||Kaplan 1, [Syllabus](../assets/syllabus/data-stories-reich-syllabus.pdf) |  
