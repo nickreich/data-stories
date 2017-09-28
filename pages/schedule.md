@@ -10,16 +10,16 @@ Month| Day   |     | Topic |  Notes  | HW Due | Reading
 :---- |:----- | --- |:----- |:-----  |:------ |:------- 
  Sep | Tu, 5 |     | Intro, motivation | [Lec 1](../assets/lectures/lecture1-intro-regression/lecture1-intro-regression.pdf) ||Kaplan 1, [Syllabus](../assets/syllabus/data-stories-reich-syllabus.pdf) 
      | Th,  7|     |  | | | 
-     | Tu, 12|     | What is data?     | [Lec 2](../assets/lectures/lecture2-what-is-data/lecture2-what-is-data.pdf) | [Lab 1](../assets/labs/lab1-data/lab1-data.pdf) | Kaplan 2 
+     | Tu, 12|     | What is data?     | [Lec 2](../assets/lectures/lecture2-what-is-data/lecture2-what-is-data.pdf) | [Lab 1](../assets/labs/lab1-data/lab1-data.pdf) &nbsp; &nbsp; | Kaplan 2 
      | Th, 14|     |  | | | 
      | Tu, 19|     | Data visualization and summary | [Lec 3](../assets/lectures/lecture3-data-viz/lecture3-data-viz.pdf) |  | [Data viz reading list](data-viz-reading-list.html), Kaplan 3
      | Th, 14|     |    | | | 
      | Tu, 26|     | Language of Models | [Lec 4](../assets/lectures/lecture4-models/lecture4-model-language.pdf) || Kaplan 6, 7  
-     | Th, 28|     |    | | | 
+     | Th, 28|     | Linear Regression | | | 
      | Fr, 29|     || | [Lab 2](../assets/labs/lab2-blog/lab2-blog.pdf)  | 
- Oct | Tu,  3|     | Linear Regression | || Kaplan 8, OI 7 
-     | Th,  5|     |    | | | 
-     | Fr,  6|     |||||
+ Oct | Tu,  3|     | Linear Regression | || Kaplan 8, OI 7, [OI Videos](https://www.youtube.com/playlist?list=PLkIselvEzpM63ikRfN41DNIhSgzboELOM) 
+     | Th,  5|     |    | |[Lab 3](../assets/labs/lab3-regress/lab3-regress.pdf) | [OI Videos](https://www.youtube.com/playlist?list=PLkIselvEzpM5f1HYzIjFt52SD4izsJ2_I)  
+     | Fr,  6|     |||| BC 1|
      | Tu, 10|     | _No Class_ |   | | 
      | Th, 12|     | Linear Regression | || Kaplan 8-10, OI 7 
      | Tu, 17|     | Linear Regression | || Kaplan 9-10 
