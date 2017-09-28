@@ -32,7 +32,7 @@ One of any of the following introductory stats courses taught at UMass: BIOSTAT 
 &nbsp; &nbsp; Kaplan D. 2012. [Statistical Modeling: A Fresh Approach](http://www.mosaic-web.org/go/StatisticalModeling/). 
 
 **Recommended book (free download)** <br>
-&nbsp; &nbsp; Diez D, Barr C, and &Ccedil;etinkaya-Rundel M. 2012. [OpenIntro Statistics, 3rd Ed.](http://www.openintro.org/stat/index.php)
+&nbsp; &nbsp; Diez D, Barr C, and &Ccedil;etinkaya-Rundel M. 2012. [OpenIntro Statistics, 3rd Ed.](https://www.openintro.org/stat/index.php?stat_book=os)
 
 
 **Topics covered**<br>

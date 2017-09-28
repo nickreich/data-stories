@@ -6,7 +6,11 @@ tagline:
 
 <!---Updated restructuring--->
 
-Month| Day   |     | Topic |  Notes &nbsp;   | HW Due &nbsp;  | Reading 
+*This is the working schedule for the course. It is subject to change.*
+
+Abbreviation key: OI = [OpenIntro Stats](https://www.openintro.org/stat/index.php?stat_book=os) textbook, BC = biweekly challenge
+
+Month &nbsp; | Day   |     | Topic |  Notes &nbsp;   | HW Due &nbsp;  | Reading 
 :---- |:----- | --- |:----- |:-----  |:------ |:------- 
  Sep | Tu, 5 |     | Intro, motivation | [Lec 1](../assets/lectures/lecture1-intro-regression/lecture1-intro-regression.pdf) ||Kaplan 1, [Syllabus](../assets/syllabus/data-stories-reich-syllabus.pdf) 
      | Th,  7|     |  | | | 
@@ -42,7 +46,6 @@ Month| Day   |     | Topic |  Notes &nbsp;   | HW Due &nbsp;  | Reading
 
 
 
-*This is the working schedule for the course. It is subject to change.*
 
 <!---
 Week |       |     | Topic   | Notes | HW Due | Reading
