@@ -7,7 +7,7 @@ tagline:
 <!---Updated restructuring--->
 
 Month| Day   |     | Topic |  Notes  | HW Due | Reading 
----- | ----- | --- | ----- |  -----  | ------ | ------- 
+:---- |:----- | --- |:----- |:-----  |:------ |:------- 
  Sep | Tu, 5 |     | Intro, motivation | [Lec 1](../assets/lectures/lecture1-intro-regression/lecture1-intro-regression.pdf) ||Kaplan 1, [Syllabus](../assets/syllabus/data-stories-reich-syllabus.pdf) 
      | Th,  7|     |  | | | 
      | Tu, 12|     | What is data?     | [Lec 2](../assets/lectures/lecture2-what-is-data/lecture2-what-is-data.pdf) | [Lab 1](../assets/labs/lab1-data/lab1-data.pdf) | Kaplan 2 
