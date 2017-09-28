@@ -113,7 +113,11 @@ _Tues, week 4_
 
 _Thurs, week 4_
 
- - announcements: (reminder: Linear regression basics lectures on youtube), (introduction: challenges), 
+ - announcements: 
+    new schedule webpage
+    reminder: Linear regression basics lectures on youtube
+    introduction: challenges
+    ok to switch topics for lab
  - SLR basic concepts overview
  - Lab 3 (slr) work session.
 

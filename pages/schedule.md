@@ -21,14 +21,14 @@ Month &nbsp; | Day   |     | Topic |  Notes &nbsp;   | HW Due &nbsp;  | Reading
      | Tu, 26|     | Language of Models | [Lec 4](../assets/lectures/lecture4-models/lecture4-model-language.pdf) || Kaplan 6, 7  
      | Th, 28|     | Linear Regression | | | 
      | Fr, 29|     || | [Lab 2](../assets/labs/lab2-blog/lab2-blog.pdf)  | 
- Oct | Tu,  3|     | Linear Regression | || Kaplan 8, OI 7, [OI Videos](https://www.youtube.com/playlist?list=PLkIselvEzpM63ikRfN41DNIhSgzboELOM) 
-     | Th,  5|     |    | |[Lab 3](../assets/labs/lab3-regress/lab3-regress.pdf) | [OI Videos](https://www.youtube.com/playlist?list=PLkIselvEzpM5f1HYzIjFt52SD4izsJ2_I)  
+ Oct | Tu,  3|     | Linear Regression | || Kaplan 8-9, OI 7, [OI Videos](https://www.youtube.com/playlist?list=PLkIselvEzpM63ikRfN41DNIhSgzboELOM) 
+     | Th,  5|     | Linear Regression | |[Lab 3](../assets/labs/lab3-regress/lab3-regress.pdf) | [OI Videos](https://www.youtube.com/playlist?list=PLkIselvEzpM5f1HYzIjFt52SD4izsJ2_I)  
      | Fr,  6|     |||| BC 1|
      | Tu, 10|     | _No Class_ |   | | 
-     | Th, 12|     | Linear Regression | || Kaplan 8-10, OI 7 
-     | Tu, 17|     | Linear Regression | || Kaplan 9-10 
+     | Th, 12|     | Logistic regression | || Kaplan 16, OI 8 
+     | Tu, 17|     |  | || 
      | Th, 19|     |    | | | 
-     | Tu, 24|     | Linear Regression | || Kaplan 9-10 
+     | Tu, 24|     |  | || 
      | Th, 26|     |    | | | 
      | Tu, 31|     | Midterm exam | | | 
  Nov | Th,  2|     |    | | | 
@@ -38,7 +38,7 @@ Month &nbsp; | Day   |     | Topic |  Notes &nbsp;   | HW Due &nbsp;  | Reading
      | Th, 16|     |    | | | 
      | Tu, 21|     | _Thanksgiving_   | | |
      | Th, 23|     | _Thanksgiving_    | | | 
-     | Tu, 28|     | Logistic regression/Missing data | || Kaplan 16, OI 8
+     | Tu, 28|     | Missing data | || Kaplan 16, OI 8
      | Th, 30|     |    | | | 
  Dec | Tu,  5|     | Projects/Poisson regression? | | |
      | Th,  7|     |    | | | 
