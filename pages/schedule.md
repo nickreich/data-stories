@@ -36,9 +36,9 @@ Month| Day   |     | Topic |  Notes  | HW Due | Reading
      | Th, 23|     | _Thanksgiving_    | | | 
      | Tu, 28|     | Logistic regression/Missing data | || Kaplan 16, OI 8
      | Th, 30|     |    | | | 
- Dec | Tu,  5|     | Projects/Poisson regression? | |
+ Dec | Tu,  5|     | Projects/Poisson regression? | | |
      | Th,  7|     |    | | | 
-     | Tu, 12|     | Final Projects | |
+     | Tu, 12|     | Final Projects | | |
 
 
 
