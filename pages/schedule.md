@@ -8,7 +8,7 @@ tagline:
 
 *This is the working schedule for the course. It is subject to change.*
 
-Abbreviation key: OI = [OpenIntro Stats](https://www.openintro.org/stat/index.php?stat_book=os) textbook, BC = biweekly challenge
+Abbreviation key: OI = [OpenIntro Stats](https://www.openintro.org/stat/index.php?stat_book=os) textbook, BC = biweekly challenge, MDSR = [Modern Data Science with R](http://mdsr-book.github.io/)
 
 Month &nbsp; | Day   |     | Topic |  Notes &nbsp;   | HW Due &nbsp;  | Reading 
 :---- |:----- | --- |:----- |:-----  |:------ |:------- 
@@ -29,7 +29,7 @@ Month &nbsp; | Day   |     | Topic |  Notes &nbsp;   | HW Due &nbsp;  | Reading
      | Tu, 17|     |  | || 
      | Th, 19|     |    | | | 
      | Tu, 24|     |  | || 
-     | Th, 26|     |    | | | 
+     | Th, 26|     | Professional Ethics | | | [MDSR 6](http://mdsr-book.github.io/excerpts/mdsr-ethics.pdf)
      | Tu, 31|     | Midterm exam | | | 
  Nov | Th,  2|     |    | | | 
      | Tu,  7|     | Midterm review and exam | || 
