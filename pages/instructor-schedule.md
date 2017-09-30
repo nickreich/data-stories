@@ -122,6 +122,7 @@ _Thurs, week 4_
  - Lab 3 (slr) work session.
 
 _Tues, week 5_
+ - changing office hours to 2:30-3:30 on Tues, also available by appt if needed
  - Lecture 5: Linear regression intro
  - lab 3 wrap-up
 

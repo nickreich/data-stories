@@ -18,7 +18,7 @@ The aim of this course is to provide students with the skills necessary to tell 
 **Course number**: PUBHLTH 490ST 
 
 **Instructor**: [Nicholas Reich](http://reichlab.io)\\
-Office hours: Tuesday 3-4pm, Arnold 425
+Office hours: Tuesday 2:30-3:30pm, Arnold 425
 
 **TAs**: Bianca Doone, Brittany Pine, Ilina Shah, Evan Moore\\
 Office hours: Tuesdays 7-8:30pm Goodell 608, Thursdays 11:30am-12:45pm in Hasbrouck 242, Fridays 2:30-4pm in LGRT 171
