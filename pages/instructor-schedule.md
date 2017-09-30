@@ -123,7 +123,7 @@ _Thurs, week 4_
 
 _Tues, week 5_
  - changing office hours to 2:30-3:30 on Tues, also available by appt if needed
- - Lecture 5: Linear regression intro
+ - quiz: linear regression
  - lab 3 wrap-up
 
 _Thurs, week 5_

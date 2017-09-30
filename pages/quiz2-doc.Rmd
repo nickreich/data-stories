@@ -1,7 +1,7 @@
 ---
-title: "Quiz: Interpreting Coefficients"
+title: "Quiz 1: Interpreting Regression Coefficients"
 author: "Nicholas Reich, adapted from Project MOSAIC"
-date: "February 14, 2016"
+date: "October 3, 2017"
 output: html_document
 ---
 
@@ -9,11 +9,13 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-The quiz is available at this link [http://goo.gl/forms/uEMm375GDj](http://goo.gl/forms/uEMm375GDj).
+The quiz is available at this link https://goo.gl/forms/BjoQZBF6iZPckweB2.
+
+Please note, your performance on this quiz will not contribute to your course grade. It is designed to give both you and the instructors feedback on your progress and understanding of the material.
 
 ## Overview
 
-We will load the data set JAMA-HR.csv which contains data from a report in the Journal of the American Medical Association.
+We will load the data set `JAMA-HR.csv` which contains data from a report in the Journal of the American Medical Association.
 
 Each case is an individual person. The variables are 
 
