@@ -127,7 +127,7 @@ _Tues, week 5_
  - lab 3 wrap-up
 
 _Thurs, week 5_
- - Lecture 5 continued, 
+ - Exercise on smoothing and overfitting
  - interactive linear regression
 
 _Tues, week 6_
