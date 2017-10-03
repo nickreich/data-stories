@@ -235,5 +235,12 @@ Figure 2.10 from ISL.
 \end{frame}
 
 
+\begin{frame}{Summary}
+
+Validating potential models on external data is critical to understanding how well your model will generalize to another dataset.
+
+\end{frame}
+
+
 
 \end{document}
