@@ -128,7 +128,16 @@ _Tues, week 5_
  - lab 3 wrap-up
 
 _Thurs, week 5_
- - interactive linear regression
+ - wrap-up on test data exercise: 
+    - 5 min group check-in
+    - 10 min group presentations
+    - 5 min, finish slides
+  - model validation vs. model diagnostics
+    - validation: see test sample exercise
+    - diagnostics: residual analysis
+ - announcements: 
+    - post R questions on the #r thread!
+    - don't show up late to class
 
 _Tues, week 6_
 
