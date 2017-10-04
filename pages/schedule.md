@@ -23,7 +23,7 @@ Month &nbsp; | Day   |     | Topic |  Notes &nbsp;   | HW Due &nbsp;  | Reading
      | Fr, 29|     || | [Lab 2](../assets/labs/lab2-blog/lab2-blog.pdf)  | 
  Oct | Tu,  3|     | Linear Regression | [Lec](../assets/lectures/lecture-splines/lecture-splines.pdf) || Kaplan 8-9, OI 7, [OI Videos](https://www.youtube.com/playlist?list=PLkIselvEzpM63ikRfN41DNIhSgzboELOM) 
      | Th,  5|     | Linear Regression | |[Lab 3](../assets/labs/lab3-regress/lab3-regress.pdf) | [OI Videos](https://www.youtube.com/playlist?list=PLkIselvEzpM5f1HYzIjFt52SD4izsJ2_I)  
-     | Fr,  6|     |||| [BC 1](../assets/challenges/biweekly-challenge-1.pdf) |
+     | Fr,  6|     ||| [BC 1](../assets/challenges/biweekly-challenge-1.pdf) | |
      | Tu, 10|     | _No Class_ |   | | 
      | Th, 12|     | Logistic regression | || Kaplan 16, OI 8 
      | Tu, 17|     |  | || 
