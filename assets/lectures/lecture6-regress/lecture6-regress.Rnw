@@ -1,0 +1,331 @@
+%% beamer/knitr slides 
+%% for Statistical Modeling and Data Visualization course @ UMass
+%% Nicholas Reich: nick [at] schoolph.umass.edu
+
+
+\documentclass[table]{beamer}
+
+
+\input{../../slide-includes/standard-knitr-beamer-preamble}
+
+%	The following variables are assumed by the standard preamble:
+%	Global variable containing module name:
+\title{Regression: Model diagnostics}
+%	Global variable containing module shortname:
+%		(Currently unused, may be used in future.)
+\newcommand{\ModuleShortname}{introRegression}
+%	Global variable containing author name:
+\author{Nicholas G Reich}
+%	Global variable containing text of license terms:
+\newcommand{\LicenseText}{Made available under the Creative Commons Attribution-ShareAlike 3.0 Unported License: http://creativecommons.org/licenses/by-sa/3.0/deed.en\textunderscore US }
+%	Instructor: optional, can leave blank.
+%		Recommended format: {Instructor: Jane Doe}
+\newcommand{\Instructor}{}
+%	Course: optional, can leave blank.
+%		Recommended format: {Course: Biostatistics 101}
+\newcommand{\Course}{}
+
+
+% leftovers from openintro slides
+
+% pr: left and right parentheses
+\newcommand{\pr}[1]{
+\left( #1 \right)
+}
+
+\xdefinecolor{rubineRed}{rgb}{0.89,0,0.30}
+\newcommand{\red}[1]{\textit{\textcolor{rubineRed}{#1}}}
+
+\xdefinecolor{irishGreen}{rgb}{0,0.60,0}	
+\newcommand{\green}[1]{\textit{\textcolor{irishGreen}{#1}}}
+
+
+\xdefinecolor{hlblue}{rgb}{0.051,0.65,1}
+\newcommand{\hl}[1]{\textit{\textcolor{hlblue}{#1}}}
+
+
+
+\input{../../slide-includes/shortcuts}
+
+\hypersetup{colorlinks,linkcolor=,urlcolor=MainColor}
+
+
+%	******	Document body begins here	**********************
+
+\begin{document}
+
+%	Title page
+\begin{frame}[plain]
+	\titlepage
+\end{frame}
+
+%	******	Everything through the above line must be placed at
+%		the top of any TeX file using the statsTeachR standard
+%		beamer preamble. 
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Outline}
+
+\bi
+  \myitem Model validation vs. diagnostics
+  \myitem Outlier classification and influence
+  \myitem Model selection
+  %\myitem Categorical variable representation via dummy variables
+\ei
+	
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+
+\centering
+\Huge
+Model validation vs. model diagnostics
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+
+\begin{block}{Validation: Is my model generalizable?}
+\begin{itemize}
+    \myitem ideally: need external test sample
+    \myitem internal test sample can offer (limited) help in evaluating overfitting
+\end{itemize}
+\end{block}
+
+\begin{block}{Diagnostics: Does my model fit the data well?}
+\begin{itemize}
+    \myitem very hard to automate this process if something isn't quite right
+    \myitem requires inspection of residuals
+    \myitem doesn't necessarily require detailed understanding of the model
+\end{itemize}
+\end{block}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+
+\centering
+\Huge
+types of outliers
+
+ \end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Some terminology}
+ 
+\begin{itemize}
+
+\item \hl{Outliers} are points that lie away from the cloud  of points.
+
+\item Outliers that lie horizontally away from the center of the cloud are called \hl{high leverage} points.
+
+\item High leverage points that actually influence the \underline{slope} of the regression line are called \hl{influential} points.
+
+\item In order to determine if a point is influential, visualize the regression line with and without the point. Does the slope of the line change considerably? If so, then the point is influential. If not, then it's not an influential point.
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Influence}
+
+Intuitively, ``influence'' is a combination of outlying-ness and leverage. More specifically, we can measure the ``deletion influence'' of each observation: quantify how much $\hat\bbeta$ changes if an observation is left out.
+\bi
+	\myitem Mathematically: $|\hat{\bbeta}- \hat{\bbeta}_{(-i)}|$
+	\myitem Cook's distance is a value we can calculate for each observation in our dataset that measures this deletion influence. (It uses some nice tricks of linear algebra without having to refit the regression iteratively without each point.)
+\ei
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Poverty data}
+<<echo=FALSE>>=
+poverty = read.table("../old-lecture5-slr/7-1_linefit_res_corr/figures/poverty/poverty.txt", 
+                     h = T, sep = "\t")
+names(poverty) = c("state", "metro_res", "white", "hs_grad", "poverty", "female_house")
+@
+
+This is a dataset with the \% of residents living below the poverty line, as well as some demographic characteristics of states:
+\begin{itemize}
+  \myitem \% living in a metro region
+  \myitem \% white
+  \myitem \% high-school graduates
+  \myitem \% with female head-of-household
+\end{itemize}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]{Example diagnostic plots with poverty data}
+
+You can use the {\tt plot.lm()} function to look at leverage, outlying-ness, and influence all together. 
+\scriptsize
+<<levPlots1a, fig.height=4, tidy=FALSE>>=
+mlr = lm(poverty ~ female_house + white, data = poverty)
+plot(mlr, which=1)
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]{Example diagnostic plots with poverty data}
+
+You can use the {\tt plot.lm()} function to look at leverage, outlying-ness, and influence all together. 
+\scriptsize
+<<levPlots1, fig.height=4, tidy=FALSE>>=
+mlr = lm(poverty ~ female_house + white, data = poverty)
+plot(mlr, which=5)
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Investigate identified points!}
+
+<<echo=FALSE, fig.height=3>>=
+plot(mlr, which=5)
+@
+
+
+\scriptsize
+<<plotlm1, fig.height=3>>=
+poverty[12,]
+colMeans(poverty[,2:6])
+@
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Model diagnostics summary}
+
+\begin{block}{You are looking for...}
+\bi
+ \myitem Points that show worrisome level of influence $\implies$ sensitivity analysis!
+ \myitem Systematic departures from model assumptions $\implies$ transformations, different model structure
+ \myitem Unrealistic outliers $\implies$ check your data!
+\ei
+\end{block}
+
+No points show worrisome influence in this poverty data analysis, although observation 12 was high leverage. 
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\begin{frame}
+
+\centering
+\Huge
+model selection
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\begin{frame}{Model selection}
+
+\begin{block}{Why are you building a model in the first place?}
+\end{block}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Model selection: considerations}
+
+\begin{block}{Things to keep in mind...}
+\bi
+    \myitem {\bf Why am I building a model?} Some common answers
+    \bi
+      \item Estimate an association
+      \item Test a particular hypothesis
+      \item Predict new values
+    \ei
+    \myitem What predictors will I allow?
+    \myitem What predictors are needed?
+\ei
+
+Different answers to these questions will yield different final models.
+
+\end{block}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}{Model selection: realities}
+
+\centering {\em All models are wrong. Some are more useful than others.} \\ - George Box
+
+
+\bi
+	\myitem In practice, issues with sample size, collinearity (highly correlated predictor variables), and limited available predictors are real problems.
+	\myitem There is not a single best algorithm for model selection! It pretty much always requires thoughful reasoning and knowledge about the data at hand. 
+	\myitem When in doubt (unless you are specifically ``data mining''), err on the side creating a process that does not require choices being made (by you or the computer) about which covariates to include.
+\ei
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Basic ideas for model selection}
+
+\begin{block}{For association studies, when your sample size is large}
+\bi
+        \myitem Include key covariates of interest.
+        \myitem Include covariates needed because they might be confounders.
+        \myitem Include covariates that your colleagues/reviewers/collaborators will demand be included for face validity.
+        \myitem Do NOT go on a fishing expedition for significant results!
+        \myitem Do NOT use ``stepwise selection'' methods!
+        \myitem Subject the selected model to model checking/diagnostics, possibly adjust model structure (i.e. include non-linear relationships with covariates) as needed.
+\ei
+\end{block}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Basic ideas for model selection}
+
+\begin{block}{For association studies, when your sample size is small}
+\bi
+        \myitem Same as above, but may need to be more frugal with how many predictors you include.
+        \myitem Rule of thumb for multiple linear regression is to have at least 15 observations for each covariate you include in your model.
+\ei
+\end{block}
+
+
+\end{frame}
+
+
+
+\end{document}

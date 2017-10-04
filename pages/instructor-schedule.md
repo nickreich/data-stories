@@ -132,7 +132,7 @@ _Thurs, week 5_
     - 5 min group check-in
     - 10 min group presentations
     - 5 min, finish slides
-  - model validation vs. model diagnostics
+  - Lecture 6: model validation vs. model diagnostics
     - validation: see test sample exercise
     - diagnostics: residual analysis
  - announcements: 
@@ -146,7 +146,6 @@ _Tues, week 6_
 _Thurs, week 6_
 
  - Lecture 6
- - linear regression sum of squares game from Lab 4
 
 _Tues, week 7_
 

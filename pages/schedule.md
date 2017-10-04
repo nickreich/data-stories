@@ -21,7 +21,7 @@ Month &nbsp; | Day   |     | Topic |  Notes &nbsp;   | HW Due &nbsp;  | Reading
      | Tu, 26|     | Language of Models | [Lec 4](../assets/lectures/lecture4-models/lecture4-model-language.pdf) || Kaplan 6, 7  
      | Th, 28|     | Linear Regression | | | 
      | Fr, 29|     || | [Lab 2](../assets/labs/lab2-blog/lab2-blog.pdf)  | 
- Oct | Tu,  3|     | Linear Regression | [Lec 5](../assets/lectures/lecture5-splines/lecture-splines.pdf) || Kaplan 8-9, OI 7, [OI Videos](https://www.youtube.com/playlist?list=PLkIselvEzpM63ikRfN41DNIhSgzboELOM) 
+ Oct | Tu,  3|     | Linear Regression | [Lec 5](../assets/lectures/lecture5-splines/lecture-splines.pdf), [Lec 6](../assets/lectures/lecture6-regress/lecture6-regress.pdf) || Kaplan 8-9, OI 7, [OI Videos](https://www.youtube.com/playlist?list=PLkIselvEzpM63ikRfN41DNIhSgzboELOM) 
      | Th,  5|     | Linear Regression | |[Lab 3](../assets/labs/lab3-regress/lab3-regress.pdf) | [OI Videos](https://www.youtube.com/playlist?list=PLkIselvEzpM5f1HYzIjFt52SD4izsJ2_I)  
      | Fr,  6|     ||| [BC 1](../assets/challenges/biweekly-challenge-1.pdf) | |
      | Tu, 10|     | _No Class_ |   | | 
