@@ -1,0 +1,63 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r, message=FALSE, warning=FALSE}
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+elect <- read.csv("https://goo.gl/HCHzui")
+with(elect, sum(HRC_win*electoral_votes, na.rm=TRUE))
+```
+
+
+```{r}
+elect <- elect %>%
+  mutate(nyt_score = ifelse(HRC_win, log(nyt), log(1-nyt)),
+         fivethirtyeight_score = ifelse(HRC_win, log(fivethirtyeight), log(1-fivethirtyeight)),
+         huffpost_score = ifelse(HRC_win, log(huffpost), log(1-huffpost)),
+         pw_score = ifelse(HRC_win, log(pw), log(1-pw)),
+         pec_score = ifelse(HRC_win, log(pec), log(1-pec)),
+         dk_score = ifelse(HRC_win, log(dk), log(1-dk)))
+summary_scores <- elect %>%
+  group_by(swing) %>%
+  summarize(nyt_score = mean(nyt_score, na.rm=TRUE),
+            fivethirtyeight_score = mean(fivethirtyeight_score, na.rm=TRUE),
+            huffpost_score = mean(huffpost_score, na.rm=TRUE),
+            pw_score = mean(nyt_score, na.rm=TRUE),
+            pec_score = mean(nyt_score, na.rm=TRUE),
+            dk_score = mean(nyt_score, na.rm=TRUE))
+```
+
+```{r}
+round(exp(summary_scores), 3)
+```
+
+```{r}
+elect_long <- elect %>%
+  select(-(nyt:dk)) %>%
+  mutate(nyt = nyt_score,
+         dk = dk_score,
+         fivethirtyeight = fivethirtyeight_score,
+         huffpost = huffpost_score,
+         pec = pec_score,
+         pw = pw_score) %>%
+  gather(key=metric, value=log_score, 
+                     nyt:pw)
+  
+ggplot(filter(elect_long, swing==1), aes(x=exp(log_score), fill=metric)) + 
+  geom_histogram(alpha=.3) + facet_grid(metric~.) +
+  theme_bw()
+
+ggplot(filter(elect_long, swing==1), aes(y=exp(log_score), x=metric)) + 
+  geom_boxplot(alpha=.3) +
+  theme_bw()
+
+ggplot(elect_long, aes(y=exp(log_score), x=metric)) + 
+  geom_boxplot(alpha=.3) +
+  theme_bw()
+
+```
+
+

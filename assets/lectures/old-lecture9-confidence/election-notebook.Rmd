@@ -1,0 +1,30 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r, message=FALSE, warning=FALSE}
+library(mosaic)
+library(ggplot2)
+elect <- read.csv("https://goo.gl/HCHzui")
+head(elect)
+```
+
+```{r}
+nrow(elect)
+```
+
+```{r}
+nsims <- 1000
+sims <- do(nsims) * rbinom(n = nrow(elect), size = 1, 
+                           prob = elect$nyt)
+tsims <- t(sims)
+HRC_votes <- elect$electoral.votes*tsims
+HRC_totals <- colSums(HRC_votes)
+qplot(HRC_totals, binwidth=1) + geom_vline(xintercept=270, color="red")
+```
+
+```{r}
+sum(HRC_totals>=270)/length(HRC_totals)
+```
+
