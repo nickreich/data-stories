@@ -138,6 +138,7 @@ _Thurs, week 5_
  - announcements: 
     - post R questions on the #r thread!
     - don't show up late to class
+    - office hours confirmation.
 
 _Tues, week 6_
 
