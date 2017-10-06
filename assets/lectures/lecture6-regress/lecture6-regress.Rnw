@@ -85,7 +85,7 @@
 
 \centering
 \Huge
-Model validation vs. model diagnostics
+Model validation vs. diagnostics
 
 \end{frame}
 
