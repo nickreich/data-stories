@@ -1,0 +1,79 @@
+---
+title: 'Lab 6: Telling a story about survival on the Titanic'
+author: "Nicholas G Reich, for PUBHLTH 490ST at UMass-Amherst"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE, eval=FALSE)
+```
+
+
+## Introduction to the Titanic dataset
+
+In this exercise, we are going to look at a dataset describing characteristics (including survival) of passengers on the Titanic, which [sunk in the North Atlantic Ocean in 1912](https://en.wikipedia.org/wiki/RMS_Titanic). You can hand in this lab for extra credit. 
+
+## Getting started
+Let's load the data into our current R session, and look at the variables available in the dataset:
+```{r}
+library("Hmisc")
+getHdata(titanic)
+head(titanic)
+```
+
+### Exercise 1: Understand your data
+For this analysis, we are going to focus primarily on the impact of three predictor variables on survival: economic status (`pclass`), `sex`, and `age`. Examine your data carefully using some univariate plots and/or summaries of the variables to understand what the distributions look like. 
+
+### Exercise 1a: Deal with missing data
+There are a lot of missing data in the `age` variable. In real data analysis problems, missing data is a common and pesky problem. It can especially be difficult to deal with when the missingness is not "random", i.e. certain factors (whether they are variables you measure or not) can predict whether the data will be missing or not. For example, do you think that older or younger people might be more or less likely to be missing their age from this dataset? What other variables might determine whether we have age or not? One way to start to look at this is to create a new factor variable that indicates whether `age` is missing or not for each observation. Then we can create some simple tables to assess missingness across different groups. Try these types of tabulations out and determine whether you think missing age is predicable based on some of the other data in our dataset.
+
+```{r}
+titanic$age_mis <- factor(is.na(titanic$age))
+mosaic::tally(~sex|age_mis, data=titanic)
+```
+
+For now, to make the rest of the lab easier to work through, we are going to ignore the observations that are missing `age`. This is rarely a great assumption to make in practice, especially if the missingness may be associated with other factors. So when we interpret our results, we will need to remember that our dataset may no longer be representative of the entire population of travelers on the Titanic. Run the following code to remove anyone missing age from our dataset.
+
+```{r}
+titanic1 <- dplyr::filter(titanic, age_mis==FALSE)
+```
+
+
+
+
+### Exercise 2: Make some hypotheses
+_Before making any multivariate plots_, discuss with your teammates your hypotheses about what relationships might exist between these variables. Make a short list, including directions of possible relationships and possible interactions. Sketch out a few graphics that you want to make.
+
+### Exercise 3: Look at your data
+Create a few exploratory graphics and/or tables that illustrate the relationships between these variables and survivial. (Hint: try adapting graphing code from the logistic regression lecture. Try using facets or colors to highlight important comparisons.)
+```{r, echo=FALSE}
+ggplot(titanic, aes(x=age, y=survived, color=sex)) + geom_point(alpha=I(.4)) + facet_grid(.~pclass)
+ggplot(titanic, aes(x=age, y=survived, color=sex)) + geom_smooth(se=FALSE, span=1) + facet_grid(.~pclass)
+ggplot(titanic, aes(x=age, y=survived, color=sex)) + 
+    stat_smooth(se=FALSE, method='glm', method.args=list(family='binomial')) + 
+    facet_grid(.~pclass)
+ggplot(titanic, aes(x=age, y=survived, color=sex)) + 
+    stat_smooth(se=FALSE, method='glm', method.args=list(family='binomial')) + 
+    facet_grid(embarked~pclass)
+ggplot(titanic, aes(x=pclass, y=boat)) + geom_raster(aes(fill=survived))
+```
+
+### Exercise 4: Design and fit a model
+Using the plots as your guide, write down a model that you'd like to fit to use to describe how this data predicts the outcome of survival. Then fit that model. 
+
+```{r, echo=FALSE}
+fm1 <- glm(survived~age*sex + pclass, data=titanic1, family='binomial')
+```
+
+### Exercise 5: Examine your model performance
+Now that you've fit a model, you can calculate, for each individual, an estimated probability of survival, using code similar to that below (Note: adding `type='response'` ensures that if you fit a logistic regression model, the `predict` function returns you predicted probabilities instead of predicted log-odds.):
+```{r}
+titanic1$preds <- predict(fm1, type = "response")
+```
+Using these predicted probabilities, try to determine where your model performs worst. Start by figuring out a metric that you could use to measure a poor prediction for a particular observation. Then, summarize your data in a way that shows you what type of individuals you make the worst predictions about. Why did you make poor predictions for these subsets of people? What other data would you like to have to help you make even better predictions?
+
+```{r, echo=FALSE}
+titanic1$raw_resid <- with(titanic1, survived-preds)
+```
+
+

@@ -146,7 +146,7 @@ _Tues, week 6_
 
 _Thurs, week 6_
 
- - Lecture 6
+ - Lecture 7: 
 
 _Tues, week 7_
 

@@ -21,27 +21,30 @@ Month &nbsp; | Day   |     | Topic |  Notes &nbsp;   | HW Due &nbsp;  | Reading
      | Tu, 26|     | Language of Models | [Lec 4](../assets/lectures/lecture4-models/lecture4-model-language.pdf) || Kaplan 6, 7  
      | Th, 28|     | Linear Regression | | | 
      | Fr, 29|     || | [Lab 2](../assets/labs/lab2-blog/lab2-blog.pdf)  | 
- Oct | Tu,  3|     | Linear Regression | [Lec 5](../assets/lectures/lecture5-splines/lecture-splines.pdf), [Lec 6](../assets/lectures/lecture6-regress/lecture6-regress.pdf) || Kaplan 8-9, OI 7, [OI Videos](https://www.youtube.com/playlist?list=PLkIselvEzpM63ikRfN41DNIhSgzboELOM) 
-     | Th,  5|     | Linear Regression | |[Lab 3](../assets/labs/lab3-regress/lab3-regress.pdf) | [OI Videos](https://www.youtube.com/playlist?list=PLkIselvEzpM5f1HYzIjFt52SD4izsJ2_I)  
+ Oct | Tu,  3|     | Linear Regression | [Lec 5](../assets/lectures/lecture5-splines/lecture-splines.pdf) || Kaplan 8-9, OI 7, [OI Videos](https://www.youtube.com/playlist?list=PLkIselvEzpM63ikRfN41DNIhSgzboELOM) 
+     | Th,  5|     | Linear Regression | [Lec 6](../assets/lectures/lecture6-regress/lecture6-regress.pdf) |[Lab 3](../assets/labs/lab3-regress/lab3-regress.pdf) | [OI Videos](https://www.youtube.com/playlist?list=PLkIselvEzpM5f1HYzIjFt52SD4izsJ2_I)  
      | Fr,  6|     ||| [BC 1](../assets/challenges/biweekly-challenge-1.pdf) | |
      | Tu, 10|     | _No Class_ |   | | 
-     | Th, 12|     | Logistic regression | || Kaplan 16, OI 8 
-     | Tu, 17|     |  | || 
-     | Th, 19|     |    | | | 
-     | Tu, 24|     |  | || 
-     | Th, 26|     | Professional Ethics | | | [MDSR 6](http://mdsr-book.github.io/excerpts/mdsr-ethics.pdf)
-     | Tu, 31|     | Midterm exam | | | 
- Nov | Th,  2|     |    | | | 
-     | Tu,  7|     | Midterm review and exam | || 
-     | Th,  9|     |    | | | 
-     | Tu, 14|     | Evidence in data | || Kaplan 11-15 
-     | Th, 16|     |    | | | 
+     | Th, 12|     | Logistic regression | || Kaplan 16, OI 8, [OI Video](https://www.youtube.com/watch?v=uYC2eLVSpI8&list=PLkIselvEzpM5f1HYzIjFt52SD4izsJ2_I&index=4)
+     | Fr, 13|     |  | | [Lab 4](../assets/labs/lab4-interact/lab4-interact.pdf) | 
+     | Tu, 17|     | Understanding Uncertainty | | |  Kaplan 11-13
+     | Th, 19|     | Understanding Uncertainty | | | 
+     | Fr, 20|     |  | | Lab 5 | 
+     | Tu, 24|     | Understanding Uncertainty | || Kaplan 14-15
+     | Th, 26|     | Understanding Uncertainty | | | 
+     | Tu, 31|     |  | | Lab 6  | 
+ Nov | Th,  2|     | Professional Ethics | | | [MDSR 6](http://mdsr-book.github.io/excerpts/mdsr-ethics.pdf)
+     | Tu,  7|     | Midterm review | | | 
+     | Th,  9|     | Midterm exam   | | | 
+     | Tu, 14|     | Classification models | || 
+     | Th, 16|     | Classification models | | | 
+     | Fr, 17|     |    | | Lab 7 | 
      | Tu, 21|     | _Thanksgiving_   | | |
      | Th, 23|     | _Thanksgiving_    | | | 
-     | Tu, 28|     | Missing data | || Kaplan 16, OI 8
-     | Th, 30|     |    | | | 
- Dec | Tu,  5|     | Projects/Poisson regression? | | |
-     | Th,  7|     |    | | | 
+     | Tu, 28|     | Missing data | || 
+     | Th, 30|     |  | | | 
+ Dec | Tu,  5|     |  | | |
+     | Th,  7|     | Final Projects | | | 
      | Tu, 12|     | Final Projects | | |
 
 
