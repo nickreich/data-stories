@@ -25,7 +25,7 @@ Month &nbsp; | Day   |     | Topic |  Notes &nbsp;   | HW Due &nbsp;  | Reading
      | Th,  5|     | Linear Regression | [Lec 6](../assets/lectures/lecture6-regress/lecture6-regress.pdf) |[Lab 3](../assets/labs/lab3-regress/lab3-regress.pdf) | [OI Videos](https://www.youtube.com/playlist?list=PLkIselvEzpM5f1HYzIjFt52SD4izsJ2_I)  
      | Fr,  6|     ||| [BC 1](../assets/challenges/biweekly-challenge-1.pdf) | |
      | Tu, 10|     | _No Class_ |   | | 
-     | Th, 12|     | Logistic regression | || Kaplan 16, OI 8, [OI Video](https://www.youtube.com/watch?v=uYC2eLVSpI8&list=PLkIselvEzpM5f1HYzIjFt52SD4izsJ2_I&index=4)
+     | Th, 12|     | Logistic regression | [Lec 7](../assets/lectures/lecture7-logistic/lecture7-logistic.pdf) || Kaplan 16, OI 8, [OI Video](https://www.youtube.com/watch?v=uYC2eLVSpI8&list=PLkIselvEzpM5f1HYzIjFt52SD4izsJ2_I&index=4)
      | Fr, 13|     |  | | [Lab 4](../assets/labs/lab4-interact/lab4-interact.pdf) | 
      | Tu, 17|     | Understanding Uncertainty | | |  Kaplan 11-13
      | Th, 19|     | Understanding Uncertainty | | | 
