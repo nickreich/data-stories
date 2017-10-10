@@ -147,6 +147,7 @@ _Tues, week 6_
 _Thurs, week 6_
 
  - Lecture 7: logistic regression
+ - activity: binned residual plots
 
 _Tues, week 7_
 

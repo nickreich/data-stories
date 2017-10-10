@@ -446,7 +446,7 @@ $$logit Pr(LC=1|\mathbf x)  =  \beta_0 + \beta_1 BK + \beta_2 FM + \beta_3 SS + 
 \vspace{-5mm}
 <<birdModel, tidy=FALSE>>=
 birds$LCnum <- as.numeric(birds$LC=="LungCancer")
-lm1 <- glm(LCnum ~ BK + FM + SS +  AG + YR + CD, 
+fm1 <- glm(LCnum ~ BK + FM + SS +  AG + YR + CD, 
            data=birds, family=binomial)
 @
 
@@ -463,7 +463,7 @@ lm1 <- glm(LCnum ~ BK + FM + SS +  AG + YR + CD,
 
 {\scriptsize
 <<>>=
-summary(lm1)$coef
+summary(fm1)$coef
 @
 }
 
@@ -581,6 +581,31 @@ This is the difference between relative risk and an odds ratio.
 \end{block}
 
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{On your own...}
+
+
+\bi
+    \myitem Examine the residuals from the logistic regression model shown earlier with six predictors. Why does this plot look different than other residual plots we have seen this semester?
+<<eval=FALSE>>=
+plot(fm1, which=1)
+@
+
+    \myitem A better way to look at residuals for logistic regression is using "binned residual plots". Divide your observations into bins with equal numbers of observations along some variable of interest (e.g. the fitted values, or one of your covariates). Then, calculate the average residual in that bin. Luckily, there is a function that can do this for us! 
+<<eval=FALSE>>=
+library(arm)
+binnedplot(birds$AG, resid(fm1), nclass=20)
+@
+
+Evaluate binned residual plots across continuous predictor variables as well as the ``fitted'' model values. Do you see any violations of the assumption that the mean residual is far away from zero?
+
+
+\ei
+
+\end{frame}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}[fragile]
