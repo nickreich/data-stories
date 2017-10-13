@@ -29,7 +29,7 @@ Month &nbsp; | Day   |     | Topic |  Notes &nbsp;   | HW Due &nbsp;  | Reading
      | Fr, 13|     |  | | [Lab 4](../assets/labs/lab4-interact/lab4-interact.pdf) | 
      | Tu, 17|     | Understanding Uncertainty | | |  Kaplan 11-13
      | Th, 19|     | Understanding Uncertainty | | | 
-     | Fr, 20|     |  | | [Lab 5](../assets/labs/lab5-logit/lab5-logit.pdf) | 
+     | Fr, 20|     |  | | [Lab 5](../assets/labs/lab5-logit/lab5-logit.pdf), [BC 2](../assets/challenges/biweekly-challenge-2.pdf) | 
      | Tu, 24|     | Understanding Uncertainty | || Kaplan 14-15
      | Th, 26|     | Understanding Uncertainty | | | 
      | Tu, 31|     |  | | Lab 6  | 
