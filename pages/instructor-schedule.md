@@ -113,15 +113,21 @@ _Tues, week 4_
 
 _Thurs, week 4_
 
- - Additional notes about not all models being linear models!
- - Lab 3 (ipod) work session.
+ - announcements: 
+    new schedule webpage
+    reminder: Linear regression basics lectures on youtube
+    introduction: challenges
+    ok to switch topics for lab
+ - SLR basic concepts overview
+ - Lab 3 (slr) work session.
 
 _Tues, week 5_
- - Lecture 5: Linear regression intro
+ - changing office hours to 2:30-3:30 on Tues, also available by appt if needed
+ - quiz: linear regression
+ - Exercise on smoothing and overfitting
  - lab 3 wrap-up
 
 _Thurs, week 5_
- - Lecture 5 continued, 
  - interactive linear regression
 
 _Tues, week 6_

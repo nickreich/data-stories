@@ -4,9 +4,21 @@ title: Homework
 tagline: 
 ---
 
+THIS PAGE IS NO LONGER UPDATED. PLEASE VISIT THE [schedule](schedule.html) page instead.
+
+<!--
+
 Homework assignments will be posted here, in general organized by due date. Unless otherwise specified, parts of homework assignments that need to be handed in should be handed in via your personal Google Drive folder that only you and the instructor have access to. Unless specified below, the deadline for completing homework is before the beginning of class on the due date.
 
-<!-- **Collaboration on homework is expected and encouraged, although you must write up your own assignment. No copying or cutting and pasting.** -->
+<!-- **Collaboration on homework is expected and encouraged, although you must write up your own assignment. No copying or cutting and pasting.** 
+
+_Due Thursday, 10/5, 5pm_ 
+
+ - [Lab 3](../assets/labs/lab3-regress/lab3-regress.pdf) must be handed in by 5pm.
+
+_Due Tuesday, 10/3, before class_ 
+
+ - Watch [these four short videos (4-6 min each) on linear regression](https://www.youtube.com/playlist?list=PLkIselvEzpM63ikRfN41DNIhSgzboELOM)
 
 _Due Friday, 9/29, 5pm_ 
 
@@ -26,3 +38,4 @@ _Due Tuesday, 9/19_
  - Read the [data visualization reading list](data-viz-reading-list.html).
  - Read Kaplan, Chapter 3: Describing Variation.
 
+-->

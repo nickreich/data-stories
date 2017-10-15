@@ -18,7 +18,7 @@ The aim of this course is to provide students with the skills necessary to tell 
 **Course number**: PUBHLTH 490ST 
 
 **Instructor**: [Nicholas Reich](http://reichlab.io)\\
-Office hours: Tuesday 3-4pm, Arnold 425
+Office hours: Tuesday 2:30-3:30pm, Arnold 425
 
 **TAs**: Bianca Doone, Brittany Pine, Ilina Shah, Evan Moore\\
 Office hours: Tuesdays 7-8:30pm Goodell 608, Thursdays 11:30am-12:45pm in Hasbrouck 242, Fridays 2:30-4pm in LGRT 171
@@ -31,8 +31,10 @@ One of any of the following introductory stats courses taught at UMass: BIOSTAT 
 **Required books** <br>
 &nbsp; &nbsp; Kaplan D. 2012. [Statistical Modeling: A Fresh Approach](http://www.mosaic-web.org/go/StatisticalModeling/). 
 
-**Recommended book (free download)** <br>
-&nbsp; &nbsp; Diez D, Barr C, and &Ccedil;etinkaya-Rundel M. 2012. [OpenIntro Statistics, 3rd Ed.](http://www.openintro.org/stat/index.php)
+**Recommended books** <br>
+&nbsp; &nbsp; Diez D, Barr C, and &Ccedil;etinkaya-Rundel M. 2012. [OpenIntro Statistics, 3rd Ed.](https://www.openintro.org/stat/index.php?stat_book=os) (the entire book is available as a free download)
+
+&nbsp; &nbsp; Baumer B, Kaplan D, Horton N. 2017. [Modern Data Science with R](http://mdsr-book.github.io/excerpts/mdsr-ethics.pdf) (we will only be using free excerpts from this book)
 
 
 **Topics covered**<br>
