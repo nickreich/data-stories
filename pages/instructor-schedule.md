@@ -128,7 +128,17 @@ _Tues, week 5_
  - lab 3 wrap-up
 
 _Thurs, week 5_
- - interactive linear regression
+ - wrap-up on test data exercise: 
+    - 5 min group check-in
+    - 10 min group presentations
+    - 5 min, finish slides
+  - Lecture 6: model validation vs. model diagnostics
+    - validation: see test sample exercise
+    - diagnostics: residual analysis
+ - announcements: 
+    - post R questions on the #r thread!
+    - don't show up late to class
+    - office hours confirmation.
 
 _Tues, week 6_
 
@@ -136,77 +146,67 @@ _Tues, week 6_
 
 _Thurs, week 6_
 
- - Lecture 6
- - linear regression sum of squares game from Lab 4
+ - Lecture 7: logistic regression
+ - activity: binned residual plots
 
 _Tues, week 7_
 
- - nick out of town
+ - Lecture 8: Understanding uncertainty: coin-flipping, election simulations, etc...
 
 _Thurs, week 7_
  
- Regression Topics remaining: adj R^2, model parsimony, model selection, collinearity, splines, interactions
- 
- - lecture 7: model syntax (Lec 4), R^2 and R^2_adj (Lec 6), outliers (Lec 5), model selection (Lec 5 spring), dummy variables (Lec 5 fall)
- - ask students whether they want to be able to bring notes to exam?
+ - continued
 
 _Tues, week 8_
 
- - Lecture 8
+ - Lecture 9: understanding uncertainty - sampling distributions, etc...
 
 _Thurs, week 8_
 
- - Review of key regression topics: geometry of fit, residuals, sums of squares, coefficient interpretations, adj R^2, model parsimony, model selection, collinearity, splines, interactions
+ - continued
 
  _Tues, week 9_
 
- - midterm exam
+ - biostats pitch?
 
  _Thurs, week 9_
 
- - lecture about evidence in data: lady tasting tea example
- - Election in-class simulations
+ - Ethics!
 
  _Tues, week 10_
 
-  - lecture on hypothesis testing
+  - midterm review
 
  _Thurs, week 10_
  
- - adapt this exercise for fivethirtyeight (or other) election predictions. 
- - project description
- - Biostats pitch.
- - do two-sided coin flipping? 
- - Binomial likelihood: http://shiny.stat.calpoly.edu/MLE_Binomial/
- - Bayesian version: https://r.amherst.edu/apps/nhorton/Shiny-Bayes/
+ - midterm exam
 
  _Tues, week 11_
 
- - no class, nick out of town
+ - 
 
  _Thurs, week 11_
 
- - lecture on logistic regression
+ - 
 
  _Tues, week 12_
 
- - exam review
- - titanic lab/group project work
+ - 
 
  _Thurs, week 12_
 
- - Missing data lecture
+ - 
 
  _Tues week 13_
  
- - Projects?
+ - 
 
 _Thurs week 13_
 
- - Poisson regression lecture?
+ - 
 
 _tues week 14_
 
- - Wrap up activity? CI activity?
+ - 
 
 

@@ -7,12 +7,12 @@
 
 \license{This is a product of \href{http://statsteachr.org}{statsTeachR} that is released under a \href{http://creativecommons.org/licenses/by-sa/3.0}{Creative Commons Attribution-ShareAlike 3.0 Unported}.}
 
-\section*{Lab 5: Modeling predictors of lung health}
+\section*{Lab 4: Modeling predictors of lung health}
 
 
 Create a short reproducible report answering the questions below. The report should be less than 3 pages, including all figures. You do not need to show your code in the PDF report.  
 
-This lab is due at 5pm on Thursday, October 27th. You should submit your assignment, in the form of both a knitted RMarkdown PDF as well as the .Rmd file that created the PDF, by uploading them to your personal Google Drive folder that is shared with the TA and the instructor. While you may collaborate with other students on this assignment, you must write up your own code and answers to the questions. Absolutely no cutting and pasting of any portion of the answers. This assignment, like the others, will be worth 50 points.
+This lab is due at 5pm on Friday, October 13th. You should submit your assignment, in the form of both a knitted RMarkdown PDF as well as the .Rmd file that created the PDF, by uploading them to your personal Google Drive folder that is shared with the TA and the instructor. While you may collaborate with other students on this assignment, you must write up your own code and answers to the questions. Absolutely no cutting and pasting of any portion of the answers. This assignment, like the others, will be worth 50 points.
 
 \subsection*{Data exploration}
 This lab will cover model selection and checking for multiple linear regression using the FEV dataset (found in the \href{http://biostat.mc.vanderbilt.edu/wiki/Main/DataSets}{Vanderbilt Datasets repository}). This dataset contains 654 observations on 6 variables, including a continuous outcome variable, forced expiratory volume (FEV) which is a measure of lung health and strength, age, height, sex, and smoking status. To begin, load (install if necessary) the Hmisc package to load the dataset from the Vanderbilt website. The brief FEV dataset codebook can be found on \href{http://biostat.mc.vanderbilt.edu/wiki/pub/Main/DataSets/FEV.html}{this webpage}. 
@@ -34,7 +34,7 @@ Think about the different measures variables that you have at your disposal. Hyp
 Generate a few simple plots of the data to evaluate the possible bivariate relationships that exist. Based on these plots, do you think that linear relationships will be sufficient to explain the data? 
 \end{exercise}
 
-Recall (from lecture 7) that when you have a large sample size relative to the number of possible covariates (which we do), one justifiable way to build a model is to 
+Recall (from lecture 6) that when you have a large sample size relative to the number of possible covariates (which we do), one justifiable way to build a model is to 
 \begin{itemize}
     \item􏰆 Include key covariates of interest.
     \item􏰆 Include covariates needed because they might be confounders.
