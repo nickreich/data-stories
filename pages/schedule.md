@@ -23,7 +23,7 @@ Month &nbsp; | Day   |     | Topic |  Notes &nbsp;   | HW Due &nbsp;  | Reading
      | Fr, 29|     || | [Lab 2](../assets/labs/lab2-blog/lab2-blog.pdf)  | 
  Oct | Tu,  3|     | Linear Regression | [Lec 5](../assets/lectures/lecture5-splines/lecture-splines.pdf) || Kaplan 8-9, OI 7, [OI Videos](https://www.youtube.com/playlist?list=PLkIselvEzpM63ikRfN41DNIhSgzboELOM) 
      | Th,  5|     | Linear Regression | [Lec 6](../assets/lectures/lecture6-regress/lecture6-regress.pdf) |[Lab 3](../assets/labs/lab3-regress/lab3-regress.pdf) | [OI Videos](https://www.youtube.com/playlist?list=PLkIselvEzpM5f1HYzIjFt52SD4izsJ2_I)  
-     | Fr,  6|     ||| [BC 1](../assets/challenges/biweekly-challenge-1.pdf), [BC1 Answer Key] (../assets/challenges/challenge_1_answer_key.pdf) | |
+     | Fr,  6|     ||| [BC 1](../assets/challenges/biweekly-challenge-1.pdf) | |
      | Tu, 10|     | _No Class_ |   | | 
      | Th, 12|     | Logistic regression | [Lec 7](../assets/lectures/lecture7-logistic/lecture7-logistic.pdf) || Kaplan 16, OI 8, [OI Video](https://www.youtube.com/watch?v=uYC2eLVSpI8&list=PLkIselvEzpM5f1HYzIjFt52SD4izsJ2_I&index=4)
      | Fr, 13|     |  | | [Lab 4](../assets/labs/lab4-interact/lab4-interact.pdf) | 

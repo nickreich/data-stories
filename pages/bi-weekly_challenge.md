@@ -15,3 +15,8 @@ Homework Grade: 100/140
 Bi-Weekly Challenge Grade: 90/80  
 
 Total Homework Grade: 190/220
+
+## List of assignments and answer keys
+
+ - [BC 1](../assets/challenges/biweekly-challenge-1.pdf)
+ - [BC1 Answer Key](../assets/challenges/challenge_1_answer_key.pdf)

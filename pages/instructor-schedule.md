@@ -151,6 +151,7 @@ _Thurs, week 6_
 
 _Tues, week 7_
 
+ - Bayesian coin-flipping activity
  - Lecture 8: Understanding uncertainty: coin-flipping, election simulations, etc...
 
 _Thurs, week 7_
