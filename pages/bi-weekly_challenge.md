@@ -19,5 +19,5 @@ Total Homework Grade: 190/220
 ## List of assignments and answer keys
 
  - [BC 1](../assets/challenges/biweekly-challenge-1.pdf)
- - [BC1 Answer Key](../assets/challenges/challenge_1_answer_key.pdf)
+ - [BC1 Answer Key](../assets/challenges/biweekly-challenge-1-answers.pdf)
  - [BC 2](../assets/challenges/biweekly-challenge-2.pdf)
