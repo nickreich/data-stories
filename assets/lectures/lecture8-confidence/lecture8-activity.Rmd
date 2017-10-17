@@ -1,0 +1,98 @@
+---
+title: 'Lecture 8 activity: Hypothesis testing using a null distribution'
+author: "Nicholas G Reich"
+date: "October 14, 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE, eval=FALSE)
+```
+
+## The Lady Tasting Tea
+
+In a famous statistical fable, an aristocratic British Lady claims she can tell whether milk has been poured into tea or vice versa. This story was first documented by Ronald Fisher in 1935. More details [here](https://en.wikipedia.org/wiki/Lady_tasting_tea).
+
+Question: How do we test this claim?
+
+One Possible Answer: Think about each guess about a cup of tea as a flip of a coin with a given probability ($p$) of being heads (or the guess being right).
+
+What would $p$=0.1 mean in the context of the tea-tasting lady? $p$=.5? $p$=.8?
+
+We can use the `rflip()` function in the `mosaic` package to simulate flipping coins (or tea-tasting ladies):
+
+```{r}
+library(mosaic)
+rflip()
+```
+
+
+Rather than flip each coin separately, we can flip multiple coins at once. `rflip(10)` simulates 1 lady tasting 10 cups of tea 1 time each time with a 50\% chance of getting it `right'.
+
+Experiment with the `rflip` function and try running a few different versions of this command. Each time you run the command `rflip(k)`, it's like asking our aristocratic lady to taste `k` cups of tea and make a guess about whether the milk was added first of vice versa.
+
+We can think of each of these commands representing a different kind of tea-taster. This is someone who gets it right every time (with probability 1):
+
+```{r}
+rflip(10, prob=1)
+```
+
+And this is someone who might as well be flipping a coin. They don't have a clue and are guessing randomly with a 0.5 chance of being right:
+```{r}
+rflip(10, prob=0.5)
+```
+
+
+
+We can automate the process of repeating the experiment. Try running this command:
+```{r}
+do(2) * rflip(10, prob=0.5)
+```
+
+ - `do()` is a function within the `mosaic` package that is clever about what it remembers (in many common situations).
+ - 2 isn't many Ladies -- we'll do many in a minute -- but it is a good idea to take a look at a small example before generating a lot of random data.
+ - What kind of R object does the command `do(2) * rflip(10)` return?
+
+
+Now let's simulate what would happen if we asked 5000 `poser' tea-tasting ladies to each taste 10 cups of tea. How many times do 
+ 
+```{r}
+Ladies <- do(5000) * rflip(10)
+head(Ladies, 8)
+```
+
+
+You just simulated what natural randomness would look like if the ladies are guessing randomly, i.e. can't tell the difference between the cups of tea.
+
+Summarize these results with a plot or a table to show the distribution of possible outcomes across all the ladies.
+
+
+Let's come back to our original Lady, who is convinced that she can tell the difference between the cups of tea. 
+
+How many would she need to get right to convince you that she is doing something different than guessing randomly?
+
+
+## Framing this in terms of hypotheses
+
+In statistical parlance, a hypothesis is a statement about the world that can be supported or refuted with data.
+
+Classical hypothesis testing in statistics has a few ingredients
+
+ -  A _Null Hypothesis_ ($H_0$, or "H naught"): a proposition of no difference between groups or that deviations are due to sampling error. In our tea-tasting example, $H_0: p=0.5$.
+ - One or more __Alternative Hypotheses__ ($H_A$): a proposition that there is a difference between groups, or a significant effect. 
+
+
+### Null distributions characterize expected variability
+
+Our simulation above of our poser ladies who can't tell the difference between the cups of tea is an example of a ``null distribution'': it characterizes expected variability when $H_0$ is true. In this case, values far from 0.5 indicate evidence against $H_0$.
+
+## Questions
+
+What proportion of your Ladies Tasting Tea guessed 9 or 10? (Note that this is the same as asking that, assuming we are flipping a fair coin, how often do we see 9 or 10 heads?)
+
+Rumor has it that the original Lady (described by Fisher) correctly guessed all 10 cups of tea. 
+
+
+
+
+

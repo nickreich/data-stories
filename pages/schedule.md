@@ -27,7 +27,7 @@ Month &nbsp; | Day   |     | Topic |  Notes &nbsp;   | HW Due &nbsp;  | Reading
      | Tu, 10|     | _No Class_ |   | | 
      | Th, 12|     | Logistic regression | [Lec 7](../assets/lectures/lecture7-logistic/lecture7-logistic.pdf) || Kaplan 16, OI 8, [OI Video](https://www.youtube.com/watch?v=uYC2eLVSpI8&list=PLkIselvEzpM5f1HYzIjFt52SD4izsJ2_I&index=4)
      | Fr, 13|     |  | | [Lab 4](../assets/labs/lab4-interact/lab4-interact.pdf) | 
-     | Tu, 17|     | Understanding Uncertainty | | |  Kaplan 11-13
+     | Tu, 17|     | Understanding Uncertainty | [Lec 8](../assets/lectures/lecture8-confidence/lecture8-inference.pdf), [Suppl](../assets/lectures/lecture8-confidence/lecture8-activity.html) | |  Kaplan 11-13
      | Th, 19|     | Understanding Uncertainty | | | 
      | Fr, 20|     |  | | [Lab 5](../assets/labs/lab5-logit/lab5-logit.pdf), [BC 2](../assets/challenges/biweekly-challenge-2.pdf) | 
      | Tu, 24|     | Understanding Uncertainty | || Kaplan 14-15

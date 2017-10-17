@@ -1,0 +1,225 @@
+%% beamer/knitr slides 
+%% for Statistical Modeling and Data Visualization course @ UMass
+%% Nicholas Reich: nick [at] schoolph.umass.edu
+
+
+\documentclass[table]{beamer}
+
+
+\input{../../slide-includes/standard-knitr-beamer-preamble}
+
+%	The following variables are assumed by the standard preamble:
+%	Global variable containing module name:
+\title{From Data to Knowledge: Thinking like a Bayesian}
+%	Global variable containing module shortname:
+%		(Currently unused, may be used in future.)
+\newcommand{\ModuleShortname}{introRegression}
+%	Global variable containing author name:
+\author{Nicholas G Reich}
+%	Global variable containing text of license terms:
+\newcommand{\LicenseText}{This exercise has been adapted from materials from the mosaic R package, and is released under the  GPL (>=2) license.}
+%	Instructor: optional, can leave blank.
+%		Recommended format: {Instructor: Jane Doe}
+\newcommand{\Instructor}{}
+%	Course: optional, can leave blank.
+%		Recommended format: {Course: Biostatistics 101}
+\newcommand{\Course}{}
+
+
+\input{../../slide-includes/shortcuts}
+
+% for conditional cases formulas 
+\usepackage{amsmath}
+
+
+%	******	Document body begins here	**********************
+
+\begin{document}
+
+%	Title page
+\begin{frame}[plain]
+	\titlepage
+\end{frame}
+
+%	******	Everything through the above line must be placed at
+%		the top of any TeX file using the statsTeachR standard
+%		beamer preamble. 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Why do we do statistics}
+
+\bi
+\myitem Statistics is the science of turning data into knowledge.
+
+\myitem Knowing what you do not know is one the most important traits as a scientist/seeker of knowledge through data.
+\ei
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Estimation vs. inference}
+
+\bi
+  \myitem Statistical estimation (i.e. least-squares or maximum-likelihood methods) gives us our best guess at a parameter.
+  \myitem Inference tells us how certain we should be about these estimates.
+\ei
+
+\centering
+\includegraphics[width=.7\textwidth]{../../slide-includes/CircleOfLife.pdf}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{There isn't one accepted way of learning from data}
+
+Over the next two weeks, we are going to look at a few different methods for measuring uncertainty in relationships that we see in data.
+
+\ 
+
+Relationships are characterized by parameters in our models. 
+
+\ 
+
+These are some tools we use to characterize our uncertainty about these parameters:
+\bi
+  \myitem Likelihood
+  \myitem Posterior distributions
+  \myitem Null distributions
+  \myitem Sampling distributions (``classical'' approach)
+\ei
+
+There is no one "best" approach. Some will be right for some circumstances, not right for others. Each make different assumptions.
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Using models to learn about the world}
+
+\bi
+  \myitem One model might describe the relationship between smoking status and forced expiratory volume.
+  \myitem Another model could describe the probability that this coin will land heads.
+\ei
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Underlying most models is a likelihood}
+
+\bi
+\myitem Likelihood is a mathematical function that gives you the likelihood of a particular parameter given the data you have seen.
+
+\myitem In regression, when you find the "least squares" parameters that minimize the residual sum of squares, these also maximize the likelihood function. They are mathematically equivalent.
+
+\myitem Likelihood is driven by assumptions that you make about the distribution and structure of your data. e.g. residuals follow a Normal distribution, coin flips follow a binomial distribution.
+\ei
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Likelihood for coin-flipping}
+
+$$L(p | X=5, n=10) = {10 \choose 5}\cdot p^5 \cdot (1-p^{10-5})$$
+
+<<echo=FALSE, fig.height=3>>=
+binom_lik_scaled <- function(p, x, n) {
+  dbinom(x=x, size = n, prob = p)/dbinom(x=x, size=n, p=x/n)
+}
+par(mar=c(5, 5, 1, 1))
+curve(binom_lik_scaled(x, 1, 2), xlab="p", ylab="scaled likelihood") 
+curve(binom_lik_scaled(x, 5, 10), col="blue", add=TRUE) 
+curve(binom_lik_scaled(x, 50, 100), col="red", add=TRUE) 
+legend(x=0, y=1, col = c("black", "blue", "red"), lty=1, legend = paste0("X=", c(1, 5, 50), ", N=", c(2, 10, 100)), cex = .6)
+@
+
+Maximum for all curves occurs when $p= .5$.
+
+The more pointy the likelihood, the more knowledge you have about the parameter.
+
+Binomial App: \href{http://shiny.stat.calpoly.edu/MLE_Binomial/}{http://shiny.stat.calpoly.edu/MLE\_Binomial/}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Schools of inference}
+
+Most (not all) statisticians use likelihood to translate data into knowledge.
+
+\bi
+  \myitem {\color{orange}Frequentists} use the likelihood to approximate a {\color{purple}sampling distribution}. 
+  \myitem {\color{orange}Bayesians} modify the likelihood based on prior belief to create a {\color{purple}posterior distribution}.
+\ei
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Bayesian thinking}
+
+A Bayesian incorporates prior belief into the likelihood. What is your prior belief about what this parameter is? 
+
+\bi
+  \myitem Based on prior scientific studies or observations. e.g. "The laws of physics dictate that this coin is more or less fair, so I think the probability of getting a head should be about 0.5." 
+  \myitem Little or no knowledge can be described as having a {\color{orange}uniform prior}. In this case, Bayesian inference is equivalent to just using the likelihood. 
+\ei
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Let's establish the classes prior beliefs}
+
+Go here to submit your guess: https://goo.gl/RKW8dJ
+
+We are going to use these guesses to create a prior distribution for the collective belief in the class about this coin.
+
+<<eval=FALSE>>=
+probs <- read.csv(file="https://goo.gl/jNDbrv")
+(probs$prob)
+
+library(MASS)
+fitdistr(probs$prob, "beta", list(shape1=1,shape2=1))
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Now, update, using Bayesian reasoning}
+
+Every coin flip we observe will update the likelihood and therefore the posterior distribution as well.
+
+\href{https://reichlab.shinyapps.io/bayes-beta-binomial/}{Link to app}
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{}
+
+We just used Bayesian reasoning to learn about the probability that this coin lands heads.
+
+Now we are going to use a different kind of statistical reasoning to evaluate a similar question.
+
+Go to \href{https://nickreich.github.io/data-stories/assets/lectures/lecture8-confidence/lecture8-activity.Rmd}{the class activity for today}.
+
+\end{frame}
+
+
+
+\end{document}
