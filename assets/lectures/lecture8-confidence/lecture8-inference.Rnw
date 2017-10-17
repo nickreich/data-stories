@@ -10,7 +10,7 @@
 
 %	The following variables are assumed by the standard preamble:
 %	Global variable containing module name:
-\title{From Data to Knowledge: Thinking like a Bayesian}
+\title{From Data to Knowledge: \\ A peek under the hood of statistics}
 %	Global variable containing module shortname:
 %		(Currently unused, may be used in future.)
 \newcommand{\ModuleShortname}{introRegression}
@@ -65,7 +65,7 @@
 \begin{frame}{Estimation vs. inference}
 
 \bi
-  \myitem Statistical estimation (i.e. least-squares or maximum-likelihood methods) gives us our best guess at a parameter.
+  \myitem Statistical estimation (e.g. the method of least-squares) gives us our best guess at a parameter.
   \myitem Inference tells us how certain we should be about these estimates.
 \ei
 
