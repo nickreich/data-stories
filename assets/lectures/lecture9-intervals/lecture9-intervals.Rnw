@@ -51,7 +51,7 @@
 library(ggplot2)
 theme_set(theme_bw())
 library(knitr)
-opts_chunk$set(fig.align='center',fig.show='hold',size='footnotesize')
+opts_chunk$set(fig.align='center',fig.show='hold',size='footnotesize', warning=FALSE)
 @
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -170,6 +170,47 @@ summary(fm)$coef
 
 \end{frame} 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Hypothesis testing for $\hat\beta_k$}
+
+Null hypothesis ($H_0$): $\beta_k=0$
+
+<<echo=FALSE, fig.height=3>>=
+x <- seq(-2, 8, by=.1)
+y1 <- dnorm(x, 4, 1)
+y2 <- dnorm(x, 4, 2)
+plot(x, y1, type="n", yaxt="n", xlab=expression(beta), ylab="", bty="n")
+abline(v=c(0, 4), col="red")
+text(x=c(0,4)+.3, y=.3, , col="red",
+  labels = c(expression(beta[k]^H[0]), expression(hat(beta)[k])))
+@
+
+We need a measure of uncertainty about our point-estimates.
+
+\end{frame} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Hypothesis testing for $\hat\beta_k$}
+
+Null hypothesis ($H_0$): $\beta_k=0$
+
+<<echo=FALSE, fig.height=3>>=
+x <- seq(-2, 8, by=.1)
+y1 <- dnorm(x, 4, 1)
+y2 <- dnorm(x, 4, 3)
+plot(x, y1, type="l", yaxt="n", xlab=expression(beta), ylab="", bty="n")
+abline(v=c(0, 4), col="red")
+text(x=c(0,4)+.3, y=.3, , col="red",
+  labels = c(expression(beta[k]^H[0]), expression(hat(beta)[k])))
+lines(x, y2, col="blue")
+@
+
+Sampling distributions measure our uncertainty.
+
+\end{frame} 
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -208,7 +249,7 @@ summary(fm)$coef
 
 \begin{frame}[fragile]{Standard inference about $\beta_k$ in R}
 
-Assuming $H_0:\beta_{age} = 0$ is true we can use the estimated SE to approximate the sampling distribution as a t-distribution
+Assuming $H_0:\beta_{age} = 0$ is true we can use the estimated SE to approximate the sampling distribution as a t-distribution. We see that if $H_0$ were true, our observed $\hat\beta_{age}$ would be VERY unlikely.
 
 \scriptsize
 <<echo=FALSE, fig.height=3>>=
@@ -244,17 +285,35 @@ Permutation and bootstrap inference can be particularly useful when you have a p
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[fragile]{A sample of the race data gives different results}
+\begin{frame}[fragile]{What if our dataset was only a fraction of the pop'n?}
 
 $$ net  = \beta_0 + \beta_1\cdot age + \beta_2 \cdot sex$$
 
+This is the model fit to the entire population
 \scriptsize
 <<>>=
 coef(fm)
 @
 
+But what if it was just fit to a subsample of the population?
 
-Using a sample of 100 observations from the population:
+[See activity...]
+
+\scriptsize
+<<message=FALSE>>=
+library(mosaic)
+s <- do(500) * lm(net ~ age + sex, data=sample(race, 100))
+head(s[,1:5])
+@
+
+\end{frame} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{What if our dataset was only a fraction of the pop'n?}
+
+$$ net  = \beta_0 + \beta_1\cdot age + \beta_2 \cdot sex$$
+
 \scriptsize
 <<message=FALSE>>=
 library(mosaic)
@@ -278,21 +337,6 @@ grid.arrange(p1, p2, nrow=1)
 @
 
 \end{frame} 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}[fragile]{The sampling distribution of the $\beta$s}
-
-Important to note that the sampling distributions may be correlated with each other.
-<<message=FALSE, fig.height=3>>=
-ggplot(s, aes(x=age, y=sexM)) + 
-    geom_point() + geom_density_2d(color='red')
-@
-
-\end{frame} 
-
-
-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -375,18 +419,6 @@ summary(fm)$coef
 
 \end{frame} 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}[fragile]{Full data vs. partial data sampling distribution}
-
-Our estimated sampling distribution for 1000 observations (in blue) vs. the estimated sampling distribution for all data (in red). 
-
-<<fig.height=4>>=
-ggplot(s1000, aes(x=age)) + geom_density(fill='blue') +
-    stat_function(fun = dnorm, lwd = 2, col = 'red',
-                  args = list(mean = mean(s1000$age), sd = sd(s1000$age)))
-@
-\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -416,7 +448,7 @@ summary(fm)$coef["age",]
 r <- sample(race, 500)
 qplot(age, net, data=r) + geom_smooth(method="lm")
 @
-E.g. 95\% of 60-year-olds will not have times within $\pm$ 200 of the predicted value ($\sim$ 5900?).
+E.g. 95\% of 60-year-olds will not have times within $\pm$ 200 of the predicted value ($\sim$ 5900).
 
 \end{frame}
 

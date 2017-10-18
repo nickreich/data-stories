@@ -1,0 +1,42 @@
+---
+title: "Lecture 9 R code"
+output: html_notebook
+---
+
+Start by loading the packages and data that we need.
+
+```{r}
+library(mosaic)
+library(mosaicData)
+data("TenMileRace")
+race <- TenMileRace
+```
+
+## Activity 1
+
+Run a few commands here to look at your data to get a feel for what it is
+```{r}
+
+```
+
+
+The following code uses `mosaic`-style syntax to repeatedly (currently, 10 times) sample 100 observations from your "population" of racers, and fit the given model to the data. The resulting object stores the model coefficients from each sample.
+
+```{r}
+s <- do(10) * lm(net ~ age + sex, data=sample(race, 100))
+```
+
+Look at this resulting object, so you understand its structure. Then, repeat the resampling with a larger number of repetitions. How many do you think are enough?
+
+With this second object, create two plots that show the distribution of the estimated coefficients for each of the age and sex variables. If you want to get fancy, add a vertical line (hint: `geom_vline()`) showing the mean estimated coefficient from your samples and the estimated coefficient from all the data.
+
+
+Think about what this distibution represents. If all we ever observed were 100 observations from this population, how often would we get a fitted regression coefficient for age that is more than 10 units away the true value? 
+
+## Activity 2
+
+Now, use the code you used before to resample your data, but do so with 1000 observations. Plot the sampling distribution curve based on 100 observations and overlay the distribution with 100 observations.  
+
+If we sampled 1000 observations from our population, how often would we get a fitted regression coefficient for age that is more than 10 units away the true value? 
+
+Which distribution is narrower? Why?
