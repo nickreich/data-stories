@@ -156,11 +156,12 @@ _Tues, week 7_
 
 _Thurs, week 7_
  
- - continued
+ - announcements: David H?
+ - Lecture 9: understanding uncertainty - sampling distributions, etc...
+ - with activities
 
 _Tues, week 8_
 
- - Lecture 9: understanding uncertainty - sampling distributions, etc...
 
 _Thurs, week 8_
 

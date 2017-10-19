@@ -121,13 +121,8 @@ We can create a simple example of a population as a illustration.
 
 E.g. 8636 running times for the Cherry Blossom Ten Mile race in Washington DC in 2005:
 
-<<message=FALSE, eval=FALSE>>=
-race <- fetch::fetchData("ten-mile-race.csv")
-head(race)
-@
-
-<<echo=FALSE>>=
-race <- read.csv("ten-mile-race.csv")
+<<message=FALSE, eval=TRUE>>=
+race <- mosaicData::TenMileRace
 head(race)
 @
 
@@ -186,7 +181,7 @@ text(x=c(0,4)+.3, y=.3, , col="red",
   labels = c(expression(beta[k]^H[0]), expression(hat(beta)[k])))
 @
 
-We need a measure of uncertainty about our point-estimates.
+We need a measure of uncertainty about our point-estimates to evaluate ``statistical significance'', which is different from ``practical significance''.
 
 \end{frame} 
 
@@ -207,7 +202,7 @@ text(x=c(0,4)+.3, y=.3, , col="red",
 lines(x, y2, col="blue")
 @
 
-Sampling distributions measure our uncertainty.
+Sampling distributions measure our uncertainty. But we have to come up with ways to approximate them.
 
 \end{frame} 
 
@@ -223,6 +218,8 @@ Sampling distributions measure our uncertainty.
     \item Increased variability in $y$;
     \vspace{3em}
     \item Increased variability in $x$:
+    \vspace{3em}
+    \item Bias in your sampling of observations:
 \ei
 \end{block}
 
@@ -299,13 +296,6 @@ But what if it was just fit to a subsample of the population?
 
 [See activity...]
 
-\scriptsize
-<<message=FALSE>>=
-library(mosaic)
-s <- do(500) * lm(net ~ age + sex, data=sample(race, 100))
-head(s[,1:5])
-@
-
 \end{frame} 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -347,7 +337,7 @@ grid.arrange(p1, p2, nrow=1)
 
 \bi
 
-    \myitem If your data collection process involves a measurement process that contains a lot of error, how will that impact the standard errors? 
+    \myitem If your data collection process involves a measurement process that contains a lot of error (just noise, not biased observations on average), how will that impact the standard errors? 
 
     \myitem In the setting of the race, what measurement procedures might lead to less or more error?
     
@@ -362,7 +352,7 @@ grid.arrange(p1, p2, nrow=1)
 
 \begin{block}{The quality of the model}
 
-Models with lower residual error tend to have \_\_\_\_\_\_\_\_ standard errors than ones with larger residual error. 
+Models with lower residual error tend to have lower standard errors than ones with larger residual error. 
 
 
 \end{block}
