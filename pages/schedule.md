@@ -28,11 +28,11 @@ Month &nbsp; | Day   |     | Topic |  Notes &nbsp;   | HW Due &nbsp;  | Reading
      | Th, 12|     | Logistic regression | [Lec 7](../assets/lectures/lecture7-logistic/lecture7-logistic.pdf) || Kaplan 16, OI 8, [OI Video](https://www.youtube.com/watch?v=uYC2eLVSpI8&list=PLkIselvEzpM5f1HYzIjFt52SD4izsJ2_I&index=4)
      | Fr, 13|     |  | | [Lab 4](../assets/labs/lab4-interact/lab4-interact.pdf) | 
      | Tu, 17|     | Understanding Uncertainty | [Lec 8](../assets/lectures/lecture8-confidence/lecture8-inference.pdf), [Suppl](../assets/lectures/lecture8-confidence/lecture8-activity.html)| |  Kaplan 11-13
-     | Th, 19|     | Understanding Uncertainty |  Lec 9, [Suppl](../assets/lectures/lecture9-intervals/lecture9-activity.Rmd)  | | 
+     | Th, 19|     | Understanding Uncertainty |  [Lec 9](../assets/lectures/lecture9-intervals/lecture9-intervals.pdf), [Suppl](../assets/lectures/lecture9-intervals/lecture9-activity.Rmd)  | | 
      | Fr, 20|     |  | | [Lab 5](../assets/labs/lab5-logit/lab5-logit.pdf), [BC 2](../assets/challenges/biweekly-challenge-2.pdf) | 
      | Tu, 24|     | Understanding Uncertainty | || Kaplan 14-15
      | Th, 26|     | Understanding Uncertainty | | | 
-     | Tu, 31|     |  | | Lab 6  | 
+     | Tu, 31|     |  | | [Lab 6](../assets/labs/lab6-infer/lab6-infer.pdf)  | 
  Nov | Th,  2|     | Professional Ethics | | | [MDSR 6](http://mdsr-book.github.io/excerpts/mdsr-ethics.pdf)
      | Tu,  7|     | Midterm review | | | 
      | Th,  9|     | Midterm exam   | | | 

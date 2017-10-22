@@ -9,13 +9,13 @@
 
 \license{This activity has been adapted by Nicholas Reich from \href{https://www.causeweb.org/workshop/uscots09_catalyst4change/}{CATALST teaching materials availble under a CC-BY-NC-SA license}, and are made available under the same license.}
 
-\section*{Lab 3: Is an iPod's shuffle random?}
+\section*{Lab 7: Is an iPod's shuffle random?}
 
 \subsection*{Overview}
-This is an assignment that you will work on first individually, then in groups of 4-5 students. The overall goal is to develop and validate a set of rules (a model!) for determining whether a given playlist of songs is ``random'' or not.
+This is an assignment that you will work on first individually, then with your tables. The overall goal is to develop and validate a set of rules (a model!) for determining whether a given playlist of songs is ``random'' or not.
 
 \subsection*{The assignment}
-The deliverable for this lab is a single page writeup in the form of a letter to Mr. Hoffman (more details are given in Part V on page 4 of this assignment). The single page should contain all group members' full names and be submitted to the instructors via Piazza by 5pm on Thursday, October 6. All group members will receive the same number of points (out of 50), based on the letter.
+The deliverable for this lab is a single page writeup in the form of a letter to Mr. Hoffman (more details are given in Part V on page 4 of this assignment). Although you will work as a group on conducting the lab itself, your writeup needs to be written individualy. The single page should list at the top of the page your name first, followed by all team members' full names. The writeup is due to instructors via a PDF submission to Google Drive by 5pm on Friday, November 3. 
 
 \subsection*{Introduction}
 [The following narrative is excerpts from an article by Carl Bialik in the Wall Street Journal (9-21-2006), the iPod User’s Manual, and a Keynote Address by Steve Jobs.]
@@ -97,9 +97,9 @@ Your group will be provided with Mr. Hoffman’s original three playlists. Apply
 
 
 \subsubsection*{PART V: Summarize}
-Your group will now write a letter to Mr. Hoffman that includes the following:
-1.	Your group’s set of rules, used to judge whether a playlist does not appear to have been randomly generated. In your letter the rules need to be clearly stated so that another person could apply them to a playlist of 20 songs from Mr. Hoffman’s music library;
-2.	A response to Mr. Hoffman’s claim that the shuffle feature is not random because it produces playlists in which some artists are played too often and others are not played enough.
+You will now write a letter to Mr. Hoffman that includes the following:
+1.	Your group’s set of rules, used to judge whether a playlist does not appear to have been randomly generated. In your letter the rules need to be clearly stated so that another person could apply them to a playlist of 20 songs from Mr. Hoffman’s music library; (10 points for listing the rules, 15 points for describing them clearly)
+2.	A response to Mr. Hoffman’s claim that the shuffle feature is not random because it produces playlists in which some artists are played too often and others are not played enough. (25 points for providing a clear and quantitative rationale for your statement)
 
 \end{document}
 
