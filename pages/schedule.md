@@ -32,13 +32,14 @@ Month &nbsp; | Day   |     | Topic |  Notes &nbsp;   | HW Due &nbsp;  | Reading
      | Fr, 20|     |  | | [Lab 5](../assets/labs/lab5-logit/lab5-logit.pdf), [BC 2](../assets/challenges/biweekly-challenge-2.pdf) | 
      | Tu, 24|     | Understanding Uncertainty | || Kaplan 14-15
      | Th, 26|     | Understanding Uncertainty | | | 
-     | Tu, 31|     |  | | [Lab 6](../assets/labs/lab6-infer/lab6-infer.pdf)  | 
- Nov | Th,  2|     | Professional Ethics | | | [MDSR 6](http://mdsr-book.github.io/excerpts/mdsr-ethics.pdf)
+     | Fr, 27|     |  | | [Lab 6](../assets/labs/lab6-infer/lab6-infer.pdf) | 
+     | Tu, 31|     |  | |   | 
+ Nov | Th,  2|     | Professional Ethics | | [Lab 7](../assets/labs/lab7-predict/lab7-predict.pdf) | [MDSR 6](http://mdsr-book.github.io/excerpts/mdsr-ethics.pdf)
      | Tu,  7|     | Midterm review | | | 
      | Th,  9|     | Midterm exam   | | | 
      | Tu, 14|     | Classification models | || 
      | Th, 16|     | Classification models | | | 
-     | Fr, 17|     |    | | Lab 7 | 
+     | Fr, 17|     |    | | | 
      | Tu, 21|     | _Thanksgiving_   | | |
      | Th, 23|     | _Thanksgiving_    | | | 
      | Tu, 28|     | Missing data | || 

@@ -65,7 +65,7 @@ Share and discuss your responses to each of the 4 questions with your group.
 
 Albert Hoffman, an iPod owner, has written a letter to Apple to complain about the iPod shuffle feature.  He writes that every day he takes an hour-long walk and listens to his iPod using the shuffle feature. He believes that the shuffle feature is producing playlists in which some artists are played too often and others are not played enough. 
 
-He has claimed that the iPod Shuffle feature is not generating random playlists. As evidence, Mr. Hoffman has provided both his \href{https://raw.githubusercontent.com/nickreich/data-stories/gh-pages/assets/labs/lab3-random/Albert-Hoffman-Music-Library.csv}{music library} (8 artists with 10 songs each) and three playlists (20 songs each) that his iPod generated using the shuffle feature.
+He has claimed that the iPod Shuffle feature is not generating random playlists. As evidence, Mr. Hoffman has provided both his \href{https://raw.githubusercontent.com/nickreich/data-stories/gh-pages/assets/labs/lab7-predict/Albert-Hoffman-Music-Library.csv}{music library} (8 artists with 10 songs each) and three playlists (20 songs each) that his iPod generated using the shuffle feature.
 
 Tim Cook, the CEO of Apple, Inc., has contacted your group to respond to Mr. Hoffman’s complaint. He has provided your group with several playlists of 20 songs each using the same songs as Mr. Hoffman’s library but generating them using a genuine random number generation method.
 
@@ -73,7 +73,7 @@ To help your group respond to Mr. Hoffman, the next four parts of the problem ar
   
 \subsubsection*{PART I: Explore and Describe}
 
-Examine the \href{https://github.com/nickreich/data-stories/raw/gh-pages/assets/labs/lab3-random/25-Random-Playlists.pdf}{25 randomly generated playlists} to get an idea of the characteristics of these lists. Write down and number two or more characteristics of a randomly generated playlist in the space below.
+Examine the \href{https://github.com/nickreich/data-stories/raw/gh-pages/assets/labs/lab7-predict/25-Random-Playlists.pdf}{25 randomly generated playlists} to get an idea of the characteristics of these lists. Write down and number two or more characteristics of a randomly generated playlist in the space below.
  
 \vspace{4cm}
 
