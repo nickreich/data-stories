@@ -31,12 +31,12 @@ head(titanic)
 @
 
 \begin{exercise}
-{\bf Understand your data}
+{\bf Understand your data} (5 pts)
 For this analysis, we are going to focus primarily on the impact of three predictor variables on survival: economic status ({\tt pclass}), {\tt sex}, and {\tt age}. Examine your data carefully using some univariate plots and/or summaries of the variables to understand what the distributions look like. 
 \end{exercise}
 
 \begin{exercise}
-{\bf Deal with missing data} There are a lot of missing data in the {\tt age} variable. In real data analysis problems, missing data is a common and pesky problem. It can especially be difficult to deal with when the missingness is not ``random'', i.e. certain factors (whether they are variables you measure or not) can predict whether the data will be missing or not. For example, do you think that older or younger people might be more or less likely to be missing their age from this dataset? What other variables might determine whether we have age or not? One way to start to look at this is to create a new factor variable that indicates whether `age` is missing or not for each observation. Then we can create some simple tables to assess missingness across different groups. Try these types of tabulations out and determine whether you think missing age is predicable based on some of the other data in our dataset.
+{\bf Deal with missing data}  (5 pts) There are a lot of missing data in the {\tt age} variable. In real data analysis problems, missing data is a common and pesky problem. It can especially be difficult to deal with when the missingness is not ``random'', i.e. certain factors (whether they are variables you measure or not) can predict whether the data will be missing or not. For example, do you think that older or younger people might be more or less likely to be missing their age from this dataset? What other variables might determine whether we have age or not? One way to start to look at this is to create a new factor variable that indicates whether `age` is missing or not for each observation. Then we can create some simple tables to assess missingness across different groups. Try these types of tabulations out and determine whether you think missing age is predicable based on some of the other data in our dataset.
 
 <<>>=
 titanic$age_mis <- factor(is.na(titanic$age))
@@ -54,13 +54,13 @@ titanic1 <- dplyr::filter(titanic, age_mis==FALSE)
 
 
 \begin{exercise}
-{\bf Make some hypotheses}
+{\bf Make some hypotheses}  (5 pts) 
 {\em Before making any multivariate plots}, discuss with your teammates your hypotheses about what relationships might exist between these variables. Make a short list, including directions of possible relationships and possible interactions. Sketch out a few graphics that you want to make.
 \end{exercise}
 
 
 \begin{exercise}
-{\bf Look at your data}
+{\bf Look at your data}  (5 pts) 
 Create a few exploratory graphics and/or tables that illustrate the relationships between these variables and survivial. (Hint: try adapting graphing code from the logistic regression lecture. Try using facets or colors to highlight important comparisons.)
 <<echo=FALSE>>=
 ggplot(titanic, aes(x=age, y=survived, color=sex)) + geom_point(alpha=I(.4)) + facet_grid(.~pclass)
@@ -77,7 +77,7 @@ ggplot(titanic, aes(x=pclass, y=boat)) + geom_raster(aes(fill=survived))
 \end{exercise}
 
 \begin{exercise}
-{\bf Design and fit a model}
+{\bf Design and fit a model}  (15 pts)
 Using the plots as your guide, write down a model that you'd like to fit to use to describe how this data predicts the outcome of survival. Then fit that model. 
 
 <<echo=FALSE>>=
@@ -86,7 +86,7 @@ fm1 <- glm(survived~age*sex + pclass, data=titanic1, family='binomial')
 \end{exercise}
 
 \begin{exercise}
-{\bf Examine your model performance}
+{\bf Examine your model performance}  (15 pts) 
 Now that you've fit a model, you can calculate, for each individual, an estimated probability of survival, using code similar to that below (Note: adding `type='response'` ensures that if you fit a logistic regression model, the `predict` function returns you predicted probabilities instead of predicted log-odds.):
 <<>>=
 titanic1$preds <- predict(fm1, type = "response")

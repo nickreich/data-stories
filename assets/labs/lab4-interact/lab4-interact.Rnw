@@ -23,15 +23,15 @@ getHdata(FEV)
 @
 
 \begin{exercise}
-Before looking at the data, what types of relationships do you expect to see between each of these variables and FEV? Justify your answers briefly. 
+(5 pts) Before looking at the data, what types of relationships do you expect to see between each of these variables and FEV? Justify your answers briefly. 
 \end{exercise}
 
 \begin{exercise}
-Think about the different measures variables that you have at your disposal. Hypothesize at least two possible interactions, and come up with a plausible justification about why such an ineraction might exist. 
+(5 pts) Think about the different measures variables that you have at your disposal. Hypothesize at least two possible interactions, and come up with a plausible justification about why such an ineraction might exist. 
 \end{exercise}
 
 \begin{exercise}
-Generate a few simple plots of the data to evaluate the possible bivariate relationships that exist. Based on these plots, do you think that linear relationships will be sufficient to explain the data? 
+(10 pts) Generate a few simple plots of the data to evaluate the possible bivariate relationships that exist. Based on these plots, do you think that linear relationships will be sufficient to explain the data? 
 \end{exercise}
 
 Recall (from lecture 6) that when you have a large sample size relative to the number of possible covariates (which we do), one justifiable way to build a model is to 
@@ -44,23 +44,23 @@ Recall (from lecture 6) that when you have a large sample size relative to the n
 
 
 \begin{exercise}
-Before fitting any models, identify somewhere between 2 and 6 multiple linear regression models that you think follow the rules above, i.e. write down what each model is, and which covariates and/or interactions it includes. Fit each model. Compare the coefficients from each of the models as well as the adjusted $R^2$ values. For the 2-3 models with the best adjusted $R^2$ values, look at residual plots. Do you see any worrisome patterns that suggest the model assumptions aren't met? If so, do something to try to improve it.
+(15 pts) Before fitting any models, identify somewhere between 2 and 6 multiple linear regression models that you think follow the rules above, i.e. write down what each model is, and which covariates and/or interactions it includes. Fit each model. Compare the coefficients from each of the models as well as the adjusted $R^2$ values. For the 2-3 models with the best adjusted $R^2$ values, look at residual plots. Do you see any worrisome patterns that suggest the model assumptions aren't met? If so, do something to try to improve it.
 \end{exercise}
 
 
 
 \begin{exercise}
-Based on your work above, pick one model that represents what you think is the ``best'' model for this data. Justify your choice, and interpret what you think are the most important or interesting relationships with the covariates and FEV.  Illustrate one of these relationships with a figure.
+(5 pts) Based on your work above, pick one model that represents what you think is the ``best'' model for this data. Justify your choice, and interpret what you think are the most important or interesting relationships with the covariates and FEV.  Illustrate one of these relationships with a figure.
 \end{exercise}
 
 
 \begin{exercise}
-Based on your thinking about this dataset and correlates of lung health more generally, if you were to collect similar data like this in a new study, what additional variables would you be interested in collecting and why? 
+(5 pts) Based on your thinking about this dataset and correlates of lung health more generally, if you were to collect similar data like this in a new study, what additional variables would you be interested in collecting and why? 
 \end{exercise}
 
 
 \begin{exercise}
-Ensure that your entire report is reproducible. That means that the instructors should be able to run your .Rmd file and have it generate the same PDF that you handed in. Note that you can assume that we have the Hmisc package installed on our machine but you should not rely on us having any particular filepath or directory structure when running the file. (In other words, don't try to load the data from a local file whose path is specific to your computer.)
+(5 pts) Ensure that your entire report is reproducible. That means that the instructors should be able to run your .Rmd file and have it generate the same PDF that you handed in. Note that you can assume that we have the Hmisc package installed on our machine but you should not rely on us having any particular filepath or directory structure when running the file. (In other words, don't try to load the data from a local file whose path is specific to your computer.)
 \end{exercise}
 
 
