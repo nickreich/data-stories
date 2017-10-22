@@ -34,7 +34,7 @@ Month &nbsp; | Day   |     | Topic |  Notes &nbsp;   | HW Due &nbsp;  | Reading
      | Th, 26|     | Understanding Uncertainty | | | 
      | Fr, 27|     |  | | [Lab 6](../assets/labs/lab6-infer/lab6-infer.pdf) | 
      | Tu, 31|     |  | |   | 
- Nov | Th,  2|     | Professional Ethics | | [Lab 7](../assets/labs/lab7-predict/lab7-predict.pdf) | [MDSR 6](http://mdsr-book.github.io/excerpts/mdsr-ethics.pdf)
+ Nov | Th,  2|     | Professional Ethics | | Lab 7 | [MDSR 6](http://mdsr-book.github.io/excerpts/mdsr-ethics.pdf)
      | Tu,  7|     | Midterm review | | | 
      | Th,  9|     | Midterm exam   | | | 
      | Tu, 14|     | Classification models | || 
