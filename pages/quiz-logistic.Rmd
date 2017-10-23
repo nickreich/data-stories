@@ -1,8 +1,10 @@
 ---
 title: 'Quiz: Logistic Regression'
 author: "Nicholas Reich, adapted from Project MOSAIC"
-date: "April, 2016"
-output: pdf_document
+date: "October, 2017"
+output:
+  html_document:
+    df_print: paged
 ---
 
 ```{r setup, include=FALSE}
@@ -18,7 +20,7 @@ An important issue for the commission was whether the accident was avoidable. At
 Here are some initial commands to load and look at the dataset, which has 23 observations, shown below sorted by temperature: 
 ```{r, message=FALSE, echo=FALSE}
 library(pander)
-oring = fetch::fetchData("oring-damage.csv")
+oring = read.csv("http://www.mosaic-web.org/go/datasets/oring-damage.csv")
 oring_srted <- oring[order(oring$temp),]
 row.names(oring_srted) <- NULL #seq_along(1:nrow(oring))
 pander(oring_srted)
