@@ -15,7 +15,7 @@
 This is an assignment that you will work on first individually, then with your tables. The overall goal is to develop and validate a set of rules (a model!) for determining whether a given playlist of songs is ``random'' or not.
 
 \subsection*{The assignment}
-The deliverable for this lab is a single page writeup in the form of a letter to Mr. Hoffman (more details are given in Part V on page 4 of this assignment). Although you will work as a group on conducting the lab itself, your writeup needs to be written individualy. The single page should list at the top of the page your name first, followed by all team members' full names. The writeup is due to instructors via a PDF submission to Google Drive by 5pm on Friday, November 3. 
+The deliverable for this lab is a single page writeup in the form of a letter to Mr. Hoffman (more details are given in Part V on page 4 of this assignment). Although you will work as a group on conducting the lab itself, your writeup needs to be written individualy. The single page should list at the top of the page your name first, followed by all team members' full names. The writeup is due to instructors via a PDF submission to Google Drive by 5pm on Tuesday, November 7. 
 
 \subsection*{Introduction}
 [The following narrative is excerpts from an article by Carl Bialik in the Wall Street Journal (9-21-2006), the iPod User’s Manual, and a Keynote Address by Steve Jobs.]
