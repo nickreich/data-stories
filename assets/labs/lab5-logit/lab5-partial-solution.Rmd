@@ -1,0 +1,66 @@
+---
+title: "Lab 5, partial solution "
+output: html_notebook
+editor_options: 
+  chunk_output_type: inline
+---
+
+## Loading data and setup
+
+First, we load the titanic data and remove the missing observations.
+```{r echo=TRUE}
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE)
+library("ggplot2")
+theme_set(theme_minimal())
+library("Hmisc")
+getHdata(titanic)
+titanic$age_mis <- factor(is.na(titanic$age))
+titanic1 <- dplyr::filter(titanic, age_mis==FALSE)
+head(titanic)
+```
+
+Let's focus on questions 5 and 6, which ask you to fit a model and then (in Q6) to "examine your model performance". Let's start by fitting a fairly simple model with main effect terms for age, sex, and pclass.
+
+```{r}
+fm <- glm(survived ~ age + sex + pclass, dat=titanic1, family="binomial")
+summary(fm)
+```
+
+To examine the model performance, we can still use a version of a "residual", using similar ideas from linear regression. Basically, a residual is a measure of "observed value - expected value". In logistic regression, our observed values ($y$s) are 0s and 1s, and our model values ($\hat y$s) are probabilities. We can use the same residual from linear regression, this is called a "response residual" = $y-\hat y$. There are other ways to create residuals in logistic regression that for now, let's take this as a measure of how well a model predicts a certain observation. We can calculate these residuals using the `residuals()` function, specifying the type as response.
+
+Here is a plot of the response residuals against age, with a moving average smoother drawn through. We want the smooth line to be at zero across the whole dimension of x.
+```{r}
+titanic1$fm_resid <- residuals(fm, type="response")
+ggplot(titanic1, aes(x=age, y=fm_resid)) + 
+  geom_point(alpha=.5) + geom_smooth(span=.95, method="loess") + 
+  geom_hline(aes(yintercept=0), linetype=2)
+```
+
+Points above the $y=0$ line are observations for which $y-\hat y>0$ i.e. where our predicted value was lower than observed. This can only happen when $y=1$. If there are places where the smooth line is above 0 this suggests that the model is in general predicting __too low__ of a probability of survival. Similarly, if the smooth line is below the $y=0$ line this suggests that our model on average is predicting __too high__ of a probability of survival. I take away from the above graph that in general our model is doing a pretty good job, although it is maybe not capturing a bit of trend at the low and high ages: children were more likely to survive and old people were less likely to survive than our model predicts.
+
+Let's look at this trend by sex and class
+```{r}
+ggplot(titanic1, aes(x=age, y=fm_resid)) + 
+  geom_point(alpha=.5) + geom_smooth(span=.95, method="loess") + 
+  geom_hline(aes(yintercept=0), linetype=2) +
+  facet_grid(sex~pclass)
+
+```
+
+Interestingly, it looks like the trend we noticed in the overall graph about the model underestimating the probability of survival is more pronounced for young boys than for young girls.
+
+This is likely due to our assumption of linearity in the relationship between age and log-odds of survival. If we allowed this relationship to not be linear, maybe it would make the "shoulders" of this plot a little closer to the $y=0$ line. 
+
+
+```{r}
+fm1 <- glm(survived ~ splines::ns(age, knots=c(10, 20, 30)) + sex + pclass, dat=titanic1, family="binomial")
+titanic1$fm1_resid <- residuals(fm1, type="response")
+ggplot(titanic1, aes(x=age, y=fm1_resid)) + 
+  geom_point(alpha=.5) + geom_smooth(span=.95, method="loess") + 
+  geom_hline(aes(yintercept=0), linetype=2) +
+  facet_grid(sex~pclass)
+
+```
+
+While this does seem to "fix" at least some of the residual deviations in the original model, it also makes the fit worse for some of the observations on young females.  
+
