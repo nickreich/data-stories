@@ -59,7 +59,6 @@ ggplot(titanic1, aes(x=age, y=fm1_resid)) +
   geom_point(alpha=.5) + geom_smooth(span=.95, method="loess") + 
   geom_hline(aes(yintercept=0), linetype=2) +
   facet_grid(sex~pclass)
-
 ```
 
 While this does seem to "fix" at least some of the residual deviations in the original model, it also makes the fit worse for some of the observations on young females.  
