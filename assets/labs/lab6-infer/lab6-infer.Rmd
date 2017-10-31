@@ -9,6 +9,8 @@ knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE, eval=FALSE)
 ```
 
 
+# THIS IS AN OLD VERSION OF THE LAB!
+
 ## Introduction to Hypothesis Testing
 
 A central question in regression analysis is ``How can we formally evaluate statistical evidence about associations between the observed variables, while controlling for the presence of other factors?''
