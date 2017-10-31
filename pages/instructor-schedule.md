@@ -169,7 +169,23 @@ _Thurs, week 8_
 
  _Tues, week 9_
 
- - biostats pitch?
+ - announcements: career info, survey methods info session
+ - hand out old version of exam and discuss differences 
+    - logistic regression is fair game this year
+    - we have emphasized less the model syntax
+    - model training
+    - there are things that we haven't gone over a lot in class but are covered in videos and book: assumptions of linear model, interpretation of R^2, ...
+ - go over old homework questions: 
+    - coefficient interpretation example
+    
+http://biostat.mc.vanderbilt.edu/wiki/Main/DataSets
+ - table-based data analyses with datasets:
+   - getHdata(diabetes)
+   - getHdata(acath)
+   - getHdata(dmd)
+   - getHdata(plasma)
+   - getHdata(vlbw)
+   - getHdata(stressEcho)
 
  _Thurs, week 9_
 

@@ -26,6 +26,25 @@ fm <- glm(survived ~ age + sex + pclass, dat=titanic1, family="binomial")
 summary(fm)
 ```
 
+## Interpreting the model
+
+Let's interpret some of the above coefficients. Because this is a logistic regression, we need to be careful about how we think about the numbers in the "Estimate" column above. Recall that this model has been fit on the log-odds scale, so if we want to interpret any of these coefficients as odds or odds ratios, then we need to look at them on the exponential scale. Let's start by exponentiating the coefficients and their confidence intervals:
+
+```{r}
+round(exp(coef(fm)), 2)
+```
+
+```{r}
+round(exp(confint(fm)), 2)
+```
+
+Adjusting for sex and class, the odds of survival were estimated to decrease by 5% (95% CI: 3-6%) for each additional year of age.
+
+Individuals in third class were estimated to have 94% (95% CI: 89-97%) lower odds of survival than counterparts of the same age and sex in first class.
+
+
+## Examining model performance
+
 To examine the model performance, we can still use a version of a "residual", using similar ideas from linear regression. Basically, a residual is a measure of "observed value - expected value". In logistic regression, our observed values ($y$s) are 0s and 1s, and our model values ($\hat y$s) are probabilities. We can use the same residual from linear regression, this is called a "response residual" = $y-\hat y$. There are other ways to create residuals in logistic regression that for now, let's take this as a measure of how well a model predicts a certain observation. We can calculate these residuals using the `residuals()` function, specifying the type as response.
 
 Here is a plot of the response residuals against age, with a moving average smoother drawn through. We want the smooth line to be at zero across the whole dimension of x.
