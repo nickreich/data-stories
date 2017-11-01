@@ -189,11 +189,13 @@ http://biostat.mc.vanderbilt.edu/wiki/Main/DataSets
 
  _Thurs, week 9_
 
- - Ethics!
+ - table presentations of mini-analyses
+ - Ethical dilemmas
 
  _Tues, week 10_
 
   - midterm review
+  - review the quiz 2
 
  _Thurs, week 10_
  
