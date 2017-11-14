@@ -65,6 +65,7 @@ As an example: Your group receives 40/50 points for the "final product produced 
 * Tues Nov 14: Make Google Drive folder for the group
 * Fri Nov 17: Group ouline and individual topics proposed (1 paragraph summary, submitted to instructors on Google Drive by 5pm)
 * Wed Nov 29: Draft of group data description write-up due, 5pm
+* Thurs, Nov 30: presentation of group data descriptions/projects
 * Wed Dec 6: Draft of individual data analysis due, 5pm
 * Fri Dec 15: project handed in, by 5pm (digital copies on Google Drive, physical copies to Nick Reich's mailbox, 4th floor of Arnold House)
 
@@ -74,7 +75,7 @@ As an example: Your group receives 40/50 points for the "final product produced 
 Your group may choose from any of the datasets listed below. If you would like to use a dataset that is not listed below, you must obtain permission from the instructor.
 
 * __State-level flu data from the US CDC.__ This data is freely available as a time-series of counts from 50 states/territories in the US. Challenges include modeling count data, modeling grouped binary outcome data, time-series, forecasting, spatial data, mapping. The data can be accessed using the [cdcfluview package](https://github.com/hrbrmstr/cdcfluview), which has a new version available on GitHub. This version is substantially different than the one available on CRAN.
-* __Regional-level flu data from the US CDC.__ Mostly the same as above, but data is reported for the for the 10 US Health and Human Services "regions" and the national level in aggregate.
+* __Regional-level flu data from the US CDC.__ Mostly the same as above, but data is reported for the for the 10 US Health and Human Services "regions" and the national level in aggregate. An overview of flu surveillance at the CDC is [here](https://www.cdc.gov/flu/weekly/overview.htm). Papers on the flu datasets include [this](https://bmcinfectdis.biomedcentral.com/articles/10.1186/s12879-016-1669-x), [this](https://arxiv.org/abs/1703.10936), and [this](http://journals.plos.org/ploscompbiol/article/authors?id=10.1371/journal.pcbi.1004382).
 * __Dengue fever incidence in Thailand.__ A [dataset is available from a forthcoming publication](https://github.com/reichlab/annual-predictions-paper) that has monthly incidence of dengue hemorrhagic fever for each of the 76 provinces of Thailand. Code is also available to download weather data from three different governmental sources that can be used as predictors of incidence.
 * Gender gap developmental data.__ This data is from [an article published in Science](http://science.sciencemag.org/content/355/6323/389) in January 2017 about the gender-gap in childhood stereotypes about intellectual ability. The [data is available through the Open Science Framework](https://osf.io/yund6/?view_only=9a8505d4e87b456a89f255b43e21234e).
 * __Several studies on political viewpoints, sexuality, prejudice, etc...__ [Dr. David Broockman](https://people.stanford.edu/dbroock/) has published a wide array of interesting research on public opinion, voter behavior, minority groups and prejudice, and political polarization. Many of these studies have data and analysis code available online, for example, [this one](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi%3A10.7910/DVN/RAMHWP). 
