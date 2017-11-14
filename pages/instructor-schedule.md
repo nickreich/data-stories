@@ -189,13 +189,16 @@ http://biostat.mc.vanderbilt.edu/wiki/Main/DataSets
 
  _Thurs, week 9_
 
- - table presentations of mini-analyses
+ - table presentations of mini-analyses started on Tues.
  - Ethical dilemmas
 
  _Tues, week 10_
 
   - midterm review
-  - review the quiz 2
+    - 0 for citizenship if you are on phone, also getting up and walking out of class.
+    - review the quiz 2
+    - math equations for models
+    - categorical predictors
 
  _Thurs, week 10_
  
