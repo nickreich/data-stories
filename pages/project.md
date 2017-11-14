@@ -11,7 +11,7 @@ Each group will be expected to hand in the following items
 1. a PDF file containing the data analysis write-up that has been typeset using RMarkdown/knitr submitted online via Google Drive, and
 2. a single paper copy of the final report submitted to the instructors mailbox on the 4th floor of Arnold House.
 
-The instructor will divide each table into two teams and assign each team a particular dataset.
+The instructor will divide each table into two teams and each team will choose their own dataset to work on from the list at the bottom of this file, or, with permission of the instructor, a dataset of their own.
 
 #### Guidelines for the project write-up
 
@@ -67,3 +67,20 @@ As an example: Your group receives 40/50 points for the "final product produced 
 * Wed Nov 29: Draft of group data description write-up due, 5pm
 * Wed Dec 6: Draft of individual data analysis due, 5pm
 * Fri Dec 15: project handed in, by 5pm (digital copies on Google Drive, physical copies to Nick Reich's mailbox, 4th floor of Arnold House)
+
+
+#### Possible Datasets
+
+Your group may choose from any of the datasets listed below. If you would like to use a dataset that is not listed below, you must obtain permission from the instructor.
+
+* __State-level flu data from the US CDC.__ This data is freely available as a time-series of counts from 50 states/territories in the US. Challenges include modeling count data, modeling grouped binary outcome data, time-series, forecasting, spatial data, mapping. The data can be accessed using the [cdcfluview package](https://github.com/hrbrmstr/cdcfluview), which has a new version available on GitHub. This version is substantially different than the one available on CRAN.
+* __Regional-level flu data from the US CDC.__ Mostly the same as above, but data is reported for the for the 10 US Health and Human Services "regions" and the national level in aggregate.
+* __Dengue fever incidence in Thailand.__ A [dataset is available from a forthcoming publication](https://github.com/reichlab/annual-predictions-paper) that has monthly incidence of dengue hemorrhagic fever for each of the 76 provinces of Thailand. Code is also available to download weather data from three different governmental sources that can be used as predictors of incidence.
+* Gender gap developmental data.__ This data is from [an article published in Science](http://science.sciencemag.org/content/355/6323/389) in January 2017 about the gender-gap in childhood stereotypes about intellectual ability. The [data is available through the Open Science Framework](https://osf.io/yund6/?view_only=9a8505d4e87b456a89f255b43e21234e).
+* __Several studies on political viewpoints, sexuality, prejudice, etc...__ [Dr. David Broockman](https://people.stanford.edu/dbroock/) has published a wide array of interesting research on public opinion, voter behavior, minority groups and prejudice, and political polarization. Many of these studies have data and analysis code available online, for example, [this one](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi%3A10.7910/DVN/RAMHWP). 
+* __Women's Health and Aging Study (WHAS).__ The WHAS Study was a population-based prospective cohort of women age 65 in Baltimore, Maryland, designed to identify and answer questions about risk factors for older women becoming frail. We have 682 observations on women from this cohort. Challenges involve missing data, risk prediction, skewed data, and binary or categorical outcome data. Data is available from instructor upon request.
+* __Framingham Heart Study (FHS).__ This [prospective cohort study](https://www.framinghamheartstudy.org/) has been going on for decades and has collected a wealth of data on the health of individuals and their families over long periods of time. We have a subset of their data for teaching purposes. Data is available on Google Drive.
+* __The HELP study.__ This study looked at the association between substance abuse and physical/sexual abuse. Data is available on Google Drive.
+* __The DIG Trial data.__ "The DIG Trial was a randomized, double-blind, multicenter trial with more than 300 centers in the United States and Canada participating. The purpose of the trial was to examine the safety and efficacy of Digoxin in treating patients with congestive heart failure in sinus rhythm." This data is available on Google Drive.
+
+

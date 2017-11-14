@@ -206,7 +206,18 @@ http://biostat.mc.vanderbilt.edu/wiki/Main/DataSets
 
  _Tues, week 11_
 
- - 
+ - announcements: 
+    put phones away, 
+    exam graded by Thursday, hopefully 
+    biweekly challenge on Friday
+    project details
+      overview
+      elements: will be some new challenges (missing data, count data, survey data...)
+      poster component still on the table
+      peer evaluation
+      datasets
+      for today: make folder, set team name, start to think about datasets
+      for friday: outline of project
 
  _Thurs, week 11_
 
