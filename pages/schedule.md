@@ -36,13 +36,13 @@ Month &nbsp; | Day   |     | Topic |  Notes &nbsp;   | HW Due &nbsp;  | Reading
  Nov | Th,  2|     | Professional Ethics | | | [MDSR 6](http://mdsr-book.github.io/excerpts/mdsr-ethics.pdf)
      | Tu,  7|     | Midterm review | | [Lab 7](../assets/labs/lab7-predict/lab7-predict.pdf) | 
      | Th,  9|     | Midterm exam   | | | 
-     | Tu, 14|     | Classification models | || 
-     | Th, 16|     | Classification models | | | 
-     | Fr, 17|     |    | | | 
+     | Tu, 14|     | Project work | | | 
+     | Th, 16|     | Project work | | | 
+     | Fr, 17|     |    | | [Proj. Outline](proj-outline.html) | 
      | Tu, 21|     | _Thanksgiving_   | | |
      | Th, 23|     | _Thanksgiving_    | | | 
-     | Tu, 28|     | Missing data | || 
-     | Th, 30|     |  | | | 
+     | Tu, 28|     | Project work | || 
+     | Th, 30|     | Project work | | | 
  Dec | Tu,  5|     |  | | |
      | Th,  7|     | Final Projects | | | 
      | Tu, 12|     | Final Projects | | |
