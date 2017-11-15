@@ -38,13 +38,13 @@ Month &nbsp; | Day   |     | Topic |  Notes &nbsp;   | HW Due &nbsp;  | Reading
      | Th,  9|     | Midterm exam   | | | 
      | Tu, 14|     | Project  | | | 
      | Th, 16|     | Project  | | | 
-     | Fr, 17|     |    | | [Proj. Outline](proj-outline.html) | 
+     | Fr, 17|     |    | | [Outline](proj-outline.html) | 
      | Tu, 21|     | _Thanksgiving_   | | |
      | Th, 23|     | _Thanksgiving_    | | | 
      | Tu, 28|     | Project, Missing data  | [Lec 10](../assets/lectures/lecture10-impute/lecture10-impute.pdf) || 
-     | We, 29|     |  | [Milestone: Group draft](proj-outline.html) | | 
+     | We, 29|     |  | [Grp draft](proj-outline.html) | | 
      | Th, 30|     | Project  | | | 
  Dec | Tu,  5|     |  | | |
-     | We, 6|      | | [Milestone: Ind. draft](proj-outline.html) | | 
+     | We, 6|      | |  | [Ind. draft](proj-outline.html) | 
      | Th,  7|     | Projects | | | 
      | Tu, 12|     | Final Projects | | |
