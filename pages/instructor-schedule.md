@@ -221,15 +221,21 @@ http://biostat.mc.vanderbilt.edu/wiki/Main/DataSets
 
  _Thurs, week 11_
 
- - 
+ - biostats pitch
+ - group work on project outlines
 
  _Tues, week 12_
 
- - 
+ - Missing data lecture?
+ - group work on individual analyses
 
  _Thurs, week 12_
 
- - 
+ - draft of group analysis should have been handed in via Google Drive on Wednesday.
+ - activity for Thursday: at each table, the groups share with the other team at their table their write-up. Each group takes a turn critiquing the other write-up. I'm thinking a structure like
+     - 5-10 minutes for everyone to read the other group's work
+     - each person write down, about the write-up from the other group, 2 things they like, 2-4 specific things they think could be improved
+     - go around the table and share the constructive feedback
 
  _Tues week 13_
  
