@@ -44,12 +44,6 @@ opts_chunk$set(fig.path='figure/beamer-',fig.align='center',fig.show='hold',size
 \end{frame}
 
 
-\begin{frame}
-
-\centering \includegraphics[width=\linewidth]{campus-survey.png}
-
-\end{frame}
-
 <<ggplot2, echo=FALSE, message=FALSE>>=
 require(ggplot2)
 theme_set(theme_bw())
@@ -433,7 +427,7 @@ summary(m_imp)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\begin{frame}{Best practices}
+\begin{frame}{Best practices (recap)}
 
 \begin{block}{Hard to argue with an approach that does the following:}
 \bi
@@ -444,21 +438,6 @@ summary(m_imp)
 \end{block}
 
 \tiny{Proposed guidelines for reporting missing covariate data (Burton and Altman 2004)}
-
-\end{frame}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-\begin{frame}[fragile]{Bonus: ROC for Titanic data}
-
-<<fig.height=4.5>>=
-library(ROCR)
-pred <- prediction(predict(m_full, type="response"), t2$survived)
-perf <- performance(pred, measure = "tpr", x.measure = "fpr") 
-plot(perf)
-@
 
 \end{frame}
 

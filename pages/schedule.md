@@ -41,7 +41,7 @@ Month &nbsp; | Day   |     | Topic |  Notes &nbsp;   | HW Due &nbsp;  | Reading
      | Fr, 17|     |    | | [Proj. Outline](proj-outline.html) | 
      | Tu, 21|     | _Thanksgiving_   | | |
      | Th, 23|     | _Thanksgiving_    | | | 
-     | Tu, 28|     | Project work | || 
+     | Tu, 28|     | Project work | [Lec 10](../assets/lectures/lecture10-impute/lecture10-impute.pdf) || 
      | Th, 30|     | Project work | | | 
  Dec | Tu,  5|     |  | | |
      | Th,  7|     | Final Projects | | | 
