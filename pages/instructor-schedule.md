@@ -221,6 +221,10 @@ http://biostat.mc.vanderbilt.edu/wiki/Main/DataSets
 
  _Thurs, week 11_
 
+ - announcements:
+     - I have enforced the points off for using phones
+     - details on project milestones are up on schedule
+     - I will be gone the week after tday, plan for that week.
  - biostats pitch
  - group work on project outlines
 

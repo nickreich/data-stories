@@ -61,7 +61,10 @@ To evaluate group participation and contributions, I will be using the following
 As an example: Your group receives 40/50 points for the "final product produced by the group". You have three teammates who give you scores of 35, 40 and 30, respectively. Therefore, you receive a total of 105 points from your teammates. So your final "group" grade is (40/50) * (105/100) = 0.84 = 42/50.
 
 
-#### Deadlines
+#### Milestones and deadlines
+
+See [this page](proj-outline.md) for a complete description of project milestones.
+
 * Tues Nov 14: Make Google Drive folder for the group
 * Fri Nov 17: Group ouline and individual topics proposed (1 paragraph summary, submitted to instructors on Google Drive by 5pm)
 * Wed Nov 29: Draft of group data description write-up due, 5pm
