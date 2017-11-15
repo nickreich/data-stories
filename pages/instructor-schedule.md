@@ -225,6 +225,8 @@ http://biostat.mc.vanderbilt.edu/wiki/Main/DataSets
      - I have enforced the points off for using phones
      - details on project milestones are up on schedule
      - I will be gone the week after tday, plan for that week.
+     - NYT example of interaction!
+     - go over exam
  - biostats pitch
  - group work on project outlines
 
