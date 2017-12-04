@@ -47,4 +47,5 @@ Month &nbsp; | Day   |     | Topic |  Notes &nbsp;   | HW Due &nbsp;  | Reading
  Dec | Tu,  5|     |  | | |
      | We, 6|      | |  | [Ind. draft](proj-outline.html) | 
      | Th,  7|     | Projects | | | 
+     | Fr,  8|     | | | [BC 3](../assets/challenges/biweekly-challenge-3.pdf) | 
      | Tu, 12|     | Final Projects | | |
