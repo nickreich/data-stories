@@ -245,11 +245,17 @@ http://biostat.mc.vanderbilt.edu/wiki/Main/DataSets
 
  _Tues week 13_
  
- - 
+ - announcements: 
+   - BC3 due Friday
+   - BC4 will serve as extra credit
+   - individual analyses due Wednesday
+ - go over sample project, critique in small groups, move to large groups
+ - project work time
+ 
 
 _Thurs week 13_
 
- - 
+ - peer review on individual project write-ups
 
 _tues week 14_
 
