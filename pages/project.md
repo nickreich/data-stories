@@ -54,7 +54,7 @@ Your project grade makes up 25% of your final grade for the class and will be ca
   * 5 points: project details (page limits adhered to, appropriate sectioning, etc...)
 * Individually prepared data analysis: 50 points
   * 35 points: overall quality of analysis (correct implementation and interpretation of method(s) used, appropriate use of equations to show what methods/models have been used, appropriate use of graphics/tables to support central results, succinct summary of key results)
-  * 10 points: clarity and presentation (clear statement/summary of goals and central results, clear and accurate description of methods/models used, use of figures rather than text to illustrate central ideas, page limit adhered to)
+  * 15 points: clarity and presentation (clear statement/summary of goals and central results, clear and accurate description of methods/models used, use of figures rather than text to illustrate central ideas, page limit adhered to)
 
 To evaluate group participation and contributions, I will be using the following approach to evaluate each of your contributions to the project. Each student will be given 100 points to allocate among your teammates (excluding yourself). The more points you give to a teammate, the more you are indicating they contributed to the project. You cannot allocate the same number of points for any two team members. I reserve the right to intervene to correct gross imbalances in allocations if necessary. The number of points that you receive from your teammates will be summed, divided by 100, and then used as a multiplier on the final grade for the 50-point group component of the project. 
 
