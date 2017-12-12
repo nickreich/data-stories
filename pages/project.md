@@ -8,7 +8,7 @@ For the project you will create, in small groups, a thorough analysis of a parti
 
 Each group will be expected to hand in the following items
 
-1. a PDF file containing the data analysis write-up that has been typeset using RMarkdown/knitr submitted online via Google Drive, and
+1. a PDF (and accompanying Rmd) file containing the data analysis write-up that has been typeset using RMarkdown/knitr submitted online via Google Drive, and
 2. a single paper copy of the final report submitted to the instructors mailbox on the 4th floor of Arnold House.
 
 The instructor will divide each table into two teams and each team will choose their own dataset to work on from the list at the bottom of this file, or, with permission of the instructor, a dataset of their own.
