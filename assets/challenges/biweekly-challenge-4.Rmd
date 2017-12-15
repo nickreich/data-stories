@@ -7,7 +7,7 @@ output: pdf_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = F, message = F, warning = F)
 ```
-*Please show all output but no code, warnings, or messages, and make sure your assignment is no more than one page. Submit the assignment as a PDF file along with the .RMD used to create it in your Google Drive folder.*
+*Please show all output but no code, warnings, or messages, and make sure your assignment is no more than one page. Submit the assignment as a PDF file along with the .RMD used to create it in your Google Drive folder by 5pm on Wednesday December 20.*
 
 The goal of this challenge is practice your data storytelling skills on a dataset of your choice. We recommend looking through R's included datasets using the command `library(help = "datasets")` to find one that seems interesting to you, then loading it using the command `data(dataName)`.
 
