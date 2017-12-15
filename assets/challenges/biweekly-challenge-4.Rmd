@@ -1,6 +1,6 @@
 ---
 title: 'Biweekly Challenge #4 - Tell a Story!'
-subtitle: 'Due Thursday, December 21th at 5PM'
+subtitle: 'Due Wednesday, December 20th at 5PM'
 output: pdf_document
 ---
 
