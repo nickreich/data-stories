@@ -49,3 +49,4 @@ Month &nbsp; | Day   |     | Topic |  Notes &nbsp;   | HW Due &nbsp;  | Reading
      | Th,  7|     | Projects | | | 
      | Fr,  8|     | | | [BC 3](../assets/challenges/biweekly-challenge-3.pdf) | 
      | Tu, 12|     | Final Projects | | |
+     | We, 20|     | | | [BC 4](../assets/challenges/biweekly-challenge-4.pdf) |
