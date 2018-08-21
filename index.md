@@ -20,7 +20,8 @@ The aim of this course is to provide students with the skills necessary to tell 
 **Instructor**: [Nicholas Reich](http://reichlab.io)\\
 Office hours: TBD in Arnold 425
 
-**TAs**: Bianca Doone\\
+**TAs**: Bianca Doone, Yukun Li
+**Undergrad Course Assistants**: Julianne Higgins, Apoorva Karpurapu, Sinduja Manchi, Malachai Purgahn, Sameeiya Saffiullah, Angus Wong\\
 Office hours: TBD
 
 **Prerequisites**: <br> 
