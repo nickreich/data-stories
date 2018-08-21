@@ -10,7 +10,7 @@
 
 %	The following variables are assumed by the standard preamble:
 %	Global variable containing module name:
-\title{What is Data?}
+\title{On statistics, sampling, and data structures}
 %	Global variable containing module shortname:
 %		(Currently unused, may be used in future.)
 \newcommand{\ModuleShortname}{introRegression}
@@ -30,6 +30,10 @@
 
 \hypersetup{colorlinks,linkcolor=,urlcolor=MainColor}
 
+
+<<echo=FALSE, warning=FALSE, message=FALSE>>=
+knitr::opts_chunk$set(message = FALSE, warning = FALSE)
+@
 
 %	******	Document body begins here	**********************
 
@@ -70,6 +74,17 @@ This did not mean, however, that they gave up on mathematics. \\
 \em Sapiens: A Brief History of Humankind
 
 \end{centering}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}
+
+ \includegraphics[width=\textwidth]{figure-static/gelman-statistics-challenges.png}
+
+\href{http://andrewgelman.com/2018/08/18/fallacy-excluded-middle-statistical-philosophy-edition/}{Andrew Gelman's blog}
 
 \end{frame}
 
@@ -141,6 +156,34 @@ ggplot(aes(salary, sat, color=fracgrp), data=SAT) +
 
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}{Language of uncertainty: real-world politics edition}
+
+Quotes from Nate Silver, Sunday Nov 6, 2016
+
+\small 
+\begin{itemize}
+  \item ``... it shouldn’t be hard to see how Clinton could lose. She's up by about 3 percentage points nationally, and 3-point polling errors happen fairly often, including in the last two federal elections. Obama beat his polls by about 3 points in 2012, whereas Republicans beat their polls by 3 to 4 points in the 2014 midterms.''
+  \item ``Right now, the tipping-point state in our forecast — the state that would provide the decisive 270th electoral vote if the polls got things exactly right — is New Hampshire. ... Clinton’s doing a little bit worse in the tipping-point state than she is overall — a sign that she might win the popular vote but lose the Electoral College.''
+  \item ``To be honest, I’m kind of confused as to why people think it’s heretical for our model to give Trump a 1-in-3 chance — which does make him a fairly significant underdog, after all. ... the public polls — specifically including the highest-quality public polls — show a tight race in which turnout and late-deciding voters will determine the difference between a clear Clinton win, a narrow Clinton win and Trump finding his way to 270 electoral votes.''
+\end{itemize}
+
+\footnotesize
+\href{https://fivethirtyeight.com/features/election-update-dont-ignore-the-polls-clinton-leads-but-its-a-close-race/}{FiveThirtyEight.com}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}{Language of uncertainty: flu forecasting edition}
+
+ \includegraphics[width=\textwidth]{figure-static/flu-forecast-tweet.png}
+
+\end{frame}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -187,7 +230,7 @@ Data are measurements from our \\ imperfect, noisy world.
 
 \begin{frame}{Where does the noise come from?}
 
-<<showHeights, message=FALSE, echo=FALSE, fig.height=5>>=
+<<showHeights, message=FALSE, echo=FALSE, fig.height=5, warning=FALSE>>=
 library(alr3)
 library(ggplot2)
 data(heights)
@@ -212,6 +255,36 @@ qplot(Mheight, Dheight, data=heights, col="red", alpha=.5) +
 % 
 % \end{frame}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}
+
+
+\begin{center}
+\huge
+Tidy data
+\end{center}
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}{Tidy Data}
+
+\begin{itemize}
+  \item Tidy data is a very useful term. It was defined (although not conceived) by Hadley Wickham in \href{http://vita.had.co.nz/papers/tidy-data.html}{this paper}. 
+
+  \item It is not the only acceptable format for data (there are times when other formats, such as a `wide-format' dataset may be needed), but it is a very common and widely used data structure.
+  
+  \item And, it plays very nicely with R.
+\end{itemize}
+
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -240,26 +313,58 @@ qplot(Mheight, Dheight, data=heights, col="red", alpha=.5) +
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[fragile]{Sampling in a small population}
 
+\begin{frame}
+
+
+\begin{center}
+\huge
+Understanding Sampling
+\end{center}
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Sample size is tied to how much info is in your data}
+
+Say we have a population of 1000 people where 600 have characteristic X and 400 do not. We want to estimate how many people have characteristic X. 
+
+
+
+\small
 <<resample>>=
-groupA <- c("A", "A", "A", "A", "A", "A")
-groupB <- c("B", "B", "B")
+groupA <- rep("A", 600)
+groupB <- rep("B", 400)
 population <- c(groupA, groupB)
-sample(population, size = 5, replace=FALSE)
 sample(population, size = 5, replace=FALSE)
 sample(population, size = 5, replace=FALSE)
 @
 
+\normalsize
+How many people do you think we need to sample randomly to attain ``adequate'' precision on our estimate?
 
-<<eval=FALSE, include=FALSE>>=
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]{The size of your sample matters!}
+
+Results from hypothetically sampling 5 people from the population 1000 times...
+
+\small
+<<fig.height=2.5>>=
 nsim <- 1000
 sample_props <- rep(NA, nsim)
 for(i in 1:nsim) {
   tmp <- sample(population, size = 5, replace=FALSE)
-  sample_props[i] <- sum(tmp=="A")
+  sample_props[i] <- sum(tmp=="A")/5
 }
-hist(sample_props, breaks=20)
+hist(sample_props, breaks=20, xlim=c(0,1))
+abline(v=3/5, col="red")
 @
 
 
@@ -267,15 +372,22 @@ hist(sample_props, breaks=20)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[fragile]{Sampling in a large population}
 
-<<resample-large-sample>>=
-groupA <- rep("A", 600)
-groupB <- rep("B", 300)
-population <- c(groupA, groupB)
-sample1 <- sample(population, size = 100, 
-                  replace=FALSE)
-table(sample1)
+\begin{frame}[fragile]{The size of your sample matters!}
+
+Results from hypothetically sampling 20 people from the population 1000 times...
+
+\small
+<<fig.height=2.5>>=
+nsim <- 1000
+nsamp <- 20
+sample_props <- rep(NA, nsim)
+for(i in 1:nsim) {
+  tmp <- sample(population, size = nsamp, replace=FALSE)
+  sample_props[i] <- sum(tmp=="A")/nsamp
+}
+hist(sample_props, breaks=20, xlim=c(0,1), ylim=c(0,10), freq = F)
+abline(v=3/5, col="red")
 @
 
 
@@ -283,16 +395,37 @@ table(sample1)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[fragile]{Sampling in a large population (with bias)}
+\begin{frame}[fragile]{Beware of bias in your sampling!}
 
+What if people without characteristic X were 2 times as likely to be sampled than those with it?
+
+\small
 <<resample-large-sample-bias>>=
-## with a biased sample
-weights <- c(rep(1,1000), rep(3, 500))
+weights <- c(rep(1,600), rep(2, 400))
 sample2 <- sample(population, size = 100, 
                   replace=FALSE, prob=weights)
 table(sample2)
 @
 
+\normalsize
+In your groups: What fraction of your sample do you expect to have characteristic X?
+
+%original fraction = 600/(600+400)
+%updated fraction = 600/(600+400+400)
+
+<<include=FALSE, eval=FALSE, fig.height=3>>=
+nsim <- 1000
+nsamp <- 100
+sample_props <- rep(NA, nsim)
+weights <- c(rep(1,600), rep(2, 400))
+for(i in 1:nsim) {
+  tmp <- sample(population, size = nsamp, 
+                  replace=TRUE, prob=weights)
+  sample_props[i] <- sum(tmp=="A")/nsamp
+}
+hist(sample_props, breaks=20, xlim=c(0,1), ylim=c(0,10), freq = F)
+abline(v=6/14, col="red")
+@
 
 \end{frame}
 
@@ -304,6 +437,7 @@ table(sample2)
 
 \begin{itemize}
     \item What types of variables are you collecting?
+    \item What is the appropriate ``tidy data'' format for your data?
     \item Who are you collecting data on?
     \item What population are you trying to draw conclusions about?
     \item Do you expect your sample to be representative of the population? Why or why not?

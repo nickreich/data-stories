@@ -40,7 +40,7 @@ One of any of the following introductory stats courses taught at UMass: BIOSTAT 
 **Topics covered**<br>
 
 &nbsp; &nbsp; Organizing, summarizing, and visualizing data<br>
-&nbsp; &nbsp; Conceptual models for data
+&nbsp; &nbsp; Conceptual models for data<br>
 &nbsp; &nbsp; Simple and multiple linear regression <br>
 &nbsp; &nbsp; Interpretation and inference from linear regression <br>
 &nbsp; &nbsp; Logistic regression (introduction) <br>

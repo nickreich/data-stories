@@ -53,7 +53,7 @@ _Tuesday, week 1_
     - introduce TAs (that are here)
     - expectations of team-based learning: not all TBL, still some standard lectures, some team projects
     - expectations of individual students: I have high expectations for what students will achieve in the course. requires both individual effort and collaboration.
-    - R: I will use it and teach with it. If you need help learning it, take Steve's class (PUBHLTH 497D), or do online modules. We will assume working knowledge that is developing over the semester.
+    - R: I will use it and teach with it. If you need help learning it, take Sara's class (PUBHLTH 497D), or do online modules. We will assume working knowledge that is developing over the semester.
     - trajectory of course: starts out squishy, gets tough fast
 
  - Wits and wagers (15 min):
@@ -67,6 +67,7 @@ _Thursday, week 1_
 
  - course technology intro: website, slack, Google Drive (20 min)
  - TA office hours 
+ - Syllabus review
  - Expectations and behavioral norms: what do we expect of our teammates? How will teammates make each other successful? 
  - Lab 1 (50 min): talk about how to share roles...
  
@@ -78,14 +79,15 @@ _Thursday, week 1_
 _Tuesday, week 2_
 
  - confirm everyone on slack, clarify google drive name format, office hour update
- - Lecture 2: What is data, including showing some R work (45 min)
+ - Lecture 2: "On statistics, sampling, and data structures", including showing some R work (45 min)
  - continue group work on project (30 min)
  
 _Thursday, week 2_
 
  - presentations on data collection exercises (50 min)
  - wrap-up discussion on data collection moving towards data analysis
- - talk more about sampling, gay face study, etc...
+ - talk more about sampling, gay face study. 
+   Prompt: How does Simpson's critique of the gay face study relate to sampling issues that we have discussed in class?
  - group discussions about what went well/poorly in terms of group communication/working together.
  - point towards HW of reading about data visualization
  - introduce Lab 2
