@@ -85,15 +85,15 @@ _Tuesday, week 2_
 _Thursday, week 2_
 
  - presentations on data collection exercises (50 min)
- - wrap-up discussion on data collection moving towards data analysis
- - talk more about sampling, gay face study. 
-   Prompt: How does Simpson's critique of the gay face study relate to sampling issues that we have discussed in class?
+ - wrap-up discussion on what they learned from data collection process and how to do it in such a way as to make data analysis go smoothly
+ - talk more about sampling biases. Currently, they are assigned to read the ["gay face" study](https://osf.io/fk3xr/) and a [critique by Dan Simpson](http://andrewgelman.com/2017/09/12/seemed-destruction-done-not-choose-two/) from Andrew Gelman's blog. 
+ - possible prompt for group discussions: How does Simpson's critique of the gay face study relate to sampling issues that we have discussed in class and that you may have faced in your project?
  - group discussions about what went well/poorly in terms of group communication/working together.
- - point towards HW of reading about data visualization
- - introduce Lab 2
+ - reminder of HW of reading about data visualization
  
 _Tuesday, week 3_
 
+ - introduce Lab 2
  - NYT graphic interpretation
  - not being grammar-picky today, but later...
  - slack is an app, notifications can be customized
