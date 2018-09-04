@@ -18,7 +18,7 @@ The aim of this course is to provide students with the skills necessary to tell 
 **Course number**: PUBHLTH 460 
 
 **Instructor**: [Nicholas Reich](http://reichlab.io)\\
-Office hours: TBD in Arnold 425
+Office hours: Tuesday 2:30-3:30pm, Arnold 425
 
 **TAs**: Bianca Doone
 

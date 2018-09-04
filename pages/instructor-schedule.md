@@ -62,7 +62,8 @@ _Tuesday, week 1_
  - Lecture: Intro to telling stories with data (45 min)
  
  - HW: Install R, RStudio, register for Slack, read syllabus
- 
+ - complete pre-semester student survey
+
 _Thursday, week 1_
 
  - course technology intro: website, slack, Google Drive (20 min)
@@ -73,7 +74,6 @@ _Thursday, week 1_
  
  - HW:
    - Work as a group on Lab1 (start slack channels? or other modes)
-   - complete pre-semester student survey: https://goo.gl/forms/qI1qRl77rBT9uuBB2
    - create and share a google drive folder (see slack for directions)
  
 _Tuesday, week 2_
