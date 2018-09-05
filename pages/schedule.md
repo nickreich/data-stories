@@ -15,7 +15,7 @@ Month &nbsp; | Day   |     | Topic |  Notes &nbsp;   | HW Due &nbsp;  | Reading
  Sep | Tu, 4 |     | Intro, motivation | [Lec 1](../assets/lectures/lecture1-intro-regression/lecture1-intro-regression.pdf) ||Kaplan 1
      | Th,  6|     |  | | | [Syllabus](../assets/syllabus/data-stories-reich-syllabus.pdf) 
      | Tu, 11|     | What is data?     | [Lec 2](../assets/lectures/lecture2-what-is-data/lecture2-what-is-data.pdf) |  | Kaplan 2, [post](https://simplystatistics.org/2018/08/15/the-law-and-order-of-data-science/) 
-     | Th, 13|     |  | | [Lab 1](../assets/labs/lab1-data/lab1-data.pdf) &nbsp; &nbsp; | [paper](https://osf.io/fk3xr/), [critique](http://andrewgelman.com/2017/09/12/seemed-destruction-done-not-choose-two/) 
+     | Th, 13|     |  | | [Lab 1](../assets/labs/lab1-data/lab1-data.pdf) &nbsp; &nbsp; | [paper](https://psyarxiv.com/hv28a/), [critique](http://andrewgelman.com/2017/09/12/seemed-destruction-done-not-choose-two/) 
      | Tu, 18|     | Data visualization and summary | <!--[Lec 3](../assets/lectures/lecture3-data-viz/lecture3-data-viz.pdf)--> |  | [Data viz reading list](data-viz-reading-list.html), Kaplan 3
      | Th, 20|     |    | | | 
      | Tu, 25|     | Language of Models | <!--[Lec 4](../assets/lectures/lecture4-models/lecture4-model-language.pdf) --> || Kaplan 6, 7  

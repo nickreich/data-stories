@@ -66,21 +66,20 @@ _Tuesday, week 1_
 
 _Thursday, week 1_
 
- - course technology intro: website, slack, Google Drive (20 min)
- - TA office hours 
+ - course technology intro: website, piazza, Google Drive (20 min)
+ - TA office hours (coming soon)
  - Syllabus review
- - Expectations and behavioral norms: what do we expect of our teammates? How will teammates make each other successful? 
+ - Expectations and behavioral norms: what do we expect of our teammates? How will teammates make each other successful? (15 min)
  - Lab 1 (50 min): talk about how to share roles...
- 
  - HW:
-   - Work as a group on Lab1 (start slack channels? or other modes)
+   - Work as a group on Lab1 (start piazza teams!)
    - create and share a google drive folder (see slack for directions)
  
 _Tuesday, week 2_
 
- - confirm everyone on slack, clarify google drive name format, office hour update
- - Lecture 2: "On statistics, sampling, and data structures", including showing some R work (45 min)
- - continue group work on project (30 min)
+ - Lecture 2: "On statistics, sampling, and data structures", including showing some R work (50 min)
+ - continuation of R code from lecture: run a few more versions of the simulation studies with different sample sizes. maybe compute different summary statistics. what summary statistics do you want to see?
+ - continue group work on project (remainder of time)
  
 _Thursday, week 2_
 

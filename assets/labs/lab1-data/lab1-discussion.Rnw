@@ -1,0 +1,39 @@
+\documentclass{article}
+
+\input{../../slide-includes/statsTeachR-preamble-labs}
+
+\begin{document}
+
+\license{This is a product of \href{http://statsteachr.org}{statsTeachR} that is released under a \href{http://creativecommons.org/licenses/by-sa/3.0}{Creative Commons Attribution-ShareAlike 3.0 Unported}.}
+
+\section*{Lab 1 Follow-up Discussion}
+
+The paper "Deep neural networks are more accurate than humans at detecting sexual orientation from facial images"(\href{http://psycnet.apa.org/doiLanding?doi=10.1037%2Fpspa0000098}{paywalled peer-reviewed article}, and \href{https://psyarxiv.com/hv28a/}{freely available preprint}) makes some big claims about machine learning. Are they justified?
+
+As background, this article was published online in a preprint archive (a public online repository for research to publish findings prior to the article being submitted for peer review) in the summer of 2017. It was published in the Journal of Personality and Social Psychology in February 2018. The final article is available only via subscription through the journal website, although the preprint provides an opportunity to review the paper in its entirety. 
+
+\begin{exercise}
+The first sentence of the abstract of this article reads "We show that faces contain much more information about sexual orientation than can be perceived and interpreted by the human brain." What data do they present to back up this claim, and do you find it convincing? If not, what additional data would you like to see?
+\end{exercise}
+
+
+
+\begin{exercise}
+The authors state: "We obtained facial images from public profiles posted on a U.S. dating website. We recorded 130,741 images of 36,630 men and 170,360 images of 38,593 women between the ages of 18 and 40, who reported their location as the U.S."
+
+In \href{https://andrewgelman.com/2017/09/12/seemed-destruction-done-not-choose-two/}{Dan Simpson's critique}, he writes, "So probably my biggest problem with this study is that it [sic] the training sample is likely unrepresentative of the population at large. This means that any inferences drawn from a model trained on this sample will be completely unable to answer questions about whether gay face is real in Caucasian Americans.  By withholding critical information about the data, the authors make it impossible to assess the extent of the problem."
+
+\end{exercise}
+
+
+\begin{exercise}
+
+\end{exercise}
+
+
+\begin{exercise}
+
+\end{exercise}
+
+
+\end{document}
