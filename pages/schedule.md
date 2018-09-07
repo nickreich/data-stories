@@ -8,7 +8,7 @@ tagline:
 
 *This is the working schedule for the course. It is subject to change.*
 
-Abbreviation key: OI = [OpenIntro Stats](https://www.openintro.org/stat/index.php?stat_book=os) textbook, BC = coding challenge, MDSR = [Modern Data Science with R](http://mdsr-book.github.io/)
+Abbreviation key: OI = [OpenIntro Stats](https://www.openintro.org/stat/index.php?stat_book=os) textbook, CC = coding challenge, MDSR = [Modern Data Science with R](http://mdsr-book.github.io/)
 
 Month &nbsp; | Day   |     | Topic |  Notes &nbsp;   | HW Due &nbsp;  | Reading 
 :---- |:----- | --- |:----- |:-----  |:------ |:------- 
