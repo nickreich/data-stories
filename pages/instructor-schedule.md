@@ -92,12 +92,11 @@ _Thursday, week 2_
  
 _Tuesday, week 3_
 
+ - CDC trip recap
+ - reading assignment reminder
+ - TA office hours update
  - introduce Lab 2
- - NYT graphic interpretation
- - not being grammar-picky today, but later...
- - slack is an app, notifications can be customized
- - office hours update
- - on your own: do the data viz exercise for the bachelorette viz.
+ - NYT graphic interpretation??
  - Lecture 3: exploratory data analysis/ intro to data viz.
  - exercise with visualizing NHANES data
 

@@ -20,9 +20,10 @@ Month &nbsp; | Day   |     | Topic |  Notes &nbsp;   | HW Due &nbsp;  | Reading
      | Fri, 14|    |   | | Lab 1 - Ind Write-Up|
      | Tu, 18|     | Data visualization and summary | <!--[Lec 3](../assets/lectures/lecture3-data-viz/lecture3-data-viz.pdf)--> |  | [Data viz reading list](data-viz-reading-list.html), Kaplan 3
      | Th, 20|     |    | | [Lab 2 topic](https://goo.gl/forms/q9G3ABH1m7wuyOaI3) | 
+     | Fr, 21|     |    | | [CC1](../assets/challenges/coding-challenge-1.pdf) | 
      | Tu, 25|     | Language of Models | <!--[Lec 4](../assets/lectures/lecture4-models/lecture4-model-language.pdf) --> || Kaplan 6, 7  
      | Th, 27|     | Linear Regression | | | 
-     | Fri, 28|    |    | [Lab 2](../assets/labs/lab2-blog/lab2-blog.pdf) | CC1|
+     | Fri, 28|    |    |  | [Lab 2](../assets/labs/lab2-blog/lab2-blog.pdf)|
  Oct | Tu,  2|     | Linear Regression | <!--[Lec 5](../assets/lectures/lecture5-splines/lecture-splines.pdf)--> || Kaplan 8-9, OI 7, [OI Videos](https://www.youtube.com/playlist?list=PLkIselvEzpM63ikRfN41DNIhSgzboELOM) 
      | Th,  4|     | Linear Regression | <!--[Lec 6](../assets/lectures/lecture6-regress/lecture6-regress.pdf) -->| <!--[Lab 3](../assets/labs/lab3-regress/lab3-regress.pdf) --> | [OI Videos](https://www.youtube.com/playlist?list=PLkIselvEzpM5f1HYzIjFt52SD4izsJ2_I)  
      | Fri, 5|    |    | | Lab 3|

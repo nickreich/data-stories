@@ -120,6 +120,130 @@ For each of the following graphics, work in pairs to
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\begin{frame}
+
+\centering
+\Huge \tt ggplot2
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Choices for R graphics}
+
+You have three central choices for making graphics in R:
+
+\begin{itemize}
+    \item "Base graphics"
+    \item ggplot2
+    \item lattice
+\end{itemize}
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Understanding the ``grammar'' of ggplot2}
+
+The grammar ...
+
+\begin{itemize}
+    \item geom 
+    \item aesthetics (`aes`)
+    \item scales
+    \item facets
+    \item data
+    \item ... and more here: \href{http://ggplot2.tidyverse.org/reference/}{http://ggplot2.tidyverse.org/reference/}
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{What is a ``geom''?}
+
+From \href{http://ggplot2.org/resources/2007-vanderbilt.pdf}{Hadley}:
+
+\begin{itemize}
+    \item Geoms define the basic ``shape'' of the elements on the plot
+    \item Basics: point, line, bar, text, hline, vline
+    \item Statistics: histogram, smooth, density
+    \item Others: boxplot, pointrange, linerange, ribbon
+\end{itemize}
+
+For more info check out the documentation: \href{http://docs.ggplot2.org/current/}{http://docs.ggplot2.org/current}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{What are ``aesthetics''?}
+
+Aesthetics define a mapping between data and the display.\footnote{Figure credits: \href{http://ggplot2.org/resources/2007-vanderbilt.pdf}{Hadley Wickham}}
+
+\includegraphics[width=\textwidth]{figure-static/aes.png}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{\tt{geom\_point}}
+
+
+Each geom has a different set of aesthetics.
+
+What aesthetics do we need for {\tt geom\_point}?
+
+\uncover<2>{
+\begin{itemize}
+    \item x (required)
+    \item y (required)
+    \item alpha
+    \item color
+    \item fill
+    \item shape
+    \item size
+\end{itemize}
+}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{\tt{geom\_line}}
+
+
+What aesthetics do we need for {\tt geom\_line}?
+
+\uncover<2>{
+\begin{itemize}
+    \item x (required)
+    \item y (required)
+    \item alpha
+    \item color
+    \item linetype
+    \item size
+\end{itemize}
+}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+
+\centering
+\Huge more examples
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \begin{frame}{The Bachelorette\footnote{https://fivethirtyeight.com/features/the-bachelorette/}}
 
 \centering 
@@ -248,119 +372,6 @@ data(NHANES)
 
 \end{frame}
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-
-\centering
-\Huge \tt ggplot2
-
-
-\end{frame}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{Choices for R graphics}
-
-You have three central choices for making graphics in R:
-
-\begin{itemize}
-    \item "Base graphics"
-    \item ggplot2
-    \item lattice
-\end{itemize}
-
-
-\end{frame}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}[fragile]{Understanding the ``grammar'' of ggplot2}
-
-The grammar ...
-
-\begin{itemize}
-    \item geom 
-    \item aesthetics (`aes`)
-    \item scales
-    \item facets
-    \item data
-    \item ... and more here: \href{http://ggplot2.tidyverse.org/reference/}{http://ggplot2.tidyverse.org/reference/}
-\end{itemize}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}[fragile]{What is a ``geom''?}
-
-From \href{http://ggplot2.org/resources/2007-vanderbilt.pdf}{Hadley}:
-
-\begin{itemize}
-    \item Geoms define the basic ``shape'' of the elements on the plot
-    \item Basics: point, line, bar, text, hline, vline
-    \item Statistics: histogram, smooth, density
-    \item Others: boxplot, pointrange, linerange, ribbon
-\end{itemize}
-
-For more info check out the documentation: \href{http://docs.ggplot2.org/current/}{http://docs.ggplot2.org/current}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}[fragile]{What are ``aesthetics''?}
-
-Aesthetics define a mapping between data and the display.\footnote{Figure credits: \href{http://ggplot2.org/resources/2007-vanderbilt.pdf}{Hadley Wickham}}
-
-\includegraphics[width=\textwidth]{figure-static/aes.png}
-
-\end{frame}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}[fragile]{\tt{geom\_point}}
-
-
-Each geom has a different set of aesthetics.
-
-What aesthetics do we need for {\tt geom\_point}?
-
-\uncover<2>{
-\begin{itemize}
-    \item x (required)
-    \item y (required)
-    \item alpha
-    \item color
-    \item fill
-    \item shape
-    \item size
-\end{itemize}
-}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}[fragile]{\tt{geom\_line}}
-
-
-What aesthetics do we need for {\tt geom\_line}?
-
-\uncover<2>{
-\begin{itemize}
-    \item x (required)
-    \item y (required)
-    \item alpha
-    \item color
-    \item linetype
-    \item size
-\end{itemize}
-}
-\end{frame}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
