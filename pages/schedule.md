@@ -18,7 +18,7 @@ Month &nbsp; | Day   |     | Topic |  Notes &nbsp;   | HW Due &nbsp;  | Reading
      | Wed, 12|    ||| Lab 1 - Group Write-Up| 
      | Th, 13|     |  | [discussion](../assets/labs/lab1-data/lab1-data.pdf) | [Lab 1](../assets/labs/lab1-data/lab1-discussion.pdf) &nbsp; &nbsp; | [gaydar critique](http://www.stat.columbia.edu/~gelman/research/unpublished/gaydar5.pdf), [orig. paper](https://psyarxiv.com/hv28a/)
      | Fri, 14|    |   | | Lab 1 - Ind Write-Up|
-     | Tu, 18|     | Data visualization and summary | <!--[Lec 3](../assets/lectures/lecture3-data-viz/lecture3-data-viz.pdf)--> |  | [Data viz reading list](data-viz-reading-list.html), Kaplan 3
+     | Tu, 18|     | Data visualization and summary | [Lec 3](../assets/lectures/lecture3-data-viz/lecture3-data-viz.pdf) |  | [Data viz reading list](data-viz-reading-list.html), Kaplan 3
      | Th, 20|     |    | | [Lab 2 topic](https://goo.gl/forms/q9G3ABH1m7wuyOaI3) | 
      | Fr, 21|     |    | | [CC1](../assets/challenges/coding-challenge-1.pdf) | 
      | Tu, 25|     | Language of Models | <!--[Lec 4](../assets/lectures/lecture4-models/lecture4-model-language.pdf) --> || Kaplan 6, 7  
