@@ -94,6 +94,7 @@ _Tuesday, week 3_
 
  - CDC trip recap
  - reading assignment reminder
+ - CC1 introduce
  - TA office hours update
  - introduce Lab 2
  - NYT graphic interpretation??

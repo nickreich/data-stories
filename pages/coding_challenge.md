@@ -20,8 +20,9 @@ Total Homework Grade: 160/200 (80%)
 
 Coming soon...
 
-<!-- - [BC 1](../assets/challenges/biweekly-challenge-1.pdf)
- - [BC1 Answer Key](../assets/challenges/biweekly-challenge-1-answers.pdf)
+ - [CC1](../assets/challenges/coding-challenge-1.pdf)
+ 
+<!--  - [BC1 Answer Key](../assets/challenges/biweekly-challenge-1-answers.pdf)
  - [BC 2](../assets/challenges/biweekly-challenge-2.pdf)
  - [BC 3](../assets/challenges/biweekly-challenge-3.pdf)
  - [BC 4](../assets/challenges/biweekly-challenge-4.pdf)
