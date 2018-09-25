@@ -21,9 +21,14 @@ The aim of this course is to provide students with the skills necessary to tell 
 Office hours: Tuesday 2:30-3:30pm, Arnold 425
 
 **TAs**: Bianca Doone
+Office hours: Thurs 2:30-4, Arnold Rm 4
 
 **Undergrad Course Assistants**: Julianne Higgins, Apoorva Karpurapu, Sinduja Manchi, Malachai Purgahn, Sameeiya Saffiullah, Angus Wong\\
-Office hours: TBD
+Office hours: \\
+Mon 5:30-6:30, Arnold 103\\
+Weds 11:15-12:05 LGRT 1234\\
+Fri 12:20-1:10, Machmer 413
+
 
 **Prerequisites**: <br> 
 One of any of the following introductory stats courses taught at UMass: BIOSTAT 391B, STAT 240, STAT 501, ResEcon 212, PSYCH 240. If you have not taken an intro stats course at UMass but still want to enroll in this course, you are encouraged to petition the instructor for permission, especially if any of the following apply: (a) you have taken AP Stats in high school, (b) you have taken a college-level intro stats course just not one of the ones listed above, or (c) you are confident in your quantitative skills and your ability to succeed in a fast-paced, advanced introductory course.
