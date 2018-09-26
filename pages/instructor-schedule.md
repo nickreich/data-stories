@@ -108,6 +108,7 @@ _Thurs, week 3_
 
 _Tues, week 4_
  
+ - lab 2 due Fri (topics have been reviewed), office hours posted, videos on simple regression online, questions about HW feedback 
  - Lecture 4: Language of models
  - Minute 1-5 of Hadley's talk:
  https://channel9.msdn.com/Events/useR-international-R-User-conference/useR2016/Towards-a-grammar-of-interactive-graphics
@@ -115,15 +116,10 @@ _Tues, week 4_
 _Thurs, week 4_
 
  - announcements: 
-    new schedule webpage
-    reminder: Linear regression basics lectures on youtube
-    introduction: challenges
-    ok to switch topics for lab
  - SLR basic concepts overview
  - Lab 3 (slr) work session.
 
 _Tues, week 5_
- - changing office hours to 2:30-3:30 on Tues, also available by appt if needed
  - quiz: linear regression
  - Exercise on smoothing and overfitting
  - lab 3 wrap-up

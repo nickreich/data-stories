@@ -20,7 +20,7 @@ knit_hooks$set(source = function(x, options) {
 
 An abundance of research has been done to assess the direct health impacts of cigarette smoke. Studies have also investigated the effects that different cigarette brands have on the environment based on their chemical make-ups. While each chemical in cigarettes are considered hazardous to the smoker's health by the United States Surgeon General, in this lab we will be interested in seeing if there is an association between the amount of chemicals and the amount of carbon monoxide emitted into the environment. 
 
-This lab is due at 5pm on Thursday, October 5th. You should submit your assignment, in the form of a knitted RMarkdown PDF file by uploading it to your personal Google Drive folder that is shared with the TAs and the instructor. While you may collaborate with other students on this assignment, you must write up your own code and answers to the questions. Absolutely no cutting and pasting of any portion of the answers. Please note that to generate the PDF file directly from RStudio, you will need to install LaTeX, a PDF typesetting program. This will allow the RMarkdown file to generate the PDF directly. This assignment, like the others, will be worth 50 points.
+This lab is due at 5pm on Friday, October 5th. You should submit your assignment, in the form of a knitted RMarkdown PDF file by uploading it to your personal Google Drive folder that is shared with the TAs and the instructor. While you may collaborate with other students on this assignment, you must write up your own code and answers to the questions. Absolutely no cutting and pasting of any portion of the answers. Please note that to generate the PDF file directly from RStudio, you will need to install LaTeX, a PDF typesetting program. This will allow the RMarkdown file to generate the PDF directly. This assignment, like the others, will be worth 50 points.
 
 \subsection*{The data (5 points)}
 
@@ -43,7 +43,7 @@ If the relationship looks linear, we can quantify the strength of the relationsh
 cor(cigs$CO, cigs$tar)
 @
 
-\subsection*{Sum of squared residuals (10 points)}
+\subsection*{Sum of squared residuals (5 points)}
 Think back to the way that we described the distribution of a single variable. Recall that we discussed characteristics such as center, spread, and shape.  It's also useful to be able to describe the relationship of two numerical variables, such as \hlkwd{CO} and \hlkwd{tar} above.
 
 \begin{exercise}
@@ -75,7 +75,7 @@ Try running the above command again, this time with a line that is not a good fi
 Run this code several more times trying to minimize the sum of squares each time. What is the smallest sum of squares you can obtain? How does it compare to your neighbors? Compared to the first line you drew, what adjustments did you make to reduce the RSS?
 \end{exercise}
 
-\subsection*{The linear model (10 points)}
+\subsection*{The linear model (15 points)}
 
 It is rather cumbersome to try to get the correct least squares line, i.e. the line that minimizes the sum of squared residuals, through trial and error. Instead we can use the \hlkwd{lm} function in R to fit the linear model (a.k.a. regression line).
 
