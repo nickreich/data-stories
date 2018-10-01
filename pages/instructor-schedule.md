@@ -116,12 +116,23 @@ _Tues, week 4_
 _Thurs, week 4_
 
  - announcements: 
+ - Piazza announcement: 
+We will be spending the rest of this week and all of next week on linear regression. I have posted Lab 3 on the schedules page of the website. It is due next Friday, Oct 5. To complete this lab, and to keep up with the discussions in class, you will need to read the textbook (chapters 6-7 this week, chapters 8-9 next week) and watch the content in the OpenIntro YouTube playlist called "Intro to Linear Regression". The playlist is 4 videos and all together is less than 20 minutes. 
+
+Note that the content on the videos and in the book is not content that we are covering in class, so I am expecting that you will watch these and do the reading on your own. They will provide useful perspective, additional depth, and technical details to supplement what we cover in class. 
+
+The content in both the book and the videos will be needed to complete Lab 3 and all of that content will be fair game to be included on the midterm exam.
+
+Let me or the other instructors know if you have any questions!
  - SLR basic concepts overview
  - Lab 3 (slr) work session.
 
 _Tues, week 5_
+ - announcements:
+    - ask students to identify challenges they faced in reproducing code.
+    - 
  - quiz: linear regression
- - Exercise on smoothing and overfitting
+ - lecture: splines, with Exercise on smoothing and overfitting
  - lab 3 wrap-up
 
 _Thurs, week 5_
@@ -133,9 +144,6 @@ _Thurs, week 5_
     - validation: see test sample exercise
     - diagnostics: residual analysis
  - announcements: 
-    - post R questions on the #r thread!
-    - don't show up late to class
-    - office hours confirmation.
 
 _Tues, week 6_
 

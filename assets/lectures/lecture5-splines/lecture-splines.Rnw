@@ -43,7 +43,7 @@ opts_chunk$set(fig.path='figs/beamer-',fig.align='center',fig.show='hold',size='
         \titlepage
 \end{frame}
 
-<<ggplot2, echo=FALSE, message=FALSE>>=
+<<ggplot2, echo=FALSE, message=FALSE, warning=FALSE>>=
 require(ggplot2)
 theme_set(theme_bw())
 @
@@ -76,7 +76,7 @@ More info:
 \item The {\color{orange} mean squared error (MSE)} is the most commonly used measure of the performance of a statistical learning method in the regression setting:
 %
 \begin{eqnarray*}
-MSE = \frac{1}{n} \sum_{i=1}^n \left(y_i -\hat y_i)\right)^2
+MSE = \frac{1}{n} \sum_{i=1}^n \left(y_i -\hat y_i\right)^2
 \end{eqnarray*}
 
 \bigskip
@@ -136,8 +136,8 @@ head(FEV)
 <<>>=
 set.seed(756)  ## so we all get the same result
 idx_test <- sample(1:nrow(FEV), size=200) ## 200 test observations
-fev_train <- FEV[-idx_test,]
-fev_test <- FEV[idx_test,]
+fev_train <- FEV[-idx_test,]    ## removing all test observations 
+fev_test <- FEV[idx_test,]      ## leaving all test observations
 ggplot(fev_train, aes(height, fev)) + geom_point() + 
   geom_smooth(method="lm", se=FALSE)
 @
