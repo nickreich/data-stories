@@ -139,10 +139,8 @@ _Thurs, week 5_
  - announcements: 
     - looking for TAs for next semester
     - UGrid?
-    - 
+ - QUIZ!
  - Lecture 6: model validation vs. model diagnostics
-   - validation: see test sample exercise
-   - diagnostics: residual analysis
 
 _Tues, week 6_
 
