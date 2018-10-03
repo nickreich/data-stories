@@ -136,14 +136,13 @@ _Tues, week 5_
  - lab 3 wrap-up
 
 _Thurs, week 5_
- - wrap-up on test data exercise: 
-    - 5 min group check-in
-    - 10 min group presentations
-    - 5 min, finish slides
-  - Lecture 6: model validation vs. model diagnostics
-    - validation: see test sample exercise
-    - diagnostics: residual analysis
  - announcements: 
+    - looking for TAs for next semester
+    - UGrid?
+    - 
+ - Lecture 6: model validation vs. model diagnostics
+   - validation: see test sample exercise
+   - diagnostics: residual analysis
 
 _Tues, week 6_
 

@@ -1,7 +1,7 @@
 ---
-title: "Quiz 1: Interpreting Regression Coefficients"
+title: "Quiz: Interpreting Regression Coefficients"
 author: "Nicholas Reich, adapted from Project MOSAIC"
-date: "October 3, 2017"
+date: "October 4, 2018"
 output: html_document
 ---
 
@@ -9,7 +9,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-The quiz is available at this link https://goo.gl/forms/BjoQZBF6iZPckweB2.
+The quiz is available at this link https://goo.gl/forms/Ba4z3jwdK7cUrQC92.
 
 Please note, your performance on this quiz will not contribute to your course grade. It is designed to give both you and the instructors feedback on your progress and understanding of the material.
 
