@@ -25,7 +25,7 @@ Month &nbsp; | Day   |     | Topic |  Notes &nbsp;   | HW Due &nbsp;  | Reading
      | Th, 27|     | Linear Regression | [Lec 4 w/markup](../assets/lectures/lecture4-models/lecture4-model-language-annotated.pdf) | | 
      | Fri, 28|    |    |  | [Lab 2](../assets/labs/lab2-blog/lab2-blog.pdf)|
  Oct | Tu,  2|     | Linear Regression | [Lec 5](../assets/lectures/lecture5-splines/lecture-splines.pdf) || Kaplan 8-9, OI 7, [OI Videos](https://www.youtube.com/playlist?list=PLkIselvEzpM63ikRfN41DNIhSgzboELOM) 
-     | Th,  4|     | Linear Regression | <!--[Lec 6](../assets/lectures/lecture6-regress/lecture6-regress.pdf) -->|  | [OI Videos](https://www.youtube.com/playlist?list=PLkIselvEzpM5f1HYzIjFt52SD4izsJ2_I)  
+     | Th,  4|     | Linear Regression | [Lec 6](../assets/lectures/lecture6-regress/lecture6-regress.pdf) |  | [OI Videos](https://www.youtube.com/playlist?list=PLkIselvEzpM5f1HYzIjFt52SD4izsJ2_I)  
      | Fri, 5|    |    | | [Lab 3](../assets/labs/lab3-regress/lab3-regress.pdf) |
      | Tu, 9|     | _No Class_ |   | | 
      | Th, 11|     | Logistic regression | <!-- [Lec 7](../assets/lectures/lecture7-logistic/lecture7-logistic.pdf)--> || Kaplan 16, OI 8, [OI Video](https://www.youtube.com/watch?v=uYC2eLVSpI8&list=PLkIselvEzpM5f1HYzIjFt52SD4izsJ2_I&index=4)
