@@ -139,7 +139,7 @@ _Thurs, week 5_
  - announcements: 
     - looking for TAs for next semester
     - UGrid?
- - QUIZ!
+ - QUIZ! https://nickreich.github.io/data-stories/pages/quiz1-doc.html
  - Lecture 6: model validation vs. model diagnostics
 
 _Tues, week 6_

@@ -156,13 +156,15 @@ Intuitively, ``influence'' is a combination of outlying-ness and leverage. More 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}[fragile]{Poverty data}
-<<echo=FALSE>>=
+<<echo=FALSE, message=FALSE, warning=FALSE>>=
+library(ggplot2)
+theme_set(theme_bw())
 poverty = read.table("../old-lecture5-slr/7-1_linefit_res_corr/figures/poverty/poverty.txt", 
                      h = T, sep = "\t")
 names(poverty) = c("state", "metro_res", "white", "hs_grad", "poverty", "female_house")
 @
 
-This is a dataset with the \% of residents living below the poverty line, as well as some demographic characteristics of states:
+This is a dataset on US states, containing the \% of residents living below the poverty line, as well as some demographic characteristics of states:
 \begin{itemize}
   \myitem \% living in a metro region
   \myitem \% white
@@ -170,7 +172,66 @@ This is a dataset with the \% of residents living below the poverty line, as wel
   \myitem \% with female head-of-household
 \end{itemize}
 
+\scriptsize
+<<>>=
+head(poverty)
+@
+
+
 \end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Poverty data: poverty vs \% of female HH head}
+\scriptsize
+<<fig.height=4>>=
+ggplot(poverty, aes(x=female_house, y=poverty)) + geom_point()
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Poverty data: poverty vs \% white}
+\scriptsize
+<<fig.height=4>>=
+ggplot(poverty, aes(x=white, y=poverty)) + geom_point()
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Poverty data: poverty vs \% white}
+\scriptsize
+<<fig.height=4>>=
+ggplot(poverty, aes(x=white, y=poverty, label=state)) + geom_text()
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Poverty data: \% white vs \% of female HH head}
+\scriptsize
+<<fig.height=4>>=
+ggplot(poverty, aes(x=female_house, y=white)) + geom_point()
+@
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]{Example multiple linear regression model}
+
+Let's say we are interested in looking at the associations of race and household makeup on poverty at the state level. We could start with a regression model as follows:
+
+$$  \widehat{poverty} = \beta_0 + \beta_1 \cdot pct\_white + \beta_2 \cdot pct\_female\_hh  $$
+
+
+\end{frame}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -190,7 +251,8 @@ plot(mlr, which=1)
 
 \begin{frame}[fragile]{Example diagnostic plots with poverty data}
 
-You can use the {\tt plot.lm()} function to look at leverage, outlying-ness, and influence all together. 
+You can use the {\tt plot.lm()} function to look at leverage, outlying-ness, and influence all together. (Note: when you call {\tt plot()} on an {\tt lm} object, i.e. the output from a call to {\tt lm} then you are really using the function {\tt plot.lm()}.)
+
 \scriptsize
 <<levPlots1, fig.height=4, tidy=FALSE>>=
 mlr = lm(poverty ~ female_house + white, data = poverty)
@@ -230,6 +292,7 @@ colMeans(poverty[,2:6])
 \end{block}
 
 No points show worrisome influence in this poverty data analysis, although observation 12 was high leverage. 
+
 
 
 \end{frame}
