@@ -140,7 +140,8 @@ _Thurs, week 5_
     - looking for TAs for next semester
     - UGrid?
  - QUIZ! https://nickreich.github.io/data-stories/pages/quiz1-doc.html
- - Lecture 6: model validation vs. model diagnostics
+ - went over quiz on whiteboard, with diagrams/explanations of slopes of models with and without interaction
+ - Lecture 6: model validation vs. model diagnostics (left model selection to later)
 
 _Tues, week 6_
 

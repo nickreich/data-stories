@@ -29,7 +29,7 @@ Month &nbsp; | Day   |     | Topic |  Notes &nbsp;   | HW Due &nbsp;  | Reading
      | Fri, 5|    |    | | [Lab 3](../assets/labs/lab3-regress/lab3-regress.pdf) |
      | Tu, 9|     | _No Class_ |   | | 
      | Th, 11|     | Logistic regression | <!-- [Lec 7](../assets/lectures/lecture7-logistic/lecture7-logistic.pdf)--> || Kaplan 16, OI 8, [OI Video](https://www.youtube.com/watch?v=uYC2eLVSpI8&list=PLkIselvEzpM5f1HYzIjFt52SD4izsJ2_I&index=4)
-     | Fri, 12|    |   | | Lab 4|
+     | Fri, 12|    |   | | [Lab 4](../assets/labs/lab4-interact/lab4-interact.pdf)|
      | Tu, 16|     | Understanding Uncertainty | <!--[Lec 8](../assets/lectures/lecture8-confidence/lecture8-inference.pdf), [Suppl](../assets/lectures/lecture8-confidence/lecture8-activity.html) -->| |  Kaplan 11-13
      | Th, 18|     | Understanding Uncertainty |  <!--[Lec 9](../assets/lectures/lecture9-intervals/lecture9-intervals.pdf), [Suppl](../assets/lectures/lecture9-intervals/lecture9-activity.Rmd)-->  | || 
      | Fri, 19|    |    | | Lab 5|
