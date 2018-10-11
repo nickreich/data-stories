@@ -30,26 +30,27 @@ Month &nbsp; | Day   |     | Topic |  Notes &nbsp;   | HW Due &nbsp;  | Reading
      | Tu, 9|     | _No Class_ |   | | 
      | Th, 11|     | Logistic regression | <!-- [Lec 7](../assets/lectures/lecture7-logistic/lecture7-logistic.pdf)--> || Kaplan 16, OI 8, [OI Video](https://www.youtube.com/watch?v=uYC2eLVSpI8&list=PLkIselvEzpM5f1HYzIjFt52SD4izsJ2_I&index=4)
      | Fri, 12|    |   | | [Lab 4](../assets/labs/lab4-interact/lab4-interact.pdf)|
-     | Tu, 16|     | Understanding Uncertainty | <!--[Lec 8](../assets/lectures/lecture8-confidence/lecture8-inference.pdf), [Suppl](../assets/lectures/lecture8-confidence/lecture8-activity.html) -->| |  Kaplan 11-13
-     | Th, 18|     | Understanding Uncertainty |  <!--[Lec 9](../assets/lectures/lecture9-intervals/lecture9-intervals.pdf), [Suppl](../assets/lectures/lecture9-intervals/lecture9-activity.Rmd)-->  | || 
+     | Tu, 16|     | Project  | | | 
+     | Th, 18|     | Project  | | | 
      | Fri, 19|    |    | | Lab 5|
-     | Tu, 23|     | Understanding Uncertainty | || Kaplan 14-15
-     | Th, 25|     | Understanding Uncertainty |  | | 
-     | Fri, 26|    |    | | Lab 6|
-     | Tu, 30|     |  | | <!--[Lab 6](../assets/labs/lab6-infer/lab6-infer.pdf)--> | 
- Nov | Th,  1|     | Professional Ethics | | | [MDSR 6](http://mdsr-book.github.io/excerpts/mdsr-ethics.pdf)
-     | Fri, 2|     |    | | Lab 7, CC2|
-     | Tu,  6|     | Midterm review | | <!--[Lab 7](../assets/labs/lab7-predict/lab7-predict.pdf)--> | 
-     | Th,  8|     | Midterm exam   | | | 
-     | Tu, 13|     | Project  | | | 
-     | Th, 15|     | Project  | | | 
-     | Fri, 16|    |          | | CC3|
+     | Tu, 23|     | Project, Missing data  | <!--[Lec 10](../assets/lectures/lecture10-impute/lecture10-impute.pdf)--> ||
+     | Th, 25|     | Project  | | | 
+     | Fri, 26|    |    | | CC2 |
+     | Tu, 30|     | Project  | | | 
+ Nov | Th,  1|     | Project  | | | 
+     | Fri, 2|     |    | | CC3 |
+     | Tu,  6|     | Project  | | |  
+     | Th,  8|     |    | | | 
+     | Mo, 12|     | Projects due   | | | 
+     | Tu, 13|     | Understanding Uncertainty | <!--[Lec 8](../assets/lectures/lecture8-confidence/lecture8-inference.pdf), [Suppl](../assets/lectures/lecture8-confidence/lecture8-activity.html) -->| |  Kaplan 11-13
+     | Th, 15|     | Understanding Uncertainty |  <!--[Lec 9](../assets/lectures/lecture9-intervals/lecture9-intervals.pdf), [Suppl](../assets/lectures/lecture9-intervals/lecture9-activity.Rmd)-->  | ||
+     | Fri, 16|    |          | | CC4 |
      | Tu, 20|     | _Thanksgiving_   | | |
      | Th, 22|     | _Thanksgiving_    | | | 
-     | Tu, 27|     | Project, Missing data  | <!--[Lec 10](../assets/lectures/lecture10-impute/lecture10-impute.pdf)--> || 
-     | Th, 29|     | Project  | | | 
-     | Fri, 30|    |          | | CC4|
- Dec | Tu,  4|     |  | | |
-     | Th,  6|     | Projects | | | 
-     | Fri, 7|     |     | | CC5|
-     | Tu, 11|     | Final Projects | | |
+     | Tu, 27|     | Understanding Uncertainty | || Kaplan 14-15 
+     | Th, 29|     | Understanding Uncertainty | || Kaplan 14-15
+     | Fri, 30|    |          | | Lab 6 <!--[](../assets/labs/lab6-infer/lab6-infer.pdf)-->|
+ Dec | Tu,  4|     | Professional Ethics | | | [MDSR 6](http://mdsr-book.github.io/excerpts/mdsr-ethics.pdf)
+     | Th,  6|     | Final exam review | | |
+     | Fri, 7|     |     | | Lab 7 |
+     | Tu, 11|     | Final Exam | | |

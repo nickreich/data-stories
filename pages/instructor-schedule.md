@@ -100,6 +100,7 @@ _Tuesday, week 3_
  - NYT graphic interpretation??
  - Lecture 3: exploratory data analysis/ intro to data viz.
  - exercise with visualizing NHANES data
+ - added from last year: NEED TO COVER INSTALLING LATEX AND KNITTING TO PDF.
 
 _Thurs, week 3_
 
@@ -149,8 +150,10 @@ _Tues, week 6_
 
 _Thurs, week 6_
 
+ - announcements: must install latex and get it working!, what is latex, how to work in RStudio console vs. notebook vs. scripts, don't wait until last minue to do homework!, public health data challenge!
+ - public health data challenge: will need input about what topics people want to cover during class
  - Lecture 7: logistic regression
- - activity: binned residual plots
+ - activity: binned residual plots at end of lecture 7
 
 _Tues, week 7_
 
