@@ -33,7 +33,7 @@ Month &nbsp; | Day   |     | Topic |  Notes &nbsp;   | HW Due &nbsp;  | Reading
      | Tu, 16|     | Project  | | | 
      | Th, 18|     | Project  | | | 
      | Fri, 19|    |    | | <!--Lab 5-->|
-     | Tu, 23|     | Project, Missing data  | <!--[Lec 10](../assets/lectures/lecture10-impute/lecture10-impute.pdf)--> ||
+     | Tu, 23|     | Project  | <!--[Lec 10](../assets/lectures/lecture10-impute/lecture10-impute.pdf)--> ||
      | Th, 25|     | Project  | | | 
      | Fri, 26|    |    | | <!--CC2--> |
      | Tu, 30|     | Project  | | | 
