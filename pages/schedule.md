@@ -32,25 +32,27 @@ Month &nbsp; | Day   |     | Topic |  Notes &nbsp;   | HW Due &nbsp;  | Reading
      | Fri, 12|    |   | | [Lab 4](../assets/labs/lab4-interact/lab4-interact.pdf)|
      | Tu, 16|     | Project  | | | 
      | Th, 18|     | Project  | | | 
-     | Fri, 19|    |    | | <!--Lab 5-->|
+     | Fri, 19|    |    | | |
      | Tu, 23|     | Project  | <!--[Lec 10](../assets/lectures/lecture10-impute/lecture10-impute.pdf)--> ||
      | Th, 25|     | Project  | | | 
-     | Fri, 26|    |    | | <!--CC2--> |
+     | Fri, 26|    |    | | [CC2](../assets/challenges/coding-challenge-2.pdf)|
      | Tu, 30|     | Project  | | | 
  Nov | Th,  1|     | Project  | | | 
-     | Fri, 2|     |    | | <!--CC3--> |
+     | Fri, 2|     |    | | CC3 |
      | Tu,  6|     | Project  | | |  
      | Th,  8|     |    | | | 
+     | Fri, 9|     |    | | CC4|
      | Mo, 12|     | Projects due   | | | 
      | Tu, 13|     | Understanding Uncertainty | <!--[Lec 8](../assets/lectures/lecture8-confidence/lecture8-inference.pdf), [Suppl](../assets/lectures/lecture8-confidence/lecture8-activity.html) -->| |  Kaplan 11-13
      | Th, 15|     | Understanding Uncertainty |  <!--[Lec 9](../assets/lectures/lecture9-intervals/lecture9-intervals.pdf), [Suppl](../assets/lectures/lecture9-intervals/lecture9-activity.Rmd)-->  | ||
-     | Fri, 16|    |          | | <!--CC4--> |
+     | Fri, 16|    |          | | |
      | Tu, 20|     | _Thanksgiving_   | | |
      | Th, 22|     | _Thanksgiving_    | | | 
      | Tu, 27|     | Understanding Uncertainty | || Kaplan 14-15 
      | Th, 29|     | Understanding Uncertainty | || Kaplan 14-15
-     | Fri, 30|    |          | | <!--Lab 6--> <!--[](../assets/labs/lab6-infer/lab6-infer.pdf)-->|
+     | Fri, 30|    |          | | Lab 5 |
  Dec | Tu,  4|     | Professional Ethics | | | [MDSR 6](http://mdsr-book.github.io/excerpts/mdsr-ethics.pdf)
      | Th,  6|     | Final exam review | | |
-     | Fri, 7|     |     | | <!--Lab 7--> |
+     | Fri, 7|     |     | | Lab 6<!--(../assets/labs/lab6-infer/lab6-infer.pdf)-->|
      | Tu, 11|     | Final Exam | | |
+     | Fri, 14|    |    |  | CC5 |
