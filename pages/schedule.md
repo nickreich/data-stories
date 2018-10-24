@@ -35,10 +35,10 @@ Month &nbsp; | Day   |     | Topic |  Notes &nbsp;   | HW Due &nbsp;  | Reading
      | Fri, 19|    |    | | |
      | Tu, 23|     | Project  | <!--[Lec 10](../assets/lectures/lecture10-impute/lecture10-impute.pdf)--> ||
      | Th, 25|     | Project  | | | 
-     | Fri, 26|    |    | | [CC2](../assets/challenges/coding-challenge-2.pdf)|
-     | Tu, 30|     | Project  | | | 
+     | Fri, 26|    |    | | [CC2](../assets/challenges/coding-challenge-2.pdf) |
+     | Tu, 30|     | Project  | | [CC3](../assets/challenges/coding-challenge-3.pdf) | 
  Nov | Th,  1|     | Project  | | | 
-     | Fri, 2|     |    | | CC3 |
+     | Fri, 2|     |    | | |
      | Tu,  6|     | Project  | | |  
      | Th,  8|     |    | | | 
      | Fri, 9|     |    | | CC4|
