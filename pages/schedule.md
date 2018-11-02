@@ -41,7 +41,7 @@ Month &nbsp; | Day   |     | Topic |  Notes &nbsp;   | HW Due &nbsp;  | Reading
      | Fri, 2|     |    | | |
      | Tu,  6|     | Project  | | |  
      | Th,  8|     |    | | | 
-     | Fri, 9|     |    | | CC4|
+     | Fri, 9|     |    | | [CC4](../assets/challenges/coding-challenge-4.pdf) |
      | Mo, 12|     | Projects due   | | | 
      | Tu, 13|     | Understanding Uncertainty | <!--[Lec 8](../assets/lectures/lecture8-confidence/lecture8-inference.pdf), [Suppl](../assets/lectures/lecture8-confidence/lecture8-activity.html) -->| |  Kaplan 11-13
      | Th, 15|     | Understanding Uncertainty |  <!--[Lec 9](../assets/lectures/lecture9-intervals/lecture9-intervals.pdf), [Suppl](../assets/lectures/lecture9-intervals/lecture9-activity.Rmd)-->  | ||
