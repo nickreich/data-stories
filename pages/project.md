@@ -10,7 +10,9 @@ The Public Health Data Challenge requires each group to hand in the following it
  - A ten-slide presentation summarizing the key findings.
  - A 500 word technical write-up describing the details of your analysis.
 
-Each team will create a Google Drive folder and should submit the above materials to that folder in addition to submitting them officially to the challenge website. Additionally, each individual student will hand in a separate detailed write-up that describes the analyses that they contributed to their group analysis (see below).
+You hand in the items by sending an email to the project organizers at the ASA. When you send your email, please CC the instructor, Nick Reich, as well.
+
+Each team should also create a Google Drive folder and should submit the above materials to that folder in addition to submitting them officially to the challenge. Additionally, each individual student will hand in a separate detailed write-up that describes the analyses that they contributed to their group analysis (see below). All of these items should be placed in the shared Google Drive folder by the due date.
 
 #### Guidelines for the group write-up
 
@@ -53,9 +55,8 @@ As an example: Your group receives 50/60 points for the "final product produced 
 * Thurs Oct 18: Background paper discussions
 * Thurs Nov 1: Group presentations of draft slides
 * Tues Nov 6: Group presentations of draft slides
-* Thurs Nov 8: Peer feedback on individual presentations
-* Mon Nov 12: Group project submitted
-* Fri Nov 16: Individual project write-up submitted
+* Mon Nov 12: Group project submitted by 11:59pm
+* Fri Nov 16: Individual project write-up submitted by 5pm
 
 
 
