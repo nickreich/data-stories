@@ -43,14 +43,14 @@ Month &nbsp; | Day   |     | Topic |  Notes &nbsp;   | HW Due &nbsp;  | Reading
      | Th,  8|     |    | | | 
      | Fri, 9|     |    | | [CC4](../assets/challenges/coding-challenge-4.pdf) |
      | Mo, 12|     | Projects due   | | | 
-     | Tu, 13|     | Understanding Uncertainty | <!--[Lec 8](../assets/lectures/lecture8-confidence/lecture8-inference.pdf), [Suppl](../assets/lectures/lecture8-confidence/lecture8-activity.html) -->| |  Kaplan 11-13
-     | Th, 15|     | Understanding Uncertainty |  <!--[Lec 9](../assets/lectures/lecture9-intervals/lecture9-intervals.pdf), [Suppl](../assets/lectures/lecture9-intervals/lecture9-activity.Rmd)-->  | ||
-     | Fri, 16|    |          | | |
+     | Tu, 13|     | Understanding Uncertainty | [Lec 8](../assets/lectures/lecture8-confidence/lecture8-inference.pdf) | |  Kaplan 11-13
+     | Th, 15|     | Understanding Uncertainty | [Suppl](../assets/lectures/lecture8-confidence/lecture8-activity.html) | ||
+     | Fri, 16|    |          | |  |
      | Tu, 20|     | _Thanksgiving_   | | |
      | Th, 22|     | _Thanksgiving_    | | | 
-     | Tu, 27|     | Understanding Uncertainty | || Kaplan 14-15 
+     | Tu, 27|     | Understanding Uncertainty |   [Lec 9](../assets/lectures/lecture9-intervals/lecture9-intervals.pdf), [Suppl](../assets/lectures/lecture9-intervals/lecture9-activity.Rmd)  |  | Kaplan 14-15 
      | Th, 29|     | Understanding Uncertainty | || Kaplan 14-15
-     | Fri, 30|    |          | | Lab 5 |
+     | Fri, 30|    |          | |  Lab 5<!-- [Lab 5](../assets/labs/lab5-logit/lab5-logit.pdf)-->  |
  Dec | Tu,  4|     | Professional Ethics | | | [MDSR 6](http://mdsr-book.github.io/excerpts/mdsr-ethics.pdf)
      | Th,  6|     | Final exam review | | |
      | Fri, 7|     |     | | Lab 6<!--(../assets/labs/lab6-infer/lab6-infer.pdf)-->|

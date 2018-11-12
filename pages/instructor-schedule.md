@@ -157,25 +157,60 @@ _Thurs, week 6_
 
 _Tues, week 7_
 
- - Bayesian coin-flipping activity
- - Lecture 8: Understanding uncertainty: coin-flipping, election simulations, etc...
+Project
 
 _Thurs, week 7_
- 
- - Lecture 9: understanding uncertainty - sampling distributions, etc...
- - with activities
+
+Project
 
 _Tues, week 8_
 
- - lab 7 (ipod shuffle) in class
+Project
 
 _Thurs, week 8_
 
+Project
+
+_Tues, week 9_
+
+Project
+
+_Thurs, week 9_
+
+Project
+
+_Tues, week 10_
+
+Project
+
+_Thurs, week 10_
+
+Project
+
+
+_Tues, week 11_
+
+ - Biostats pitch
+ - ReichLab research
+ - Lecture 8: lecture8-inference
+
+_Thurs, week 11_
+ 
+ - Activity from lecture 8
+
+_Tues, week 12_
+
+ - Lecture 9: understanding uncertainty - sampling distributions, etc...
+ - Lecture 9 activity
+
+_Thurs, week 12_
+
  - lab 7 (con't)
+
+<!-- unedited below here -->
 
  _Tues, week 9_
 
- - announcements: career info, survey methods info session
  - hand out old version of exam and discuss differences 
     - logistic regression is fair game this year
     - we have emphasized less the model syntax

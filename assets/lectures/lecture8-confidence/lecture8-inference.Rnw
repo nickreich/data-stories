@@ -86,15 +86,9 @@ Relationships are characterized by parameters in our models.
 
 \ 
 
-These are some tools we use to characterize our uncertainty about these parameters:
-\bi
-  \myitem Likelihood
-  \myitem Posterior distributions
-  \myitem Null distributions
-  \myitem Sampling distributions (``classical'' approach)
-\ei
+e.g. in this model, $\beta_1$ characterizes an assumed relationship between FEV and height
 
-There is no one "best" approach. Some will be right for some circumstances, not right for others. Each make different assumptions.
+$$ \widehat{FEV} = \beta_0 +\beta_1\cdot height $$
 
 \end{frame}
 
@@ -125,7 +119,24 @@ There is no one "best" approach. Some will be right for some circumstances, not 
 \end{frame}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\begin{frame}[fragile]{Likelihood for coin-flipping}
+
+What is the relative likelihood of each $p$ given 10 coin flips and 5 heads? 
+
+$$L(p | X=5, n=10) = {10 \choose 5}\cdot p^5 \cdot (1-p^{10-5})$$
+
+<<echo=FALSE, fig.height=3>>=
+binom_lik_scaled <- function(p, x, n) {
+  dbinom(x=x, size = n, prob = p)/dbinom(x=x, size=n, p=x/n)
+}
+par(mar=c(5, 5, 1, 1))
+curve(binom_lik_scaled(x, 5, 10), xlab="p", ylab="scaled likelihood", col="blue") 
+@
+
+
+\end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}[fragile]{Likelihood for coin-flipping}
@@ -172,8 +183,18 @@ Most (not all) statisticians use likelihood to translate data into knowledge.
 A Bayesian incorporates prior belief into the likelihood. What is your prior belief about what this parameter is? 
 
 \bi
-  \myitem Based on prior scientific studies or observations. e.g. "The laws of physics dictate that this coin is more or less fair, so I think the probability of getting a head should be about 0.5." 
-  \myitem Little or no knowledge can be described as having a {\color{orange}uniform prior}. In this case, Bayesian inference is equivalent to just using the likelihood. 
+  \myitem Based on prior scientific studies or observations. 
+  
+  e.g.``The laws of physics dictate that this coin is more or less fair, so I think the probability of getting a head should be about 0.5." or ``Based on prior studies, there should be a positive association between height and FEV.''
+  
+  \myitem Little knowledge can be described as having a {\color{orange}weakly informative prior}. 
+  
+  e.g. ``Based on common sense, we know that height likely has a moderate effect of FEV, but it could be positive or negative, and we don't really want to make an assumption one way or another.''
+  
+  \myitem No knowledge can be described as having a {\color{orange}uniform prior}. 
+  
+  e.g. ``I have no idea what the relationship between FEV and height should be. it could be anywhere between $-\infty$ and $\infty$.''
+  
 \ei
 
 \end{frame}
@@ -181,14 +202,14 @@ A Bayesian incorporates prior belief into the likelihood. What is your prior bel
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[fragile]{Let's establish the classes prior beliefs}
+\begin{frame}[fragile]{Let's establish the classes prior beliefs about this coin}
 
-Go here to submit your guess: https://goo.gl/RKW8dJ
+Go here to submit your guess: https://goo.gl/forms/bp6PE4ZHXedoJhj92
 
 We are going to use these guesses to create a prior distribution for the collective belief in the class about this coin.
 
 <<eval=FALSE>>=
-probs <- read.csv(file="https://goo.gl/jNDbrv")
+probs <- read.csv(file="https://docs.google.com/spreadsheets/d/e/2PACX-1vTd9GsPDSeBtk5Qfx-2xJ-9vSlIaOF7rNYIbVcgWVnx5UC_yoOnQRoQW6kQTMP5kMlPpNaCqrC8m1Ec/pub?gid=1602296264&single=true&output=csv")
 (probs$prob)
 
 library(MASS)
