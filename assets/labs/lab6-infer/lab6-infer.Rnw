@@ -15,7 +15,7 @@ opts_chunk$set(eval=FALSE)
 
 Create a short reproducible report answering the questions below, The report should be less than 3 pages, including all figures, and should be submitted as both PDF and Rmd formats. You do not need to show your code in the PDF report. It is worth five points on your homework to have handed in everything correctly and in the right format.
 
-This lab is due at 8:30pm on Tuesday, October 31st. You should submit your assignment, in the form of both a knitted RMarkdown PDF as well as the .Rmd file that created the PDF, by uploading them to your personal Google Drive folder that is shared with the TA and the instructor. While you may collaborate with other students on this assignment, you must write up your own code and answers to the questions. Absolutely no cutting and pasting of any portion of the answers. This assignment, like the others, will be worth 50 points.
+This lab is due at 5pm on Friday, December 7th. You should submit your assignment, in the form of both a knitted RMarkdown PDF as well as the .Rmd file that created the PDF, by uploading them to your personal Google Drive folder that is shared with the TAs and the instructor. While you may collaborate with other students on this assignment, you must write up your own code and answers to the questions. Absolutely no cutting and pasting of any portion of the answers. This assignment, like the others, will be worth 50 points.
 
 \subsection*{Introduction to Hypothesis Testing}
 
@@ -45,7 +45,7 @@ fm <- lm(fev ~ age + smoke + height + sex, data=FEV)
 
 
 \begin{exercise}
-(5 pts) We are interested in testing a hypothesis about whether smoking is associated with fev. One way to address this question is to set up a hypothetical world where we know that smoking does not have an association with fev time. One way to achieve this is to randomly shuffle or permute the values of the covariate. By randomly shuffling these values, we are breaking any association that might exist. Test out this shuffling method and see for yourself what the data looks like when we assign a random value of smoking from our dataset to each net time. First off, what is the relationship between FEV and smoking status in the real data? Explain the trend that you see in the data. Second, describe the changes you see when you shuffle smoking status.
+(5 pts) We are interested in testing a hypothesis about whether smoking is associated with fev. One way to address this question is to set up a hypothetical world where we know that smoking does not have an association with fev. One way to achieve this is to randomly shuffle or permute the values of the covariate. By randomly shuffling these values, we are breaking any association that might exist. Test out this shuffling method and see for yourself what the data looks like when we assign a random value of smoking from our dataset to each net time. First off, what is the relationship between FEV and smoking status in the real data? Explain the trend that you see in the data. Second, describe the changes you see when you shuffle smoking status.
 <<>>=
 qplot(smoke, fev, data=FEV) + geom_boxplot()
 qplot(shuffle(smoke), fev, data=FEV) + geom_boxplot()

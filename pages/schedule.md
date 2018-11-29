@@ -53,6 +53,6 @@ Month &nbsp; | Day   |     | Topic |  Notes &nbsp;   | HW Due &nbsp;  | Reading
      | Fri, 30|    |          | |  [Lab 5](../assets/labs/lab5-logit/lab5-logit.pdf)  |
  Dec | Tu,  4|     | Professional Ethics | | | [MDSR 6](http://mdsr-book.github.io/excerpts/mdsr-ethics.pdf)
      | Th,  6|     | Final exam review | | |
-     | Fri, 7|     |     | | Lab 6<!--(../assets/labs/lab6-infer/lab6-infer.pdf)-->|
+     | Fri, 7|     |     | | [Lab 6](../assets/labs/lab6-infer/lab6-infer.pdf)|
      | Tu, 11|     | Final Exam | | |
-     | Fri, 14|    |    |  | CC5 |
+     | Fri, 14|    |    |  | |
