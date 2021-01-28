@@ -1,0 +1,57 @@
+---
+title: "Coding Challenge 1: Getting set up with RStudio and the tidyverse"
+author: "Public Health 460"
+date: "Due: 5pm, Friday Febuary 5th, 2021"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+
+__You will be a better coder if you start off with good, organized habits when using Rstudio. Here is the process we ask you to follow to set up your RStudio development environment for this course.__
+
+
+* Make sure you have the latest version of R installed (should be 4.0 or later).
+* Make sure you have an updated version of RStudio.
+* Open RStudio and create a new Project in a new directory on your computer in a relevant location, e.g. `Home/Documents/classes/PH460`.
+* You should open and use this project for every assignment this semester.
+* Create a new subfolder called `coding-challenges` and another called `data`.
+* Open a new R Markdown file and save it in the `coding-challenges` directory you just made.
+* Install the `tidyverse` R package (this is a bundle of a lot of different packages).
+* Download the `women.csv` from Google Drive/data-stories-spring2021/data and save it in the `data` folder you created above in the project.
+
+
+__Answer the questions below for credit__
+
+By the deadline listed above, you must hand in both the .Rmd file and the resulting, "knitted" HTML file on Moodle. The HTML file must show all code and output (2 pts).
+
+
+1) Load the `tidyverse` package. (2pts)
+```{r}
+
+```
+
+
+
+1) Read in the `women.csv` file using `read_csv()` with a [relative path](https://en.wikipedia.org/wiki/Path_(computing)) to identify your dataset. Save the dataset as a [named object](http://adv-r.had.co.nz/Style.html). [Add info about the women dataset here.]  (5pts)
+```{r}
+
+```
+
+
+1) Using the `dplyr::mutate()` function to add a the following new variables to your dataset: `height_m` which should represent height in meters, `mass_kg` for weight in kilograms, and `bmi` which will be the body mass index (BMI = mass in kg divided by height in meters squared). (6 pts)
+
+
+```{r}
+
+```
+
+
+1) Print the data sorted from largest (at the top) to smallest by BMI. (5pts)
+```{r}
+
+```
+
+
+
+

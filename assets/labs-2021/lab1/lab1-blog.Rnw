@@ -1,0 +1,30 @@
+\documentclass{article}
+
+\input{../../slide-includes/statsTeachR-preamble-labs}
+
+\begin{document}
+
+
+\license{This is a product of \href{http://statsteachr.org}{statsTeachR} that is released under a \href{http://creativecommons.org/licenses/by-sa/3.0}{Creative Commons Attribution-ShareAlike 3.0 Unported}.}
+
+\section*{Lab 1: Data journalism critique}
+
+\subsection*{Overview}
+For this lab, you will work on your own to write a critique of a data journalism article or blog post. 
+
+Spend some time browsing some data science and statistics blogs and data journalism websites (e.g. \href{https://www.r-bloggers.com/}{R-Bloggers}, \href{http://fivethirtyeight.com/}{FiveThirtyEight}, \href{https://www.nytimes.com/section/upshot}{The Upshot}, \href{http://varianceexplained.org/}{Variance Explained}, \href{https://www.economist.com/graphic-detail/}{Graphic Detail} ...). Pick an article/entry that you find interesting. It is not required, but it might help you for Lab 2 if you find a post that has the underlying data associated with the article/post. 
+
+\subsection*{The assignment}
+The deliverable for this lab is a written critique submitted as a Word doc or PDF file. The file must be submitted on Moodle by 5pm on Friday, February 12, 2021. Late assignments will not be accepted. The assignment must contain your name, the date submitted, and a link to the original post. Your critique must also contain the following sections:
+
+\begin{itemize}
+    \item (5 points) Introduction: State in your own words in 1-2 sentences what the main idea of the article is. The graders will not necessarily read the article, so you need to summarize it for us.
+    \item (5 points) Data: Summarize the data source(s) used by the article. What are the key variables the authors are looking at? What defined the \href{https://en.wikipedia.org/wiki/Sampling_frame}{sampling frame}: that is to say, what data were included and not included in the analysis? (Or, if the authors do not provide enough information on the sampling frame, state that clearly.) 
+    \item (5 points) Graphics: Include one of the figures from the article in your write-up. Write 1-2 sentences in your own words describing what the figure is showing. List all variables that you can identify being shown in the figure? List at least three features of the graphic that you think are helpful in telling the story. List at least two features of the graphic that you think could be improved. Provide specific suggestions for how to make it better.
+    \item (5 points) Conclusions: State the main conclusion of the article in 1 sentence. Do the data provided in the article back-up this claim? Give some examples of what you found convincing or not about the conclusions being drawn from the data at hand.
+\end{itemize}
+
+
+
+\end{document}
+
