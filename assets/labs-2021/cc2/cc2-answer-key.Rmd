@@ -1,0 +1,139 @@
+---
+title: "Coding Challlenge 2"
+author: "Public Health 460"
+date: "Due: Febuary 19th 5:00 pm, 2021"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE)
+```
+
+
+__This assignment is all about visualization using ggplot. Please turn in an HTML file and your .Rmd file__
+
+* Download the data called ``gapminder.csv`` from the Google Drive
+* Use ``ggplot`` and its functions for every question. Do not use the `qplot()` function.
+* Include your code in your output.
+* There are nine questions for credit.
+
+This dataset is from [Gapminder.org](https://www.gapminder.org/). It includes data on life expectancy (in years) and GDP per capita of different countries.
+
+
+__Answer the questions below for credit__
+
+1) Read in the `gapminder.csv` from a relative file path. Load the `tidyverse`, `DT`, and `plotly` packages. (If you have not installed `DT` or `plotly` yet, run the code to install them once on your machine, but do not include that code to install them in your assignment.) (1 pts)
+```{r packages}
+library(tidyverse)
+library(DT)
+library(plotly)
+gapminder <- read_csv("../data/gapminder.csv")
+```
+
+> *Q1 rubric: 1 pt for using a relative file path*
+
+2) Use `View()`, `print()` or just click on the dataset in your "Environment" pane in RStudio to inspect the dataset. What is the unit of analysis of this dataset? What temporal sampling appears to have been done to generate this dataset? (Hint: try running `unique(gapminder$year)`.) (2 pts)
+
+> *Q2 rubric: 1 pt for identifying that the unit of analysis is a "country-year" or something similar. Note that this is the right answer because these variables encapsulate the fixed design of the observations (we are observing every country once a year), and are not "random" observations of variables in the way that GDP and life expectancy are. 1 pt for saying something like"only data from every five years from 1952 to 2007 is available in this dataset".*
+
+3) Use the `DT::datatable()` function to present an interactive table in your HTML file. [Note that we use the `::` notation here to show that you should use the `datatable()` function from the `DT` package. You can use this syntax to call a single function directly without having run `library(DT)` (as long as you have the `DT` package installed on your machine). This syntax can also be helpful when two loaded packages have functions with the same name, as you can specify exactly which function you want to use. For the purposes of the assignment you can use either method to use the `datatable()` function.] (2 pts)
+
+> *Q3 rubric: 2 pts for having the following command, or a fancier and working version of it.*
+
+```{r}
+datatable(gapminder)
+```
+
+
+4) Create a simple scatter plot of life expectancy as the dependent variable by GDP per capita. Do not worry about titles or labels beyond what is given as the default. The plot should look like the following. (2 pts)
+
+> *Q4 rubric: 1 pt for specifying geom_point(), 1 point for correct aesthetics.*
+
+```{r, fig.height=3, fig.width=4}
+# Base R plot
+ggplot(data = gapminder, aes(x = gdpPercap, y = lifeExp)) + 
+  geom_point()
+```
+
+
+5) Using the same data as the graph above make the following adjustments to the plot (3 pts)
+
+- Label the y-axis as ``Life expectancy'' and the x-axis as ``GDP per capita''.
+
+- Add a title to your graph.
+
+- Transform the variable GDP per capita on the x-axis, using a log-transform while still displaying the unlogged GDP values as axis labels.
+
+- Add a smooth regression line using `geom_smooth()`.
+
+- Make all the points slightly transparent so you can see individual points more clearly.
+
+It should look something like the graph shown below
+
+> *Q5 rubric: 1 pt for axis labels and title added correctly. 1 pt for using scale_x_log10(). 1 pt for defining alpha as a constant value inside geom_point (not inside ggplot, as then it would apply to the smooth line too).*
+
+```{r, fig.height=3, fig.width=4, message=F}
+p <- ggplot(data = gapminder, aes(x = gdpPercap, y = lifeExp)) + 
+  geom_point(alpha=.5) + 
+  geom_smooth() +
+  labs(y = "Life Expectancy", title = "Life Expectancy by GDP for different continents", x="GDP per capita") +  
+  scale_x_log10()
+
+p
+```
+
+\pagebreak
+
+
+6) Pick a new `ggplot` theme and use `theme_set()` to set a new theme for the remaining figures for this assignment. Re-plot the figure from question 5 with the new theme applied. (1 pt)
+
+> *Q6 rubric: 1 point for successful application of a new theme.*
+
+```{r}
+theme_set(theme_bw())
+p
+```
+
+
+7) Build off of the previous graph, to examine each continent separately. First, facet the graph by continent as was shown in the SAT lecture. This way each continent has its own smaller graph next to the other continents. Second, remove the "error bars" from the smooth lines. (3 pts)
+
+> *Q7 rubric: 2 pts for using facet_wrap with continent correctly. 1 point using geom_smooth(se=FALSE).*
+
+
+```{r}
+ggplot(data = gapminder, aes(x = gdpPercap, y = lifeExp)) + 
+  geom_point(alpha=0.2) +
+  geom_smooth(se=FALSE) + 
+  labs(y = "Life Expectancy", title = "Life Expectancy by GDP for different continents", x="GDP per capita") +  
+  scale_x_log10() + 
+  facet_wrap( . ~ continent)
+```
+
+
+8) Pick 5 countries that you are interested in comparing. Create a new data frame that has only observations from those 5 countries. Build off of the figure created in question 5 (i.e. do not use facets). In this plot, color your points by country. Also, connect the points showing the trajectory of each country across time. (Hint: to connect the points use the `group` aesthetic and `geom_line()`.) (3 pts)
+
+> *Q8 rubric: 1 pt for filtering the data so that only 5 countries are present. 2 pts for mapping the country variable to the group aesthetic (either within geom_line() or within the overall ggplot() call is ok).* 
+
+```{r}
+gapminder_5 <- filter(gapminder, country %in% c("Peru", "Afghanistan", "Mali", "United States", "China"))
+
+ggplot(data = gapminder_5, aes(x = gdpPercap, y = lifeExp, color=country, group=country)) + 
+  geom_point() +
+  geom_line() +
+  labs(y = "Life Expectancy", title = "Life Expectancy by GDP for different continents", x="GDP per capita") +  
+  scale_x_log10()
+```
+
+
+8) Use the `plotly::ggplotly()` function to create a quick and dirty interactive version of the figure created in the previous question. (3 pts)
+
+> *Q8 rubric: 3 pts for a call to plotly that generates a plotly figure. Note that the below code works because it automatically uses the previously generated figure. But other ways to use ggplotly (as long as it recreates the figure from Q7) are ok too..*
+
+```{r}
+ggplotly()
+```
+
+

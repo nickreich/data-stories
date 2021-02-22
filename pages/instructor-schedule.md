@@ -9,7 +9,7 @@ Units:
  - Week 1-2: Data/design of experiments/collecting data to tell a story
 
     - duration: 2 weeks
-    - reading: Kaplan 1-2
+    - reading: Kaplan 1-2, tidy data paper
     - assignment: Lab 1 - experiment design and data collection on students
 
  - Week 3: Summarizing and visualizing data 
@@ -47,27 +47,33 @@ Units:
 _Tuesday, week 1_
 
  - Welcome & overview of course  (15 min)
-    - review course website and course goals
-    - open vs. closed computers/phones/devices
-    - introduce book, refer to website
-    - introduce TAs (that are here)
-    - expectations of team-based learning: not all TBL, still some standard lectures, some team projects
+    - review moodle website, Google Drive, and course goals
+    - please add preferred pronouns to your Zoom profile!
+    - expectations in remote learning: some live lectures, lots of group work, class attendance is mandatory (exceptions for time-zone issues or long-term illness)
+    - introduce TAs (that are here), office hours
+    - introduce book, 2nd edition!
+    - introduce R resources
     - expectations of individual students: I have high expectations for what students will achieve in the course. requires both individual effort and collaboration.
-    - R: I will use it and teach with it. If you need help learning it, take Sara's class (PUBHLTH 497D), or do online modules. We will assume working knowledge that is developing over the semester.
+    - R: I will use it and teach with it. If you need help learning it, do online modules (DataCamp, Hadley's book). We will assume that your working knowledge that is developing over the semester.
+    - models are integral to telling good stories and require strong statistical literacy, hard to balance the two. we will focus on interpretation and implementation, less the mathematical mechanics
     - trajectory of course: starts out squishy, gets tough fast
 
- - Wits and wagers (15 min):
-    `qplot(x, geom="dotplot") + geom_vline(xintercept=9, color="red")`
-
- - Lecture: Intro to telling stories with data (45 min)
+ - Lecture: Intro to telling stories with data - only intro with examples (20 min)
  
- - HW: Install R, RStudio, register for Slack, read syllabus
- - complete pre-semester student survey
+ - breakout rooms: 15 minutes (Sad songs)
+ 
+ - HW: coding challenge 1, read syllabus, read chapter 1
 
 _Thursday, week 1_
 
- - course technology intro: website, piazza, Google Drive (20 min)
- - TA office hours (coming soon)
+Notes
+ - syllabus: learning goals, grade breakdown, cameras, late homework policy, one homework each week, typically due on Friday
+ - Rstudio demo, talk about console vs. Rmarkdown etc..., rainbow parentheses!
+ - Lab 1 assignment: mention the start to search for a blog post (someone could look into the song valence)
+ - lecture 
+
+ - SAT slides
+ - note catcher: SAT example
  - Syllabus review
  - Expectations and behavioral norms: what do we expect of our teammates? How will teammates make each other successful? (15 min)
  - Lab 1 (50 min): talk about how to share roles...

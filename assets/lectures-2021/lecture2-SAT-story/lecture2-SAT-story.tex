@@ -60,7 +60,7 @@
 
 %	The following variables are assumed by the standard preamble:
 %	Global variable containing module name:
-\title{Introduction to \\ Telling Stories with Data}
+\title{Is teacher pay associated with student SAT performance?}
 %	Global variable containing module shortname:
 %		(Currently unused, may be used in future.)
 \newcommand{\ModuleShortname}{introRegression}
@@ -99,6 +99,25 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\begin{frame}{Central ideas}
+
+{\bf Topic}: average US state-level SAT scores and how they relate to public school teacher salaries.
+
+\vspace{2em}
+
+\begin{block}{Pay attention to:}
+\bi
+	\myitem the importance of thinking about multiple variables.
+	\myitem using knowledge of the system (your mental model) to inform the analysis.
+	\myitem keeping the story simple.
+	\myitem the generalizability of the results.
+\ei
+\end{block}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \begin{frame}[fragile]{State-level SAT score data (1994-95)}
 
 \begin{knitrout}
@@ -109,6 +128,9 @@
 
 
 \end{frame}
+
+
+
 
 
 
@@ -253,19 +275,6 @@ What can we conclude from all of this? (BTW, this is an example of \href{http://
 \end{frame}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{Regression modeling}
-
-The process of using data to describe the relationship between outcomes and predictors is called modeling.
-\bi
-	\myitem Models are models, not reality.
-	\myitem ``All models are wrong, but some are useful."
-	\myitem Introduce structure to our model that balances realism with ``goodness of fit''. \ei
-
-\end{frame}
-
-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -290,7 +299,7 @@ The process of using data to describe the relationship between outcomes and pred
 \end{kframe}
 \end{knitrout}
 
-More plotting code available \href{https://github.com/nickreich/data-stories/blob/gh-pages/assets/lectures/lecture1-intro-regression/lecture1-intro-regression.Rnw#L254}{here}.
+More plotting code available \href{https://github.com/nickreich/data-stories/blob/gh-pages/assets/lectures/lecture1-intro-regression/simpsons-paradox-sat-scores.R}{here}.
 
 \end{frame}
 

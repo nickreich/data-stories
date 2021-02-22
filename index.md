@@ -6,7 +6,7 @@ tagline:
 
 
 #### Course summary
-The aim of this course is to provide students with the skills necessary to tell interesting and useful stories in real-world encounters with data. Students will learn fundamental concepts and tools relevant to the practice of summarizing, visualizing, modeling, and analyzing data. Students will learn how to build statistical models that can be used to describe multidimensional relationships that exist in the real world. Specific methods covered will include linear and logistic regression. Students will work with the R statistical computing language and by the end of the course will require substantial independent programming. The course will not provide explicit or detailed training in R programming. To the extent possible, the course will draw on real datasets from biological and biomedical applications. This course is designed for students who are looking for a second course in applied statistics/biostatistics (e.g. beyond BIOSTATS 391B or STAT 240), or an accelerated introduction to statistics and modern statistical computing. 
+The aim of this course is to provide students with the skills necessary to tell interesting and useful stories in real-world encounters with data. Students will learn fundamental concepts and tools relevant to the practice of summarizing, visualizing, modeling, and analyzing data. Students will learn how to build statistical models that can be used to describe multidimensional relationships that exist in the real world. Specific methods covered will include linear and logistic regression. Students will work with the R statistical computing language and by the end of the course will require substantial independent programming. The course will not provide explicit or detailed training in R programming. To the extent possible, the course will draw on real datasets from biological and biomedical applications. This course is designed for students who are looking for a second course in applied statistics/biostatistics (e.g. beyond PUBHLTH 223 or STAT 240), or an accelerated introduction to statistics and modern statistical computing. 
 
 <img src="cover-image.png" width="600"/>
 
@@ -20,20 +20,17 @@ The aim of this course is to provide students with the skills necessary to tell 
 **Instructor**: [Nicholas Reich](http://reichlab.io)\\
 Office hours: Tuesday 2:30-3:30pm, Arnold 425
 
-**TAs**: Bianca Doone
+**TAs**: Anna Barry
 Office hours: Thurs 2:30-4, Arnold Rm 4
 
-**Undergrad Course Assistants**: Julianne Higgins, Apoorva Karpurapu, Sinduja Manchi, Malachai Purgahn, Sameeiya Saffiullah, Angus Wong\\
+**Undergrad Course Assistants**: TBD\\
 Office hours: \\
-Mon 5:30-6:30, Arnold 103\\
-Weds 11:15-12:05 LGRT 1234\\
-Fri 12:20-1:10, Machmer 413
-
+TBD \\
 
 **Prerequisites**: <br> 
-One of any of the following introductory stats courses taught at UMass: BIOSTAT 391B, STAT 240, STAT 501, ResEcon 212, PSYCH 240. If you have not taken an intro stats course at UMass but still want to enroll in this course, you are encouraged to petition the instructor for permission, especially if any of the following apply: (a) you have taken AP Stats in high school, (b) you have taken a college-level intro stats course just not one of the ones listed above, or (c) you are confident in your quantitative skills and your ability to succeed in a fast-paced, advanced introductory course.
+One of any of the following introductory stats courses taught at UMass: PUBHLTH 223, STAT 240, STAT 501, ResEcon 212, PSYCH 240. If you have not taken an intro stats course at UMass but still want to enroll in this course, you are encouraged to petition the instructor for permission, especially if any of the following apply: (a) you have taken AP Stats in high school, (b) you have taken a college-level intro stats course just not one of the ones listed above, or (c) you are confident in your quantitative skills and your ability to succeed in a fast-paced, advanced introductory course.
 
-**Lectures**: Tu/Th, 10:00am&ndash;11:15am
+**Lectures**: Tu/Th, 11:30am&ndash;12:45am
 
 **Required books** <br>
 &nbsp; &nbsp; Kaplan D. 2012. [Statistical Modeling: A Fresh Approach](http://www.mosaic-web.org/go/StatisticalModeling/). 
