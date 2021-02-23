@@ -10,7 +10,7 @@
 
 %	The following variables are assumed by the standard preamble:
 %	Global variable containing module name:
-\title{Conceptual introduction to \tt ggplot}
+\title{Working with categorical variables as factors}
 %	Global variable containing module shortname:
 %		(Currently unused, may be used in future.)
 \newcommand{\ModuleShortname}{introRegression}
@@ -45,170 +45,210 @@
 %		beamer preamble. 
 
 
+<<setup, include=FALSE>>=
+library(knitr)
+opts_chunk$set(fig.path='figure/beamer-',fig.align='center',fig.show='hold',size='tiny', message=FALSE, warning=FALSE)
+@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}{Choices for R graphics}
+\begin{frame}{Different kinds of variables}
+\begin{block}{Give some examples of each}
 
-You have three central choices for making graphics in R:
-
-\begin{itemize}
-    \item ``Base R graphics''
-    \item {\tt ggplot2}
-    \item lattice
-\end{itemize}
-
-\vspace{2em}
-
-I use {\tt ggplot} because:
-\begin{enumerate}
-    \item it is integrated with the {\tt tidyverse}
-    \item it is actively developed/maintained
-    \item there are a ton of extensions (see more later)
-\end{enumerate}
-
-
-\end{frame}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}[fragile]{Understanding the ``grammar'' of ggplot2}
-
-The grammar ...
-
-\begin{itemize}
-    \item layer (a `geom', a `stat', an `annotation') 
-    \item aesthetics (`aes`)
-    \item scales
-    \item facets
-    \item data
-    \item ... and more here: \href{http://ggplot2.tidyverse.org/reference/}{http://ggplot2.tidyverse.org/reference/}
-\end{itemize}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}[fragile]{What is a layer?}
-
-
-\begin{block}{Layers define the basic structure of the elements on the plot}
-\begin{itemize}
-    \item \href{https://ggplot2.tidyverse.org/reference/#section-geoms}{Geoms}: point, line, tile, boxplot, ribbon, ...
-    \item \href{https://ggplot2.tidyverse.org/reference/#section-stats}{Stats}: histogram, smooth, density, ...
-    \item \href{https://ggplot2.tidyverse.org/reference/#section-annotations}{Annotation}: hline, vline, text, ...
-\end{itemize}
-
-For more info check out the documentation: \href{http://ggplot2.tidyverse.org/reference/}{http://ggplot2.tidyverse.org/reference/}.
+\bi
+    \item Continuous: variables taking any real number value in a range
+    \vspace{4em}
+    \item Discrete: variables taking an integer value
+    \vspace{4em}
+    \item Categorical: variables taking one of a fixed set of values
+\ei
 
 \end{block}
 
 \end{frame}
 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[fragile]{What are ``aesthetics''?}
+\begin{frame}[fragile]{Categorical variables in R often start as strings}
 
-Aesthetics define a mapping between {\bf tidy data} and the information required to create a specific graphic\footnote{Figure credits: Hadley Wickham}
+By default, characters are read in as characters, not as factors, although you can force factors.
 
-\includegraphics[width=\textwidth]{figure-static/aes.png}
+<<>>=
+library(tidyverse)
+co2 <- read_csv("../../data/co2emissions.csv")
+head(co2)
+@
+
 
 \end{frame}
 
 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[fragile]{\tt{geom\_point}}
+\begin{frame}[fragile]{Using factors for aesthetics}
 
+Note that R translates the character variable into a factor for you without you doing anything.
 
-Each geom has a different set of aesthetics.
+<<fig.height=3>>=
+ggplot(co2, aes(x = Year, y = CO2, shape = Type, fill = Type))+
+  geom_point()
+@
 
-What information do we need to draw a scatterplot? \\
-Or, asked another way, what aesthetics do we need for {\tt geom\_point}?
-
-\uncover<2>{
-\begin{itemize}
-    \item x (required)
-    \item y (required)
-    \item alpha
-    \item color
-    \item fill
-    \item shape
-    \item size
-\end{itemize}
-}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[fragile]{\tt{geom\_line}}
+\begin{frame}[fragile]{Using factors for aesthetics}
 
-What information do we need to draw a line of connected points? \\
-Or, asked another way, what aesthetics do we need for {\tt geom\_line}?
+Note that you can get the same result by explicitly calling Type a {\tt factor}.
 
-\uncover<2>{
-\begin{itemize}
-    \item x (required)
-    \item y (required)
-    \item alpha
-    \item color
-    \item linetype
-    \item size
-\end{itemize}
-}
+<<fig.height=3>>=
+ggplot(co2, aes(x = Year, y = CO2, shape = factor(Type), fill = factor(Type)))+
+  geom_point()
+@
+
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\begin{frame}[fragile]{Using factors for aesthetics}
 
-\begin{frame}[fragile]{}
+And with just a few small tweaks, we can customize
 
-\centering
-\Large
-{\tt ggplot} extensions that I used in \href{https://www.medrxiv.org/content/10.1101/2021.02.03.21250974v1}{a recent paper}
+<<fig.height=3>>=
+levels <- c("Urban Gasoline", "Rural Gasoline", "Urban Diesel", "Rural Diesel")
+ggplot(co2, aes(x = Year, y = CO2, shape = Type, fill = Type)) +
+  geom_point() +
+  scale_shape_manual(breaks=levels, values=c(24, 21, 24, 21)) +
+  scale_fill_manual(breaks = levels, 
+                    values=c("blue4", "dodgerblue", "orangered", "orange")) +
+  ylab(expression(CO[2]*" (Mt)"))
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Using factors for faceting}
+
+Factors (or any variable with a small number of distinct values) can be used to create facets as well.
+
+<<fig.height=3>>=
+ggplot(co2, aes(x = Year, y = CO2)) +
+  geom_point() +
+  facet_wrap(~Type)
+@
 
 \end{frame}
 
 
-\begin{frame}[fragile]{{\tt gridExtra} or {\tt cowplot} for multi-plot alignment}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\includegraphics[width=.5\textwidth]{figure-static/data-and-forecast}
+\begin{frame}[fragile]{Advanced use of factors: ordering}
 
-\end{frame}
+Turning categorical variables into ordered factors might help you show more data.
 
-
-\begin{frame}[fragile]{\href{https://wilkelab.org/ggridges/}{{\tt ggrides}} for ridgeplots}
-
-\includegraphics[width=\textwidth]{figure-static/fig-model-ranks}
-
-\end{frame}
-
-
-\begin{frame}[fragile]{{\tt RColorBrewer} and {\tt viridis} for colors}
-
-\includegraphics[width=.5\textwidth]{figure-static/fig-by-horizon-week}
+<<fig.height=4>>=
+gapminder <- read_csv("../../data/gapminder.csv") %>%
+    filter(continent %in% c("Africa", "Oceania")) 
+ggplot(gapminder, aes(x=year, y=country, fill=lifeExp)) +
+    geom_tile()
+@
 
 \end{frame}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Advanced use of factors: ordering}
+
+If ``order matters'' for your categorical variable, then turning it into an ordered factor might be useful.
+
+<<fig.height=4>>=
+## this redefines country based on average GDP
+gapminder <- mutate(gapminder, country = reorder(country, gdpPercap, FUN=mean))
+
+ggplot(gapminder, aes(x=year, y=country, fill=lifeExp)) +
+    geom_tile() 
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Advanced use of factors: ordering}
+
+Here we order based on the maximum GDP rather than the mean.
+
+<<fig.height=4>>=
+## this redefines country based on max GDP
+gapminder <- mutate(gapminder, country = reorder(country, gdpPercap, FUN=max))
+
+ggplot(gapminder, aes(x=year, y=country, fill=lifeExp)) +
+    geom_tile() 
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Trying out different color scales}
+
+Using color scales from ColorBrewer: \href{https://colorbrewer2.org/}{colorbrewer2.org}.
+
+<<fig.height=4>>=
+ggplot(gapminder, aes(x=year, y=country, fill=lifeExp)) +
+    geom_tile() +
+    scale_fill_gradient(low="#fff7fb", high="#034e7b")
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Trying out different color scales}
+
+And from the {\tt viridis} package.
+
+<<fig.height=4>>=
+library(viridis)
+ggplot(gapminder, aes(x=year, y=country, fill=lifeExp)) +
+    geom_tile() +
+    scale_fill_viridis()
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Trying out different color scales}
+
+<<fig.height=4>>=
+ggplot(gapminder, aes(x=year, y=country, fill=lifeExp)) +
+    geom_tile() +
+    scale_fill_viridis(direction=-1)
+@
+
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}[fragile]{Breakout rooms}
 
-We have made the data from the CO2 emissions figure available in Google Drive. As a group, you will be asked to complete the following tasks:
-
-\begin{enumerate}
-    \item Recreate the figure as close as possible to the original.
-    \item Improve the figure. Make some changes that you think make the figure more clear.
-\end{enumerate}
-
-At the end of class, the class will vote on which figure is (1) closest to the original and (2) the best improvement.
-
+Work with your group to start to look for an article for \href{https://moodle.umass.edu/pluginfile.php/3739605/mod_assign/introattachment/0/lab2-blog.pdf?forcedownload=1}{Lab 2}. You must complete this assignment on your own, but it's ok, perhaps even recommended, to find an article that you can work in parallel with someone else on. 
 
 \end{frame}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
