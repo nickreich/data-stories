@@ -1,0 +1,178 @@
+%% beamer/knitr slides 
+%% for Statistical Modeling and Data Visualization course @ UMass
+%% Nicholas Reich: nick [at] schoolph.umass.edu
+
+
+\documentclass[table]{beamer}
+
+
+\input{../../slide-includes/standard-knitr-beamer-preamble}
+
+%	The following variables are assumed by the standard preamble:
+%	Global variable containing module name:
+\title{Ethics in Data Science}
+%	Global variable containing module shortname:
+%		(Currently unused, may be used in future.)
+\newcommand{\ModuleShortname}{introRegression}
+%	Global variable containing author name:
+\author{Nicholas G Reich}
+%	Global variable containing text of license terms:
+\newcommand{\LicenseText}{Made available under the Creative Commons Attribution-ShareAlike 3.0 Unported License: http://creativecommons.org/licenses/by-sa/3.0/deed.en\textunderscore US }
+%	Instructor: optional, can leave blank.
+%		Recommended format: {Instructor: Jane Doe}
+\newcommand{\Instructor}{}
+%	Course: optional, can leave blank.
+%		Recommended format: {Course: Biostatistics 101}
+\newcommand{\Course}{}
+
+
+\input{../../slide-includes/shortcuts}
+
+\hypersetup{colorlinks,linkcolor=,urlcolor=MainColor}
+
+
+%	******	Document body begins here	**********************
+
+\begin{document}
+
+%	Title page
+\begin{frame}[plain]
+	\titlepage
+\end{frame}
+
+%	******	Everything through the above line must be placed at
+%		the top of any TeX file using the statsTeachR standard
+%		beamer preamble. 
+
+
+<<setup, include=FALSE>>=
+library(knitr)
+opts_chunk$set(fig.path='figure/beamer-',fig.align='center',fig.show='hold',size='tiny', message=FALSE, warning=FALSE)
+@
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Research Ethics\footnote{\href{https://xkcd.com/1390/}{https://xkcd.com/1390/}}}
+
+\includegraphics[width=.5\textwidth]{figure-static/research_ethics_2x}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Professional ethics require vigilance, common sense}
+
+\begin{block}{Important to have an open, honest orientation}
+
+\bi
+
+\item Work to be conscious of your and others' biases.
+\item Be willing to stand up for what you believe is right.
+\item Ask for help when you need it or if you feel unsure.
+\item Admit mistakes when you make them.
+\item Be open to learn.
+\item Create open, transparent, tested workflows.
+
+\ei
+
+\end{block}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Responsibility to stakeholders\footnote{Adapted from {\em Modern Data Science with R}}}
+
+\begin{block}{Know and understand your obligations}
+
+\bi
+
+  \item {\bf Are you legally bound to your employer or client?} What terms and conditions apply?
+  \item {\bf Do you have a responsibility to the general public or people whose data you have at your fingertips?} Should you keep datasets on your laptop? etc...
+  \item {\bf Are there legal responsibilities that you need to be aware of?} Sometimes, there are legal terms around data sharing and/or confidentiality.
+  \item {\bf Are there responsibilities, binding or not, that you have to your professional community?} Make your data and code public, to the extent possible.
+
+\ei
+
+\end{block}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Present results with humility}
+
+\begin{block}{Overconfidence is a common error when interpreting data/models}
+
+\bi
+  \item Scrutinize your results from every angle. What would a critic say?
+  \item Use language like ``the models says...'' to reinforce that outputs come from a model with assumptions.
+  \item Present all evidence honestly, including that which doesn't totally fit the storyline, especially if the story fits your pre-conceived notion. Why are outliers outlying?
+
+\ei
+
+\end{block}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Conflicts of interest (COI)}
+
+\begin{block}{COIs arise frequently and naturally}
+
+\bi
+  \item You have a responsibility to identify COIs. e.g. 
+  
+  \begin{quotation}
+    \noindent \small ... I have been paid for my work by Company X.
+  \end{quotation}
+  
+  \begin{quotation}
+    \noindent \small ... I have collaborated with colleague Y on a large group project in the last two years. I do not feel that this precludes me from providing an unbiased review of the manuscript.
+  \end{quotation}
+  
+  \item They can become an issue if not identified early.
+  \item Often, different fields will have policies and standards in places to ensure reporting and compliance. 
+  
+\ei
+
+\end{block}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Acknowledge mistakes}
+
+\includegraphics[width=\textwidth]{figure-static/email-to-plos}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Ethical principles for data science\footnote{Adapted from {\em Modern Data Science with R}}}
+
+\begin{block}{Summary of key points}
+
+\bi
+
+  \item Do your work well by your own standards and by the standards of your profession.
+  \item Recognize the parties to whom you have a special professional obligation.
+  \item Report results and methods honestly 
+  \teim Respect your responsibility to identify and report flaws and shortcomings in your work.
+  \item Acknowledge possible conflicts of interest at appropriate times.
+
+\ei
+
+\end{block}
+
+\end{frame}
+
+
+
+\end{document}

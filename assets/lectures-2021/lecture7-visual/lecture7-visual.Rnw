@@ -345,9 +345,9 @@ Consider the figure on the next slide. What visual cues do they use? Follow the 
 
 \centering
 
-\includegraphics[width=.6\textwidth]{figure-static/upshot-postal-banner.png}
+\includegraphics[width=.6\textwidth]{../lecture1-story-examples/figure-static/upshot-postal-banner.png}
 
-\includegraphics[width=.9\textwidth]{figure-static/upshot-postal-timeseries.png}
+\includegraphics[width=.9\textwidth]{../lecture1-story-examples/figure-static/upshot-postal-timeseries.png}
 
 \tiny \url{https://www.nytimes.com/interactive/2021/01/19/upshot/postal-service-survived-election-but-crushed-by-holidays.html}
 
