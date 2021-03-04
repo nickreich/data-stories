@@ -110,8 +110,9 @@
 \begin{frame}{Today's topics}
 
 \bi
-    \myitem The language of models
-    \myitem Model formulas and coefficients 
+    \myitem Introduction to modeling 
+    \myitem Defining components of models
+    \myitem Defining model terms
 \ei
 
 \bigskip
@@ -120,7 +121,7 @@
 
 \bigskip
 
-{\bf Reading:} Kaplan, Chapters 4, 6-10.
+{\bf Reading:} Kaplan, Chapter 6.
 
 
 \end{frame}
@@ -245,9 +246,9 @@ What variables will explain variation in disease severity?
 \begin{knitrout}\footnotesize
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{dat} \hlkwb{<-} \hlkwd{read.table}\hlstd{(}\hlstr{"../../data/lungc.txt"}\hlstd{,} \hlkwc{header}\hlstd{=}\hlnum{TRUE}\hlstd{)}
-\hlkwd{ggplot}\hlstd{(dat,} \hlkwd{aes}\hlstd{(}\hlkwc{x}\hlstd{=disease))} \hlopt{+}
-  \hlkwd{geom_histogram}\hlstd{()}
+\hlstd{dat} \hlkwb{<-} \hlkwd{read.table}\hlstd{(}\hlstr{"../../data/lungc.txt"}\hlstd{,} \hlkwc{header}\hlstd{=}\hlnum{TRUE}\hlstd{)} \hlopt{%>%}
+  \hlkwd{mutate}\hlstd{(}\hlkwc{smoking} \hlstd{=} \hlkwd{factor}\hlstd{(smoking,} \hlkwc{levels}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,}\hlnum{1}\hlstd{),} \hlkwc{labels}\hlstd{=}\hlkwd{c}\hlstd{(}\hlstr{"non-smoker"}\hlstd{,} \hlstr{"smoker"}\hlstd{)))}
+\hlkwd{ggplot}\hlstd{(dat,} \hlkwd{aes}\hlstd{(}\hlkwc{x}\hlstd{=disease))} \hlopt{+} \hlkwd{geom_histogram}\hlstd{()}
 \end{alltt}
 \end{kframe}
 \includegraphics[width=\maxwidth]{figure/lung-plot-1-1} 
@@ -301,7 +302,7 @@ Does smoking status explain some of the variation in disease severity?
 \begin{knitrout}\footnotesize
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlkwd{ggplot}\hlstd{(dat,} \hlkwd{aes}\hlstd{(}\hlkwd{factor}\hlstd{(smoking), disease))} \hlopt{+} \hlkwd{geom_boxplot}\hlstd{()}
+\hlkwd{ggplot}\hlstd{(dat,} \hlkwd{aes}\hlstd{(smoking, disease))} \hlopt{+} \hlkwd{geom_jitter}\hlstd{(}\hlkwc{width}\hlstd{=}\hlnum{.1}\hlstd{)}
 \end{alltt}
 \end{kframe}
 \includegraphics[width=\maxwidth]{figure/lung-plots-fac-smoke-1} 
@@ -375,8 +376,8 @@ Main terms model the effect of explanatory variables directly. $$y = \beta_0 + \
 \begin{knitrout}\footnotesize
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlkwd{ggplot}\hlstd{(dat,} \hlkwd{aes}\hlstd{(}\hlkwc{x}\hlstd{=}\hlkwd{factor}\hlstd{(smoking),} \hlkwc{y}\hlstd{=disease))} \hlopt{+}
-  \hlkwd{geom_boxplot}\hlstd{()}
+\hlkwd{ggplot}\hlstd{(dat,} \hlkwd{aes}\hlstd{(}\hlkwc{x}\hlstd{=smoking,} \hlkwc{y}\hlstd{=disease,} \hlkwc{color}\hlstd{=smoking))} \hlopt{+} \hlkwd{geom_jitter}\hlstd{(}\hlkwc{width}\hlstd{=}\hlnum{.1}\hlstd{)} \hlopt{+}
+  \hlkwd{stat_summary}\hlstd{(}\hlkwc{fun}\hlstd{=mean,} \hlkwc{geom}\hlstd{=}\hlstr{"point"}\hlstd{,} \hlkwc{shape}\hlstd{=}\hlstr{"-"}\hlstd{,} \hlkwc{size}\hlstd{=}\hlnum{20}\hlstd{,} \hlkwc{color}\hlstd{=}\hlstr{"black"}\hlstd{)}
 \end{alltt}
 \end{kframe}
 \includegraphics[width=\maxwidth]{figure/lung-plot-main-term-smoking-1} 
@@ -394,8 +395,8 @@ Interaction terms allow for different explanatory variables to modulate the rela
 \begin{knitrout}\footnotesize
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlkwd{ggplot}\hlstd{(dat,} \hlkwd{aes}\hlstd{(crowding, disease,} \hlkwc{color}\hlstd{=}\hlkwd{factor}\hlstd{(smoking)))} \hlopt{+}
-  \hlkwd{geom_point}\hlstd{()} \hlopt{+} \hlkwd{geom_smooth}\hlstd{(}\hlkwc{method}\hlstd{=}\hlstr{"lm"}\hlstd{,} \hlkwc{se}\hlstd{=}\hlnum{FALSE}\hlstd{)}
+\hlkwd{ggplot}\hlstd{(dat,} \hlkwd{aes}\hlstd{(crowding, disease))} \hlopt{+} \hlkwd{geom_point}\hlstd{()} \hlopt{+}
+  \hlkwd{geom_smooth}\hlstd{(}\hlkwc{method}\hlstd{=}\hlstr{"lm"}\hlstd{,} \hlkwc{se}\hlstd{=}\hlnum{FALSE}\hlstd{)} \hlopt{+} \hlkwd{facet_wrap}\hlstd{(.}\hlopt{~}\hlstd{smoking)}
 \end{alltt}
 \end{kframe}
 \includegraphics[width=\maxwidth]{figure/lung-plot-interaction-1} 

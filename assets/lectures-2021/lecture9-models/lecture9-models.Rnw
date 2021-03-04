@@ -60,8 +60,9 @@
 \begin{frame}{Today's topics}
 
 \bi
-    \myitem The language of models
-    \myitem Model formulas and coefficients 
+    \myitem Introduction to modeling 
+    \myitem Defining components of models
+    \myitem Defining model terms
 \ei
 
 \bigskip
@@ -70,7 +71,7 @@
 
 \bigskip
 
-{\bf Reading:} Kaplan, Chapters 4, 6-10.
+{\bf Reading:} Kaplan, Chapter 6.
 
 
 \end{frame}
@@ -199,9 +200,9 @@ library(gridExtra)
 What variables will explain variation in disease severity?
 
 <<lung-plot-1, tidy=FALSE, fig.height=3.7>>=
-dat <- read.table("../../data/lungc.txt", header=TRUE)
-ggplot(dat, aes(x=disease)) + 
-  geom_histogram()
+dat <- read.table("../../data/lungc.txt", header=TRUE) %>%
+  mutate(smoking = factor(smoking, levels=c(0,1), labels=c("non-smoker", "smoker")))
+ggplot(dat, aes(x=disease)) + geom_histogram()
 @
 
 
@@ -243,7 +244,7 @@ ggplot(dat, aes(crowding, disease)) +
 Does smoking status explain some of the variation in disease severity?
 
 <<lung-plots-fac-smoke, tidy=FALSE, fig.height=3.7>>=
-ggplot(dat, aes(factor(smoking), disease)) + geom_boxplot()
+ggplot(dat, aes(smoking, disease)) + geom_jitter(width=.1)
 @
 
 
@@ -299,8 +300,8 @@ ggplot(dat, aes(crowding, disease)) + geom_point() +
 Main terms model the effect of explanatory variables directly. $$y = \beta_0 + \beta_2 \cdot smoking$$
 
 <<lung-plot-main-term-smoking, tidy=FALSE, fig.height=3.7>>=
-ggplot(dat, aes(x=factor(smoking), y=disease)) + 
-  geom_boxplot()
+ggplot(dat, aes(x=smoking, y=disease, color=smoking)) + geom_jitter(width=.1) + 
+  stat_summary(fun=mean, geom="point", shape="-", size=20, color="black")
 @
 
 \end{frame}
@@ -312,8 +313,8 @@ ggplot(dat, aes(x=factor(smoking), y=disease)) +
 Interaction terms allow for different explanatory variables to modulate the relationship of each other to the response variable. $$y = \beta_0 + \beta_1 \cdot crowding + \beta_2 \cdot smoking + \beta_3 \cdot crowding \cdot smoking$$
 
 <<lung-plot-interaction, tidy=FALSE, fig.height=3.7>>=
-ggplot(dat, aes(crowding, disease, color=factor(smoking))) + 
-  geom_point() + geom_smooth(method="lm", se=FALSE)
+ggplot(dat, aes(crowding, disease)) + geom_point() + 
+  geom_smooth(method="lm", se=FALSE) + facet_wrap(.~smoking)
 @
 
 \end{frame}
