@@ -1,0 +1,291 @@
+%% beamer/knitr slides 
+%% for Statistical Modeling and Data Visualization course @ UMass
+%% Nicholas Reich: nick [at] schoolph.umass.edu
+
+
+\documentclass[table]{beamer}
+
+
+\input{../../slide-includes/standard-knitr-beamer-preamble}
+
+%        The following variables are assumed by the standard preamble:
+%        Global variable containing module name:
+
+\title{Understanding model terms and coefficients}
+%	Global variable containing module shortname:
+%		(Currently unused, may be used in future.)
+\newcommand{\ModuleShortname}{modeling}
+%	Global variable containing author name:
+\author{Nicholas G Reich}
+%	Global variable containing text of license terms:
+\newcommand{\LicenseText}{Made available under the Creative Commons Attribution-ShareAlike 3.0 Unported License: http://creativecommons.org/licenses/by-sa/3.0/deed.en\textunderscore US }
+%	Instructor: optional, can leave blank.
+%		Recommended format: {Instructor: Jane Doe}
+\newcommand{\Instructor}{}
+%	Course: optional, can leave blank.
+%		Recommended format: {Course: Biostatistics 101}
+\newcommand{\Course}{}
+
+
+\input{../../slide-includes/shortcuts}
+\usepackage{bbm}
+
+\hypersetup{colorlinks,linkcolor=,urlcolor=MainColor}
+
+
+%	******	Document body begins here	**********************
+
+\begin{document}
+
+%	Title page
+\begin{frame}[plain]
+	\titlepage
+\end{frame}
+
+%	******	Everything through the above line must be placed at
+%		the top of any TeX file using the statsTeachR standard
+%		beamer preamble. 
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\begin{frame}{Today's topics}
+
+\bi
+    \myitem Model terms: recap and a visual tour
+    \myitem Smooth terms
+    \myitem Fitting and interpreting models
+\ei
+
+<<loadData, echo=FALSE, warning=FALSE, message=FALSE>>=
+library(tidyverse)
+theme_set(theme_bw())
+opts_chunk$set(size = 'scriptsize', message=FALSE, warning=FALSE)
+options(width=60)
+dat <- read.table("../../data/lungc.txt", header=TRUE) %>%
+  mutate(smoking = factor(smoking, levels=c(0,1), labels=c("non-smoker", "smoker"))) %>%
+  as_tibble()
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Model terms: recap}
+
+\bi
+  \myitem {\bf The intercept} is a ``baseline`` that is included in nearly every model. What would your guess of disease severity be in the absence of any other information?
+  \myitem {\bf Main terms} model the effect of explanatory variables directly.
+  \myitem {\bf Interaction terms} allow for different explanatory variables to modulate the relationship of each other to the response variable.
+  \myitem {\bf Smooth terms} allow for the modeled relationships to be flexibly curved, not just linear.
+\ei
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Formulas for Statistical Models (Linear Regression)}
+
+In general, linear models can be thought of as having these components
+\begin{eqnarray*}
+\mbox{ y } & = & \mbox{intercept + terms + error} \\
+\end{eqnarray*}
+
+
+With a single predictor variable, this is simply a line (plus error):
+\begin{eqnarray*}
+y_i & = & \beta_0 + \beta_1 \cdot x_i + \epsilon_i
+\end{eqnarray*}
+
+However, there can be multiple variables and different types of ``terms'' in this equation
+\begin{itemize}
+    \item intercept
+    \item main effects
+    \item interaction terms
+    \item smooth terms
+\end{itemize}
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Main effects model terms}
+
+$$ \mbox{equation: \ }  \widehat{disease}_i = \beta_0 + \beta_1\cdot nutrition_i $$
+
+<<fig.height=3.5>>=
+m1 <- lm(disease ~ nutrition, data=dat)
+ggplot(dat, aes(x=nutrition, y=disease)) +
+  geom_point() + ylim(c(0,80)) +
+  geom_abline(intercept = coef(m1)[1], slope = coef(m1)[2])
+@
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Back to HS algebra: what is an intercept?}
+
+$$ y = \beta_1 \cdot x \mbox{\ \ \ \  vs. \ \ \ \ } y = \beta_0 + \beta_1 \cdot x $$
+
+\vspace{12em}
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Main effects w/no intercept}
+
+$$ \mbox{equation: \ }  \widehat{disease}_i = \beta_1\cdot nutrition_i $$
+
+<<fig.height=3.5>>=
+m1_no_intcpt <- lm(disease ~ nutrition - 1, data=dat)
+ggplot(dat, aes(x=nutrition, y=disease)) +
+  geom_point() + ylim(c(0,80)) +
+  geom_abline(intercept = 0, slope = coef(m1_no_intcpt)[1])
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Main effects model terms (crowding)}
+
+$$ \mbox{equation: \ }  \widehat{disease}_i = \beta_0 + \beta_1\cdot crowding_i $$
+
+<<fig.height=3.5>>=
+m1 <- lm(disease ~ crowding, data=dat)
+ggplot(dat, aes(x=crowding, y=disease)) + geom_point() + 
+  geom_abline(intercept = coef(m1)[1], slope = coef(m1)[2])
+@
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{2 main effects: 1 continous, 1 categorical}
+
+$$ \mbox{equation: \ }  \widehat{disease}_i = \beta_0 + \beta_1\cdot crowding_i + \beta_2 \cdot smoker $$
+
+<<fig.height=3.5>>=
+m2 <- lm(disease ~ crowding + smoking, data=dat)
+ggplot(dat, aes(x=crowding, y=disease, color=smoking)) + geom_point() + 
+  scale_color_manual(values = c("blue", "red")) +
+  geom_abline(intercept = coef(m2)[1], slope = coef(m2)[2], color="blue") +
+  geom_abline(intercept = coef(m2)[1]+coef(m2)[3], slope = coef(m2)[2], color="red")
+@
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Interaction model terms}
+
+$$ \mbox{equation: \ }  \widehat{disease}_i = \beta_0 + \beta_1\cdot crowd_i + \beta_2\cdot smoke_i + \beta_3\cdot crowd_i \cdot smoke_i  $$
+
+<<interaction-term, tidy=FALSE, fig.height=3.5>>=
+m3 <- coef(lm(disease ~ crowding*smoking, data=dat))
+ggplot(dat, aes(x=crowding, y=disease, color=smoking)) +  geom_point() + 
+  scale_color_manual(values = c("blue", "red")) +
+  geom_abline(intercept = m3[1], slope = m3[2], color="blue") +
+  geom_abline(intercept = m3[1]+m3[3], slope = m3[2]+m3[4], color="red")
+@
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Interaction via {\tt geom\_smooth()}}
+
+$$ \mbox{equation: \ }  \widehat{disease}_i = \beta_0 + \beta_1\cdot crowd_i + \beta_2\cdot smoke_i + \beta_3\cdot crowd_i \cdot smoke_i  $$
+
+<<tidy=FALSE, fig.height=4>>=
+ggplot(dat, aes(x=crowding, y=disease, color=smoking)) +  geom_point() + 
+  geom_smooth(method="lm", se=FALSE) + scale_color_manual(values = c("blue", "red"))
+@
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Smooth model terms}
+
+$$ \mbox{equation: \ }  \widehat{disease} = \beta_0 + s(education)$$
+
+<<smooth-terms, tidy=FALSE, fig.height=3>>=
+library(splines)
+m4 <- lm(disease ~ ns(education, knots = 8), data=dat)
+x.new <- seq(min(dat$education), max(dat$education), by=.1)
+yhat.m4 <- predict(m4, newdata = data.frame(education=x.new))
+ggplot() + geom_point(data=dat, aes(x=education, y=disease)) + 
+    geom_path(aes(x=x.new, y=yhat.m4), color="red")
+@
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Fitting models in R}
+
+\begin{block}{Quick recap of key syntax for linear models}
+\bi
+  \myitem For linear models, use {\tt lm()}.
+  \myitem Equations look like {\tt y ~ x1 + x2}.
+  \myitem Plus signs ({\tt +}) indicate main effect terms.
+  \myitem Multiplication signs ({\tt *}) indicate main effect AND interaction terms.
+\ei
+\end{block}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Reading model output}
+
+$$ \mbox{equation: \ }  \widehat{disease}_i = \beta_0 + \beta_1\cdot crowd_i + \beta_2\cdot smoke_i + \beta_3\cdot crowd_i \cdot smoke_i  $$
+
+
+<<>>=
+m3 <- lm(disease ~ crowding*smoking, data=dat)
+round(summary(m3)$coef, 2)
+@
+
+
+
+\end{frame}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Breakout rooms}
+
+Work on, and share progress on your Lab 3 with other group-mates.
+
+\end{frame}
+
+
+
+
+
+\end{document}
