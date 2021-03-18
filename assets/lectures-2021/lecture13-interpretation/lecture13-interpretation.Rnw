@@ -1,0 +1,372 @@
+%% beamer/knitr slides 
+%% for Statistical Modeling and Data Visualization course @ UMass
+%% Nicholas Reich: nick [at] schoolph.umass.edu
+
+
+\documentclass[table]{beamer}
+
+
+\input{../../slide-includes/standard-knitr-beamer-preamble}
+
+%	The following variables are assumed by the standard preamble:
+%	Global variable containing module name:
+\title{Regression: Interactions and dummy variables}
+%	Global variable containing module shortname:
+%		(Currently unused, may be used in future.)
+\newcommand{\ModuleShortname}{introRegression}
+%	Global variable containing author name:
+\author{Nicholas G Reich}
+%	Global variable containing text of license terms:
+\newcommand{\LicenseText}{Made available under the Creative Commons Attribution-ShareAlike 3.0 Unported License: http://creativecommons.org/licenses/by-sa/3.0/deed.en\textunderscore US }
+%	Instructor: optional, can leave blank.
+%		Recommended format: {Instructor: Jane Doe}
+\newcommand{\Instructor}{}
+%	Course: optional, can leave blank.
+%		Recommended format: {Course: Biostatistics 101}
+\newcommand{\Course}{}
+
+
+% leftovers from openintro slides
+
+
+
+\input{../../slide-includes/shortcuts}
+\usepackage{bbm}
+
+
+%	******	Document body begins here	**********************
+
+\begin{document}
+
+%	Title page
+\begin{frame}[plain]
+	\titlepage
+\end{frame}
+
+%	******	Everything through the above line must be placed at
+%		the top of any TeX file using the statsTeachR standard
+%		beamer preamble. 
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Outline}
+
+<<simData, tidy=FALSE, echo=FALSE, message=FALSE, fig.height=4>>=
+library(ggplot2)
+library(tidyverse)
+theme_set(theme_bw())
+dat <- read.table("../../data/lungc.txt", header=TRUE)  %>%
+  mutate(smoking = factor(smoking, levels=c(0,1), labels=c("non-smoker", "smoker")))
+opts_chunk$set(size = 'tiny', message=FALSE, warning=FALSE)
+@
+
+\bi
+  \myitem Interpretation: main effects
+  \myitem Interpretation: interactions
+\ei
+	
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[t]{Lung data example}
+
+99 observations on patients who have sought treatment for the relief of respiratory disease symptoms. 
+
+The variables are:
+\bi
+    \myitem {\tt disease} measure of disease severity (larger values indicates more serious condition).
+    \myitem {\tt nutrition} nutritional status (larger number indicates better nutrition)
+    \myitem {\tt smoking} smoking status (1 if smoker, 0 if non-smoker)
+\ei
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Nutrition's impact on lung disease}
+
+<<nut-dis, fig.height=4, tidy=FALSE>>=
+ggplot(dat, aes(nutrition, disease)) + 
+    geom_point() + geom_smooth(method="lm")
+@
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[t]{A main effects model}
+
+Using the model $ \mbox{disease}_i = \beta_0 + \beta_1 \mbox{nutrition}_i + \epsilon_{i}$, interpret
+
+\bigskip
+
+$\beta_0 = $
+
+\vspace{1.5cm}
+
+$\beta_1 = $
+
+\vspace{2cm}
+
+\centering
+\includegraphics[width=.5\textwidth]{figure/nut-dis-1}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{A main effects model with two variables}
+
+Interpret from $ \mbox{disease}_i = \beta_0 + \beta_1 \mbox{nutrition}_i + \beta_2 \mbox{smoking}_i + \epsilon_{i}$
+
+\bigskip
+
+$\beta_0 = $
+
+\vspace{.9cm}
+
+$\beta_1 = $
+
+\vspace{.9cm}
+
+$\beta_2 = $
+
+
+\vspace{.9cm}
+
+
+\centering
+
+<<nut-smoke-dis, fig.height=4, tidy=FALSE, echo=FALSE, message=FALSE, fig.show='hide'>>=
+ggplot(dat, aes(nutrition, disease, color=smoking)) + 
+    geom_point() 
+@
+
+\includegraphics[width=.5\textwidth]{figure/nut-smoke-dis-1}
+
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{What is interaction?}
+
+\begin{block}{Definition of interaction}
+Interaction occurs when the relationship between two variables depends on the value of a third variable.
+
+\end{block}
+
+<<intModel, echo=FALSE, fig.height=3>>=
+x1 <- runif(100)
+x2 <- rep(0:1, each=50)
+y <- 3 + 2*x1 + 4*x1*x2 + rnorm(50)
+qplot(x1, y, color=factor(x2)) + geom_point() + geom_smooth(method="lm", se=FALSE)
+@
+
+
+
+
+%[Good overview: KNN pp. 306--313]
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Interaction vs. confounding}
+
+\begin{block}{Definition of interaction}
+Interaction occurs when the relationship between two variables depends on the value of a third variable. E.g. you could hypothesize that the true relationship between nutritional intake and disease severity may be different for smokers and non-smokers.
+\end{block}
+
+\begin{block}{Definition of confounding}
+Confounding occurs when the measurable association between two variables is distorted by the presence of another variable. Confounding can lead to biased estimates of a true relationship between variables.
+\end{block}
+
+\bi
+    \myitem It is important to include confounding variables. Not doing so may bias your results.
+    \myitem Unmodeled interactions do not lead to ``biased'' estimates in the same way that confounding does, but it can lead to a richer and more detailed description of the data at hand. 
+\ei
+
+%[Good overview: KNN pp. 306--313]
+
+\end{frame}
+
+% 
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \begin{frame}{Some real world examples?}
+% 
+% \end{frame}
+% 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{How to include interaction in a MLR}
+
+
+Model A: $ y_i = \beta_0 + \beta_1 x_{1i} + \beta_2 x_{2i} + \epsilon_i$
+
+
+Model B: $ y_i = \beta_0 + \beta_1 x_{1i} + \beta_2 x_{2i} + \beta_3 x_{1i}\cdot x_{2i} + \epsilon_i$
+
+\vspace{4em}
+
+\begin{block}{Key points}
+\bi
+        \myitem ``easily'' conceptualized with 1 continuous, 1 categorical variable
+        \myitem models possible with other variable combinations, but interpretation/visualization harder 
+        \myitem two variable interactions are considered ``first-order'' interactions 
+        \myitem still a {\bf linear} model, but no longer a strictly {\bf additive} model
+\ei
+\end{block}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{How to interpret an interaction model}
+
+For now, assume $x_1$ is continuous, $x_2$ is 0/1 binary.
+
+Model A: $ y_i = \beta_0 + \beta_1 x_{1i} + \beta_2 x_{2i} + \epsilon_i$
+
+Model B: $ y_i = \beta_0 + \beta_1 x_{1i} + \beta_2 x_{2i} + \beta_3 x_{1i}\cdot x_{2i} + \epsilon_i$
+
+\vspace{12em}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{How to interpret an interaction model}
+
+For now, assume $x_1$ is continuous, $x_2$ is 0/1 binary.
+
+Model A: $ y_i = \beta_0 + \beta_1 x_{1i} + \beta_2 x_{2i} + \epsilon_i$
+
+Model B: $ y_i = \beta_0 + \beta_1 x_{1i} + \beta_2 x_{2i} + \beta_3 x_{1i}\cdot x_{2i} + \epsilon_i$
+
+\vspace{1em}
+
+$\beta_3$ is the change in the slope of the line that describes the relationship of $y \sim x_1$ comparing the groups defined by $x_2=0$ and $x_2=1$.
+
+$\beta_1 + \beta_3$ is the expected change in $y$ for a one-unit increase in $x_1$ in the group $x_2=1$.
+
+$\beta_0 + \beta_2$ is the expected value of $y$ in the group $x_2=1$ when $x_1=0$ .
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Example interaction model with lung data}
+
+<<lung-plots, fig.height=4, results='hold'>>=
+ggplot(dat, aes(nutrition, disease, color=factor(smoking))) + 
+    geom_point() + geom_smooth(method="lm")
+@
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Example interaction model with lung data}
+
+\vspace{-2em}
+$$ dis_i = \beta_0 + \beta_1 nutrition_{i} + \beta_2 smoking_{i} + \beta_3 nutrition\cdot smoking_{i} + \epsilon_i$$
+
+<<intModels>>=
+mi1 <- lm(disease ~ nutrition + smoking, data=dat)
+mi2 <- lm(disease ~ nutrition*smoking, data=dat)
+c(summary(mi1)$adj.r.squared, summary(mi2)$adj.r.squared)
+round(summary(mi2)$coef,2)
+@
+
+\uncover<2> {
+\scriptsize
+Among non-smokers, for every 1 unit improvement (increase) in nutrition score, the expected disease severity increases by 0.03 points. 
+OR, among non-smokers, for every 100 unit improvement (increase) in nutrition score, the expected disease severity increases by 3 points. 
+For smokers, for every 100 unit improvement (increase) in nutrition score, the expected disease severity would decrease by 5 points. 
+}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Example interaction model with lung data}
+
+\vspace{-2em}
+$$ dis_i = \beta_0 + \beta_1 nut_{i} + \beta_2 smoking_{i} + \beta_3 nut_{i}\cdot smoking_{i} + \beta_4 crowd_i + \epsilon_i$$
+
+<<intModels1>>=
+mi3 <- lm(disease ~ nutrition*smoking + crowding, data=dat)
+round(summary(mi3)$coef,2)
+@
+
+\scriptsize
+Adjusting for level of crowding (or, "holding crowding constant"), for every 100 unit improvement (increase) in nutrition score in smokers, the expected disease severity would decrease by 5 points. 
+
+\end{frame}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Checking influential points}
+
+We note that these results are sensitive to the inclusion of an influential outlying observation which had a much higher value of nutrition than any other observation.
+<<fig.height=3, results='hold'>>=
+plot(mi2, which=5)
+dat[69,]
+@
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Results sensitivity to outlier}
+
+It is important to experiment and note the sensitivity to the outlier, but unless you have REALLY good reason to do so, you should in general NOT remove outlying points from your primary analysis.
+
+<<>>=
+round(summary(mi2)$coef, 2)
+mi2a <- lm(disease ~ nutrition*smoking, data=dat, subset=-69)
+round(summary(mi2a)$coef, 2)
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Interaction modeling summary}
+
+\bi
+
+  \myitem Interactions can give you a more detailed story about your data.
+  
+  \myitem They are 'easier' to interpret/visualize with a binary and continuous variable interaction.
+  
+  \myitem They are also valid for continuous x continuous variables: as the value of variable $A$ increases, the association between $B$ and $Y$ changes.
+  
+  \myitem Interaction is sometimes referred to as 'effect modification'.
+
+\ei
+
+\end{frame}
+
+
+
+\end{document}
