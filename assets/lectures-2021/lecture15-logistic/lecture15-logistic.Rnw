@@ -1,0 +1,764 @@
+%% Module 2 beamer/knitr slides
+%% Biostatistics in Practice workshop, January 2014
+%% Nicholas Reich: nick [at] schoolph.umass.edu
+
+
+\documentclass[table]{beamer}
+
+
+\input{../../slide-includes/standard-knitr-beamer-preamble}
+
+%        The following variables are assumed by the standard preamble:
+%	Global variable containing module name:
+\title{Introduction to Logistic Regression}
+%	Global variable containing module shortname:
+%		(Currently unused, may be used in future.)
+\newcommand{\ModuleShortname}{MLR}
+%	Global variable containing author name:
+\author{Nicholas G Reich}
+%	Global variable containing text of license terms:
+\newcommand{\LicenseText}{Made available under the Creative Commons Attribution-ShareAlike 3.0 Unported License: http://creativecommons.org/licenses/by-sa/3.0/deed.en\_US }
+%	Instructor: optional, can leave blank.
+%		Recommended format: {Instructor: Jane Doe}
+\newcommand{\Instructor}{}
+%	Course: optional, can leave blank.
+%		Recommended format: {Course: Biostatistics 101}
+\newcommand{\Course}{}
+
+\input{../../slide-includes/shortcuts}
+\usepackage{bbm}
+\hypersetup{colorlinks=TRUE, urlcolor=blue}
+
+%%%%%%%% IMPORTANT -- MUST HAVE [fragile] for some/all frames chunks to have output work correctly. 
+
+\begin{document}
+
+<<setup, include=FALSE>>=
+library(knitr)
+opts_chunk$set(fig.path='figure/beamer-',fig.align='center',fig.show='hold',size='scriptsize', message=FALSE)
+knit_hooks$set(par=function(before, options, envir){
+  if (before && options$fig.show!='none') 
+    par(mar=c(4,4,.1,.1))
+})
+@
+
+
+\begin{frame}[plain]
+        \titlepage
+\end{frame}
+
+<<ggplot2, echo=FALSE, message=FALSE>>=
+require(ggplot2)
+theme_set(theme_bw())
+@
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Today's Lecture}
+
+
+\bi
+	\myitem Logistic regression
+\ei
+
+[Note: more on logistic regression can be found in Kaplan, Chapter 16 and the OpenIntro Statistics textbook, Chapter 8. These slides are based, in part, on the slides from OpenIntro.]
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Regression so far ...}
+    
+At this point we have covered:
+
+{\small
+\begin{itemize}
+\item Simple linear regression
+\begin{itemize}
+\item Relationship between numerical response and a numerical or categorical predictor
+\end{itemize}
+\item Multiple regression
+\begin{itemize}
+\item Relationship between numerical response and multiple numerical and/or categorical predictors
+\end{itemize}
+\end{itemize}
+}
+
+
+What we haven't covered is what to do when the response is not continuous (i.e. categorical, count data, etc.)
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Refresher: regression estimates the average response}
+
+In linear regression, when y is a continuous variable, our model estimates for us the average $y$, $\hat y$, value for a particular value of $x$.
+
+<<echo=FALSE, fig.height=4>>=
+x = runif(100, 0, 20)
+y = 4+2*x+rnorm(100, 0, 4)
+qplot(x,y) + geom_smooth(method="lm", se=FALSE)
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Refresher: regression estimates the average response}
+
+When y is a binary outcome variable, regression models can still estimate for us the average $y$, $\hat y$, but now it represents something different: the probability that $y = 1$, or $P(Y=1)$.
+
+<<echo=FALSE, fig.height=4>>=
+set.seed(1234)
+x = runif(100, -5, 5)
+e = rnorm(100, 0, 4)
+probs = exp(3+2*x+e)/(1+exp(4+2*x+e))
+y = rbinom(100, 1, probs)
+qplot(x,y) + geom_smooth(method="lm", se=FALSE) + ylab("P(Y=1)")
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}
+\frametitle{Example - Birdkeeping and Lung Cancer}
+
+A 1972 - 1981 health survey in The Hague, Netherlands, discovered an association between keeping pet birds and increased risk of lung cancer. To investigate birdkeeping as a risk factor, researchers conducted a case-control study of patients in 1985 at four hospitals in The Hague (population 450,000). They identified 49 cases of lung cancer among the patients who were registered with a general practice, who were age 65 or younger and who had resided in the city since 1965. They also selected 98 controls from a population of residents having the same general age structure.
+
+
+\vfill
+
+{\tiny \textit{Ramsey, F.L. and Schafer, D.W. (2002). The Statistical Sleuth: A Course in Methods of Data Analysis (2nd ed)}}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Example - Birdkeeping and Lung Cancer - Data}
+
+{\small
+<<donnerData, warning=FALSE>>=
+library(Sleuth3)
+birds = case2002
+head(birds)
+@
+}
+
+%~\\
+
+{\tiny
+\begin{center}
+\begin{tabular}{ll}
+LC & Whether subject has lung cancer \\
+FM & Sex of subject \\
+SS & Socioeconomic status \\
+BK & Indicator for birdkeeping \\
+AG & Age of subject (years) \\
+YR & Years of smoking prior to diagnosis or examination \\
+CD & Average rate of smoking (cigarettes per day)
+\end{tabular}
+\end{center}
+}
+
+\tiny{NoCancer is the reference response (0 or failure), LungCancer is the non-reference response (1 or success) - this matters for interpretation.}
+
+\end{frame}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Example - Birdkeeping and Lung Cancer - Data}
+
+What types of associations do you expect to see between the predictors below and lung cancer? Might you expect any interactions to be present?
+
+{
+\begin{center}
+\begin{tabular}{ll}
+LC & Whether subject has lung cancer \\
+FM & Sex of subject \\
+SS & Socioeconomic status \\
+BK & Indicator for birdkeeping \\
+AG & Age of subject (years) \\
+YR & Years of smoking prior to diagnosis or examination \\
+CD & Average rate of smoking (cigarettes per day)
+\end{tabular}
+\end{center}
+}
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]{Interpreting linear regressions of binary data}
+
+We can use linear regression for binary data, and for {\em very simple models} it gives reasonable and interpretable output.
+
+$$ \hat LC_i = \beta_0 $$
+
+<<lm, echo=TRUE, fig.height=3.8>>=
+birds$LCnum <- as.numeric(birds$LC=="LungCancer")
+sum(birds$LCnum)/nrow(birds)
+summary(lm(LCnum ~ 1, data=birds))$coef
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]{Interpreting linear regressions of binary data}
+
+We can use linear regression for binary data, and for {\em very simple models} it gives reasonable and interpretable output.
+
+$$ \hat LC_i = \beta_0 + \beta_1*FM_i $$
+
+<<lm1, echo=TRUE, fig.height=3.8>>=
+mod1 <- lm(LCnum ~ FM, data=birds)
+round(summary(mod1)$coef, 3)
+@
+
+What is this model's estimated probability of lung cancer for men? for women?
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]{Interpreting linear regressions of binary data}
+
+But if the model gets too complicated, then it can produce some tricky results. 
+
+$$ \hat LC_i = \beta_0 + \beta_1 \cdot FM_i + \beta_2 \cdot YR_i $$
+
+<<lm2, echo=TRUE, fig.height=3.8>>=
+mod2 <- lm(LCnum ~ FM + YR, data=birds)
+round(summary(mod2)$coef, 3)
+@
+
+What is this model's estimated probability of lung cancer for men who have never smoked? for women who never smoked?
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% 
+% \begin{frame}[fragile]{Lung cancer as a function of smoking years}
+% 
+% <<logistic-plot, echo=TRUE, fig.height=3.8>>=
+% (p <- ggplot(birds, aes(x=YR, y=as.numeric(LC=="LungCancer")*1)) + 
+%    geom_jitter(height=0) + geom_smooth(method="lm", se=FALSE) + 
+%    ylab("Lung Cancer") + xlab("Years smoked prior to diagnosis") + 
+%    scale_y_continuous(breaks=c(0,1)) +
+%    facet_grid(.~ FM))
+% @
+% 
+% 
+% \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Brief detour: what are the ``odds''?}
+
+\vspace{-2mm}
+
+Odds are another way of quantifying the probability of an event, commonly used in gambling (and logistic regression).\\
+
+~\\
+
+{
+For some event $E$,
+{\small
+\[\text{odds}(E) = \frac{P(E)}{P(E^c)} = \frac{P(E)}{1-P(E)}\]
+}
+and
+{\small
+\[\text{P}(E) = \frac{odds(E)}{1+odds(E)}\]
+}
+Similarly, if we are told the odds of E are $x$ to $y$ then
+{\small
+\[\text{odds}(E) = \frac{x}{y} = \frac{x/(x+y)}{y/(x+y)} \]
+}
+which implies
+{\small
+\[P(E) = x/(x+y),\quad P(E^c) = y/(x+y)\]
+}
+}
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Odds Ratios}
+
+\vspace{-2mm}
+
+Odds Ratios compare the odds of an event in two different groups.\\
+
+%~\\
+
+
+For some outcome of interest (say, disease) in two groups, (e.g. exposed and unexposed),
+
+%$odds_A(Y) = \frac{P_A(Y)}{1-P_A(Y)}$
+
+%$OR_{A v B} = \frac{odds_A}{odds_B}$
+
+\[OR = \frac{P(\text{disease} | \text{exposed}) / [1-P(\text{disease} | \text{exposed})]}{P(\text{disease} | \text{unexposed})/[1-P(\text{disease} | \text{unexposed})]} \]
+
+\begin{block}{Facts about Odds Ratios}
+\begin{itemize}
+  \myitem ORs have range of (0, $\infty$). 
+  \myitem OR = 1 means no difference between the groups.
+  \myitem They have a multiplicative scale: e.g. OR = 0.5 and OR = 2 both indicate that one group has twice the odds of another.
+  \myitem This means that the log OR is on an additive scale of odds (This is important for logistic regression!).
+  \myitem OR is not a ratio of probabilities.
+\end{itemize}  
+\end{block}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]{Unadjusted association btw lung cancer and sex}
+
+<<birds-tab, echo=TRUE, fig.height=3.8>>=
+library(epitools)
+birds$LC <- relevel(birds$LC, ref="NoCancer")
+(tmp <- with(birds, table(FM, LC)))
+oddsratio(tmp)$measure
+@
+
+Do men have different odds of lung cancer compared to women, without adjustment for possible confounders?
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]{Unadjusted association btw lung cancer and birdkeeping}
+
+<<birds-tab2, echo=TRUE, fig.height=3.8>>=
+birds$BK <- relevel(birds$BK, ref="NoBird")
+(tmp <- with(birds, table(BK, LC)))
+oddsratio(tmp)$measure
+@
+
+Do birdkeepers have different odds of lung cancer compared to non-birdkeepers, without adjustment for possible confounders?
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]{Lung cancer as a function of years smoked}
+
+Modeling the log-odds is one solution to the problem of linearity.
+
+$$ \log odds(LC) \sim FM + YR $$
+
+
+<<logit-plot, echo=TRUE, fig.height=3>>=
+(p <- ggplot(birds, aes(x=YR, y=LCnum)) + 
+   geom_jitter(height=0) + facet_grid(.~FM) +
+   stat_smooth(method='glm', method.args=list(family='binomial')) +
+   ylab("P(Lung Cancer)") + xlab("Years smoked prior to diagnosis") + 
+   scale_y_continuous(breaks=c(0,1)))
+@
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]{A more drastic example: why we use the log-odds}
+
+I dropped individuals who smoked $>$30 years prior to diagnosis who did not have LC.
+
+<<logit-plot2, echo=FALSE, fig.height=4.3>>=
+birds_new <- dplyr::filter(birds, !(YR>=30 & LCnum==0))
+p1 <- ggplot(birds_new, aes(x=YR, y=LCnum)) + 
+   geom_jitter(height=0) + facet_grid(.~FM) +
+   stat_smooth(method="lm", se=FALSE) +
+   ylab("Lung Cancer") + xlab(NULL) + 
+   scale_y_continuous(breaks=c(0,1))
+
+p2 <- ggplot(birds_new, aes(x=YR, y=LCnum)) + 
+   geom_jitter(height=0) + facet_grid(.~FM) +
+   stat_smooth(method='glm', method.args=list(family='binomial'), se=FALSE) +
+   ylab("Lung Cancer") + xlab("Years smoked prior to diagnosis") + 
+   scale_y_continuous(breaks=c(0,1))
+
+gridExtra::grid.arrange(p1, p2, nrow=2)
+@
+
+
+\end{frame}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+\frametitle{Logistic regression has log(odds) as the link}
+
+A logistic regression model can be defined as follows:
+
+$$Y_i | \mathbf x_i \sim \text{Bernoulli}(p_i)$$
+$$Pr(Y_i=1|\mathbf x_i) = p_i$$
+$$logit (p_i) = \log \frac{p_i}{1-p_i}  = \eta =  \beta_0+\beta_1 X_{i1} + \cdots + \beta_p X_{ip}$$
+
+<<logisticGraph, echo=FALSE, fig.height=3>>=
+x <- seq(-6, 6, by=.1)
+y <- exp(x)/(1+exp(x))
+qplot(x, y, geom="line") + ggtitle("Logistic function") + xlab(expression(eta)) + ylab("p") + annotate("text", x=-4, y=.75, label="p == frac(e^eta,1+e^eta)", parse=TRUE)
+@
+
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+\frametitle{Example - Birdkeeping and Lung Cancer - Model}
+
+$$logit Pr(LC=1|\mathbf x)  =  \beta_0 + \beta_1 BK + \beta_2 FM + \beta_3 SS + \beta_4 AG + \beta_5 YR + \beta_6 CD$$
+\vspace{-5mm}
+<<birdModel, tidy=FALSE>>=
+birds$LCnum <- as.numeric(birds$LC=="LungCancer")
+fm1 <- glm(LCnum ~ BK + FM + SS +  AG + YR + CD, 
+           data=birds, family=binomial)
+@
+
+\vspace{20em}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+\frametitle{Example - Birdkeeping and Lung Cancer - Interpretation}
+
+\vspace{-5mm}
+
+{\scriptsize
+<<>>=
+summary(fm1)$coef
+@
+}
+
+
+Keeping all other predictors constant then,
+\begin{itemize}
+
+\item The odds ratio of getting lung cancer for bird keepers vs non-bird keepers is $\exp(1.3626) = 3.91$.
+
+\item The odds ratio of getting lung cancer for an additional year of smoking is $\exp(0.0729) = 1.08$. I.e. for every year an individual smokes, the odds of lung cancer increase by 8\%. 
+
+\item The odds ratio of getting lung cancer for an additional 10 years of smoking is $\exp(0.0729*10) = 2.07$.
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+\frametitle{Building Intuition: How do ORs modify absolute risk?}
+
+If you have a 1\% risk of lung cancer, what does a 8\% increase in odds mean? How about a 100\% or 200\% increase in odds?
+
+<<>>=
+change_in_prob <- function(orig_prob, OR){
+    new_odds <- orig_prob / (1-orig_prob) * OR
+    return( new_odds/(1+new_odds) - orig_prob)
+}
+change_in_prob(orig_prob=.01, OR=1.08)
+@
+
+<<echo=FALSE, fig.height=3>>=
+par(mar=c(5,4,1,1))
+curve(change_in_prob(x, OR=3), from=0, to=1, ylab="change in probability", xlab="original probability of outcome")
+curve(change_in_prob(x, OR=2), from=0, to=1, add=TRUE, col="blue")
+curve(change_in_prob(x, OR=1.08), from=0, to=1, add=TRUE, col="red")
+legend(x=.8, y=.25, col = c("black", "blue", "red"), lty=1, legend = paste("OR =", c(3, 2, 1.08)), cex = .8)
+@
+
+
+
+
+\end{frame}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{What the numbers do not mean ...}
+
+The most common mistake made when interpreting logistic regression is to treat an odds ratio as a ratio of probabilities.\\
+
+~\\ 
+
+Bird keepers are \emph{not} 4x more likely to develop lung cancer than non-bird keepers.
+
+~\\ 
+
+This is the difference between relative risk and an odds ratio.
+
+
+\[RR = \frac{P(\text{disease} | \text{exposed})}{P(\text{disease} | \text{unexposed})} \]
+
+\[OR = \frac{P(\text{disease} | \text{exposed}) / [1-P(\text{disease} | \text{exposed})]}{P(\text{disease} | \text{unexposed})/[1-P(\text{disease} | \text{unexposed})]} \]
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Measuring accuracy of a model for binary outcomes}
+
+A common metric for evaluating models for binary outcomes is simply called the ``accuracy''. 
+
+It requires specifying a threshold ($c$) for the predicted probability ($\hat p_i$) that an individual has the outcome of interest. For a given threshold, we say that 
+\[
+    \hat y_i(c)= 
+\begin{cases}
+    1,    & \text{if }p_i \geq c\\
+    0,  & \text{if } p_i < c\\ 
+\end{cases}
+\]
+
+And then the accuracy, for a given $c$ is defined
+$$ accuracy(c) = \sum_{i=1}^N \frac{1- | \hat y_i(c) - y_i | }{N} $$.
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Measuring accuracy across all thresholds}
+
+To gain a full picture of the accuracy of your model, you want to compute the accuracy for all possible values of $c$. This is what the ROC curve does:
+
+
+<<fig.show='asis', fig.height=3.5>>=
+library(ROCR)
+birds$phat <- predict(fm1, type="response")
+pred <- prediction(birds$phat, birds$LCnum)
+perf <- performance(pred,"tpr","fpr")
+plot(perf)
+@
+
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Measuring accuracy across all thresholds}
+
+The "area under the curve" (AUC) is a common single measure of predictive accuracy of a model. It can be interpreted as {\em the probability, if one random individual with the outcome and one without were drawn from your dataset, that your model would accurately assign a higher $p_i$ to the one with the outcome.}
+
+<<>>=
+## this prints out the computed area under the curve
+performance(pred,"auc")@y.values
+@
+
+
+<<fig.height=3.5, echo=FALSE>>=
+plot(perf)
+@
+
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \begin{frame}[fragile]
+% \frametitle{To match or not to match}
+% 
+% \begin{block}{Case-control studies are common for (rare) binary outcomes}
+% \bi
+%     \myitem Randomly selected controls $\longrightarrow$ vanilla logistic regression
+%     \myitem Matched controls $\longrightarrow$ conditional logistic regression
+% \ei
+% \end{block}
+% 
+% \begin{block}{Conditional logistic regression}
+% \bi
+%     \myitem Accounts for the fact that you have ``adjusted'' for some variables in the design.
+%     \myitem Calculates an OR for each matched-set/pair, then ``averages'' across sets
+%     \myitem Forfeits ability to estimate effects of matched variables, but design can substantially improve power. 
+%     \myitem Implemented in R with {\tt clogit()}.
+% \ei
+% \end{block}
+% 
+% \end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+\frametitle{Important notes about GLMs}
+
+\begin{block}{On logistic regression in particular...}
+\bi
+        \myitem There are other link functions for binary data (e.g. probit, cloglog).
+        \myitem Other, less parametric methods may be appropriate here too -- e.g. CART, random forests, classification algorithms.
+\ei
+\end{block}
+
+\begin{block}{Beyond the scope of this course, but interesting topics...}
+\bi
+        \myitem How are logistic models (and other GLMs) fitted?
+        \myitem Can we perform the same kind of model diagnostics to determine whether a model provides a good fit to data?
+        \myitem Sensitivity and specificity
+        \ei
+\end{block}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \begin{frame}[fragile]{On your own...}
+% 
+% 
+% \bi
+%     \myitem Examine the residuals from the logistic regression model shown earlier with six predictors. Why does this plot look different than other residual plots we have seen this semester?
+% <<eval=FALSE>>=
+% plot(fm1, which=1)
+% @
+% 
+%     \myitem A better way to look at residuals for logistic regression is using "binned residual plots". Divide your observations into bins with equal numbers of observations along some variable of interest (e.g. the fitted values, or one of your covariates). Then, calculate the average residual in that bin. Luckily, there is a function that can do this for us! 
+% <<eval=FALSE>>=
+% library(arm)
+% binnedplot(birds$AG, resid(fm1), nclass=20)
+% @
+% 
+% Evaluate binned residual plots across continuous predictor variables as well as the ``fitted'' model values. Do you see any violations of the assumption that the mean residual is far away from zero?
+% 
+% 
+% \ei
+% 
+% \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+
+
+\centering
+\Large
+Mathematical details
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+\frametitle{Generalized linear models: defined}
+
+All generalized linear models have the following three characteristics:
+\begin{enumerate}
+\item {\bf A probability distribution} describing the outcome variable \\
+\bi
+\item e.g. $Y \sim \text{Bernoulli}(p) \longrightarrow \mathbb E[Y|p] = p$. 
+\ei
+\item {\bf A linear model}
+\begin{itemize}
+\item $\eta = \beta_0+\beta_1 X_1 + \cdots + \beta_p X_p$
+\end{itemize}
+\item {\bf A link function} that relates the linear model to the parameter of the outcome distribution
+\begin{itemize}
+\item $g(\mathbb E[Y]) = g(p) = \eta$ or $\mathbb E[Y] = p = g^{-1}(\eta)$
+\end{itemize}
+\end{enumerate}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{MLR is a special case of a GLM}
+
+\begin{block}{For continuous outcome, we often do this}
+\begin{enumerate}
+\item {\bf A probability distribution} describing the outcome variable \\
+\bi
+\item $Y|X \sim \text{Normal}(\mu, \sigma^2) \longrightarrow \mathbb E[Y|X] = \mu$. 
+\ei
+\item {\bf A linear model}
+\begin{itemize}
+\item $\eta = \beta_0+\beta_1 X_1 + \cdots + \beta_p X_p$
+\end{itemize}
+\item {\bf A link function} that relates the linear model to the parameter of the outcome distribution
+\begin{itemize}
+\item $g(\mathbb E[Y|X]) = g(\mu) = \mu = \eta$ 
+\end{itemize}
+\end{enumerate}
+\end{block}
+
+$$g(\mathbb E[Y|X]) = E[Y|X] = \mu = \beta_0+\beta_1 X_1 + \cdots + \beta_p X_p$$
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Logistic regression: a common GLM for 0/1 outcome data}
+
+\begin{enumerate}
+\item {\bf A probability distribution} describing the outcome variable \\
+\bi
+\item $Y|X \sim \text{Bernoulli}(p) \longrightarrow \mathbb E[Y|X] = Pr(Y=1|X) = p$. 
+\ei
+\item {\bf A linear model}
+\begin{itemize}
+\item $\eta = \beta_0+\beta_1 X_1 + \cdots + \beta_p X_p$
+\end{itemize}
+\item {\bf A link function} that relates the linear model to the parameter of the outcome distribution
+\begin{itemize}
+\item $g(\mathbb E[Y|X]) = g(p) = logit(p) = \log\frac{p}{1-p} = \eta$ 
+\end{itemize}
+\end{enumerate}
+
+$$g(\mathbb E[Y|X]) = logit[Pr(Y=1|X)] = \beta_0+\beta_1 X_1 + \cdots + \beta_p X_p$$
+
+\end{frame}
+
+
+
+
+\end{document}
