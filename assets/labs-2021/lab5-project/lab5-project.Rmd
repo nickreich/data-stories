@@ -9,7 +9,7 @@ __This lab will get you started working with the dataset for your project. One p
 
 
 * You are required to use the main dataset that your group is using. You may use external datasets as well.  You must your own graphs using your own code.
-* Every group member must turn in their own assignment.
+* Every group member must turn in their own assignment, as an Rmd and HTML file.
 * There are 10 questions for credit.
 
 
