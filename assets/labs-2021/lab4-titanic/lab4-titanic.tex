@@ -1,0 +1,183 @@
+\documentclass{article}\usepackage[]{graphicx}\usepackage[]{color}
+% maxwidth is the original width if it is less than linewidth
+% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+\let\hlipl\hlkwb
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+
+\input{../../slide-includes/statsTeachR-preamble-labs}
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+
+
+
+
+\license{This assignment is released under a \href{http://creativecommons.org/licenses/by-sa/3.0}{Creative Commons Attribution-ShareAlike 3.0 Unported}.}
+
+\section*{Lab 4: Telling a story about survival on the Titanic}
+
+Create a short reproducible report answering the questions below, The report should be concise, including only necessary figures, and should be submitted as both HTML and Rmd formats. 
+
+This lab is due at 5pm on Tuesday, March 30th. You should submit your assignment, in the form of both a knitted RMarkdown HTML file as well as the .Rmd file, by uploading them to Moodle. While you may collaborate with other students on this assignment, you must write up your own code and answers to the questions. Absolutely no cutting and pasting of any portion of the answers. This assignment, like the others, will be worth 20 points.
+
+\subsection*{Getting started}
+In this exercise, we are going to look at a dataset describing characteristics (including survival) of passengers on the Titanic, which \href{https://en.wikipedia.org/wiki/RMS_Titanic}{sunk in the North Atlantic Ocean in 1912}. 
+
+Let's load the data into our current R session, and look at the variables available in the dataset:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{library}\hlstd{(}\hlstr{"Hmisc"}\hlstd{)}
+\hlkwd{library}\hlstd{(tidyverse)}
+\hlkwd{getHdata}\hlstd{(titanic)}
+\hlkwd{head}\hlstd{(titanic)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\begin{exercise}
+{\bf Understand your data} (1 pts)
+For this analysis, we are going to focus primarily on the impact of three predictor variables on survival: economic status ({\tt pclass}), {\tt sex}, and {\tt age}. Examine your data carefully using some univariate plots and/or summaries of the variables to understand what the distributions look like. Choose no more than 2 tables and/or figures to summarize important features of the dataset.
+\end{exercise}
+
+\begin{exercise}
+{\bf Deal with missing data}  (2 pts) There are a lot of missing data in the {\tt age} variable. In real data analysis problems, missing data is a common and pesky problem. It can especially be difficult to deal with when the missingness is not ``random'', i.e. certain factors (whether they are variables you measure or not) can predict whether the data will be missing or not. For example, do you think that older or younger people might be more or less likely to be missing their age from this dataset? What other variables might determine whether age is observed or not? One way to start to look at this is to create a new factor variable that indicates whether `age` is missing or not for each observation. Then we can create some simple tables to assess missingness across different groups. Try these types of tabulations out and determine whether you think missing age is predictable based on some of the other data in our dataset. Show one table or figure and summarize the results of your exploration of missing age data in a few sentences.
+
+
+\end{exercise}
+
+\begin{exercise}
+{\bf Remove missing data} (1 pt)
+For now, to make the rest of the lab easier to work through, we are going to ignore the observations that are missing {\tt age}. This is rarely a great assumption to make in practice, especially if the missingness may be associated with other factors. So when we interpret our results, we will need to remember that our dataset may no longer be representative of the entire population of travelers on the Titanic. Run the following code to remove anyone missing age from our dataset.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{titanic1} \hlkwb{<-} \hlkwd{filter}\hlstd{(titanic,} \hlopt{!}\hlkwd{is.na}\hlstd{(age))}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\end{exercise}
+
+
+
+\begin{exercise}
+{\bf Make some hypotheses}  (2 pts) 
+{\em Before making any multivariate plots}, think about (and if you are working with others, discuss with them) what relationships might exist between these variables of pclass, age, sex and survival. Make a short list, including directions of possible relationships and possible interactions. Write down what those ideas are here before exporing the data fully. It is good practice to ``register'' your ideas about what you are looking for, to prevent the analysis from turning into a ``fishing expedition''.
+\end{exercise}
+
+
+\begin{exercise}
+{\bf Look at your data}  (2 pts) 
+Create a few exploratory graphics and/or tables that illustrate the relationships between these variables and survival. (Hint: try adapting graphing code from the logistic regression lecture. Try using facets or colors to highlight important comparisons.)
+
+
+\end{exercise}
+
+\begin{exercise}
+{\bf Design and fit a model}  (3 pts)
+Using the plots as your guide, write down a model that you'd like to fit to use to describe how this data predicts the outcome of survival. Then fit that model. 
+
+
+\end{exercise}
+
+\begin{exercise}
+{\bf Examine your model performance}  (2 pts) 
+Now that you've fit a model, calculate, for each individual, an estimated probability of survival, using code similar to that below (Note: adding `type='response'` ensures that if you fit a logistic regression model, the `predict` function returns you predicted probabilities instead of predicted log-odds.):
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{titanic1}\hlopt{$}\hlstd{preds} \hlkwb{<-} \hlkwd{predict}\hlstd{(fm1,} \hlkwc{type} \hlstd{=} \hlstr{"response"}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+Recall that we can define a probability threshold for the predicted outcome of survival, where if the predicted probability is greater than the specified threshold then we say the individal was predicted to have survived. Using the predicted probabilities from your model, compute your model's overall accuracy for a threshold of 0.5. We define accuracy as
+$$ accuracy = \sum_{i=1}^N \frac{1- | \hat y_i - y_i | }{N} $$
+where $y_i$ is the observed outcome (either a 0 or a 1) and $\hat y_i$ is the predicted outcome (either a zero or a 1, computed based on the 0.5 threshold).
+
+
+
+\end{exercise}
+
+\begin{exercise}
+{\bf Where did your model not do well?}  (3 pts) 
+
+Compute the accuracy of your model by each group of pclass and sex with the same 0.5 threshold. Print out a tabulation that has six rows, one for each combination of pclass (3 categories) and sex (2 categories) and the 0.5 threshold accuracy for each of those 6 groups. For which groups was your model less accurate? For the group of pclass and sex for which your model was least accurate, write a few sentences about why your model was not as accurate here. Before you write the sentences, look at the rows of your dataset corresponding to the not-as-accurate predictions and/or make some plots of your data to try to get a sense of what might have gone wrong here. (Note that you are not being evaluated here on how accurate your model is, so no need to fit and re-fit your model to make it better and better. Just going through the motions of the performance evaluation is good enough.)
+
+
+
+
+\end{exercise}
+
+
+
+
+\begin{exercise}
+{\bf ROC Curve} (2 pts)
+Use the {\tt ROCR} package to plot an ROC curve for your model and calculate the area under the curve. Interpret the area under the curve in the context of the dataset.
+
+
+
+\end{exercise}
+
+
+\begin{exercise}
+{\bf Summary} (2 pts)
+Write 3-4 sentences that summarize the key conclusions of this analysis. Interpret the coefficients from your fitted model and describe your model's predictive performance. 
+
+\end{exercise}
+
+
+{\bf Extra credit}  (5 pts) 
+Fit a different kind of classification model (e.g. an XGBoost model or a Random Forest) to the same data that you did above, and compare it's results to your logistic regression. Was it more or less accurate? Credit earned regardless of it being a better forecaster or not, just getting the results is enough.
+
+\end{document}
+

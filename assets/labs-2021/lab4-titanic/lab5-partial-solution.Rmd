@@ -1,0 +1,107 @@
+---
+title: "Lab 5, partial solution "
+output: html_notebook
+editor_options: 
+  chunk_output_type: inline
+---
+
+## Loading data and setup
+
+First, we load the titanic data and remove the missing observations.
+```{r echo=TRUE}
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE)
+library("ggplot2")
+theme_set(theme_minimal())
+library("Hmisc")
+getHdata(titanic)
+titanic$age_mis <- factor(is.na(titanic$age))
+titanic1 <- dplyr::filter(titanic, age_mis==FALSE)
+head(titanic)
+```
+
+Let's focus on questions 5 and 6, which ask you to fit a model and then (in Q6) to "examine your model performance". Let's start by fitting a fairly simple model with main effect terms for age, sex, and pclass.
+
+```{r}
+fm <- glm(survived ~ age + sex + pclass, dat=titanic1, family="binomial")
+summary(fm)
+```
+
+## Interpreting the model coefficients
+
+Let's interpret some of the above coefficients. Because this is a logistic regression, we need to be careful about how we think about the numbers in the "Estimate" column above. Recall that this model has been fit on the log-odds scale, so if we want to interpret any of these coefficients as odds or odds ratios, then we need to look at them on the exponential scale. Let's start by exponentiating the coefficients and their confidence intervals:
+
+```{r}
+round(exp(coef(fm)), 2)
+```
+
+```{r}
+round(exp(confint(fm)), 2)
+```
+
+Adjusting for sex and class, the odds of survival were estimated to decrease by 5% (95% CI: 3-6%) for each additional year of age.
+
+Individuals in third class were estimated to have 94% (95% CI: 89-97%) lower odds of survival than counterparts of the same age and sex in first class.
+
+
+## Evaluating uncertainty in the model
+
+Here is the coefficient table from the fitted model above
+```{r}
+round(summary(fm)$coef, 2)
+```
+
+Usually, if you are interested in hypothesis testing, you want to evaluate how far away your estimate is from some pre-specified value that indicates "no effect". In this case, that pre-specified value is zero (or 1, if we've exponentiated the coefficients, which we have not, above). Specifically, we want to know how far away from zero our coefficients are __in units measured by standard errors__. Typically, if your estimate is more than two standard errors away from zero (or whatever your prespecified value is) then we declare it "statistically significant". 
+
+For example, the coefficient for age in the above model is `r round(coef(fm)['age'], 2)` and the standard error is `r round(summary(fm)$coef['age', 2],2)`. Therefore, our estimated coefficient of age is 5 standard errors away from zero. This is more than two, so this coefficient can be said to be statistically significantly different from zero.
+
+We have done a lot in this class (see Lab 6, Lecture X and Lecture X) to think about different ways to estimate this standard error. Recall that the standard error is one measure of uncertainty in our estimate of, in this case, the association between age and the probability of survival. We cannot say anything about the "significance" of one of these relationships without estimating this uncertainty.
+
+There are a lot of ways of measuring this uncertainty. 
+
+ - One way is to use mathematical formulas that rely on assumptions about our data (such as independence of observations). This leads to the assumption that our standard error is the std deviation of a normal (or Student's t) distribution centered at zero, and we evaluate the likelihood of our estimate in that context. 
+ - Another way is to use bootstrap re-sampling of your data (without permuting your data, just resampling your observations with replacement) to estimate the sampling distribution. (See [Lecture 9](../../lectures/lecture9-intervals/lecture9-intervals.pdf)).
+ - A third way is to re-sample your data while permuting one variable of interest to create a "null distribution" of coefficient values. This is what [Lab 6](../lab6-infer/lab6-infer.pdf) asks you to do.
+ - We also talked about using likelihood and Bayesian techniques to evaluate evidence about a particular hypothesis. These techniques use similar information in your data as the above methods, but use different mathematical techniques to evaluate your uncertainty. 
+ 
+In practice, differences between all of these methods are usually fairly small. But it will distinguish you from other aspiring data scientists if you have an intuitive understanding about how these methods work.
+
+
+## Examining model performance
+
+To examine the model performance, we can still use a version of a "residual", using similar ideas from linear regression. Basically, a residual is a measure of "observed value - expected value". In logistic regression, our observed values ($y$s) are 0s and 1s, and our model values ($\hat y$s) are probabilities. We can use the same residual from linear regression, this is called a "response residual" = $y-\hat y$. There are other ways to create residuals in logistic regression that for now, let's take this as a measure of how well a model predicts a certain observation. We can calculate these residuals using the `residuals()` function, specifying the type as response.
+
+Here is a plot of the response residuals against age, with a moving average smoother drawn through. We want the smooth line to be at zero across the whole dimension of x.
+```{r}
+titanic1$fm_resid <- residuals(fm, type="response")
+ggplot(titanic1, aes(x=age, y=fm_resid)) + 
+  geom_point(alpha=.5) + geom_smooth(span=.95, method="loess") + 
+  geom_hline(aes(yintercept=0), linetype=2)
+```
+
+Points above the $y=0$ line are observations for which $y-\hat y>0$ i.e. where our predicted value was lower than observed. This can only happen when $y=1$. If there are places where the smooth line is above 0 this suggests that the model is in general predicting __too low__ of a probability of survival. Similarly, if the smooth line is below the $y=0$ line this suggests that our model on average is predicting __too high__ of a probability of survival. I take away from the above graph that in general our model is doing a pretty good job, although it is maybe not capturing a bit of trend at the low and high ages: children were more likely to survive and old people were less likely to survive than our model predicts.
+
+Let's look at this trend by sex and class
+```{r}
+ggplot(titanic1, aes(x=age, y=fm_resid)) + 
+  geom_point(alpha=.5) + geom_smooth(span=.95, method="loess") + 
+  geom_hline(aes(yintercept=0), linetype=2) +
+  facet_grid(sex~pclass)
+
+```
+
+Interestingly, it looks like the trend we noticed in the overall graph about the model underestimating the probability of survival is more pronounced for young boys than for young girls.
+
+This is likely due to our assumption of linearity in the relationship between age and log-odds of survival. If we allowed this relationship to not be linear, maybe it would make the "shoulders" of this plot a little closer to the $y=0$ line. 
+
+
+```{r}
+fm1 <- glm(survived ~ splines::ns(age, knots=c(10, 20, 30)) + sex + pclass, dat=titanic1, family="binomial")
+titanic1$fm1_resid <- residuals(fm1, type="response")
+ggplot(titanic1, aes(x=age, y=fm1_resid)) + 
+  geom_point(alpha=.5) + geom_smooth(span=.95, method="loess") + 
+  geom_hline(aes(yintercept=0), linetype=2) +
+  facet_grid(sex~pclass)
+```
+
+While this does seem to "fix" at least some of the residual deviations in the original model, it also makes the fit worse for some of the observations on young females.  
+
