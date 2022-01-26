@@ -1,0 +1,66 @@
+---
+title: "Coding Challenge 2: Tidyverse in Action"
+author: "Public Health 460"
+date: "Due: 6pm, Friday February 4th, 2022"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+__The functions in tidyverse are powerful tools for exploring, modifying, and arranging data. In this assignment, you will explore a data set "Diabetes" which contains information about the blood chemistry of 145 adults. Please turn in an HTML file and your .Rmd file.__
+
+1) Load the data set `Diabetes` from the package ``heplots``, using the following code. (Note: you only need to run this line of code once in your console, you should not include it in your Rmd file! Once you install the package you will not need to reinstall it --unless you want to update it-- until you upgrade R. But you will need to run the `library()` command every time you want to access the functions in the package.)
+
+```{r, eval=FALSE, include=TRUE, echo=TRUE}
+install.packages("heplots") 
+```
+
+```{r, eval=TRUE, include=TRUE, echo=TRUE, message=FALSE}
+library(heplots)
+data(Diabetes)
+```
+
+Information on this data set and the meaning of its variables can be found by entering ?Diabetes in the console after the data set is loaded.
+
+2) Next, load the tidyverse package.
+
+```{r, include = FALSE}
+library(tidyverse)
+```
+
+
+3) Use the `head()` function to see the first 6 lines of the Diabetes data set.
+
+```{r, include= FALSE}
+head(Diabetes)
+```
+
+
+4) Use the `select()` function to choose the columns glufast, glutest, and group. Save the new data set as diabetes_select. 
+
+```{r, include=FALSE}
+diabetes_select <- Diabetes %>% 
+  select(glufast, glutest, group)
+```
+
+5) On diabetes_select, use the `filter()` function to filter for rows with glufast greater than 105 and also a glutest greater than 450. What do the people in this filtered data set have in common?
+
+
+```{r, include=FALSE}
+diabetes_select %>% 
+  filter(glufast > 105, glutest > 450)
+```
+
+5) On diabetes_select, use the `mutate()` function to create a new column "gluratio" that is equal to glufast/glutest. Save this new dataset as `diabetes_ratio`.
+
+```{r, include= FALSE}
+diabetes_ratio <- diabetes_select %>% 
+  mutate("gluratio" = glufast/glutest)
+```
+
+6) Using the `arrange()` function, order the `diabetes_ratio` data set by ascending "gluratio". From looking at this data, is gluratio a good way to predict which group a person is in? Why or why not?
+
+```{r, include= FALSE}
+arrange(diabetes_ratio,gluratio)
+```
+
