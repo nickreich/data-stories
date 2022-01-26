@@ -28,27 +28,23 @@ By the deadline listed above, you must hand in both the .Rmd file and the result
 
 1) Load the `tidyverse` package. (2pts)
 ```{r}
-
 ```
 
 
 
 1) Read in the `women.csv` file using `read_csv()` with a [relative path](https://en.wikipedia.org/wiki/Path_(computing)) to identify your dataset. Save the dataset as a [named object](http://adv-r.had.co.nz/Style.html). This data set gives the average heights and weights of American women aged 30-39. The height is given in inches and the weight is given in pounds. This data set is believed to have came from the Build and Blood Pressure Study by the American Society of Actuaries.  (5pts)
 ```{r}
-
 ```
 
 
 1) Using the `dplyr::mutate()` function to add a the following new variables to your dataset: `height_m` which should represent height in meters, `mass_kg` for weight in kilograms, and `bmi` which will be the body mass index (BMI = mass in kg divided by height in meters squared). (6 pts)
 
 ```{r}
-
 ```
 
 
 1) Using the `dplyr` function `arrange()`, print the data sorted from largest (at the top) to smallest by BMI. (5pts)
 ```{r}
-
 ```
 
 

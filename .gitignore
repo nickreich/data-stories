@@ -1,34 +1,25 @@
 *.Rproj
 .Rproj.user
-
 *_site/
-
 *_cache/
 *_files/
-
 # History files
 .Rhistory
 *.DS_Store
-
 # Example code in package build process
 *-Ex.R
-
 # R data files from past sessions
 .Rdata
-
 *lungc.txt
-
 # RStudio files
 *.Rproj
 .Rproj.user/
 .Rproj.user
-
 ## remove unneeded files associated with lectures
 assets/lectures/*/*.tex
 assets/labs/*/*.tex
 figure/
 cache/
-
 ## beamer files
 *.snm
 *.nav
@@ -40,7 +31,7 @@ cache/
 *-concordance.tex
 *.synctex.gz
 *framed.sty
-
 ## specific files
 _site/
 *lab2-blog.tex
+.httr-oauth
