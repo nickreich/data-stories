@@ -1,0 +1,262 @@
+%% beamer/knitr slides
+%% for Statistical Modeling and Data Visualization course @ UMass
+%% Nicholas Reich: nick [at] schoolph.umass.edu
+
+
+\documentclass[table]{beamer}
+
+
+\input{../../slide-includes/standard-knitr-beamer-preamble}
+
+%	The following variables are assumed by the standard preamble:
+%	Global variable containing module name:
+\title{Introduction to \\ Telling Stories with Data}
+%	Global variable containing module shortname:
+%		(Currently unused, may be used in future.)
+\newcommand{\ModuleShortname}{introRegression}
+%	Global variable containing author name:
+\author{Nicholas G Reich}
+%	Global variable containing text of license terms:
+\newcommand{\LicenseText}{Made available under the Creative Commons Attribution-ShareAlike 3.0 Unported License: http://creativecommons.org/licenses/by-sa/3.0/deed.en\textunderscore US }
+%	Instructor: optional, can leave blank.
+%		Recommended format: {Instructor: Jane Doe}
+\newcommand{\Instructor}{}
+%	Course: optional, can leave blank.
+%		Recommended format: {Course: Biostatistics 101}
+\newcommand{\Course}{}
+
+
+\input{../../slide-includes/shortcuts}
+
+\hypersetup{colorlinks,linkcolor=,urlcolor=MainColor}
+
+
+%	******	Document body begins here	**********************
+
+\begin{document}
+
+%	Title page
+\begin{frame}[plain]
+	\titlepage
+\end{frame}
+
+%	******	Everything through the above line must be placed at
+%		the top of any TeX file using the statsTeachR standard
+%		beamer preamble.
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{State-level SAT score data (1994-95)}
+
+<<sat1, echo=FALSE, message=FALSE, fig.height=5>>=
+library(mosaicData)
+library(ggplot2)
+theme_set(theme_bw())
+data(SAT)
+SAT$fracgrp = cut(SAT$frac, breaks=c(0, 22, 49, 81),
+                  labels=c("low", "medium", "high"))
+ggplot(SAT) +
+    geom_text(aes(x=salary, y=sat, label=state), size=4, show.legend=FALSE) +
+    xlab("est. average public school teacher salary") +
+    ylab("average total SAT score")
+
+@
+
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]{State-level SAT score data (1994-95)}
+
+<<sat1a, echo=FALSE, message=FALSE, fig.height=5>>=
+qplot(salary, sat, data=SAT) + xlab("est. average public school teacher salary") + ylab("average total SAT score")
+
+@
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\begin{frame}[fragile]{State-level SAT score data (1994-95)}
+
+<<sat2, echo=FALSE, message=FALSE, fig.height=5>>=
+ggplot(aes(salary, sat), data=SAT) +
+    geom_point() +
+    geom_smooth(method="lm", se=FALSE) +
+    xlab("est. average public school teacher salary") +
+    ylab("average total SAT score")
+@
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{The SAT example}
+
+\begin{block}{What is the outcome variable?}
+\vskip3em
+\end{block}
+
+\begin{block}{What is the covariate or predictor variable?}
+\vskip3em
+\end{block}
+
+\begin{block}{What other data might be part of this story?}
+\vskip3em
+\end{block}
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\begin{frame}[fragile]{State-level SAT score data (1994-95)}
+
+<<sat3, echo=FALSE, message=FALSE, fig.height=5>>=
+qplot(salary, frac, data=SAT)+
+    xlab("est. average public school teacher salary") +
+    ylab("percentage of all eligible students taking the SAT")
+@
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{State-level SAT score data (1994-95)}
+
+<<sat4, echo=FALSE, message=FALSE, fig.height=5>>=
+qplot(salary, frac, color=fracgrp, data=SAT)+
+    xlab("est. average public school teacher salary") +
+    ylab("percentage of all eligible students taking the SAT") +
+    geom_hline(yintercept=c(22, 49), linetype=2, color="grey") +
+    guides(color=guide_legend(title="% taking SAT"))
+@
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{State-level SAT score data (1994-95)}
+
+<<sat4a, echo=FALSE, message=FALSE, fig.height=5>>=
+qplot(salary, sat, color=fracgrp, data=SAT) +
+    xlab("est. average public school teacher salary") +
+    ylab("average total SAT score")+
+    guides(color=guide_legend(title="% taking SAT"))
+@
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{State-level SAT score data (1994-95)}
+
+<<sat5, echo=FALSE, message=FALSE, fig.height=5>>=
+qplot(salary, sat, color=fracgrp, facets=.~fracgrp, data=SAT) +
+    xlab("est. average public school teacher salary") +
+    ylab("average total SAT score")+
+    guides(color=guide_legend(title="% taking SAT"))
+@
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{State-level SAT score data (1994-95)}
+
+<<sat6, echo=FALSE, message=FALSE, fig.height=5>>=
+ggplot(aes(salary, sat, color=fracgrp), data=SAT) +
+    geom_point() + geom_smooth(method="lm", se=FALSE) +
+    xlab("est. average public school teacher salary") +
+    ylab("average total SAT score")+
+    guides(color=guide_legend(title="% taking SAT"))
+@
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{State-level SAT score data (1994-95)}
+
+<<sat7, echo=FALSE, message=FALSE, fig.height=5>>=
+ggplot(SAT, aes(x=salary, y=sat)) +
+    geom_text(aes(color=fracgrp, label=state), size=4, show.legend=FALSE)+
+    geom_smooth(aes(color=fracgrp), method="lm", se=FALSE) +
+    geom_smooth(method="lm", se=FALSE, color="black") +
+    xlab("est. average public school teacher salary") +
+    ylab("average total SAT score") +
+    guides(color=guide_legend(title="% taking SAT"))
+@
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{State-level SAT score data (1994-95)}
+
+What can we conclude from all of this? (BTW, this is an example of \href{http://en.wikipedia.org/wiki/Simpson%27s_paradox}{"Simpson's Paradox"}.)
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Regression modeling}
+
+The process of using data to describe the relationship between outcomes and predictors is called modeling.
+\bi
+	\myitem Models are models, not reality.
+	\myitem ``All models are wrong, but some are useful."
+	\myitem Introduce structure to our model that balances realism with ``goodness of fit''. \ei
+
+\end{frame}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Appendix: Code for plotting}
+
+\scriptsize
+<<eval=FALSE>>=
+library(mosaicData)
+library(ggplot2)
+theme_set(theme_bw())
+data(SAT)
+SAT$fracgrp = cut(SAT$frac, breaks=c(0, 22, 49, 81),
+                  labels=c("low", "medium", "high"))
+ggplot(SAT) +
+    geom_text(aes(x=salary, y=sat, label=state), size=4, show.legend=FALSE) +
+    xlab("est. average public school teacher salary") +
+    ylab("average total SAT score")
+@
+
+More plotting code available \href{https://github.com/nickreich/data-stories/blob/gh-pages/assets/lectures/lecture1-intro-regression/lecture1-intro-regression.Rnw#L254}{here}.
+
+\end{frame}
+
+\end{document}

@@ -18,7 +18,7 @@ __You will be a better coder if you start off with good, organized habits when u
 * Create a new subfolder called `coding-challenges` and another called `data`.
 * Open a new RMarkdown file and save it in the `coding-challenges` directory you just made.
 * If you haven't already, install the `tidyverse` R package (this is a bundle of a lot of different packages).
-* Download the `women.csv` from Google Drive/data-stories-spring2021/data and save it in the `data` folder you created above in the project.
+* Download the `women.csv` from the Moodle assignment and save it in the `data` folder you created above in the project.
 
 
 __Answer the questions below for credit__
