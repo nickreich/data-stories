@@ -1,0 +1,233 @@
+%% beamer/knitr slides
+%% for Statistical Modeling and Data Visualization course @ UMass
+%% Nicholas Reich: nick [at] schoolph.umass.edu
+
+
+\documentclass[table]{beamer}
+
+
+\input{../../slide-includes/standard-knitr-beamer-preamble}
+
+%	The following variables are assumed by the standard preamble:
+%	Global variable containing module name:
+\title{Conceptual introduction to \tt ggplot}
+%	Global variable containing module shortname:
+%		(Currently unused, may be used in future.)
+\newcommand{\ModuleShortname}{introRegression}
+%	Global variable containing author name:
+\author{Nicholas G Reich}
+%	Global variable containing text of license terms:
+\newcommand{\LicenseText}{Made available under the Creative Commons Attribution-ShareAlike 3.0 Unported License: http://creativecommons.org/licenses/by-sa/3.0/deed.en\textunderscore US }
+%	Instructor: optional, can leave blank.
+%		Recommended format: {Instructor: Jane Doe}
+\newcommand{\Instructor}{}
+%	Course: optional, can leave blank.
+%		Recommended format: {Course: Biostatistics 101}
+\newcommand{\Course}{}
+
+
+\input{../../slide-includes/shortcuts}
+
+\hypersetup{colorlinks,linkcolor=,urlcolor=MainColor}
+
+
+%	******	Document body begins here	**********************
+
+\begin{document}
+
+%	Title page
+\begin{frame}[plain]
+	\titlepage
+\end{frame}
+
+%	******	Everything through the above line must be placed at
+%		the top of any TeX file using the statsTeachR standard
+%		beamer preamble.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Choices for R graphics}
+
+You have three central choices for making graphics in R:
+
+\begin{itemize}
+    \item ``Base R graphics''
+    \item {\tt ggplot2}
+    \item lattice
+\end{itemize}
+
+\vspace{2em}
+
+I use {\tt ggplot} because:
+\begin{enumerate}
+    \item it is integrated with the {\tt tidyverse}
+    \item it is actively developed/maintained
+    \item there are a ton of extensions (see more later)
+\end{enumerate}
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Understanding the ``grammar'' of ggplot2}
+
+The grammar ...
+
+\begin{itemize}
+    \item layers (a `geom', a `stat', an `annotation')
+    \item aesthetics (`aes`)
+    \item scales
+    \item facets
+    \item data
+    \item ... and more here: \href{http://ggplot2.tidyverse.org/reference/}{http://ggplot2.tidyverse.org/reference/}
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{What is a layer?}
+
+
+\begin{block}{Layers define the basic structure of the elements on the plot}
+\begin{itemize}
+    \item \href{https://ggplot2.tidyverse.org/reference/#section-geoms}{Geoms}: point, line, tile, boxplot, ribbon, ...
+    \item \href{https://ggplot2.tidyverse.org/reference/#section-stats}{Stats}: histogram, smooth, density, ...
+    \item \href{https://ggplot2.tidyverse.org/reference/#section-annotations}{Annotation}: hline, vline, text, ...
+\end{itemize}
+
+For more info check out the documentation: \href{http://ggplot2.tidyverse.org/reference/}{http://ggplot2.tidyverse.org/reference/}.
+
+\end{block}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{What are ``aesthetics''?}
+
+Aesthetics define a mapping between {\bf tidy data} and the information required to create a specific graphic\footnote{Figure credits: Hadley Wickham}
+
+\includegraphics[width=\textwidth]{figure-static/aes.png}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{\tt{geom\_point}}
+
+
+Each geom has a different set of aesthetics.
+
+What information do we need to draw a scatterplot? \\
+Or, asked another way, what aesthetics do we need for {\tt geom\_point}?
+
+\uncover<2>{
+\begin{itemize}
+    \item x (required)
+    \item y (required)
+    \item alpha
+    \item color
+    \item fill
+    \item shape
+    \item size
+\end{itemize}
+}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{\tt{geom\_line}}
+
+What information do we need to draw a line of connected points? \\
+Or, asked another way, what aesthetics do we need for {\tt geom\_line}?
+
+\uncover<2>{
+\begin{itemize}
+    \item x (required)
+    \item y (required)
+    \item alpha
+    \item color
+    \item linetype
+    \item size
+\end{itemize}
+}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]{}
+
+\centering
+\Large
+{\tt ggplot} extensions that I used in \href{https://www.medrxiv.org/content/10.1101/2021.02.03.21250974v1}{a recent paper}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{{\tt gridExtra} or {\tt cowplot} for multi-plot alignment}
+
+\includegraphics[width=.5\textwidth]{figure-static/data-and-forecast}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{\href{https://wilkelab.org/ggridges/}{{\tt ggrides}} for ridgeplots}
+
+\includegraphics[width=\textwidth]{figure-static/fig-model-ranks}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{{\tt RColorBrewer} and {\tt viridis} for colors}
+
+\includegraphics[width=.5\textwidth]{figure-static/fig-by-horizon-week}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]{Note-catcher}
+
+
+A figure from \href{http://www.pnas.org/content/112/16/4999.full.pdf}{``Cities, traffic, and CO2: A multidecadal assessment of trends, drivers, and scaling relationships'', Gately et al, PNAS, 2015.} Original paper on Moodle.
+
+\includegraphics[width=\textwidth]{figure-static/pollution.png}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]{Note-catcher}
+
+We have made the data from the CO2 emissions figure available on Moodle. As a group, you will be asked to complete the following tasks:
+
+\begin{enumerate}
+    \item Recreate the figure as close as possible to the original.
+    \item Improve the figure. Make some changes that you think make the figure more clear.
+    \item Post your final figures on the Note-catcher document.
+\end{enumerate}
+
+At the end of class, the class will vote on which figure is (1) closest to the original and (2) the best improvement.
+
+\begin{block}{NOTE}
+Everyone should be doing some coding here, and having a version of the graphic working on their laptop! Make sure it's not just 1-2 people typing the code and having it work for them.
+\end{block}
+
+\end{frame}
+
+
+
+
+
+\end{document}

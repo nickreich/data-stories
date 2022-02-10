@@ -1,0 +1,265 @@
+%% beamer/knitr slides
+%% for Statistical Modeling and Data Visualization course @ UMass
+%% Nicholas Reich: nick [at] schoolph.umass.edu
+
+
+\documentclass[table]{beamer}
+
+
+\input{../../slide-includes/standard-knitr-beamer-preamble}
+
+%	The following variables are assumed by the standard preamble:
+%	Global variable containing module name:
+\title{Introduction to Data Visualization}
+%	Global variable containing module shortname:
+%		(Currently unused, may be used in future.)
+\newcommand{\ModuleShortname}{introRegression}
+%	Global variable containing author name:
+\author{Nicholas G Reich}
+%	Global variable containing text of license terms:
+\newcommand{\LicenseText}{Made available under the Creative Commons Attribution-ShareAlike 3.0 Unported License: http://creativecommons.org/licenses/by-sa/3.0/deed.en\textunderscore US }
+%	Instructor: optional, can leave blank.
+%		Recommended format: {Instructor: Jane Doe}
+\newcommand{\Instructor}{}
+%	Course: optional, can leave blank.
+%		Recommended format: {Course: Biostatistics 101}
+\newcommand{\Course}{}
+
+
+\input{../../slide-includes/shortcuts}
+
+\hypersetup{colorlinks,linkcolor=,urlcolor=MainColor}
+
+
+%	******	Document body begins here	**********************
+
+\begin{document}
+
+%	Title page
+\begin{frame}[plain]
+	\titlepage
+\end{frame}
+
+%	******	Everything through the above line must be placed at
+%		the top of any TeX file using the statsTeachR standard
+%		beamer preamble.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% KEY POINTS/OUTLINE
+  % - show a few data visualizations, in pairs critique them (2 things you like, 2 you don't), then discuss as a class
+  % - why do we viz our data? exploratory, hypothesis generating, describe results, summarize models, show patterns
+  % - key principles
+  % - lessons about how we perceive features of data graphics
+  % - Exploratory graphics in R: demo code on NHANES data?
+  % - more pairs critiques, including 1-2 of the same from earlier
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}{Key principles of effective data graphics}
+
+\begin{itemize}
+    \item Know your audience
+    \item ``{\bf Show} the data''
+    \item ``Encourage the eye to {\bf compare} different pieces of data''
+    \item {\bf Simplify} by maximizing the ``data-ink ratio.''
+    \item Leverage color, shapes, facets to highlight multivariate data.
+    \item Annotate your figures with context.
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Visual cues}
+\begin{block}{Graphical elements that draw attention}
+
+The choice of which visual cues you use inform the story that you are able to convey and the points you can highlight.
+
+\end{block}
+
+\includegraphics[width=\textwidth]{figure-static/visual-cues.png}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Visual cues: position (numerical)}
+
+\begin{block}{Where are the data in relation to each other?}
+
+e.g. points and axis alignment.
+\end{block}
+
+\vspace{15em}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Visual cues: Length (numerical)}
+
+\begin{block}{How big (in one dimension)?}
+
+e.g. bars, lines (aligned), lines(unaligned) ...
+
+\end{block}
+
+\vspace{15em}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Visual cues: Angle (numerical)}
+
+\begin{block}{How wide? Parallel to something else?}
+
+e.g. lines, pie wedges, ...
+
+\end{block}
+
+\vspace{15em}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Visual cues: Direction/slope (numerical)}
+
+\begin{block}{Up or down? At what slope?}
+
+e.g. lines, time-series, ...
+
+\end{block}
+
+\vspace{15em}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Visual cues: Shape (categorical)}
+
+\begin{block}{Belonging to which group?}
+
+e.g. points
+
+\end{block}
+
+\vspace{15em}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Visual cues: Area/volume (numerical)}
+
+\begin{block}{How big (in 2/3 dimensions)?}
+
+e.g. circles, squares
+
+\end{block}
+
+\vspace{15em}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Visual cues: Shade/intensity (categorical or numerical)}
+
+\begin{block}{To what extent? How severely?}
+
+e.g. points, lines, ...
+
+\end{block}
+
+\vspace{15em}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Visual cues: Color  (categorical or numerical)}
+
+\begin{block}{Belonging to which group? To what extent? How severely?}
+
+e.g. points, lines, tiles ...
+
+\end{block}
+
+\vspace{15em}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Research on perception of cues}
+
+\begin{block}{In 1980s, \href{https://courses.ischool.berkeley.edu/i247/f05/readings/Cleveland_GraphicalPerception_Science85.pdf}{Cleveland and McGill} ran experiments to measure accuracy of human perception based on different visual cues.}
+
+\includegraphics[width=.45\textwidth]{figure-static/perception.jpeg}
+
+\tiny (Figure credit: \href{https://paldhous.github.io/ucb/2016/dataviz/week2.html}{Peter Aldhous})
+\end{block}
+
+\vspace{15em}
+
+\end{frame}
+
+% \begin{frame}[fragile]{Visualization excellence}
+%
+% In Tufte's words:
+%
+% \begin{columns}
+% \begin{column}{0.5\textwidth}
+% \begin{itemize}
+%      \item consists of complex ideas communicated with clarity, precision, and efficiency.
+%      \item is that which gives to the viewer the greatest number of ideas in the shortest time with the least ink in the smallest space.
+%      \item is nearly always multivariate.
+%      \item requires telling the truth about the data.
+% \end{itemize}
+% \end{column}
+% \begin{column}{0.5\textwidth}
+% \includegraphics[width=\textwidth]{figure-static/tufte-cover.jpg}
+% \end{column}
+% \end{columns}
+% \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Breakout rooms}
+
+\Large
+For each of the following graphics, work in your breakout rooms to complete the note-catcher assignment.
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]{Front-runners in The ‘Bachelor’ Or ‘Bachelorette’\footnote{from \href{https://fivethirtyeight.com/features/the-bachelorette/}{FiveThirtyEight}}}
+
+\includegraphics[width=\textwidth]{figure-static/koeze-hickey-bachelor-5-edited.png}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{``Ageing on Facebook''}
+
+\includegraphics[width=\textwidth]{figure-static/graphic-detail-ageing-facebook.png}
+
+\end{frame}
+
+
+
+\end{document}

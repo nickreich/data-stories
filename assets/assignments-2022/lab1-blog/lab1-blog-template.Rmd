@@ -1,0 +1,31 @@
+---
+title: "Lab 1: Data Journalism Critique"
+author: "PUT YOUR NAME HERE"
+date: "PUT THE SUBMISSION DATE HERE"
+output:
+  html_document: default
+---
+
+
+<!-- YOU CAN DELETE THIS PART BELOW, BUT I'M LEAVING IT AS A REMINDER OF THE INSTRUCTIONS! 
+Code included between these brackets is the way to "comment out" text in an RMarkdown file.
+-->
+__The deliverable for this lab is a written critique submitted as an HTML file (no Rmd file required for this assignment). The file must be submitted on Moodle by 8pm on Friday, February 11, 2022. Late assignments will not be accepted. Note that the instructor and TAs will not be available for assistance after 5pm on Friday.__
+
+
+
+<!-- You should remove the text for each question - I'm leaving them here for your reference. -->
+
+1. (5 points) Introduction: State in your own words in 1-2 sentences what the main idea of the article is. The graders will not necessarily read the article, so you need to summarize it for us.
+
+2. (5 points) Data: Write 1-2 sentences about each data source used by the article. In addition, identify the key variables the authors are looking at. What defined [the sampling frame](https://en.wikipedia.org/wiki/Sampling_frame) and the sample for the analysis? (Or, if the authors do not provide enough information on the sampling frame or sample, state that clearly.)
+
+3. (5 points) Graphics: Include one of the figures from the article in your write-up. Write 1-2 sentences in your own words describing what the figure is showing. List all variables that you can identify being shown in the figure. List at least three features of the graphic that you think are helpful in telling the story. List at least two features of the graphic that you think could be improved. Provide specific suggestions for how to make it better.
+
+<!-- If you get stuck on inserting an image directly into RMarkdown, you can use these google search results for "rmarkdown insert image" to help you: https://www.google.com/search?q=rmarkdown+insert+image. 
+
+Note that you need to save an image in a reasonable place on your computer (the same directory that you've saved this Rmd file would be a good choice) and then provide a correct relative path to the image file.-->
+
+
+4. (5 points) Conclusions: State the main conclusion of the article in 1 sentence. Write a brief paragraph answering the following questions: Do the data provided in the article back-up this claim? Give some examples of what you found convincing or not about the conclusions being drawn from the data at hand.
+

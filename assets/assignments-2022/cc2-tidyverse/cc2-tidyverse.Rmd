@@ -2,65 +2,132 @@
 title: "Coding Challenge 2: Tidyverse in Action"
 author: "Public Health 460"
 date: "Due: 6pm, Friday February 4th, 2022"
+geometry: "left=2cm,right=2cm,top=1cm,bottom=1cm"
 output:
   pdf_document: default
   html_document: default
 ---
 
-__The functions in tidyverse are powerful tools for exploring, modifying, and arranging data. In this assignment, you will explore a data set "Diabetes" which contains information about the blood chemistry of 145 adults. Please turn in an HTML file and your .Rmd file.__
+__The functions in tidyverse are powerful tools for exploring, modifying, and arranging data. Please turn in an HTML file and your .Rmd file.__
 
-1) Load the data set `Diabetes` from the package ``heplots``, using the following code. (Note: you only need to run this line of code once in your console, you should not include it in your Rmd file! Once you install the package you will not need to reinstall it --unless you want to update it-- until you upgrade R. But you will need to run the `library()` command every time you want to access the functions in the package.)
+**Setup** Install the packages ``heplots`` and ``palmerpenguins``, using, e.g. `install.packages("heplots") `. (Note: you only need to run this line of code once in your console, you should not include it in your Rmd file! Once you install the package you will not need to reinstall it --unless you want to update it-- until you upgrade R. But you will need to run the `library()` command every time you want to access the functions in the package.)
 
-```{r, eval=FALSE, include=TRUE, echo=TRUE}
-install.packages("heplots") 
-```
-
+Then, load the `Diabetes` dataset using the following code
 ```{r, eval=TRUE, include=TRUE, echo=TRUE, message=FALSE}
 library(heplots)
 data(Diabetes)
 ```
 
-Information on this data set and the meaning of its variables can be found by entering ?Diabetes in the console after the data set is loaded.
 
-2) Next, load the tidyverse package.
+1) Information on this data set and the meaning of its variables can be found by entering `?Diabetes` in the console after the data set is loaded. What does one row in this dataset represent? What does the variable `group` measure and what are its possible values? (1 pt)
+
+
+```{r, include=FALSE}
+#Answer: One row in this dataset provides blood chemistry measures from a non-obese adult from a study in 1979. The `group` variable measures the classification of an individual into one of three categories: subclinical diabetics, overt diabetics and normals. 
+
+# Full credit only if a row is identified as being for an individual person AND if the three categories are correctly identified.
+```
+
+
+1) Next, load the tidyverse package.
 
 ```{r, include = FALSE}
 library(tidyverse)
+
+# 1 point for library(tidyverse)
 ```
 
 
-3) Use the `head()` function to see the first 6 lines of the Diabetes data set.
+1) Use the `head()` function to see the first 6 lines of the Diabetes data set. Then use the `glimpse()` function to see a preview, or get a glimpse of, the dataset. Both of these functions are good ways to get a first look at a data set. Write down one difference between the output of these two functions. Which one do you find more helpful for this dataset and why?  (1 pt)
 
 ```{r, include= FALSE}
 head(Diabetes)
+glimpse(Diabetes)
+
+## Should say something about how glimpse() prints out one row per variable whereas head() shows you the dataset as is.
+## For this dataset, there isn't much difference, but a student who is thinking ahead might note that glimpse gives you a bit more summary info (how many rows/columns) and also might be a better summary if you have a dataset with more columns than you have ability to see on your screen.
+
+# 1 point for writing something that shows you looked at and understand the difference between the two functions.
 ```
 
-
-4) Use the `select()` function to choose the columns glufast, glutest, and group. Save the new data set as diabetes_select. 
+1) What type of R object is `Diabetes`? (Hint:Use the `class()` function.) Create a new version of the Diabetes dataset called `diabetes_tbl` that is a `tibble` R object.  (Hint: use the `tibble()` function.) Run a line of code that just has the word `diabetes_tbl` on it. How is this output similar or different to the output from `head()` above? Write your answers to these questions in the text of the RMarkdown document, and also show your code that supports your answers. (2 pts)
 
 ```{r, include=FALSE}
-diabetes_select <- Diabetes %>% 
-  select(glufast, glutest, group)
+class(Diabetes)
+diabetes_tbl <- tibble(Diabetes)
+class(diabetes_tbl)  ## optional, but shows how this is a special kind of data.frame
+diabetes_tbl
+
+## 1 pt for identifying that Diabetes is a data.frame (interpretation should match code output) 
+## 1 pt for running the last line of code and identifying one difference (e.g. 10 rows shown vs 6, variable type shown at the top, etc...)
 ```
 
-5) On diabetes_select, use the `filter()` function to filter for rows with glufast greater than 105 and also a glutest greater than 450. What do the people in this filtered data set have in common?
+
+1) Use the `select()` function to choose the columns `glufast`, `glutest`, and `group` from `diabetes_tbl`. Save the new data set as `diabetes_select`. (2 pts)
+
+```{r, include=FALSE}
+diabetes_select <- diabetes_tbl %>% 
+  select(glufast, glutest, group)
+
+#1 point for selecting correct columns
+#1 point for assigning to diabetes_select
+```
+
+1) On `diabetes_select`, use `filter()` to extract only the rows with `glufast` greater than 105 and also a `glutest` greater than 450. What do the people in this new data set have in common? (3 pts)
 
 
 ```{r, include=FALSE}
 diabetes_select %>% 
-  filter(glufast > 105, glutest > 450)
+  filter(glufast > 105, glutest > 450) %>%
+  print(n = Inf)
+# people in the dataset are chemically diabetic or overtly diabetic
+# 2 points for correct filter, 1 for each criteria
+# 1 point for correct answer to question, which might be easier to see if you do a print statement at the end
 ```
 
-5) On diabetes_select, use the `mutate()` function to create a new column "gluratio" that is equal to glufast/glutest. Save this new dataset as `diabetes_ratio`.
+1) On `diabetes_select`, use the "pipe operator" (`%>%`) to string together the following data-wrangling verbs/operations: a) `mutate` a new column "gluratio" that is equal to `glufast`/`glutest`, b) `arrange` the data with the lowest `gluratio` values at the top, c) `print` out the top 13 rows. Note that no data needs to be saved here, you should run one command that prints output at the end. It is standard tidyverse style to start a newline after every "pipe". (3 pts)
 
 ```{r, include= FALSE}
-diabetes_ratio <- diabetes_select %>% 
-  mutate("gluratio" = glufast/glutest)
+diabetes_select %>% 
+  mutate(gluratio = glufast/glutest) %>%
+  arrange(gluratio) %>%
+  print(n = 13)
+
+# 1 point for mutating 
+# 1 point for arranging
+# 1 point for printing exactly 13 rows
 ```
 
-6) Using the `arrange()` function, order the `diabetes_ratio` data set by ascending "gluratio". From looking at this data, is gluratio a good way to predict which group a person is in? Why or why not?
 
-```{r, include= FALSE}
-arrange(diabetes_ratio,gluratio)
+1) Load the `penguins` data set from the `palmerpenguins` package. What year were these data originally published? On what continent were they collected? (2 pts)
+```{r, include = FALSE}
+library(palmerpenguins)
+data(penguins)
+
+# 1 point for correctly answering each question: 2014 and Antarctica
+# note that to see these answers you need to run ?penguins after the above code
+```
+
+1) Create a data set that `filter`s to only include the data of female penguins of the Gentoo species. Name this data set `gentoo_female`. How many female Gentoo penguins are in this data set? (3 pts)
+```{r, include = FALSE}
+gentoo_female <- penguins %>% 
+  filter(species == 'Gentoo', sex == 'female')
+nrow(gentoo_female) #58, there's a bunch of ways they could get this answer
+
+# 2 points for filtering data set, 1 for each filter
+# 1 point for correct count, don't necessarily have to use the count function.
+
+```
+
+1) In one set of piped operations that ends up printing out a single number, a) `mutate` a column `body_mass_kg` that gives the body mass in kg of each penguin in `gentoo_female`, b) `pull` out that column, c) compute the `mean` of the observations on female Gentoo penguins. Show your code and write one sentence that says what the mean body mass, in kg, of female Gentoo penguins is. (3 pts)
+```{r, include = FALSE}
+gentoo_female %>% 
+  mutate(body_mass_kg = (body_mass_g/1000)) %>% #reassigning data to a new name, student could also give it the same name
+  pull(body_mass_kg) %>%
+  mean()
+
+# 1 point for mutate correctly
+# 1 point for using pull
+# 1 point for correct mean and having it in a sentence
 ```
 

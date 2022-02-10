@@ -1,0 +1,26 @@
+---
+title: "Lab 1: Data Journalism Critique"
+author: "Public Health 460"
+date: "Due: 8pm, Friday February 11th, 2022"
+geometry: "left=2cm,right=2cm,top=1cm,bottom=1cm"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+__The deliverable for this lab is a written critique submitted as an HTML file (no Rmd file required for this assignment). The file must be submitted on Moodle by 8pm on Friday, February 11, 2022. Late assignments will not be accepted. Note that the instructor and TAs will not be available for assistance after 5pm on Friday.__
+
+## Overview
+For this lab, you will work on your own to write a critique of a data journalism article or blog post.
+
+Spend some time browsing some data science and statistics blogs and data journalism websites. For example, you could check out [R-Bloggers](https://www.r-bloggers.com/), [FiveThirtyEight](http://fivethirtyeight.com/), or [The Upshot](https://www.nytimes.com/section/upshot). Pick an article/entry/vignette that you find interesting. The only criteria an article must meet is that it should use data and have some data analysis in the article, and at least one data visualization. If you are unsure if the article you have chosen is appropriate, please ask an instructor. It is not required, but it might help you for Lab 2 (where you will be asked to reproduce an analysis) if you find a post that makes available the underlying data associated with the article/post.
+
+## The assignment
+The assignment must contain your name, the date submitted, and a link to the original post. Your critique must also contain the following sections:
+
+
+1. (5 points) Introduction: State in your own words in 1-2 sentences what the main idea of the article is. The graders will not necessarily read the article, so you need to summarize it for us.
+1. (5 points) Data: Write 1-2 sentences about each data source used by the article. In addition, identify the key variables the authors are looking at. What defined [the sampling frame](https://en.wikipedia.org/wiki/Sampling_frame) and the sample for the analysis? (Or, if the authors do not provide enough information on the sampling frame or sample, state that clearly.)
+1. (5 points) Graphics: Include one of the figures from the article in your write-up. Write 1-2 sentences in your own words describing what the figure is showing. List all variables that you can identify being shown in the figure. List at least three features of the graphic that you think are helpful in telling the story. List at least two features of the graphic that you think could be improved. Provide specific suggestions for how to make it better.
+1. (5 points) Conclusions: State the main conclusion of the article in 1 sentence. Write a brief paragraph answering the following questions: Do the data provided in the article back-up this claim? Give some examples of what you found convincing or not about the conclusions being drawn from the data at hand.
+
