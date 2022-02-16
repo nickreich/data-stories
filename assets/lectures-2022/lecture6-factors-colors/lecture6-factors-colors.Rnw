@@ -1,0 +1,294 @@
+%% beamer/knitr slides
+%% for Statistical Modeling and Data Visualization course @ UMass
+%% Nicholas Reich: nick [at] schoolph.umass.edu
+
+
+\documentclass[table]{beamer}
+
+
+\input{../../slide-includes/standard-knitr-beamer-preamble}
+
+%	The following variables are assumed by the standard preamble:
+%	Global variable containing module name:
+\title{Working with categorical variables as factors}
+%	Global variable containing module shortname:
+%		(Currently unused, may be used in future.)
+\newcommand{\ModuleShortname}{introRegression}
+%	Global variable containing author name:
+\author{Nicholas G Reich}
+%	Global variable containing text of license terms:
+\newcommand{\LicenseText}{Made available under the Creative Commons Attribution-ShareAlike 3.0 Unported License: http://creativecommons.org/licenses/by-sa/3.0/deed.en\textunderscore US }
+%	Instructor: optional, can leave blank.
+%		Recommended format: {Instructor: Jane Doe}
+\newcommand{\Instructor}{}
+%	Course: optional, can leave blank.
+%		Recommended format: {Course: Biostatistics 101}
+\newcommand{\Course}{}
+
+
+\input{../../slide-includes/shortcuts}
+
+\hypersetup{colorlinks,linkcolor=,urlcolor=MainColor}
+
+
+%	******	Document body begins here	**********************
+
+\begin{document}
+
+%	Title page
+\begin{frame}[plain]
+	\titlepage
+\end{frame}
+
+%	******	Everything through the above line must be placed at
+%		the top of any TeX file using the statsTeachR standard
+%		beamer preamble.
+
+
+<<setup, include=FALSE>>=
+library(knitr)
+opts_chunk$set(fig.path='figure/beamer-',fig.align='center',fig.show='hold',size='tiny', message=FALSE, warning=FALSE)
+@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Different kinds of variables}
+\begin{block}{Give some examples of each}
+
+\bi
+    \item Continuous: variables taking any real number value in a range
+    \vspace{4em}
+    \item Discrete: variables taking an integer value
+    \vspace{4em}
+    \item Categorical: variables taking one of a fixed set of values
+\ei
+
+\end{block}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Categorical variables in R often start as strings}
+
+By default, characters are read in as characters, not as factors, although you can force factors.
+A factor is a special type of R data type that can be used to represent a categorical variable with a fixed number of responses.
+
+<<>>=
+library(tidyverse)
+co2 <- read_csv("../../data/co2emissions.csv")
+head(co2)
+@
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Tidy aggregation and summary by category}
+
+We can use {\tt group\_by()} and {\tt summarize()} to aggregate and compute summaries by categories. (You will be asked to do this in a future coding challenge.)
+
+For example, here we compute the average CO2 emissions across all years, for each type of vehicle.
+
+<<>>=
+co2 %>%
+  group_by(Type) %>%
+  summarize(mean_emissions = mean(CO2))
+@
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Tidy aggregation and summary by category}
+
+You can compute multiple summaries at once.
+
+<<>>=
+co2 %>%
+  group_by(Type) %>%
+  summarize(
+    mean_emissions = mean(CO2),
+    max_emissions = max(CO2),
+    min_emissions = min(CO2))
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Using categorical variables for aesthetics}
+
+Note that R translates the character variable into a factor for you without you doing anything.
+
+<<fig.height=3>>=
+ggplot(co2, aes(x = Year, y = CO2, shape = Type, fill = Type))+
+  geom_point()
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Using factors for aesthetics}
+
+Note that you can get the same result by explicitly calling Type a {\tt factor}.
+
+<<fig.height=3>>=
+ggplot(co2, aes(x = Year, y = CO2, shape = factor(Type), fill = factor(Type)))+
+  geom_point()
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Using factors for aesthetics}
+
+And with just a few small tweaks, we can customize
+
+<<fig.height=3>>=
+levels <- c("Urban Gasoline", "Rural Gasoline", "Urban Diesel", "Rural Diesel")
+ggplot(co2, aes(x = Year, y = CO2, shape = Type, fill = Type)) +
+  geom_point() +
+  scale_shape_manual(breaks=levels, values=c(24, 21, 24, 21)) +
+  scale_fill_manual(breaks = levels,
+                    values=c("blue4", "dodgerblue", "orangered", "orange")) +
+  ylab(expression(CO[2]*" (Mt)"))
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Using factors for faceting}
+
+Factors (or any variable with a small number of distinct values) can be used to create facets as well.
+
+<<fig.height=3>>=
+ggplot(co2, aes(x = Year, y = CO2)) +
+  geom_point() +
+  facet_wrap(~Type)
+@
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Advanced use of factors: ordering}
+
+Turning categorical variables into ordered factors might help you show more data.
+
+<<fig.height=4>>=
+gapminder <- read_csv("../../data/gapminder.csv") %>%
+    filter(continent %in% c("Africa", "Oceania"))
+ggplot(gapminder, aes(x=year, y=country, fill=lifeExp)) +
+    geom_tile()
+@
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Advanced use of factors: ordering}
+
+If ``order matters'' for your categorical variable, then turning it into an ordered factor might be useful.
+
+<<fig.height=4>>=
+## this redefines country based on average GDP
+gapminder <- mutate(gapminder, country = reorder(country, gdpPercap, FUN=mean))
+
+ggplot(gapminder, aes(x=year, y=country, fill=lifeExp)) +
+    geom_tile()
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Advanced use of factors: ordering}
+
+Here we order based on the maximum GDP rather than the mean.
+
+<<fig.height=4>>=
+## this redefines country based on max GDP
+gapminder <- mutate(gapminder, country = reorder(country, gdpPercap, FUN=max))
+
+ggplot(gapminder, aes(x=year, y=country, fill=lifeExp)) +
+    geom_tile()
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Trying out different color scales}
+
+Using color scales from ColorBrewer: \href{https://colorbrewer2.org/}{colorbrewer2.org}.
+
+<<fig.height=4>>=
+ggplot(gapminder, aes(x=year, y=country, fill=lifeExp)) +
+    geom_tile() +
+    scale_fill_gradient(low="#fff7fb", high="#034e7b")
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Trying out different color scales}
+
+And from the {\tt viridis} package.
+
+<<fig.height=4>>=
+library(viridis)
+ggplot(gapminder, aes(x=year, y=country, fill=lifeExp)) +
+    geom_tile() +
+    scale_fill_viridis()
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Trying out different color scales}
+
+<<fig.height=4>>=
+ggplot(gapminder, aes(x=year, y=country, fill=lifeExp)) +
+    geom_tile() +
+    scale_fill_viridis(direction=-1)
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Breakout rooms}
+
+Work with your group on the following:
+
+\begin{itemize}
+  \item as a group, finish the note-catcher for last week, on recreating the improving the C02 emissions figure.
+  \item start to look for an article for Lab 2 (see assignment on Moodle). You must complete this assignment on your own, but it's recommended to find an article that you can work in parallel with 1-2 other people on.
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\end{document}
