@@ -1,0 +1,486 @@
+%% beamer/knitr slides
+%% for Statistical Modeling and Data Visualization course @ UMass
+%% Nicholas Reich: nick [at] schoolph.umass.edu
+
+
+\documentclass[table]{beamer}\usepackage[]{graphicx}\usepackage[]{color}
+% maxwidth is the original width if it is less than linewidth
+% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+\let\hlipl\hlkwb
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+
+
+\input{../../slide-includes/standard-knitr-beamer-preamble}
+
+%        The following variables are assumed by the standard preamble:
+%        Global variable containing module name:
+
+\title{The language of modeling}
+%	Global variable containing module shortname:
+%		(Currently unused, may be used in future.)
+\newcommand{\ModuleShortname}{modeling}
+%	Global variable containing author name:
+\author{Nicholas G Reich}
+%	Global variable containing text of license terms:
+\newcommand{\LicenseText}{Made available under the Creative Commons Attribution-ShareAlike 3.0 Unported License: http://creativecommons.org/licenses/by-sa/3.0/deed.en\textunderscore US }
+%	Instructor: optional, can leave blank.
+%		Recommended format: {Instructor: Jane Doe}
+\newcommand{\Instructor}{}
+%	Course: optional, can leave blank.
+%		Recommended format: {Course: Biostatistics 101}
+\newcommand{\Course}{}
+
+
+\input{../../slide-includes/shortcuts}
+\usepackage{bbm}
+
+\hypersetup{colorlinks,linkcolor=,urlcolor=MainColor}
+
+
+%	******	Document body begins here	**********************
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+
+%	Title page
+\begin{frame}[plain]
+	\titlepage
+\end{frame}
+
+%	******	Everything through the above line must be placed at
+%		the top of any TeX file using the statsTeachR standard
+%		beamer preamble.
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\begin{frame}{Today's topics}
+
+\bi
+    \myitem Introduction to modeling
+    \myitem Defining components of models
+    \myitem Defining model terms
+\ei
+
+\bigskip
+
+{\bf Example:} predicting respiratory disease severity (``lung'' dataset)
+
+\bigskip
+
+{\bf Reading:} MDSR: Appendix E and Chapter 9
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}%{Warm up}
+
+ Watch the first five minutes of \href{https://www.youtube.com/watch?v=K-ss_ag2k9E}{Hadley Wickham's 2016 talk on the Tidyverse}
+
+\vspace{1cm}
+
+\centering
+\em
+%  - models are fundamentally computational, the computer does it for you and that means that they scale
+  `` ... every model has to make assumptions, and a model by its very nature cannot question those assumptions...
+
+\vspace{1cm}
+
+ models can never fundamentally surprise you because they cannot question their own assumptions.'' %, but they do scale.'''
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Statistical modeling}
+
+The process of using data to describe the relationship between outcomes and predictors is called modeling.
+\bi
+  \myitem Models are models, not reality.
+  \myitem ``All models are wrong, but some are useful."
+  \myitem Introduce structure to our model that balances realism with ``goodness of fit''.
+\ei
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{What are models?}
+
+\includegraphics[width=\textwidth]{figure-static/models1.jpeg}
+
+\end{frame}
+
+\begin{frame}{What are models?}
+
+\includegraphics[width=\textwidth]{figure-static/models2.jpeg}
+
+\end{frame}
+
+\begin{frame}{What are models?}
+
+\includegraphics[width=\textwidth]{figure-static/models3.jpeg}
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Models are functions}
+
+Definition: ``a {\bf function} is a relation between a set of inputs and a set of permissible outputs with the property that each input is related to exactly one output''.\footnote{Wikipedia, \href{https://en.wikipedia.org/wiki/Function_(mathematics)}{https://en.wikipedia.org/wiki/Function\_(mathematics)}}
+
+\includegraphics[width=.5\textwidth]{figure-static/Function_machine2}
+
+In statistical models, inputs are explanatory variables and outputs are ``typical'' or ``expected'' values of response variables. %There is always residual variation. The key challenge is judging whether the structure of a particular model is supported by evidence in the data.
+
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Models are functions: response variable}
+
+Definition: ``a {\bf function} is a relation between a set of inputs and a set of permissible outputs with the property that each input is related to exactly one output''.\footnote{Wikipedia, \href{https://en.wikipedia.org/wiki/Function_(mathematics)}{https://en.wikipedia.org/wiki/Function\_(mathematics)}}
+
+\vspace{2em}
+
+
+
+We might write generally $$ y = f(x)$$ where $x$ could be a single variable or multiple variables.
+
+\vspace{1em}
+
+\bi
+  \myitem {\bf The response variable} is $y$ the variable whose behavior or variation you are trying to understand. We might also call this the {\bf outcome variable}.
+\ei
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% \begin{frame}{A common modeling tool: regression}
+%
+% \bi
+%         \myitem The goal is to learn about the relationship between ``explanatory'' (or ``predictor'') variables of interest and a ``response`` (or  ``outcome'') of interest.
+% 	\bi
+% 		\myitem Some models focus on prediction.
+% 		\myitem Other models focus on description.
+% 	\ei
+% 	\myitem Regression is an exercise in inferential statistics: we are drawing evidence and conclusions from data about ``complex aspects of reality'', i.e. ``noisy'' systems.
+% \ei
+%
+%
+% \end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[t]{Lung data example}
+
+99 observations on patients who have sought treatment for the relief of respiratory disease symptoms.
+
+The variables are:
+\bi
+    \myitem {\tt disease} measure of disease severity (larger values indicates more serious condition).
+    \myitem {\tt education} highest grade completed
+    \myitem {\tt crowding} measure of crowding of living quarters (larger values indicate more crowding)
+    \myitem {\tt airqual} measure of air quality at place of residence (larger number indicates poorer quality)
+    \myitem {\tt nutrition} nutritional status (larger number indicates better nutrition)
+    \myitem {\tt smoking} smoking status (1 if smoker, 0 if non-smoker)
+\ei
+
+What is the natural response variable here? Which variable are we trying to understand or explain?
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Lung data example: looking at the data}
+
+
+
+What variables will explain variation in disease severity?
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{dat} \hlkwb{<-} \hlkwd{read.table}\hlstd{(}\hlstr{"../../data/lungc.txt"}\hlstd{,} \hlkwc{header}\hlstd{=}\hlnum{TRUE}\hlstd{)} \hlopt{%>%}
+  \hlkwd{mutate}\hlstd{(}\hlkwc{smoking} \hlstd{=} \hlkwd{factor}\hlstd{(smoking,}
+                          \hlkwc{levels}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,}\hlnum{1}\hlstd{),}
+                          \hlkwc{labels}\hlstd{=}\hlkwd{c}\hlstd{(}\hlstr{"non-smoker"}\hlstd{,} \hlstr{"smoker"}\hlstd{)))}
+\hlkwd{head}\hlstd{(dat)}
+\end{alltt}
+\begin{verbatim}
+##   disease education crowding airqual nutrition    smoking
+## 1      67         7       33      61        18     smoker
+## 2      47        11       21      43       109 non-smoker
+## 3      53        10       24      54         0     smoker
+## 4      56         9       32      43        97     smoker
+## 5      48         8       22      62       131 non-smoker
+## 6      64        10       28      76        79     smoker
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Lung data example: looking at variability in the response}
+
+What is the variation in disease severity?
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{ggplot}\hlstd{(dat,} \hlkwd{aes}\hlstd{(}\hlkwc{x}\hlstd{=disease))} \hlopt{+} \hlkwd{geom_dotplot}\hlstd{()}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/lung-plot-1-1} 
+\end{knitrout}
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Models are functions: explanatory variables}
+
+We might write generally $$ y = f(x)$$ where $x$ could be a single variable or multiple variables.
+
+\bi
+  \myitem {\bf The response variable} is $y$ the variable whose behavior or variation you are trying to understand.
+  \myitem {\bf The explanatory variables} $x$ are the variable(s) that you want to use to explain the variation in the response variable.
+\ei
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Lung data example: explaining variability in the response}
+
+Does crowding of living quarters explain some of the variation in disease severity?
+
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{ggplot}\hlstd{(dat,} \hlkwd{aes}\hlstd{(crowding, disease))} \hlopt{+}
+  \hlkwd{geom_point}\hlstd{()}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/lung-plots-1} 
+\end{knitrout}
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Lung Data Example: explaining variability in the response}
+
+Does smoking status explain some of the variation in disease severity?
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{ggplot}\hlstd{(dat,} \hlkwd{aes}\hlstd{(smoking, disease))} \hlopt{+} \hlkwd{geom_jitter}\hlstd{(}\hlkwc{width}\hlstd{=}\hlnum{.1}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/lung-plots-fac-smoke-1} 
+\end{knitrout}
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Modeling recap}
+
+We might write generally $$ y = f(x) $$ where $x$ could be a single variable or multiple variables.
+
+\begin{block}{What will the "structure" of the model look like?}
+
+\bi
+  \myitem Most models we talk about will be a form of {\bf linear models}, e.g. $$ y = f(x) = \beta_0 + \beta_1 \cdot x $$.
+  \myitem You must make a choice about {\bf model terms}. What does the right hand side of the above equation look like?
+\ei
+
+\end{block}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Model terms: the intercept}
+
+The intercept is a ``baseline`` that is included in nearly every model. What would your guess of disease severity be in the absence of any other information? $$y = \beta_0 $$
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{ggplot}\hlstd{(dat,} \hlkwd{aes}\hlstd{(}\hlkwc{x}\hlstd{=}\hlnum{1}\hlstd{,} \hlkwc{y}\hlstd{=disease))} \hlopt{+} \hlkwd{geom_dotplot}\hlstd{(}\hlkwc{binaxis}\hlstd{=}\hlstr{"y"}\hlstd{)} \hlopt{+}
+  \hlkwd{geom_hline}\hlstd{(}\hlkwc{yintercept} \hlstd{=} \hlkwd{mean}\hlstd{(dat}\hlopt{$}\hlstd{disease),} \hlkwc{linetype}\hlstd{=}\hlnum{2}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/lung-plot-intercept-1} 
+\end{knitrout}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Model terms: main terms}
+
+Main terms model the effect of explanatory variables directly. $$y = \beta_0 + \beta_1 \cdot crowding $$
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{ggplot}\hlstd{(dat,} \hlkwd{aes}\hlstd{(crowding, disease))} \hlopt{+} \hlkwd{geom_point}\hlstd{()} \hlopt{+}
+  \hlkwd{geom_smooth}\hlstd{(}\hlkwc{method}\hlstd{=}\hlstr{"lm"}\hlstd{,} \hlkwc{se}\hlstd{=}\hlnum{FALSE}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/lung-plot-main-term-crowding-1} 
+\end{knitrout}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Model terms: main terms}
+
+Main terms model the effect of explanatory variables directly. $$y = \beta_0 + \beta_2 \cdot smoking$$
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{ggplot}\hlstd{(dat,} \hlkwd{aes}\hlstd{(}\hlkwc{x}\hlstd{=smoking,} \hlkwc{y}\hlstd{=disease,} \hlkwc{color}\hlstd{=smoking))} \hlopt{+} \hlkwd{geom_jitter}\hlstd{(}\hlkwc{width}\hlstd{=}\hlnum{.1}\hlstd{)} \hlopt{+}
+  \hlkwd{stat_summary}\hlstd{(}\hlkwc{fun}\hlstd{=mean,} \hlkwc{geom}\hlstd{=}\hlstr{"point"}\hlstd{,} \hlkwc{shape}\hlstd{=}\hlstr{"-"}\hlstd{,} \hlkwc{size}\hlstd{=}\hlnum{20}\hlstd{,} \hlkwc{color}\hlstd{=}\hlstr{"black"}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/lung-plot-main-term-smoking-1} 
+\end{knitrout}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Model terms: two main terms}
+
+Main terms model the effect of explanatory variables directly. $$y = \beta_0 + \beta_1 crowding + \beta_2 \cdot smoking$$
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{ggplot}\hlstd{(dat,} \hlkwd{aes}\hlstd{(}\hlkwc{x}\hlstd{=crowding,} \hlkwc{y}\hlstd{=disease,} \hlkwc{color}\hlstd{=smoking))} \hlopt{+}
+  \hlkwd{geom_point}\hlstd{()}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/lung-plot-main-terms-1} 
+\end{knitrout}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Model terms: interaction terms}
+
+Interaction terms allow for different explanatory variables to modulate the relationship of each other to the response variable. $$y = \beta_0 + \beta_1 \cdot crowding + \beta_2 \cdot smoking + \beta_3 \cdot crowding \cdot smoking$$
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{ggplot}\hlstd{(dat,} \hlkwd{aes}\hlstd{(}\hlkwc{x}\hlstd{=crowding,} \hlkwc{y}\hlstd{=disease,} \hlkwc{color}\hlstd{=smoking))} \hlopt{+}
+  \hlkwd{geom_point}\hlstd{()}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/lung-plot-interaction-1} 
+\end{knitrout}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Model terms: recap}
+
+\bi
+  \myitem {\bf The intercept} is a ``baseline`` that is included in nearly every model. What would your guess of disease severity be in the absence of any other information?
+  \myitem {\bf Main terms} model the effect of explanatory variables directly.
+  \myitem {\bf Interaction terms} allow for different explanatory variables to modulate the relationship of each other to the response variable.
+  \myitem {\bf Smooth terms} and {\bf transformation terms}: to come soon!
+\ei
+
+\end{frame}
+
+
+\end{document}

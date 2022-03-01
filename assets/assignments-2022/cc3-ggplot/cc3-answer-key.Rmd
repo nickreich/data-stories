@@ -1,0 +1,201 @@
+---
+title: "Coding Challlenge 3"
+author: "Public Health 460"
+date: "Due: February 18th 8:00 pm, 2022"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE, 
+  message=FALSE, 
+  warning=FALSE)
+```
+
+
+__This assignment is all about visualization using ggplot. Please turn in an HTML file and your .Rmd file__
+
+* Download the data called ``gapminder.csv`` from Moodle (Unit3 > Unit 3 readings and files folder).
+* Use ``ggplot2`` and its functions for every question about plotting. Do not use the `qplot()` function.
+* Include your code in your output.
+
+The first set of questions revolve around a dataset from [Gapminder.org](https://www.gapminder.org/). It includes data on life expectancy (in years) and GDP per capita of different countries.
+
+
+__Answer the questions below for credit__
+
+## Part I: Gapminder dataset (10 points)
+1) Read in the `gapminder.csv` from a relative file path. Load the `tidyverse`, `DT`, and `plotly` packages. (If you have not installed `DT` or `plotly` yet, run the code to install them once on your machine, but do not include that code to install them in your assignment.)
+```{r packages}
+library(tidyverse)
+library(DT)
+library(plotly)
+gapminder <- read_csv("assets/data/gapminder.csv")
+```
+
+<!-- *Q1 rubric: 0 pt for using a relative file path* -->
+
+2) Use `View()`, `print()` or just click on the dataset in your "Environment" pane in RStudio to inspect the dataset. What is the unit of observation of this dataset? How are the samples distributed in time?
+
+<!--  *Q2 rubric: 1 pt for identifying that the unit of analysis is a "country-year" or something similar. Note that this is the right answer because these variables encapsulate the fixed design of the observations (we are observing every country once a year), and are not "random" observations of variables in the way that GDP and life expectancy are. 0 pt for saying something like"only data from every five years from 1952 to 2007 is available in this dataset".*  -->
+
+3) Use the `DT::datatable()` function to present an interactive table in your HTML file. [Note that we use the `::` notation here to show that you should use the `datatable()` function from the `DT` package. You can use this syntax to call a single function directly without having run `library(DT)` (as long as you have the `DT` package installed on your machine). This syntax can also be helpful when two loaded packages have functions with the same name, as you can specify exactly which function you want to use. For the purposes of the assignment you can use either method to use the `datatable()` function.] 
+
+<!--  *Q3 rubric: 1 pt for having the following command, or a working version of it.* -->
+```{r, results='hide', eval=FALSE}
+datatable(gapminder)
+```
+
+
+4) Create a simple scatter plot of life expectancy as the dependent variable by GDP per capita. Do not worry about titles or labels beyond what is given as the default. The plot should look like the following figure.
+
+<!--  *Q4 rubric: 0 pt for specifying geom_point(), 0 point for correct aesthetics.* -->
+
+```{r, fig.height=3, fig.width=4}
+# Base R plot
+ggplot(data = gapminder, aes(x = gdpPercap, y = lifeExp)) + 
+  geom_point()
+```
+
+
+5) Using the same data as the graph above make the following adjustments to the plot 
+
+- Label the y-axis as "Life expectancy" and the x-axis as "GDP per capita".
+
+- Add a title to your graph.
+
+- Transform the variable GDP per capita on the x-axis, using a log-transform while still displaying the unlogged GDP values as axis labels.
+
+- Add a smooth regression line using `geom_smooth()`.
+
+- Make all the points slightly transparent so you can see individual points more clearly. Make sure that the transparency does not apply to the smooth line layer of the graphic.
+
+It should look something like the graph shown below
+
+<!--  *Q5 rubric: 1 pt for axis labels and title added correctly. 1 pt for using scale_x_log10(). 1 pt for defining alpha as a constant value inside geom_point (not inside ggplot, as then it would apply to the smooth line too).* -->
+
+```{r, fig.height=3, fig.width=4, message=F}
+p <- ggplot(data = gapminder, aes(x = gdpPercap, y = lifeExp)) + 
+  geom_point(alpha=.5) + 
+  geom_smooth() +
+  labs(y = "Life Expectancy", title = "Life Expectancy by GDP for different continents", x="GDP per capita") +  
+  scale_x_log10()
+
+p
+```
+
+
+
+6) Pick a new `ggplot` theme and use `theme_set()` to set a new theme for the remaining figures for this assignment. Re-plot the figure from question 5 with the new theme applied.
+
+<!--  *Q6 rubric: 1 point for successful application of a new theme.* -->
+
+```{r, fig.show='hide'}
+theme_set(theme_bw())
+p
+```
+
+
+7) Build off of the previous graph, to examine each continent separately. First, facet the graph by continent as was shown in the SAT lecture. This way each continent has its own smaller graph next to the other continents. Second, remove the "error bars" from the smooth lines.
+
+<!--  *Q7 rubric: 1 pts for using facet_wrap with continent correctly. 0 point using geom_smooth(se=FALSE).* -->
+
+
+```{r, fig.show='hide'}
+ggplot(data = gapminder, aes(x = gdpPercap, y = lifeExp)) + 
+  geom_point(alpha=0.2) +
+  geom_smooth(se=FALSE) + 
+  labs(y = "Life Expectancy", title = "Life Expectancy by GDP for different continents", x="GDP per capita") +  
+  scale_x_log10() + 
+  facet_wrap( . ~ continent)
+```
+
+
+8) Pick 5 countries that you are interested in comparing. Create a new data frame that has only observations from those 5 countries. Build off of the figure created in question 5 (i.e. do not use facets). In this plot, color your points by country. Also, connect the points showing the trajectory of each country across time. (Hint: to connect the points use the `group` aesthetic and `geom_line()`.) 
+
+<!-- *Q8 rubric: 1 pt for filtering the data so that only 5 countries are present. 1 pts for mapping the country variable to the group aesthetic (either within geom_line() or within the overall ggplot() call is ok).* -->
+
+```{r, fig.show='hide'}
+gapminder_5 <- filter(gapminder, country %in% c("Peru", "Afghanistan", "Mali", "United States", "China"))
+
+ggplot(data = gapminder_5, aes(x = gdpPercap, y = lifeExp, color=country, group=country)) + 
+  geom_point() +
+  geom_line() +
+  labs(y = "Life Expectancy", title = "Life Expectancy by GDP for different continents", x="GDP per capita") +  
+  scale_x_log10()
+```
+
+
+9) Use the `plotly::ggplotly()` function to create a quick interactive version of the figure created in the previous question.
+
+<!--  *Q9 rubric: 1 pt for a call to plotly that generates a plotly figure. Note that the below code works because it automatically uses the previously generated figure. But other ways to use ggplotly (as long as it recreates the figure from Q7) are ok too..* -->
+
+```{r, fig.show='hide', eval=FALSE}
+ggplotly()
+```
+
+## Part II: Visualization taxonomy (4 points)
+10) Chapter 2 of Modern Data Science with R discusses a taxonomy that can be used to describe data graphics. Choose a data graphic from https://flowingdata.com/ or another data journalism website. Copy the graphic or take a screenshot of the figure and insert the figure in your RMarkdown file. Answer the following questions:
+    a) Identify the visual cues, coordinate system , and scale(s). 
+    b) Describe the variables visualized by the graphic. What are they? How do they relate to each visual cue you identified in the previous question? 
+
+<!--  *Q10 rubric: 2 points each for an adequate, thoughtful answer to each question* -->
+
+
+
+## Part II: Religious income dataset (6 points)
+
+11) Read in the `relig_income` data set that is contained in the `tidyverse` package. This dataset provides partial results from [the Religious Landscape Study conducted by the Pew Research Center](https://www.pewforum.org/religious-landscape-study/). As provided, the dataset provides a cross-tabulation of the number of respondents who identified as being a member of each religious group with their reported income range.
+    a) How many individuals' responses are included in this dataset? (Use code to calculate the answer. There is no specific "right" way to do this that we are looking for.)
+    b) The `pivot_longer()` function allows a data analyst to make data "tidy" by taking a dataset where the values of one variable are encoded in column names. That is the situation here because the income variable is not a single value. It is called `pivot_longer()` because it increases the number of rows and decreases the number of columns. (There is a corrsponding `pivot_wider()` function as well.) Use `pivot_longer()` to create a single column for the variable `income`, rather than having a column for each level of income. Remove the "Don't know/refused" category for income. Select the Atheist, Buddhist and Muslim religious groups to plot. 
+    c) Plot income on the x-axis and the count of individuals on the y-axis using points and lines and a different color for each religious group. You will need to reorder the factor levels of income so that they are are in increasing order on the x-axis. 
+    d) Someone looks over your shoulder at the resulting plot and says: "Wow, atheists make more money than Buddhists, huh?" What is one problem with the statistical logic that they used to draw that conclusion?
+
+<!-- part A: 1 point for correct answer, many ways to get there, here is one. -->
+```{r, eval=FALSE}
+# answer to part A
+sum(colSums(relig_income[,-1]))
+# 35556
+```
+
+
+<!-- part B/C: 1 point for correct usage of pivot_longer, 1 point for releveling the factor, 1 point for correct geoms/aesthetics -->
+    
+```{r, fig.show='hide'}
+relig_income_long <- relig_income %>%
+  pivot_longer(!religion, names_to = "income", values_to = "count") %>%
+  filter(religion %in% c("Atheist", "Muslim", "Buddhist")) %>% 
+  filter(income != "Don't know/refused") %>% 
+  mutate(income = factor(
+    income,
+    levels =
+      c(
+        "<$10k",
+        "$10-20k",
+        "$20-30k",
+        "$30-40k",
+        "$40-50k",
+        "$50-75k",
+        "$75-100k",
+        "$100-150k",
+        ">150k"
+      )
+  ))
+```
+
+
+```{r, fig.show='hide'}
+ggplot(relig_income_long, 
+       aes(x = income,
+           y = count,
+           group = religion,
+           color = religion)) +
+  geom_point()+
+  geom_line()
+
+```
+
+<!--  part D 2 points correct answer to part d, by saying one or both of the following things: a) we don't know if this is a representative sample of the population, and b) these are counts not fractions, so it's just saying that there are more atheists that make, for example, $50-75K/year not that a higher FRACTION of athiests make that amount of money than Buddhists.* -->
