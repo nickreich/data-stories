@@ -1,0 +1,315 @@
+%% beamer/knitr slides
+%% for Statistical Modeling and Data Visualization course @ UMass
+%% Nicholas Reich: nick [at] schoolph.umass.edu
+
+
+\documentclass[table]{beamer}
+
+
+\input{../../slide-includes/standard-knitr-beamer-preamble}
+
+%        The following variables are assumed by the standard preamble:
+%        Global variable containing module name:
+
+\title{Residuals, outliers, and influence}
+%	Global variable containing module shortname:
+%		(Currently unused, may be used in future.)
+\newcommand{\ModuleShortname}{modeling}
+%	Global variable containing author name:
+\author{Nicholas G Reich}
+%	Global variable containing text of license terms:
+\newcommand{\LicenseText}{Made available under the Creative Commons Attribution-ShareAlike 3.0 Unported License: http://creativecommons.org/licenses/by-sa/3.0/deed.en\textunderscore US }
+%	Instructor: optional, can leave blank.
+%		Recommended format: {Instructor: Jane Doe}
+\newcommand{\Instructor}{}
+%	Course: optional, can leave blank.
+%		Recommended format: {Course: Biostatistics 101}
+\newcommand{\Course}{}
+
+
+\input{../../slide-includes/shortcuts}
+\usepackage{bbm}
+\usepackage{soul}
+
+\hypersetup{colorlinks,linkcolor=,urlcolor=MainColor}
+
+
+%	******	Document body begins here	**********************
+
+\begin{document}
+
+%	Title page
+\begin{frame}[plain]
+	\titlepage
+\end{frame}
+
+%	******	Everything through the above line must be placed at
+%		the top of any TeX file using the statsTeachR standard
+%		beamer preamble.
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\begin{frame}{Today's topics}
+
+\bi
+    \myitem Model terms recap
+    \myitem Model values and residuals
+    \myitem Smooth terms
+\ei
+
+<<loadData, echo=FALSE, warning=FALSE, message=FALSE>>=
+library(tidyverse)
+theme_set(theme_bw())
+opts_chunk$set(size = 'footnotesize', message=FALSE, warning=FALSE)
+options(width=60)
+@
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Models are functions (recap)}
+
+We might write generally $$ y = f(x)$$ where $x$ could be a single variable or multiple variables.
+
+\bi
+  \myitem {\bf The response variable} is $y$ the variable whose behavior or variation you are trying to understand.
+  \myitem {\bf The explanatory variables} $x$ are the variable(s) that you want to use to explain the variation in the response variable.
+\ei
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Statistical models are functions with randomness}
+
+\bi
+\myitem The equation $$y = f(x)$$ describes a {\bf deterministic} function. There is no randomness.
+
+\myitem A statistical model uses a deterministic kernel, e.g. $f(x)$, but layers in {\bf stochastic}, or random, variation. Remember, our goal is to explain and understand the variation in $y$.
+
+\myitem A statistical model will always have an additional layer that accounts for the random variation. In linear models with continuous outcomes, this can be expressed as a {\bf residual} term:
+$$y = f(x) + \epsilon$$
+\ei
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Statistical models are functions with randomness}
+
+\bi
+\myitem Let's say we have $N$ observations in a dataset. The observed values of the response variables are represented by $y_1, y_2, ..., y_N$.
+\myitem The observed values of the explanatory variables are $x_1, x_2, ..., x_N$.
+
+\myitem For a given observation with index $i$, the {\bf model value} $\hat y_i$ is the output of the deterministic function part of your model:
+$$ \hat y_i = f(x_i) $$
+
+\ei
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Statistical models are functions with randomness}
+
+For a given observation with index $i$, the {\bf model value} $\hat y_i$ is the output of the deterministic function part of your model:
+$$ \hat y_i = f(x_i) = 13.0 + 1.5*\mbox{crowding}_i $$
+
+<<lung-plot-1, tidy=FALSE, fig.height=3.7, echo=FALSE>>=
+dat <- read.table("../../data/lungc.txt", header=TRUE) %>%
+  mutate(smoking = factor(smoking, levels=c(0,1), labels=c("non-smoker", "smoker"))) %>%
+  as_tibble()
+m1 <- lm(disease~crowding, data=dat)
+dat$predict.y <- predict(m1)
+ggplot(dat, aes(x=crowding, y=disease)) + geom_point() +
+  geom_smooth(method="lm", se=FALSE) +
+  geom_point(aes(y=predict.y), shape=4)
+@
+
+
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Statistical models are functions with randomness}
+
+
+For a given observation with index $i$, the original observation $y_i$ can be reconstructed as  the deterministic function part of your model plus the residual ($\epsilon_i$), or the part of the variation that your model cannot explain:
+$$ y_i = f(x_i) + \epsilon_i = 13.0 + 1.5*\mbox{crowding}_i + \epsilon_i$$
+
+<<lung-plot-2, tidy=FALSE, fig.height=3.7, echo=FALSE>>=
+ggplot(dat, aes(x=crowding, y=disease)) + geom_point() +
+  geom_smooth(method="lm", se=FALSE) +
+  geom_point(aes(y=predict.y), shape=4)
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Statistical models are functions with randomness}
+
+
+Let's look at one specific model value and residual. One observation in this dataset has disease = 78 and crowding = 34.
+
+\begin{eqnarray*}
+y_i & = & f(x_i) + \epsilon_i  \\
+78  & = & 13.0 + 1.5*34 + \epsilon_i\\
+\implies 14 & = &  \epsilon_i
+\end{eqnarray*}
+
+<<lung-plot-3, tidy=FALSE, fig.height=3.5, echo=FALSE>>=
+ggplot(dat, aes(x=crowding, y=disease)) + geom_point() +
+  geom_smooth(method="lm", se=FALSE) +
+  geom_point(aes(y=predict.y), shape=4) +
+  geom_point(x=34, y=78, shape=1, size=5, color="red") +
+  geom_segment(x=34, xend=34, y=64, yend=78, linetype=2, color="grey")
+@
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Assessing variation in response explained by model}
+
+\bi
+\myitem The {\color{orange} mean squared error (MSE)} is a commonly used measure of model accuracy:
+$$MSE = \frac{1}{n} \sum_{i=1}^n \left(y_i -\hat y_i\right)^2$$
+
+\myitem The MSE will be small if the observed and predicted responses are close to one another.
+\ei
+
+<<lung-plot-4, tidy=FALSE, fig.height=3.4, echo=FALSE>>=
+ggplot(dat, aes(x=crowding, y=disease)) + geom_point() +
+  geom_smooth(method="lm", se=FALSE) +
+  geom_point(aes(y=predict.y), shape=4)
+@
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Connection to ``sample variance''}
+
+From Stats 101: the sample variance of $y$ is commonly defined as
+$$Var(y) = \frac{1}{n-1} \sum_{i=1}^n \left(y_i -\bar y\right)^2.$$
+Note similarity with MSE for an intercept-only model:
+$$MSE = \frac{1}{n} \sum_{i=1}^n \left(y_i -\hat y_i\right)^2.$$
+
+
+<<lung-plot-5, tidy=FALSE, fig.height=3.3, echo=FALSE>>=
+ggplot(dat, aes(x=crowding, y=disease)) + geom_point() +
+  geom_hline(yintercept = mean(dat$disease), color="blue") +
+  geom_point(y=mean(dat$disease), shape=4)
+@
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Connecting residuals to outliers}
+
+\bi
+\myitem \hl{Outliers} are points that lie away from the cloud  of points.
+
+\myitem Outliers that lie horizontally away from the center of the cloud are called \hl{high leverage} points.
+
+\myitem High leverage points that actually influence the \underline{slope} of the regression line are called \hl{influential} points.
+
+\myitem In order to determine if a point is influential, visualize the regression line with and without the point. Does the slope of the line change considerably? If so, then the point is influential. If not, then it's not an influential point.
+
+\ei
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Influence}
+
+Intuitively, ``influence'' is a combination of outlying-ness and leverage. More specifically, we can measure the ``deletion influence'' of each observation: quantify how much $\hat\bbeta$ changes if an observation is left out.
+\bi
+	\myitem Mathematically: $|\hat{\bbeta}- \hat{\bbeta}_{(-i)}|$
+	\myitem Cook's distance is a value we can calculate for each observation in our dataset that measures this deletion influence. (It uses some nice tricks of linear algebra without having to refit the regression iteratively without each point.)
+\ei
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Geometrical thinking about influence}
+
+Imagine the regression line as a see-saw, being pulled by springs attached to each point. Which points do you think have the most influence?
+
+<<lung-plot-6, tidy=FALSE, fig.height=3.7, echo=FALSE>>=
+ggplot(dat, aes(x=crowding, y=disease)) + geom_point() +
+  geom_smooth(method="lm", se=FALSE) +
+  geom_point(aes(y=predict.y), shape=4)
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Geometrical thinking about influence}
+
+\bi
+  \myitem Points near $\bar x$ (the average value of $x$) do not influence the slope but might influence the position of the line.
+  \myitem Only points far away from $\bar x$ can influence the slope.
+\ei
+
+<<lung-plot-7, tidy=FALSE, fig.height=3.7, echo=FALSE>>=
+ggplot(dat, aes(x=crowding, y=disease)) + geom_point() +
+  geom_smooth(method="lm", se=FALSE) +
+  geom_point(aes(y=predict.y), shape=4)
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Influential points}
+
+
+<<lung-plot-8, tidy=FALSE>>=
+m1 <- lm(disease ~ crowding, data=dat)
+dat$yhat <- predict(m1)
+dat$resid <- resid(m1)
+dat$cooksd <- cooks.distance(m1)
+dat %>% select(disease, crowding, yhat, resid, cooksd) %>%
+  arrange(desc(cooksd)) %>% head()
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Connecting back to data stories}
+
+It's really important to keep an eye out for points that might be unduly influential in telling the story!
+
+\end{frame}
+
+
+
+
+\end{document}

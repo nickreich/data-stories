@@ -1,0 +1,361 @@
+%% beamer/knitr slides
+%% for Statistical Modeling and Data Visualization course @ UMass
+%% Nicholas Reich: nick [at] schoolph.umass.edu
+
+
+\documentclass[table]{beamer}\usepackage[]{graphicx}\usepackage[]{color}
+% maxwidth is the original width if it is less than linewidth
+% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+\let\hlipl\hlkwb
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+
+
+\input{../../slide-includes/standard-knitr-beamer-preamble}
+
+%        The following variables are assumed by the standard preamble:
+%        Global variable containing module name:
+
+\title{Residuals, outliers, and influence}
+%	Global variable containing module shortname:
+%		(Currently unused, may be used in future.)
+\newcommand{\ModuleShortname}{modeling}
+%	Global variable containing author name:
+\author{Nicholas G Reich}
+%	Global variable containing text of license terms:
+\newcommand{\LicenseText}{Made available under the Creative Commons Attribution-ShareAlike 3.0 Unported License: http://creativecommons.org/licenses/by-sa/3.0/deed.en\textunderscore US }
+%	Instructor: optional, can leave blank.
+%		Recommended format: {Instructor: Jane Doe}
+\newcommand{\Instructor}{}
+%	Course: optional, can leave blank.
+%		Recommended format: {Course: Biostatistics 101}
+\newcommand{\Course}{}
+
+
+\input{../../slide-includes/shortcuts}
+\usepackage{bbm}
+\usepackage{soul}
+
+\hypersetup{colorlinks,linkcolor=,urlcolor=MainColor}
+
+
+%	******	Document body begins here	**********************
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+
+%	Title page
+\begin{frame}[plain]
+	\titlepage
+\end{frame}
+
+%	******	Everything through the above line must be placed at
+%		the top of any TeX file using the statsTeachR standard
+%		beamer preamble.
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\begin{frame}{Today's topics}
+
+\bi
+    \myitem Model terms recap
+    \myitem Model values and residuals
+    \myitem Smooth terms
+\ei
+
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Models are functions (recap)}
+
+We might write generally $$ y = f(x)$$ where $x$ could be a single variable or multiple variables.
+
+\bi
+  \myitem {\bf The response variable} is $y$ the variable whose behavior or variation you are trying to understand.
+  \myitem {\bf The explanatory variables} $x$ are the variable(s) that you want to use to explain the variation in the response variable.
+\ei
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Statistical models are functions with randomness}
+
+\bi
+\myitem The equation $$y = f(x)$$ describes a {\bf deterministic} function. There is no randomness.
+
+\myitem A statistical model uses a deterministic kernel, e.g. $f(x)$, but layers in {\bf stochastic}, or random, variation. Remember, our goal is to explain and understand the variation in $y$.
+
+\myitem A statistical model will always have an additional layer that accounts for the random variation. In linear models with continuous outcomes, this can be expressed as a {\bf residual} term:
+$$y = f(x) + \epsilon$$
+\ei
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Statistical models are functions with randomness}
+
+\bi
+\myitem Let's say we have $N$ observations in a dataset. The observed values of the response variables are represented by $y_1, y_2, ..., y_N$.
+\myitem The observed values of the explanatory variables are $x_1, x_2, ..., x_N$.
+
+\myitem For a given observation with index $i$, the {\bf model value} $\hat y_i$ is the output of the deterministic function part of your model:
+$$ \hat y_i = f(x_i) $$
+
+\ei
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Statistical models are functions with randomness}
+
+For a given observation with index $i$, the {\bf model value} $\hat y_i$ is the output of the deterministic function part of your model:
+$$ \hat y_i = f(x_i) = 13.0 + 1.5*\mbox{crowding}_i $$
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/lung-plot-1-1} 
+\end{knitrout}
+
+
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Statistical models are functions with randomness}
+
+
+For a given observation with index $i$, the original observation $y_i$ can be reconstructed as  the deterministic function part of your model plus the residual ($\epsilon_i$), or the part of the variation that your model cannot explain:
+$$ y_i = f(x_i) + \epsilon_i = 13.0 + 1.5*\mbox{crowding}_i + \epsilon_i$$
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/lung-plot-2-1} 
+\end{knitrout}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Statistical models are functions with randomness}
+
+
+Let's look at one specific model value and residual. One observation in this dataset has disease = 78 and crowding = 34.
+
+\begin{eqnarray*}
+y_i & = & f(x_i) + \epsilon_i  \\
+78  & = & 13.0 + 1.5*34 + \epsilon_i\\
+\implies 14 & = &  \epsilon_i
+\end{eqnarray*}
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/lung-plot-3-1} 
+\end{knitrout}
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Assessing variation in response explained by model}
+
+\bi
+\myitem The {\color{orange} mean squared error (MSE)} is a commonly used measure of model accuracy:
+$$MSE = \frac{1}{n} \sum_{i=1}^n \left(y_i -\hat y_i\right)^2$$
+
+\myitem The MSE will be small if the observed and predicted responses are close to one another.
+\ei
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/lung-plot-4-1} 
+\end{knitrout}
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Connection to ``sample variance''}
+
+From Stats 101: the sample variance of $y$ is commonly defined as
+$$Var(y) = \frac{1}{n-1} \sum_{i=1}^n \left(y_i -\bar y\right)^2.$$
+Note similarity with MSE for an intercept-only model:
+$$MSE = \frac{1}{n} \sum_{i=1}^n \left(y_i -\hat y_i\right)^2.$$
+
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/lung-plot-5-1} 
+\end{knitrout}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Connecting residuals to outliers}
+
+\bi
+\myitem \hl{Outliers} are points that lie away from the cloud  of points.
+
+\myitem Outliers that lie horizontally away from the center of the cloud are called \hl{high leverage} points.
+
+\myitem High leverage points that actually influence the \underline{slope} of the regression line are called \hl{influential} points.
+
+\myitem In order to determine if a point is influential, visualize the regression line with and without the point. Does the slope of the line change considerably? If so, then the point is influential. If not, then it's not an influential point.
+
+\ei
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Influence}
+
+Intuitively, ``influence'' is a combination of outlying-ness and leverage. More specifically, we can measure the ``deletion influence'' of each observation: quantify how much $\hat\bbeta$ changes if an observation is left out.
+\bi
+	\myitem Mathematically: $|\hat{\bbeta}- \hat{\bbeta}_{(-i)}|$
+	\myitem Cook's distance is a value we can calculate for each observation in our dataset that measures this deletion influence. (It uses some nice tricks of linear algebra without having to refit the regression iteratively without each point.)
+\ei
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Geometrical thinking about influence}
+
+Imagine the regression line as a see-saw, being pulled by springs attached to each point. Which points do you think have the most influence?
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/lung-plot-6-1} 
+\end{knitrout}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Geometrical thinking about influence}
+
+\bi
+  \myitem Points near $\bar x$ (the average value of $x$) do not influence the slope but might influence the position of the line.
+  \myitem Only points far away from $\bar x$ can influence the slope.
+\ei
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/lung-plot-7-1} 
+\end{knitrout}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Influential points}
+
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{m1} \hlkwb{<-} \hlkwd{lm}\hlstd{(disease} \hlopt{~} \hlstd{crowding,} \hlkwc{data}\hlstd{=dat)}
+\hlstd{dat}\hlopt{$}\hlstd{yhat} \hlkwb{<-} \hlkwd{predict}\hlstd{(m1)}
+\hlstd{dat}\hlopt{$}\hlstd{resid} \hlkwb{<-} \hlkwd{resid}\hlstd{(m1)}
+\hlstd{dat}\hlopt{$}\hlstd{cooksd} \hlkwb{<-} \hlkwd{cooks.distance}\hlstd{(m1)}
+\hlstd{dat} \hlopt{%>%} \hlkwd{select}\hlstd{(disease, crowding, yhat, resid, cooksd)} \hlopt{%>%}
+  \hlkwd{arrange}\hlstd{(}\hlkwd{desc}\hlstd{(cooksd))} \hlopt{%>%} \hlkwd{head}\hlstd{()}
+\end{alltt}
+\begin{verbatim}
+## # A tibble: 6 x 5
+##   disease crowding  yhat  resid cooksd
+##     <int>    <int> <dbl>  <dbl>  <dbl>
+## 1      62       18  40.2  21.8  0.167 
+## 2      78       34  64.3  13.7  0.121 
+## 3      70       42  76.4  -6.36 0.0937
+## 4      50       17  38.6  11.4  0.0556
+## 5      40       28  55.2 -15.2  0.0430
+## 6      33       25  50.7 -17.7  0.0375
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Connecting back to data stories}
+
+It's really important to keep an eye out for points that might be unduly influential in telling the story!
+
+\end{frame}
+
+
+
+
+\end{document}
