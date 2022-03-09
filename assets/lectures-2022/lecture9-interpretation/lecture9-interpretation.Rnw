@@ -1,0 +1,459 @@
+%% beamer/knitr slides
+%% for Statistical Modeling and Data Visualization course @ UMass
+%% Nicholas Reich: nick [at] schoolph.umass.edu
+
+
+\documentclass[table]{beamer}
+
+
+\input{../../slide-includes/standard-knitr-beamer-preamble}
+
+%        The following variables are assumed by the standard preamble:
+%        Global variable containing module name:
+
+\title{Fitting and interpreting model coefficients}
+%	Global variable containing module shortname:
+%		(Currently unused, may be used in future.)
+\newcommand{\ModuleShortname}{modeling}
+%	Global variable containing author name:
+\author{Nicholas G Reich}
+%	Global variable containing text of license terms:
+\newcommand{\LicenseText}{Made available under the Creative Commons Attribution-ShareAlike 3.0 Unported License: http://creativecommons.org/licenses/by-sa/3.0/deed.en\textunderscore US }
+%	Instructor: optional, can leave blank.
+%		Recommended format: {Instructor: Jane Doe}
+\newcommand{\Instructor}{}
+%	Course: optional, can leave blank.
+%		Recommended format: {Course: Biostatistics 101}
+\newcommand{\Course}{}
+
+
+\input{../../slide-includes/shortcuts}
+\usepackage{bbm}
+\usepackage{soul}
+
+\hypersetup{colorlinks,linkcolor=,urlcolor=MainColor}
+
+
+%	******	Document body begins here	**********************
+
+\begin{document}
+
+%	Title page
+\begin{frame}[plain]
+	\titlepage
+\end{frame}
+
+%	******	Everything through the above line must be placed at
+%		the top of any TeX file using the statsTeachR standard
+%		beamer preamble.
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\begin{frame}{Today's topics}
+
+\bi
+    \myitem Model terms: recap
+    \myitem Fitting and interpreting models
+\ei
+
+<<loadData, echo=FALSE, warning=FALSE, message=FALSE>>=
+library(tidyverse)
+theme_set(theme_bw())
+opts_chunk$set(size = 'scriptsize', message=FALSE, warning=FALSE)
+options(width=60)
+dat <- read.table("../../data/lungc.txt", header=TRUE) %>%
+  mutate(smoking = factor(smoking, levels=c(0,1), labels=c("non-smoker", "smoker"))) %>%
+  as_tibble()
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Model terms: recap}
+
+\bi
+  \myitem {\bf The intercept} is a ``baseline`` that is included in nearly every model. What would your guess of disease severity be in the absence of any other information?
+  \myitem {\bf Main terms} model the effect of explanatory variables directly.
+  \myitem {\bf Interaction terms} allow for different explanatory variables to modulate the relationship of each other to the response variable.
+\ei
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Formulas for Statistical Models (Linear Regression)}
+
+In general, linear models can be thought of as having these components
+\begin{eqnarray*}
+\mbox{ y } & = & \mbox{intercept + terms + error} \\
+\end{eqnarray*}
+
+
+With a single predictor variable, this is simply a line (plus error):
+\begin{eqnarray*}
+y_i & = & \beta_0 + \beta_1 \cdot x_i + \epsilon_i
+\end{eqnarray*}
+
+However, there can be multiple variables and different types of ``terms'' in this equation
+\begin{itemize}
+    \item intercept
+    \item main effects
+    \item interaction terms
+    \item smooth terms
+\end{itemize}
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Main effects model terms}
+
+$$ \mbox{equation: \ }  \widehat{disease}_i = \beta_0 + \beta_1\cdot crowding_i $$
+
+<<>>=
+m1 <- lm(disease ~ crowding, data=dat)
+@
+
+<<fig.height=3.5, echo=FALSE>>=
+ggplot(dat, aes(x=crowding, y=disease)) +
+  geom_point() + ylim(c(0,80)) +
+  geom_abline(intercept = coef(m1)[1], slope = coef(m1)[2])
+@
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Dust off your algebra: what is an intercept?}
+
+$$ y = \beta_1 \cdot x \mbox{\ \ \ \  vs. \ \ \ \ } y = \beta_0 + \beta_1 \cdot x $$
+
+\vspace{12em}
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Main effects with no intercept: bad idea}
+
+$$ \mbox{equation: \ }  \widehat{disease}_i = \beta_1\cdot crowding_i $$
+
+<<>>=
+m1_no_intcpt <- lm(disease ~ crowding - 1, data=dat)
+@
+
+
+<<fig.height=3.5, echo=FALSE>>=
+ggplot(dat, aes(x=crowding, y=disease)) +
+  geom_point() + ylim(c(0,80)) + xlim(c(0, 45)) +
+  geom_abline(intercept = 0, slope = coef(m1_no_intcpt)[1])
+@
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]{Main effects model terms}
+
+$$ \mbox{equation: \ }  \widehat{disease}_i = \beta_0 + \beta_1\cdot crowding_i $$
+
+<<>>=
+m1 <- lm(disease ~ crowding, data=dat)
+coef(m1)
+@
+
+<<fig.height=3, echo=FALSE>>=
+ggplot(dat, aes(x=crowding, y=disease)) +
+  geom_point() + ylim(c(0,80)) + xlim(c(0, 45)) +
+  geom_abline(intercept = coef(m1)[1], slope = coef(m1)[2])
+@
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]{Main effects model terms: interpretation}
+
+$$ \mbox{equation: \ }  \widehat{disease}_i = \beta_0 + \beta_1\cdot crowding_i $$
+
+<<>>=
+m1 <- lm(disease ~ crowding, data=dat)
+coef(m1)
+@
+
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]{Main effects model terms: interpretation}
+
+$$ \mbox{equation: \ }  \widehat{disease}_i = \beta_0 + \beta_1\cdot crowding_i $$
+
+<<>>=
+m1 <- lm(disease ~ crowding, data=dat)
+coef(m1)
+@
+
+$\beta_0 $ is the expected value of $disease$ when $crowding=0$.
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]{Main effects model terms: interpretation}
+
+$$ \mbox{equation: \ }  \widehat{disease}_i = \beta_0 + \beta_1\cdot crowding*_i $$
+
+<<>>=
+dat$crowding_ctr <- dat$crowding - mean(dat$crowding)
+m1a <- lm(disease ~ crowding_ctr, data=dat)
+coef(m1a)
+@
+
+$\beta_0 $ is the expected value of $disease$ when $crowding_{ctr}=0$, in other words, when crowding is the average value.
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]{Main effects model terms: interpretation}
+
+$$ \mbox{equation: \ }  \widehat{disease}_i = \beta_0 + \beta_1\cdot crowding_i $$
+
+<<>>=
+m1 <- lm(disease ~ crowding, data=dat)
+coef(m1)
+@
+
+$\beta_1$ is the expected change in disease for a 1 unit increase of crowding.
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{2 main effects: 1 continous, 1 categorical}
+
+$$ \mbox{equation: \ }  \widehat{disease}_i = \beta_0 + \beta_1\cdot crowding_i + \beta_2 \cdot smoker $$
+
+<<>>=
+m2 <- lm(disease ~ crowding + smoking, data=dat)
+@
+
+
+<<fig.height=3.5, echo=FALSE>>=
+ggplot(dat, aes(x=crowding, y=disease, color=smoking)) + geom_point() +
+  scale_color_manual(values = c("blue", "red")) +
+  geom_abline(intercept = coef(m2)[1], slope = coef(m2)[2], color="blue") +
+  geom_abline(intercept = coef(m2)[1]+coef(m2)[3], slope = coef(m2)[2], color="red")
+@
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{2 main effects: 1 continous, 1 categorical}
+
+$$ \mbox{equation: \ }  \widehat{disease}_i = \beta_0 + \beta_1\cdot crowding_i + \beta_2 \cdot smoker $$
+
+<<>>=
+m2 <- lm(disease ~ crowding + smoking, data=dat)
+coef(m2)
+@
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{2 main effects: 1 continous, 1 categorical}
+
+$$ \mbox{equation: \ }  \widehat{disease}_i = \beta_0 + \beta_1\cdot crowding_i + \beta_2 \cdot smoker $$
+
+<<>>=
+m2 <- lm(disease ~ crowding + smoking, data=dat)
+coef(m2)
+@
+
+$\beta_0$ is the expected value of disease when both crowding and smoker are zero.
+
+$\beta_1$ is the expected change in disease for a one-unit change in crowding, holding smoking status constant.
+
+$\beta_2$ is the expected difference in disease between smokers and non-smokers, holding crowding constant.
+
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Interaction model terms}
+
+$$ \mbox{equation: \ }  \widehat{disease}_i = \beta_0 + \beta_1\cdot crowd_i + \beta_2\cdot smoke_i + \beta_3\cdot crowd_i \cdot smoke_i  $$
+
+<<>>=
+m3 <- coef(lm(disease ~ crowding*smoking, data=dat))
+@
+
+
+<<interaction-term, tidy=FALSE, fig.height=3.5, echo=FALSE>>=
+ggplot(dat, aes(x=crowding, y=disease, color=smoking)) +  geom_point() +
+  scale_color_manual(values = c("blue", "red")) +
+  geom_abline(intercept = m3[1], slope = m3[2], color="blue") +
+  geom_abline(intercept = m3[1]+m3[3], slope = m3[2]+m3[4], color="red")
+@
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Interaction vs. confounding}
+
+\begin{block}{Definition of interaction}
+Interaction occurs when the relationship between two variables depends on the value of a third variable. E.g. you could hypothesize that the true relationship between nutritional intake and disease severity may be different for smokers and non-smokers.
+\end{block}
+
+\begin{block}{Definition of confounding}
+Confounding occurs when the measurable association between two variables is distorted by the presence of another variable. Confounding can lead to biased estimates of a true relationship between variables.
+\end{block}
+
+\bi
+    \myitem It is important to include confounding variables. Not doing so may bias your results.
+    \myitem Unmodeled interactions do not lead to ``biased'' estimates in the same way that confounding does, but it can lead to a richer and more detailed description of the data at hand.
+\ei
+
+%[Good overview: KNN pp. 306--313]
+
+\end{frame}
+
+%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \begin{frame}{Some real world examples?}
+%
+% \end{frame}
+%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{How to include interaction in a MLR}
+
+
+Model A: $ y_i = \beta_0 + \beta_1 x_{1i} + \beta_2 x_{2i} + \epsilon_i$
+
+
+Model B: $ y_i = \beta_0 + \beta_1 x_{1i} + \beta_2 x_{2i} + \beta_3 x_{1i}\cdot x_{2i} + \epsilon_i$
+
+\vspace{4em}
+
+\begin{block}{Key points}
+\bi
+        \myitem ``easily'' conceptualized with 1 continuous, 1 categorical variable
+        \myitem models possible with other variable combinations, but interpretation/visualization harder
+        \myitem two variable interactions are considered ``first-order'' interactions
+        \myitem still a {\bf linear} model, but no longer a strictly {\bf additive} model
+\ei
+\end{block}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{How to interpret an interaction model}
+
+For now, assume $x_1$ is continuous, $x_2$ is 0/1 binary.
+
+Model A: $ y_i = \beta_0 + \beta_1 x_{1i} + \beta_2 x_{2i} + \epsilon_i$
+
+Model B: $ y_i = \beta_0 + \beta_1 x_{1i} + \beta_2 x_{2i} + \beta_3 x_{1i}\cdot x_{2i} + \epsilon_i$
+
+\vspace{12em}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{How to interpret an interaction model}
+
+For now, assume $x_1$ is continuous, $x_2$ is 0/1 binary.
+
+Model A: $ y_i = \beta_0 + \beta_1 x_{1i} + \beta_2 x_{2i} + \epsilon_i$
+
+Model B: $ y_i = \beta_0 + \beta_1 x_{1i} + \beta_2 x_{2i} + \beta_3 x_{1i}\cdot x_{2i} + \epsilon_i$
+
+\vspace{1em}
+
+$\beta_3$ is the change in the slope of the line that describes the relationship of $y \sim x_1$ comparing the groups defined by $x_2=0$ and $x_2=1$.
+
+$\beta_1 + \beta_3$ is the expected change in $y$ for a one-unit increase in $x_1$ in the group $x_2=1$.
+
+$\beta_0 + \beta_2$ is the expected value of $y$ in the group $x_2=1$ when $x_1=0$ .
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Fitting models in R: syntax summary}
+
+\begin{block}{Quick recap of key syntax for linear models}
+\bi
+  \myitem For linear models, use {\tt lm()}.
+  \myitem Equations look like {\tt y $\sim$ x1 + x2}.
+  \myitem Plus signs ({\tt +}) indicate main effect terms.
+  \myitem Multiplication signs ({\tt *}) indicate main effect AND interaction terms.
+\ei
+\end{block}
+
+\end{frame}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Group work}
+
+
+\end{frame}
+
+
+
+
+
+\end{document}
