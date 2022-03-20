@@ -3,14 +3,15 @@ title: "Coding Challlenge 3"
 author: "Public Health 460"
 date: "Due: February 18th 8:00 pm, 2022"
 output:
+  html_document: 
+    code_folding: hide
   pdf_document: default
-  html_document: default
 ---
 
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(
-  echo = FALSE, 
+  echo = TRUE, 
   message=FALSE, 
   warning=FALSE)
 ```
@@ -33,7 +34,7 @@ __Answer the questions below for credit__
 library(tidyverse)
 library(DT)
 library(plotly)
-gapminder <- read_csv("assets/data/gapminder.csv")
+gapminder <- read_csv("../../../assets/data/gapminder.csv")
 ```
 
 <!-- *Q1 rubric: 0 pt for using a relative file path* -->
