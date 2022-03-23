@@ -1,0 +1,272 @@
+%% beamer/knitr slides
+%% for Statistical Modeling and Data Visualization course @ UMass
+%% Nicholas Reich: nick [at] schoolph.umass.edu
+
+
+\documentclass[table]{beamer}
+
+
+\input{../../slide-includes/standard-knitr-beamer-preamble}
+
+%	The following variables are assumed by the standard preamble:
+%	Global variable containing module name:
+\title{Regression: dummy variables}
+%	Global variable containing module shortname:
+%		(Currently unused, may be used in future.)
+\newcommand{\ModuleShortname}{introRegression}
+%	Global variable containing author name:
+\author{Nicholas G Reich}
+%	Global variable containing text of license terms:
+\newcommand{\LicenseText}{Made available under the Creative Commons Attribution-ShareAlike 3.0 Unported License: http://creativecommons.org/licenses/by-sa/3.0/deed.en\textunderscore US }
+%	Instructor: optional, can leave blank.
+%		Recommended format: {Instructor: Jane Doe}
+\newcommand{\Instructor}{}
+%	Course: optional, can leave blank.
+%		Recommended format: {Course: Biostatistics 101}
+\newcommand{\Course}{}
+
+
+% leftovers from openintro slides
+
+
+
+\input{../../slide-includes/shortcuts}
+\usepackage{bbm}
+
+
+%	******	Document body begins here	**********************
+
+\begin{document}
+
+%	Title page
+\begin{frame}[plain]
+	\titlepage
+\end{frame}
+
+%	******	Everything through the above line must be placed at
+%		the top of any TeX file using the statsTeachR standard
+%		beamer preamble.
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Outline}
+
+<<simData, tidy=FALSE, echo=FALSE, message=FALSE, fig.height=4>>=
+library(ggplot2)
+theme_set(theme_bw())
+dat <- read.table("../../data/lungc.txt", header=TRUE)
+opts_chunk$set(size = 'scriptsize')
+options(width=60)
+@
+
+\bi
+  \myitem Dummy variables for categorical covariates
+\ei
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Categorical predictors}
+
+\bi
+	\myitem Assume $X$ is a categorical / nominal / factor variable with $k$ levels: e.g. `Industry'.
+	\myitem If you use a single predictor with continuous values of $1, 2, \ldots, K$ this assumes that a ``one unit increase'' has a clear meaning.
+	\myitem You need to create {\it indicator} or {\it dummy} variables so that each level stands on its own and can be estimated separately.
+\ei
+
+\centering
+\includegraphics[width=.7\textwidth]{figure-static/woke-factors.png}
+
+\end{frame}
+
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Categorical predictors}
+
+\begin{block}{Important to distinguish between...}
+\bi
+	\myitem  ``nominal'' categorical variables: e.g. ones with no natural ordering, such as Industry, country, etc...
+	\myitem ``ordinal'' categorical variables: e.g. ones with a natural ordering, such as education level, or age grouping.
+\ei
+\end{block}
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Categorical predictor example: lung data}
+
+Education could plausibly be continuous (e.g. you could interpret a one-unit increase), but likely a linear assumption is not great. Thinking of education as a ``factor'' may be more practical.
+
+<<education-as-continuous, tidy=FALSE, message=FALSE, fig.height=4>>=
+qplot(education, disease, data=dat) + geom_point() +
+  geom_smooth(method="lm", se=FALSE)
+@
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]{Defining a categorical variable}
+
+We could define educational level relative to high-school (HS) achievement.
+
+\[
+    \text{ed\_cat}_i=
+\begin{cases}
+    \text{no HS},    & \text{if education}_i < 5\\
+    \text{some HS},  & \text{if } 5 \leq \text{education}_i < 8\\
+    \text{HS grad},  & \text{if } 8 \leq \text{education}_i
+\end{cases}
+\]
+
+
+\small
+<<define-cat, tidy=FALSE, fig.height=2>>=
+dat$ed_cat <- cut(dat$education, breaks = c(-Inf, 8, 12, Inf),
+                  right=FALSE,  ## intervals "open" on the right
+                  labels=c("no HS", "some HS", "HS grad"))
+qplot(ed_cat, disease, geom="boxplot", data=dat)
+@
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Indicator variables}
+
+\bi
+	\myitem An indicator variable is a binary variable. Multiple indicator variables can be used to encode which of multiple categories an observation belongs to. When constructed as below, these are referred to as `dummy variables'.
+	\myitem Let $x$ be a categorical variable with $k$ levels .
+  \myitem Choose one group as the baseline (e.g. ``no HS'').
+	\myitem Create $(k-1)$ binary variables to encode the information about which group each observation belongs to.
+\ei
+
+<<>>=
+dat$someHS <- as.numeric(dat$ed_cat=="some HS")
+dat$HSgrad <- as.numeric(dat$ed_cat=="HS grad")
+dat[8:13, c("disease", "education", "ed_cat", "someHS", "HSgrad")]
+@
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Standard model interpretation}
+
+<<>>=
+## note that R doesn't need the two indicator variables we created by hand
+## the lm() function will create them for us, saving us work.
+mod1 <- lm(disease ~ crowding + ed_cat, data=dat)
+@
+
+Interpret:  $ \mbox{dis}_i = \beta_0 + \beta_1 \cdot \mbox{crowding}_i + \beta_2 \cdot \mbox{someHS}_{i} + \beta_{3} \cdot \mbox{HSgrad}_{i} + \epsilon_{i}$.
+
+\bigskip
+
+$\beta_0 = $
+
+\vspace{1.5cm}
+
+$\beta_1 = $
+
+\vspace{1.5cm}
+
+$\beta_2 = $
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% \begin{frame}[t]{Equivalent model}
+%
+% Define the model $y_i = \beta_1 x_{i1} + \ldots + \beta_{k} x_{i, k} + \epsilon_{i}$ where there are indicators for each possible group
+%
+% \bigskip
+%
+% $\beta_1 = $
+%
+% \vspace{1.5cm}
+%
+% $\beta_2 = $
+%
+%
+% \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Categorical predictor example: lung data}
+
+<<lungMLREducCat, tidy=FALSE, message=FALSE, fig.height=4>>=
+coefs <- coef(mod1)
+ggplot(dat, aes(x=crowding, y=disease, color=ed_cat, shape=ed_cat)) +
+  geom_point() + scale_color_manual(values=c("#1b9e77", "#d95f02", "#7570b3"))+
+  geom_abline(intercept = coefs[1], slope = coefs[2], color="#1b9e77")+
+  geom_abline(intercept = coefs[1]+coefs[3], slope = coefs[2], color="#d95f02")+
+  geom_abline(intercept = coefs[1]+coefs[4], slope = coefs[2], color="#7570b3")
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Categorical predictor example: lung data}
+
+$$ \mbox{dis}_i = \beta_0 + \beta_1\cdot \mbox{crowding}_i + \beta_2\cdot \mbox{someHS}_i + \beta_{3}\cdot \mbox{HSgrad}_i + \epsilon_{i} $$
+
+\small
+<<lungMLRCategorical, tidy=FALSE>>=
+mod1 <- lm(disease ~ crowding + ed_cat, data=dat)
+round(summary(mod1)$coef, 2)
+@
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Categorical predictor example: interaction}
+
+\small
+$$ \widehat{\mbox{dis}}_i = \beta_0 + \beta_1\cdot c_i + \beta_2\cdot \mbox{someHS}_i + \beta_{3}\cdot \mbox{HSgrad}_i + \beta_4 \cdot c_i \cdot \mbox{someHS}_i + \beta_{5} \cdot c_i \cdot \mbox{HSgrad}_i $$
+
+\vspace{1em}
+
+In terms of the betas, what are the equations of the regression lines for predicted disease value for a hypothetical individual in the `no HS', `some HS' and `HS grad' categories?
+
+<<lungMLRCategorical-interaction, tidy=FALSE>>=
+mod1 <- lm(disease ~ crowding*ed_cat, data=dat)
+round(summary(mod1)$coef, 2)
+@
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+\end{document}
