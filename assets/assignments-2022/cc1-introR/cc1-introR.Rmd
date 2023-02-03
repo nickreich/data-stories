@@ -1,7 +1,7 @@
 ---
 title: "Coding Challenge 1: Getting set up with RStudio and the tidyverse"
 author: "Public Health 460"
-date: "Due: 6pm, Friday January 28th, 2022"
+date: "Due: 6pm, Friday February 10th, 2023"
 output:
   pdf_document: default
   html_document: default
@@ -15,15 +15,16 @@ __You will be a better coder if you start off with good, organized habits when u
 * Make sure you have an updated version of RStudio.
 * Open RStudio and create a "new project" in a new directory on your computer in a relevant directory that is named clearly for this class, e.g. `Home/Documents/classes/PH460`.
 * You should open and use this project for every assignment this semester.
-* Create a new subfolder called `coding-challenges` and another called `data`.
+* Create new subdirectories in the `PH460` directory you just created. They should be called `coding-challenges` and `data`.
 * Open a new RMarkdown file and save it in the `coding-challenges` directory you just made.
 * If you haven't already, install the `tidyverse` R package (this is a bundle of a lot of different packages).
 * Download the `women.csv` from the Moodle assignment and save it in the `data` folder you created above in the project.
+* If you are new to RMarkdown, we recommend reviewing [this overview on using RMarkdown files in RStudio](https://rmarkdown.rstudio.com/authoring_quick_tour.html).
 
 
 __Answer the questions below for credit__
 
-By the deadline listed above, you must hand in both the .Rmd file and the resulting, "knitted" HTML file on Moodle. The HTML file must show all code and output (2 pts).
+By the deadline listed above, you must hand in both the .Rmd file and the resulting, "knitted" HTML file on Moodle. The HTML file must show all code and output  (2 pts). Hint: this involves making sure the `echo` option is set to `TRUE` in your RMarkdown file, which it should be by default.
 
 
 1) Load the `tidyverse` package. (2pts)
