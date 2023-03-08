@@ -17,6 +17,9 @@
 \makeatother
 
 \definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\makeatletter
+\@ifundefined{AddToHook}{}{\AddToHook{package/xcolor/after}{\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}}}
+\makeatother
 \newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
 \newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
 \newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
@@ -51,6 +54,14 @@
 \definecolor{messagecolor}{rgb}{0, 0, 0}
 \definecolor{warningcolor}{rgb}{1, 0, 1}
 \definecolor{errorcolor}{rgb}{1, 0, 0}
+\makeatletter
+\@ifundefined{AddToHook}{}{\AddToHook{package/xcolor/after}{
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+}}
+\makeatother
 \newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
 
 \usepackage{alltt}
@@ -60,7 +71,7 @@
 
 %	The following variables are assumed by the standard preamble:
 %	Global variable containing module name:
-\title{Working with categorical variables as factors}
+\title{Categories, factors, and colors}
 %	Global variable containing module shortname:
 %		(Currently unused, may be used in future.)
 \newcommand{\ModuleShortname}{introRegression}
@@ -310,7 +321,7 @@ Factors (or any variable with a small number of distinct values) can be used to 
 
 \begin{frame}[fragile]{Advanced use of factors: ordering}
 
-Turning categorical variables into ordered factors might help you show more data.
+By default, R will sort factors alphanumerically. Reordering factors might help you show more data.
 
 \begin{knitrout}\tiny
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
@@ -384,43 +395,58 @@ Here we order based on the maximum GDP rather than the mean.
 
 \end{frame}
 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[fragile]{Trying out different color scales}
+\begin{frame}[fragile]{}
+
+\huge
+\center
+Using color
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Three main types of color palettes}
+
+
+\bi
+  \item sequential: a gradient in one direction
+  \item divergent: a gradient away from a center
+  \item qualitative: categorical groupings
+\ei
+
+\vspace{4em}
+
+\begin{block}{Setting up a small running example}
+
+\begin{knitrout}\tiny
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{gapminder_asia} \hlkwb{<-} \hlkwd{read_csv}\hlstd{(}\hlstr{"../../data/gapminder.csv"}\hlstd{)} \hlopt{%>%}
+  \hlkwd{filter}\hlstd{(continent} \hlopt{==} \hlstr{"Asia"}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\end{block}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Manual sequential color scale}
 
 Using color scales from ColorBrewer: \href{https://colorbrewer2.org/}{colorbrewer2.org}.
 
 \begin{knitrout}\tiny
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlkwd{ggplot}\hlstd{(gapminder,} \hlkwd{aes}\hlstd{(}\hlkwc{x}\hlstd{=year,} \hlkwc{y}\hlstd{=country,} \hlkwc{fill}\hlstd{=lifeExp))} \hlopt{+}
+\hlkwd{ggplot}\hlstd{(gapminder_asia,} \hlkwd{aes}\hlstd{(}\hlkwc{x}\hlstd{=year,} \hlkwc{y}\hlstd{=country,} \hlkwc{fill}\hlstd{=lifeExp))} \hlopt{+}
     \hlkwd{geom_tile}\hlstd{()} \hlopt{+}
     \hlkwd{scale_fill_gradient}\hlstd{(}\hlkwc{low}\hlstd{=}\hlstr{"#fff7fb"}\hlstd{,} \hlkwc{high}\hlstd{=}\hlstr{"#034e7b"}\hlstd{)}
-\end{alltt}
-\end{kframe}
-
-{\centering \includegraphics[width=\maxwidth]{figure/beamer-unnamed-chunk-11-1} 
-
-}
-
-
-\end{knitrout}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}[fragile]{Trying out different color scales}
-
-And from the {\tt viridis} package.
-
-\begin{knitrout}\tiny
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlkwd{library}\hlstd{(viridis)}
-\hlkwd{ggplot}\hlstd{(gapminder,} \hlkwd{aes}\hlstd{(}\hlkwc{x}\hlstd{=year,} \hlkwc{y}\hlstd{=country,} \hlkwc{fill}\hlstd{=lifeExp))} \hlopt{+}
-    \hlkwd{geom_tile}\hlstd{()} \hlopt{+}
-    \hlkwd{scale_fill_viridis}\hlstd{()}
 \end{alltt}
 \end{kframe}
 
@@ -435,14 +461,13 @@ And from the {\tt viridis} package.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[fragile]{Trying out different color scales}
+\begin{frame}[fragile]{Use {\tt RColorBrewer} palettes like a design pro}
 
+Here are all of the sequential palettes available in {\tt RColorBrewer}. Good for showing variables that have a single natural direction:
 \begin{knitrout}\tiny
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlkwd{ggplot}\hlstd{(gapminder,} \hlkwd{aes}\hlstd{(}\hlkwc{x}\hlstd{=year,} \hlkwc{y}\hlstd{=country,} \hlkwc{fill}\hlstd{=lifeExp))} \hlopt{+}
-    \hlkwd{geom_tile}\hlstd{()} \hlopt{+}
-    \hlkwd{scale_fill_viridis}\hlstd{(}\hlkwc{direction}\hlstd{=}\hlopt{-}\hlnum{1}\hlstd{)}
+\hlstd{RColorBrewer}\hlopt{::}\hlkwd{display.brewer.all}\hlstd{(}\hlkwc{n}\hlstd{=}\hlkwa{NULL}\hlstd{,} \hlkwc{type}\hlstd{=}\hlstr{"seq"}\hlstd{,} \hlkwc{select}\hlstd{=}\hlkwa{NULL}\hlstd{,} \hlkwc{exact.n}\hlstd{=}\hlnum{TRUE}\hlstd{)}
 \end{alltt}
 \end{kframe}
 
@@ -457,21 +482,237 @@ And from the {\tt viridis} package.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[fragile]{Breakout rooms}
+\begin{frame}[fragile]{Using {\tt RColorBrewer} to pick sequential palettes}
 
-Work with your group on the following:
+Picking palette colors using {\tt RColorBrewer}.
+\begin{knitrout}\tiny
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{(pal} \hlkwb{<-} \hlstd{RColorBrewer}\hlopt{::}\hlkwd{brewer.pal}\hlstd{(}\hlkwc{n}\hlstd{=}\hlnum{5}\hlstd{,} \hlkwc{name}\hlstd{=}\hlstr{"Reds"}\hlstd{))}
+\end{alltt}
+\begin{verbatim}
+## [1] "#FEE5D9" "#FCAE91" "#FB6A4A" "#DE2D26" "#A50F15"
+\end{verbatim}
+\begin{alltt}
+\hlkwd{ggplot}\hlstd{(gapminder,} \hlkwd{aes}\hlstd{(}\hlkwc{x}\hlstd{=year,} \hlkwc{y}\hlstd{=country,} \hlkwc{fill}\hlstd{=lifeExp))} \hlopt{+}
+    \hlkwd{geom_tile}\hlstd{()} \hlopt{+}
+    \hlkwd{scale_fill_gradient}\hlstd{(}\hlkwc{low}\hlstd{=pal[}\hlnum{1}\hlstd{],} \hlkwc{high}\hlstd{=pal[}\hlnum{5}\hlstd{])}
+\end{alltt}
+\end{kframe}
 
-\begin{itemize}
-  \item as a group, finish the note-catcher for last week, on recreating the improving the C02 emissions figure.
-  \item start to look for an article for Lab 2 (see assignment on Moodle). You must complete this assignment on your own, but it's recommended to find an article that you can work in parallel with 1-2 other people on.
-\end{itemize}
+{\centering \includegraphics[width=\maxwidth]{figure/beamer-unnamed-chunk-14-1} 
+
+}
+
+
+\end{knitrout}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Special hot-cold sequential scales}
+
+And from the {\tt viridis} package.
+
+\begin{knitrout}\tiny
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{library}\hlstd{(viridis)}
+\hlkwd{ggplot}\hlstd{(gapminder_asia,} \hlkwd{aes}\hlstd{(}\hlkwc{x}\hlstd{=year,} \hlkwc{y}\hlstd{=country,} \hlkwc{fill}\hlstd{=lifeExp))} \hlopt{+}
+    \hlkwd{geom_tile}\hlstd{()} \hlopt{+}
+    \hlkwd{scale_fill_viridis}\hlstd{()}
+\end{alltt}
+\end{kframe}
+
+{\centering \includegraphics[width=\maxwidth]{figure/beamer-unnamed-chunk-15-1} 
+
+}
+
+
+\end{knitrout}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Special hot-cold sequential scales}
+
+\begin{knitrout}\tiny
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{ggplot}\hlstd{(gapminder_asia,} \hlkwd{aes}\hlstd{(}\hlkwc{x}\hlstd{=year,} \hlkwc{y}\hlstd{=country,} \hlkwc{fill}\hlstd{=lifeExp))} \hlopt{+}
+    \hlkwd{geom_tile}\hlstd{()} \hlopt{+}
+    \hlkwd{scale_fill_viridis}\hlstd{(}\hlkwc{direction}\hlstd{=}\hlopt{-}\hlnum{1}\hlstd{)}
+\end{alltt}
+\end{kframe}
+
+{\centering \includegraphics[width=\maxwidth]{figure/beamer-unnamed-chunk-16-1} 
+
+}
+
+
+\end{knitrout}
 
 \end{frame}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\begin{frame}[fragile]{Divergent palettes}
 
+Here are the RColorBrewer divergent palettes: good for showing variables that have a natural midpoint to facilitate a ``baseline'' comparison.
+\begin{knitrout}\tiny
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{RColorBrewer}\hlopt{::}\hlkwd{display.brewer.all}\hlstd{(}\hlkwc{n}\hlstd{=}\hlkwa{NULL}\hlstd{,} \hlkwc{type}\hlstd{=}\hlstr{"div"}\hlstd{,} \hlkwc{select}\hlstd{=}\hlkwa{NULL}\hlstd{,} \hlkwc{exact.n}\hlstd{=}\hlnum{TRUE}\hlstd{)}
+\end{alltt}
+\end{kframe}
+
+{\centering \includegraphics[width=\maxwidth]{figure/beamer-unnamed-chunk-17-1} 
+
+}
+
+
+\end{knitrout}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Using divergent palettes to compare values to a baseline}
+
+To create a ``baseline'' comparison for plotting a divergent variable, we create a new GDP variable in the dataset, where we set a country's GDP in 1952 as the ``basline'' (equal to 1).
+
+\begin{knitrout}\tiny
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{pal} \hlkwb{<-} \hlstd{RColorBrewer}\hlopt{::}\hlkwd{brewer.pal}\hlstd{(}\hlkwc{n}\hlstd{=}\hlnum{9}\hlstd{,} \hlkwc{name}\hlstd{=}\hlstr{"PRGn"}\hlstd{)}
+
+\hlcom{## extract 1952 life expectancy as a baseline}
+\hlstd{gapminder_asia_1952} \hlkwb{<-} \hlstd{gapminder_asia} \hlopt{%>%}
+  \hlkwd{filter}\hlstd{(year}\hlopt{==}\hlnum{1952}\hlstd{)} \hlopt{%>%}
+  \hlkwd{select}\hlstd{(country,} \hlkwc{gdp1952} \hlstd{= gdpPercap)}
+
+\hlcom{## merge back into original dataset, compute new variable that shows change in life expectancy relative to baseline}
+\hlstd{gapminder_asia} \hlkwb{<-} \hlstd{gapminder_asia} \hlopt{%>%}
+  \hlkwd{left_join}\hlstd{(gapminder_asia_1952)} \hlopt{%>%}
+  \hlkwd{mutate}\hlstd{(}\hlkwc{gdp_v_baseline} \hlstd{= gdpPercap}\hlopt{/}\hlstd{gdp1952)}
+
+\hlkwd{head}\hlstd{(gapminder_asia)}
+\end{alltt}
+\begin{verbatim}
+## # A tibble: 6 x 8
+##   country     continent  year lifeExp      pop gdpPercap gdp1952 gdp_v_baseline
+##   <chr>       <chr>     <dbl>   <dbl>    <dbl>     <dbl>   <dbl>          <dbl>
+## 1 Afghanistan Asia       1952    28.8  8425333      779.    779.          1    
+## 2 Afghanistan Asia       1957    30.3  9240934      821.    779.          1.05 
+## 3 Afghanistan Asia       1962    32.0 10267083      853.    779.          1.09 
+## 4 Afghanistan Asia       1967    34.0 11537966      836.    779.          1.07 
+## 5 Afghanistan Asia       1972    36.1 13079460      740.    779.          0.949
+## 6 Afghanistan Asia       1977    38.4 14880372      786.    779.          1.01
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Using divergent palettes to compare values to a baseline}
+
+Note: when plotting a ratio, it can be useful to use a log transformation on the scale because this will make 0.5 and 2 have the same intensity color away from 1.
+\begin{knitrout}\tiny
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{ggplot}\hlstd{(gapminder_asia,} \hlkwd{aes}\hlstd{(}\hlkwc{x}\hlstd{=year,} \hlkwc{y}\hlstd{=country,} \hlkwc{fill}\hlstd{=gdp_v_baseline))} \hlopt{+}
+    \hlkwd{geom_tile}\hlstd{()} \hlopt{+}
+    \hlkwd{scale_fill_gradient2}\hlstd{(}\hlkwc{low}\hlstd{=pal[}\hlnum{1}\hlstd{],} \hlkwc{mid}\hlstd{=pal[}\hlnum{5}\hlstd{],} \hlkwc{high}\hlstd{=pal[}\hlnum{9}\hlstd{],} \hlkwc{midpoint} \hlstd{=} \hlnum{0}\hlstd{,} \hlkwc{trans}\hlstd{=}\hlstr{"log2"}\hlstd{)}
+\end{alltt}
+\end{kframe}
+
+{\centering \includegraphics[width=\maxwidth]{figure/beamer-unnamed-chunk-19-1} 
+
+}
+
+
+\end{knitrout}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Qualitative palettes}
+
+Here are the available palettes from RColorBrewer that are qualitative. These are good for showing unordered categories for comparison.
+\begin{knitrout}\tiny
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{RColorBrewer}\hlopt{::}\hlkwd{display.brewer.all}\hlstd{(}\hlkwc{n}\hlstd{=}\hlkwa{NULL}\hlstd{,} \hlkwc{type}\hlstd{=}\hlstr{"qual"}\hlstd{,} \hlkwc{select}\hlstd{=}\hlkwa{NULL}\hlstd{,} \hlkwc{exact.n}\hlstd{=}\hlnum{TRUE}\hlstd{)}
+\end{alltt}
+\end{kframe}
+
+{\centering \includegraphics[width=\maxwidth]{figure/beamer-unnamed-chunk-20-1} 
+
+}
+
+
+\end{knitrout}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Using qualitative palettes from {\tt RColorBrewer}}
+
+For low-number palettes (usually less than 12 colors) you can request a qualitative palette type.
+\begin{knitrout}\tiny
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{gapminder_asia} \hlopt{%>%}
+  \hlkwd{filter}\hlstd{(country} \hlopt{%in%} \hlkwd{c}\hlstd{(}\hlstr{"Syria"}\hlstd{,} \hlstr{"Iraq"}\hlstd{,} \hlstr{"Iran"}\hlstd{,} \hlstr{"China"}\hlstd{,} \hlstr{"Thailand"}\hlstd{))} \hlopt{%>%}
+  \hlkwd{ggplot}\hlstd{(}\hlkwd{aes}\hlstd{(}\hlkwc{x}\hlstd{=year,} \hlkwc{y}\hlstd{=gdpPercap,} \hlkwc{color}\hlstd{=country))} \hlopt{+}
+  \hlkwd{geom_point}\hlstd{()} \hlopt{+} \hlkwd{geom_line}\hlstd{()} \hlopt{+}
+  \hlkwd{scale_color_brewer}\hlstd{(}\hlkwc{type} \hlstd{=} \hlstr{"qual"}\hlstd{)}
+\end{alltt}
+\end{kframe}
+
+{\centering \includegraphics[width=\maxwidth]{figure/beamer-unnamed-chunk-21-1} 
+
+}
+
+
+\end{knitrout}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Using qualitative palettes from {\tt RColorBrewer}}
+
+You can also specify a palette directly.
+\begin{knitrout}\tiny
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{gapminder_asia} \hlopt{%>%}
+  \hlkwd{filter}\hlstd{(country} \hlopt{%in%} \hlkwd{c}\hlstd{(}\hlstr{"Syria"}\hlstd{,} \hlstr{"Iraq"}\hlstd{,} \hlstr{"Iran"}\hlstd{,} \hlstr{"China"}\hlstd{,} \hlstr{"Thailand"}\hlstd{))} \hlopt{%>%}
+  \hlkwd{ggplot}\hlstd{(}\hlkwd{aes}\hlstd{(}\hlkwc{x}\hlstd{=year,} \hlkwc{y}\hlstd{=gdpPercap,} \hlkwc{color}\hlstd{=country))} \hlopt{+}
+  \hlkwd{geom_point}\hlstd{()} \hlopt{+} \hlkwd{geom_line}\hlstd{()} \hlopt{+}
+  \hlkwd{scale_color_brewer}\hlstd{(}\hlkwc{palette} \hlstd{=} \hlstr{"Dark2"}\hlstd{)}
+\end{alltt}
+\end{kframe}
+
+{\centering \includegraphics[width=\maxwidth]{figure/beamer-unnamed-chunk-22-1} 
+
+}
+
+
+\end{knitrout}
+
+\end{frame}
 
 
 

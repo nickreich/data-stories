@@ -1,14 +1,14 @@
 ---
 title: "Lab 1: Data Journalism Critique"
 author: "Public Health 460"
-date: "Due: 8pm, Friday February 11th, 2022"
+date: "Due: 6pm, Friday February 24th, 2023"
 geometry: "left=2cm,right=2cm,top=1cm,bottom=1cm"
 output:
   pdf_document: default
   html_document: default
 ---
 
-__The deliverable for this lab is a written critique submitted as an HTML file (no Rmd file required for this assignment). The file must be submitted on Moodle by 8pm on Friday, February 11, 2022. Late assignments will not be accepted. Note that the instructor and TAs will not be available for assistance after 5pm on Friday.__
+__The deliverable for this lab is a written critique submitted as an HTML file (no Rmd file required for this assignment). The file must be submitted on Moodle by 6pm on Friday, February 24, 2023. Late assignments will not be accepted.__
 
 ## Overview
 For this lab, you will work on your own to write a critique of a data journalism article or blog post.

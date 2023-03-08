@@ -1,0 +1,127 @@
+---
+title: "Analysis of songs on Spotify using spotifyr"
+author: Nicholas G Reich for PUBHLTH 460
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE)
+```
+
+Note: some of the content of this file is based on [the `spotifyr` help files](https://www.rcharlie.com/spotifyr/index.html), but I updated parts of it.
+
+## Your assignment
+
+You should create a new `.R` script file (note, DO NOT create a `.Rmd` file). Make a new directory for "in-class code" in your root directory for this project. You could call it `class-code` or something like that. Save this R file in that directory. Copy the relevant and necessary code from below into your script as you go, editing as needed.
+
+Goals for this exercise
+
+ - Run an interesting analysis in R
+ - Get more familiar with tidyverse syntax
+ - Build understanding of how to write code in R scripts rather than notebooks
+
+
+## Setting up things with Spotify
+
+1. If you don't already have one make yourself a Spotify account. You don't need to pay for a subscription, a free account should work fine.
+2. Register your account with [the Spotify for Developers system](https://developer.spotify.com/dashboard/login).
+3. Once you've linked your account as a Spotify "developer" then you should be able to visit [this Dashboard page](https://developer.spotify.com/dashboard/applications) and see a green button to "Create an app". Click that green button.
+4. The details/name of the app that you create are not important. Name it something like "access for spotifyr", or something else of your choosing.
+5. Once the app has been created you should see it in your dashboard page. If you click on the app, you should see an "Edit settings" button. Click on this and in the "Redirect URLs" section, add this text: `http://localhost:1410/`.
+6. Note also that under the name of your app you should see a long alphanumeric string of letters after the words "Client ID". You should also see green text that says "SHOW CLIENT SECRET". If you click on that, you will see a second long string called "Client Secret". You will need both of these items further down
+
+## Installing the necessary packages
+
+The following packages will be used in this tutorial. Note that the following lines will install packages and you should run them once in your console and should NOT include them in your final Rmd file, as then the packages would be installed every time the file is knit. You only need to install them once and LOAD them via `library()` every time the file is knit.
+
+```{r install, eval=FALSE}
+install.packages("spotifyr")
+install.packages("ggridges")
+```
+
+## Setting up your R session
+
+Load the packages that we will use in this analysis into your R session. Note: `lubridate` is a package that has [a lot of handy functions for manipulating dates](https://lubridate.tidyverse.org/). It is part of the `tidyverse` but is not loaded by default.
+
+```{r}
+library(spotifyr)
+library(tidyverse)
+library(lubridate) 
+library(ggridges)
+```
+
+Additionally, copy your "Client ID" and "Client Secret" mentioned above, and put them in below where it says `xxx`. The following lines of code identify yourself to and authorize you to access the API.
+
+```{r, include=FALSE}
+Sys.setenv(SPOTIFY_CLIENT_ID = '6cb1ccd66fef44e082064ee3c74cd56d')
+Sys.setenv(SPOTIFY_CLIENT_SECRET = '0b1880256d454fff87772a6682e61d5e')
+access_token <- get_spotify_access_token()
+```
+
+```{r, eval=FALSE}
+Sys.setenv(SPOTIFY_CLIENT_ID = 'xxx')
+Sys.setenv(SPOTIFY_CLIENT_SECRET = 'xxx')
+access_token <- get_spotify_access_token()
+```
+
+## Download some data about an artist's albums
+
+I was interested in looking at data on songs by the Beatles. Here is code to download info on all their songs on Spotify.
+
+```{r}
+beatles <- get_artist_audio_features('the beatles')
+```
+
+Inspect this resulting dataset in RStudio and answer the relevant questions on the note-catcher for today's class.
+
+You could try putting in the name of one of your favorite bands here. I haven't experimented a ton with this, but I think that the names need to be all lowercase. Here is another example
+
+```{r}
+nina <- get_artist_audio_features('nina simone')
+```
+
+## plot info about the songs
+
+First, let's just make a simple plot of some of the data. Here is a plot showing the album release date on the x-axis and the song valence on the y-axis. you could do this with the Beatles or some artist of your choice.
+
+```{r}
+ggplot(beatles, aes(x=album_release_date, y=valence)) +
+  geom_point()
+```
+
+
+And here is a plot of the energy of a song versus the valence.
+```{r}
+ggplot(beatles, aes(x=energy, y=valence)) +
+  geom_point()
+```
+
+Pick out a song or two that you know, find their data in the dataset (you can click on the R object in your Environment pane and then use the filter command to view the data in the RStudio "spreadsheet" like view) and locate those songs in the graphs that you made. 
+
+Here's a slightly more advanced visualization.I was interested in making a plot showing the changes over time in the happiness of Beatles albums. I started by creating a new variable in the dataframe that ordered the albums by the year it was was released. (Note that Spotify, for some artists, seems to have multiple versions of the same album, which seems to cause some duplicate data.) Then I plotted the distribution of happiness of the songs for each albums, where the albums are sorted by year (old albums at the top).
+
+```{r}
+beatles <- beatles %>%
+  mutate(album_name_fct = reorder(album_name, X = album_release_year))
+
+ggplot(beatles, aes(x = valence, y = album_name_fct)) +
+  geom_density_ridges() +
+  theme_ridges() +
+  ggtitle("Happiness of Beatles's songs, by album") +
+  ylab(NULL)
+```
+
+
+If you listen to music on spotify, the following code should retrieve for you some info about songs you've recently listened to.
+
+```{r, eval=FALSE}
+get_my_recently_played(limit = 5) %>%
+  mutate(artist.name = map_chr(track.artists, function(x) x$name[1]),
+         played_at = as_datetime(played_at)) %>%
+  select(track.name, artist.name, track.album.name, played_at)
+```
+
+
+
+
+

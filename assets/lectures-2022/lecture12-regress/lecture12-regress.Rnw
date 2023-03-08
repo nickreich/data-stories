@@ -1,0 +1,419 @@
+%% beamer/knitr slides
+%% for Statistical Modeling and Data Visualization course @ UMass
+%% Nicholas Reich: nick [at] schoolph.umass.edu
+
+
+\documentclass[table]{beamer}
+
+
+\input{../../slide-includes/standard-knitr-beamer-preamble}
+
+%        The following variables are assumed by the standard preamble:
+%        Global variable containing module name:
+
+\title{Multiple Linear Regression}
+%	Global variable containing module shortname:
+%		(Currently unused, may be used in future.)
+\newcommand{\ModuleShortname}{modeling}
+%	Global variable containing author name:
+\author{Nicholas G Reich}
+%	Global variable containing text of license terms:
+\newcommand{\LicenseText}{Derivative of OpenIntro slides, released under a CC BY-NC-SA license.}
+%	Instructor: optional, can leave blank.
+%		Recommended format: {Instructor: Jane Doe}
+\newcommand{\Instructor}{}
+%	Course: optional, can leave blank.
+%		Recommended format: {Course: Biostatistics 101}
+\newcommand{\Course}{}
+
+%%%%%%%% FROM TEX FILE
+%%% To get rid of solutions on handouts:
+\newcommand{\soln}[1]{\textit{#1}}				% For slides
+%\newcommand{\soln}[1]{ }	% For handouts
+
+\newcommand{\solnGr}[1]{#1}
+%\newcommand{\solnGr}{ }
+
+%\input{../../slide-includes/lec_style.tex}
+%%%%%%%% END FROM TEX FILE
+
+
+
+\input{../../slide-includes/shortcuts}
+\usepackage{bbm}
+
+\hypersetup{colorlinks,linkcolor=,urlcolor=MainColor}
+
+
+%	******	Document body begins here	**********************
+
+\begin{document}
+
+%	Title page
+\begin{frame}[plain]
+	\titlepage
+\end{frame}
+
+%	******	Everything through the above line must be placed at
+%		the top of any TeX file using the statsTeachR standard
+%		beamer preamble.
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\section{A multiple regression example}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+\frametitle{Modeling kid's test scores}
+
+Setting: a model for cognitive test scores of 434 three- and four-year-old children using characteristics of their mothers. Data are from a survey of adult American women and their children - a subsample from the National Longitudinal Survey of Youth.
+
+
+<<message=FALSE>>=
+library(rstanarm)
+data("kidiq")
+head(kidiq)
+@
+% {\small
+% \begin{center}
+% \begin{tabular}{rrlrlr}
+%   \hline
+%  & kid\_score & mom\_hs & mom\_iq & mom\_work & mom\_age \\
+%   \hline
+% 1 &  65 & yes & 121.12 & yes &  27 \\
+%   \vdots \\
+%   5 & 115 & yes & 92.75 & yes &  27 \\
+%   6 &  98 & no & 107.90 & no &  18 \\
+%   \vdots \\
+%   434 &  70 & yes & 91.25 & yes &  25 \\
+%    \hline
+% \end{tabular}
+% \end{center}
+% }
+
+\vfill
+
+{\tiny Gelman, Hill. \textit{Data Analysis Using Regression and Multilevel/Hierarchical Models}. (2007) Cambridge University Press.}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+\frametitle{Exploratory analysis}
+
+\scriptsize
+<<message=FALSE, fig.height=4>>=
+library(GGally)
+kidiq$mom_hs <- factor(kidiq$mom_hs, levels=c(0,1), labels=c("no", "yes"))
+ggpairs(kidiq)
+@
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{What might we want to know?}
+
+\begin{block}{What impact does a mom's education have on her child's intelligence?}
+(as measured by a standardized test)
+\end{block}
+
+\vspace{6em}
+
+\begin{block}{Does the relationship change when we account for other characteristics about the mom?}
+\end{block}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+\frametitle{Interpreting an SLR coefficient}
+
+What is the correct interpretation of the coefficient for mom's high school status?
+
+\scriptsize
+<<>>=
+fm <- lm(kid_score ~ mom_hs, data=kidiq)
+round(summary(fm)$coef, 3)
+@
+
+
+\pause
+
+Kids with mothers who finished high school tend to score on average 11.8 points higher on the IQ test compared to kids whose mothers did not finish high school.
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+\frametitle{Interpreting uncertainty in an SLR coefficient}
+
+\scriptsize
+<<>>=
+confint(fm)
+@
+
+Kids with mothers who finished high school tend to score on average 11.8 points higher on the IQ test compared to kids whose mothers did not finish high school (95\% CI: 7.2 - 16.3).
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+\frametitle{What percent of the variation is explained by a model?}
+
+
+$R^2$ is a common metric. It is defined as the percent of variation in the outcome described by a model:
+
+\begin{eqnarray*}
+ R^2 & = & \frac{\text{explained variability in }y}{\text{total variability in }y} \\
+     & = & 1-\frac{\text{unexplained variability in }y}{\text{total variability in }y} \\
+     & = & 1-\frac{\text{variation of model residuals}}{\text{total variability in }y} \\
+\end{eqnarray*}
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+\frametitle{What percent of the variation in kid IQ is explained by mom HS?}
+
+
+\begin{eqnarray*}
+ R^2 & = & 1-\frac{\text{variation of model residuals}}{\text{total variability in }y} \\
+     & = & 1- \frac{\sum_i (y_i - \hat y_i)^2}{\sum_i (y_i - \bar y_i)^2}
+\end{eqnarray*}
+
+\scriptsize
+<<>>=
+1 - sum( resid(fm)^2 ) / sum( (kidiq$kid_score-mean(kidiq$kid_score))^2 )
+summary(fm)$r.squared
+@
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+\frametitle{Interpreting an MLR coefficient}
+
+What does this model look like in terms of math?
+
+\scriptsize
+<<>>=
+fm1 <- lm(kid_score ~ mom_hs + mom_iq + mom_age, data=kidiq)
+@
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+\frametitle{Interpreting an MLR coefficient}
+
+What is the correct interpretation of the coefficient for mom's high school status?
+
+\scriptsize
+<<>>=
+coef(fm1)
+confint(fm1)
+@
+
+
+{\bf Controlling for a mom's age and score on an IQ test}, kids with mothers who finished high school scored on average 5.6 points higher on the IQ test compared to kids whose mothers did not finish high school (95\% CI: 1.2 - 10.1).
+
+Could also say, {\bf holding a mom's age and IQ test score constant}, kids with mothers...
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+\frametitle{How much variation is explained now?}
+
+\begin{eqnarray*}
+ R^2 & = & 1-\frac{\text{variation of model residuals}}{\text{total variability in }y} \\
+     & = & 1- \frac{\sum_i (y_i - \hat y_i)^2}{\sum_i (y_i - \bar y_i)^2}
+\end{eqnarray*}
+
+\scriptsize
+<<>>=
+1 - sum( resid(fm1)^2 ) / sum( (kidiq$kid_score-mean(kidiq$kid_score))^2 )
+summary(fm1)$r.squared
+summary(fm1)$adj.r.squared
+@
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+\frametitle{$R^2$ vs. adjusted $R^2$}
+
+\renewcommand\arraystretch{1.25}
+\begin{center}
+\begin{tabular}{l | c  c}
+			& $R^2$	& Adjusted $R^2$ \\
+\hline
+Model 1 (Single-predictor)	& 0.056	& 0.054 \\
+Model 2 (Multiple)			& 0.215	& 0.210
+\end{tabular}
+\end{center}
+
+
+\begin{itemize}
+
+\item When \underline{any} variable is added to the model $R^2$ increases.
+
+\item But if the added variable doesn't really provide any new information, or is completely unrelated, adjusted $R^2$ does not increase.
+
+\end{itemize}
+
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+\frametitle{Adjusted $R^2$}
+
+
+\begin{eqnarray*}
+ R^2_{adj} & = & 1-\frac{\text{variation of model residuals}}{\text{total variability in }y} \cdot \frac{n - 1}{n - p - 1}
+\end{eqnarray*}
+where $n$ is the number of cases and $p$ is the number of predictors (explanatory variables) in the model.
+
+\begin{itemize}
+
+\item Because $p$ is never negative, $R^2_{adj}$ will always be smaller than $R^2$.
+\item $R^2_{adj}$ applies a (arbitrary, but useful) penalty for the number of predictors included in the model.
+\item Therefore, one model selection criteria could be to choose models with higher $R^2_{adj}$ over others.
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]
+\frametitle{Taking stock}
+
+\begin{itemize}
+\item First model: ``mom finishing high school is really important.''
+\item Second model: ``meh. mom finishing high school is still important, but not as important after you account for her age and IQ score.''
+\item This is an example of ``confounding'': predictor variables are correlated with each other and only looking at a subset of them can mask the true association.
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]
+\frametitle{Model diagnostics}
+
+\begin{enumerate}
+\item Check basic model assumptions.
+\item Look at fitted relationships.
+\item Look at predictions from the fitted model.
+\end{enumerate}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]
+\frametitle{1. Check model assumptions}
+
+A smooth line through the residuals vs fitted plot should roughly have mean=0.
+
+<<fig.height=3.5>>=
+plot(fm1, which = 1)
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]
+\frametitle{1. Check model assumptions}
+
+Points that have high residual value (in either direction) and high leverage should be examined.
+<<fig.height=3.5>>=
+plot(fm1, which = 5)
+@
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]
+\frametitle{2. Look at fitted relationships}
+
+{\bf Added variable plots} for the outcome $Y$ and one predictor $X$ show residuals from $Y\sim Z$ plotted against the residuals from $X\sim Z$, where $Z$ are the other predictor variables. In this way, the plot shows the part of $Y$ and $X$ that are not explained by a linear relationship on the other variables. By mathematical definition the regression line through this plot has the same slope as the coefficient on $X$.
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]
+\frametitle{2. Added variable plots}
+
+\scriptsize
+<<fig.height=4>>=
+coef(fm1)
+car::avPlots(fm1)
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]
+\frametitle{3. Look at model predictions}
+
+Note that predictions can be for the mean value of a particular covariate profile (type="confidence"), or for a new observed data point value (type = "prediction")
+\scriptsize
+<<>>=
+newdata <- data.frame(mom_hs = "yes", mom_iq = 100, mom_age = 27)
+predict(fm1, newdata = newdata, interval = "confidence")
+predict(fm1, newdata = newdata, interval = "prediction")
+@
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

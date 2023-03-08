@@ -10,7 +10,7 @@
 
 %	The following variables are assumed by the standard preamble:
 %	Global variable containing module name:
-\title{Working with categorical variables as factors}
+\title{Categories, factors, and colors}
 %	Global variable containing module shortname:
 %		(Currently unused, may be used in future.)
 \newcommand{\ModuleShortname}{introRegression}
@@ -182,7 +182,7 @@ ggplot(co2, aes(x = Year, y = CO2)) +
 
 \begin{frame}[fragile]{Advanced use of factors: ordering}
 
-Turning categorical variables into ordered factors might help you show more data.
+By default, R will sort factors alphanumerically. Reordering factors might help you show more data.
 
 <<fig.height=4>>=
 gapminder <- read_csv("../../data/gapminder.csv") %>%
@@ -226,14 +226,50 @@ ggplot(gapminder, aes(x=year, y=country, fill=lifeExp)) +
 
 \end{frame}
 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[fragile]{Trying out different color scales}
+\begin{frame}[fragile]{}
+
+\huge
+\center
+Using color
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Three main types of color palettes}
+
+
+\bi
+  \item sequential: a gradient in one direction
+  \item divergent: a gradient away from a center
+  \item qualitative: categorical groupings
+\ei
+
+\vspace{4em}
+
+\begin{block}{Setting up a small running example}
+
+<<>>=
+gapminder_asia <- read_csv("../../data/gapminder.csv") %>%
+  filter(continent == "Asia")
+@
+
+\end{block}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Manual sequential color scale}
 
 Using color scales from ColorBrewer: \href{https://colorbrewer2.org/}{colorbrewer2.org}.
 
 <<fig.height=4>>=
-ggplot(gapminder, aes(x=year, y=country, fill=lifeExp)) +
+ggplot(gapminder_asia, aes(x=year, y=country, fill=lifeExp)) +
     geom_tile() +
     scale_fill_gradient(low="#fff7fb", high="#034e7b")
 @
@@ -242,13 +278,38 @@ ggplot(gapminder, aes(x=year, y=country, fill=lifeExp)) +
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[fragile]{Trying out different color scales}
+\begin{frame}[fragile]{Use {\tt RColorBrewer} palettes like a design pro}
+
+Here are all of the sequential palettes available in {\tt RColorBrewer}. Good for showing variables that have a single natural direction:
+<<fig.height=5>>=
+RColorBrewer::display.brewer.all(n=NULL, type="seq", select=NULL, exact.n=TRUE)
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Using {\tt RColorBrewer} to pick sequential palettes}
+
+Picking palette colors using {\tt RColorBrewer}.
+<<fig.height=3>>=
+(pal <- RColorBrewer::brewer.pal(n=5, name="Reds"))
+ggplot(gapminder, aes(x=year, y=country, fill=lifeExp)) +
+    geom_tile() +
+    scale_fill_gradient(low=pal[1], high=pal[5])
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Special hot-cold sequential scales}
 
 And from the {\tt viridis} package.
 
 <<fig.height=4>>=
 library(viridis)
-ggplot(gapminder, aes(x=year, y=country, fill=lifeExp)) +
+ggplot(gapminder_asia, aes(x=year, y=country, fill=lifeExp)) +
     geom_tile() +
     scale_fill_viridis()
 @
@@ -257,33 +318,108 @@ ggplot(gapminder, aes(x=year, y=country, fill=lifeExp)) +
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[fragile]{Trying out different color scales}
+\begin{frame}[fragile]{Special hot-cold sequential scales}
 
 <<fig.height=4>>=
-ggplot(gapminder, aes(x=year, y=country, fill=lifeExp)) +
+ggplot(gapminder_asia, aes(x=year, y=country, fill=lifeExp)) +
     geom_tile() +
     scale_fill_viridis(direction=-1)
 @
 
 \end{frame}
 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[fragile]{Breakout rooms}
+\begin{frame}[fragile]{Divergent palettes}
 
-Work with your group on the following:
+Here are the RColorBrewer divergent palettes: good for showing variables that have a natural midpoint to facilitate a ``baseline'' comparison.
+<<fig.height=4>>=
+RColorBrewer::display.brewer.all(n=NULL, type="div", select=NULL, exact.n=TRUE)
+@
 
-\begin{itemize}
-  \item as a group, finish the note-catcher for last week, on recreating the improving the C02 emissions figure.
-  \item start to look for an article for Lab 2 (see assignment on Moodle). You must complete this assignment on your own, but it's recommended to find an article that you can work in parallel with 1-2 other people on.
-\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Using divergent palettes to compare values to a baseline}
+
+To create a ``baseline'' comparison for plotting a divergent variable, we create a new GDP variable in the dataset, where we set a country's GDP in 1952 as the ``basline'' (equal to 1).
+
+<<fig.height=3>>=
+pal <- RColorBrewer::brewer.pal(n=9, name="PRGn")
+
+## extract 1952 life expectancy as a baseline
+gapminder_asia_1952 <- gapminder_asia %>%
+  filter(year==1952) %>%
+  select(country, gdp1952 = gdpPercap)
+
+## merge back into original dataset, compute new variable that shows change in life expectancy relative to baseline
+gapminder_asia <- gapminder_asia %>%
+  left_join(gapminder_asia_1952) %>%
+  mutate(gdp_v_baseline = gdpPercap/gdp1952)
+
+head(gapminder_asia)
+@
 
 \end{frame}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\begin{frame}[fragile]{Using divergent palettes to compare values to a baseline}
 
+Note: when plotting a ratio, it can be useful to use a log transformation on the scale because this will make 0.5 and 2 have the same intensity color away from 1.
+<<fig.height=3>>=
+ggplot(gapminder_asia, aes(x=year, y=country, fill=gdp_v_baseline)) +
+    geom_tile() +
+    scale_fill_gradient2(low=pal[1], mid=pal[5], high=pal[9], midpoint = 0, trans="log2")
+@
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Qualitative palettes}
+
+Here are the available palettes from RColorBrewer that are qualitative. These are good for showing unordered categories for comparison.
+<<fig.height=4>>=
+RColorBrewer::display.brewer.all(n=NULL, type="qual", select=NULL, exact.n=TRUE)
+@
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Using qualitative palettes from {\tt RColorBrewer}}
+
+For low-number palettes (usually less than 12 colors) you can request a qualitative palette type.
+<<fig.height=3>>=
+gapminder_asia %>%
+  filter(country %in% c("Syria", "Iraq", "Iran", "China", "Thailand")) %>%
+  ggplot(aes(x=year, y=gdpPercap, color=country)) +
+  geom_point() + geom_line() +
+  scale_color_brewer(type = "qual")
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Using qualitative palettes from {\tt RColorBrewer}}
+
+You can also specify a palette directly.
+<<fig.height=3>>=
+gapminder_asia %>%
+  filter(country %in% c("Syria", "Iraq", "Iran", "China", "Thailand")) %>%
+  ggplot(aes(x=year, y=gdpPercap, color=country)) +
+  geom_point() + geom_line() +
+  scale_color_brewer(palette = "Dark2")
+@
+
+\end{frame}
 
 
 

@@ -1,11 +1,11 @@
 ---
 title: "Coding Challlenge 3"
 author: "Public Health 460"
-date: "Due: February 18th 8:00 pm, 2022"
+date: "Due: March 3rd 6:00 pm, 2023"
 output:
+  pdf_document: default
   html_document: 
     code_folding: hide
-  pdf_document: default
 ---
 
 
@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 
 __This assignment is all about visualization using ggplot. Please turn in an HTML file and your .Rmd file__
 
-* Download the data called ``gapminder.csv`` from Moodle (Unit3 > Unit 3 readings and files folder).
+* Download the data called ``gapminder.csv`` from Moodle (Unit 2 > Unit 2 readings and files folder).
 * Use ``ggplot2`` and its functions for every question about plotting. Do not use the `qplot()` function.
 * Include your code in your output.
 
@@ -30,7 +30,7 @@ __Answer the questions below for credit__
 
 ## Part I: Gapminder dataset (10 points)
 1) Read in the `gapminder.csv` from a relative file path. Load the `tidyverse`, `DT`, and `plotly` packages. (If you have not installed `DT` or `plotly` yet, run the code to install them once on your machine, but do not include that code to install them in your assignment.)
-```{r packages}
+```{r packages, echo=FALSE}
 library(tidyverse)
 library(DT)
 library(plotly)
@@ -46,7 +46,7 @@ gapminder <- read_csv("../../../assets/data/gapminder.csv")
 3) Use the `DT::datatable()` function to present an interactive table in your HTML file. [Note that we use the `::` notation here to show that you should use the `datatable()` function from the `DT` package. You can use this syntax to call a single function directly without having run `library(DT)` (as long as you have the `DT` package installed on your machine). This syntax can also be helpful when two loaded packages have functions with the same name, as you can specify exactly which function you want to use. For the purposes of the assignment you can use either method to use the `datatable()` function.] 
 
 <!--  *Q3 rubric: 1 pt for having the following command, or a working version of it.* -->
-```{r, results='hide', eval=FALSE}
+```{r, results='hide', echo=FALSE}
 datatable(gapminder)
 ```
 
@@ -55,7 +55,7 @@ datatable(gapminder)
 
 <!--  *Q4 rubric: 0 pt for specifying geom_point(), 0 point for correct aesthetics.* -->
 
-```{r, fig.height=3, fig.width=4}
+```{r, fig.height=3, fig.width=4, message=FALSE, echo=FALSE}
 # Base R plot
 ggplot(data = gapminder, aes(x = gdpPercap, y = lifeExp)) + 
   geom_point()
@@ -78,7 +78,7 @@ It should look something like the graph shown below
 
 <!--  *Q5 rubric: 1 pt for axis labels and title added correctly. 1 pt for using scale_x_log10(). 1 pt for defining alpha as a constant value inside geom_point (not inside ggplot, as then it would apply to the smooth line too).* -->
 
-```{r, fig.height=3, fig.width=4, message=F}
+```{r, fig.height=3, fig.width=4, message=FALSE, echo=FALSE}
 p <- ggplot(data = gapminder, aes(x = gdpPercap, y = lifeExp)) + 
   geom_point(alpha=.5) + 
   geom_smooth() +
@@ -94,7 +94,7 @@ p
 
 <!--  *Q6 rubric: 1 point for successful application of a new theme.* -->
 
-```{r, fig.show='hide'}
+```{r, fig.show='hide', include=FALSE, eval=FALSE}
 theme_set(theme_bw())
 p
 ```
@@ -105,7 +105,7 @@ p
 <!--  *Q7 rubric: 1 pts for using facet_wrap with continent correctly. 0 point using geom_smooth(se=FALSE).* -->
 
 
-```{r, fig.show='hide'}
+```{r, fig.show='hide', include=FALSE}
 ggplot(data = gapminder, aes(x = gdpPercap, y = lifeExp)) + 
   geom_point(alpha=0.2) +
   geom_smooth(se=FALSE) + 
@@ -115,16 +115,16 @@ ggplot(data = gapminder, aes(x = gdpPercap, y = lifeExp)) +
 ```
 
 
-8) Pick 5 countries that you are interested in comparing. Create a new data frame that has only observations from those 5 countries. Build off of the figure created in question 5 (i.e. do not use facets). In this plot, color your points by country. Also, connect the points showing the trajectory of each country across time. (Hint: to connect the points use the `group` aesthetic and `geom_line()`.) 
+8) Pick 5 countries that you are interested in comparing. Create a new data frame that has only observations from those 5 countries. Build off of the figure created in question 5 (i.e. do not use facets). In this plot, color your points by country. Also, connect the points showing the trajectory of each country across time. (Hint: to connect the points use the `group` aesthetic and `geom_path()`.) 
 
 <!-- *Q8 rubric: 1 pt for filtering the data so that only 5 countries are present. 1 pts for mapping the country variable to the group aesthetic (either within geom_line() or within the overall ggplot() call is ok).* -->
 
-```{r, fig.show='hide'}
+```{r, fig.show='hide', include=FALSE}
 gapminder_5 <- filter(gapminder, country %in% c("Peru", "Afghanistan", "Mali", "United States", "China"))
 
 ggplot(data = gapminder_5, aes(x = gdpPercap, y = lifeExp, color=country, group=country)) + 
   geom_point() +
-  geom_line() +
+  geom_path() +
   labs(y = "Life Expectancy", title = "Life Expectancy by GDP for different continents", x="GDP per capita") +  
   scale_x_log10()
 ```
@@ -134,7 +134,7 @@ ggplot(data = gapminder_5, aes(x = gdpPercap, y = lifeExp, color=country, group=
 
 <!--  *Q9 rubric: 1 pt for a call to plotly that generates a plotly figure. Note that the below code works because it automatically uses the previously generated figure. But other ways to use ggplotly (as long as it recreates the figure from Q7) are ok too..* -->
 
-```{r, fig.show='hide', eval=FALSE}
+```{r, fig.show='hide', eval=FALSE, include=FALSE}
 ggplotly()
 ```
 
@@ -156,7 +156,7 @@ ggplotly()
     d) Someone looks over your shoulder at the resulting plot and says: "Wow, atheists make more money than Buddhists, huh?" What is one problem with the statistical logic that they used to draw that conclusion?
 
 <!-- part A: 1 point for correct answer, many ways to get there, here is one. -->
-```{r, eval=FALSE}
+```{r, eval=FALSE, include=FALSE}
 # answer to part A
 sum(colSums(relig_income[,-1]))
 # 35556
@@ -165,7 +165,7 @@ sum(colSums(relig_income[,-1]))
 
 <!-- part B/C: 1 point for correct usage of pivot_longer, 1 point for releveling the factor, 1 point for correct geoms/aesthetics -->
     
-```{r, fig.show='hide'}
+```{r, fig.show='hide', include=FALSE}
 relig_income_long <- relig_income %>%
   pivot_longer(!religion, names_to = "income", values_to = "count") %>%
   filter(religion %in% c("Atheist", "Muslim", "Buddhist")) %>% 
@@ -188,7 +188,7 @@ relig_income_long <- relig_income %>%
 ```
 
 
-```{r, fig.show='hide'}
+```{r, fig.show='hide', include=FALSE}
 ggplot(relig_income_long, 
        aes(x = income,
            y = count,

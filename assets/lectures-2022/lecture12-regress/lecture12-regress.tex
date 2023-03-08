@@ -1,0 +1,590 @@
+%% beamer/knitr slides
+%% for Statistical Modeling and Data Visualization course @ UMass
+%% Nicholas Reich: nick [at] schoolph.umass.edu
+
+
+\documentclass[table]{beamer}\usepackage[]{graphicx}\usepackage[]{color}
+% maxwidth is the original width if it is less than linewidth
+% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+\let\hlipl\hlkwb
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+
+
+\input{../../slide-includes/standard-knitr-beamer-preamble}
+
+%        The following variables are assumed by the standard preamble:
+%        Global variable containing module name:
+
+\title{Multiple Linear Regression}
+%	Global variable containing module shortname:
+%		(Currently unused, may be used in future.)
+\newcommand{\ModuleShortname}{modeling}
+%	Global variable containing author name:
+\author{Nicholas G Reich}
+%	Global variable containing text of license terms:
+\newcommand{\LicenseText}{Derivative of OpenIntro slides, released under a CC BY-NC-SA license.}
+%	Instructor: optional, can leave blank.
+%		Recommended format: {Instructor: Jane Doe}
+\newcommand{\Instructor}{}
+%	Course: optional, can leave blank.
+%		Recommended format: {Course: Biostatistics 101}
+\newcommand{\Course}{}
+
+%%%%%%%% FROM TEX FILE
+%%% To get rid of solutions on handouts:
+\newcommand{\soln}[1]{\textit{#1}}				% For slides
+%\newcommand{\soln}[1]{ }	% For handouts
+
+\newcommand{\solnGr}[1]{#1}
+%\newcommand{\solnGr}{ }
+
+%\input{../../slide-includes/lec_style.tex}
+%%%%%%%% END FROM TEX FILE
+
+
+
+\input{../../slide-includes/shortcuts}
+\usepackage{bbm}
+
+\hypersetup{colorlinks,linkcolor=,urlcolor=MainColor}
+
+
+%	******	Document body begins here	**********************
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+
+%	Title page
+\begin{frame}[plain]
+	\titlepage
+\end{frame}
+
+%	******	Everything through the above line must be placed at
+%		the top of any TeX file using the statsTeachR standard
+%		beamer preamble.
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\section{A multiple regression example}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+\frametitle{Modeling kid's test scores}
+
+Setting: a model for cognitive test scores of 434 three- and four-year-old children using characteristics of their mothers. Data are from a survey of adult American women and their children - a subsample from the National Longitudinal Survey of Youth.
+
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{library}\hlstd{(rstanarm)}
+\hlkwd{data}\hlstd{(}\hlstr{"kidiq"}\hlstd{)}
+\hlkwd{head}\hlstd{(kidiq)}
+\end{alltt}
+\begin{verbatim}
+##   kid_score mom_hs    mom_iq mom_age
+## 1        65      1 121.11753      27
+## 2        98      1  89.36188      25
+## 3        85      1 115.44316      27
+## 4        83      1  99.44964      25
+## 5       115      1  92.74571      27
+## 6        98      0 107.90184      18
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+% {\small
+% \begin{center}
+% \begin{tabular}{rrlrlr}
+%   \hline
+%  & kid\_score & mom\_hs & mom\_iq & mom\_work & mom\_age \\
+%   \hline
+% 1 &  65 & yes & 121.12 & yes &  27 \\
+%   \vdots \\
+%   5 & 115 & yes & 92.75 & yes &  27 \\
+%   6 &  98 & no & 107.90 & no &  18 \\
+%   \vdots \\
+%   434 &  70 & yes & 91.25 & yes &  25 \\
+%    \hline
+% \end{tabular}
+% \end{center}
+% }
+
+\vfill
+
+{\tiny Gelman, Hill. \textit{Data Analysis Using Regression and Multilevel/Hierarchical Models}. (2007) Cambridge University Press.}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+\frametitle{Exploratory analysis}
+
+\scriptsize
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{library}\hlstd{(GGally)}
+\hlstd{kidiq}\hlopt{$}\hlstd{mom_hs} \hlkwb{<-} \hlkwd{factor}\hlstd{(kidiq}\hlopt{$}\hlstd{mom_hs,} \hlkwc{levels}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,}\hlnum{1}\hlstd{),} \hlkwc{labels}\hlstd{=}\hlkwd{c}\hlstd{(}\hlstr{"no"}\hlstd{,} \hlstr{"yes"}\hlstd{))}
+\hlkwd{ggpairs}\hlstd{(kidiq)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-2-1} 
+\end{knitrout}
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{What might we want to know?}
+
+\begin{block}{What impact does a mom's education have on her child's intelligence?}
+(as measured by a standardized test)
+\end{block}
+
+\vspace{6em}
+
+\begin{block}{Does the relationship change when we account for other characteristics about the mom?}
+\end{block}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+\frametitle{Interpreting an SLR coefficient}
+
+What is the correct interpretation of the coefficient for mom's high school status?
+
+\scriptsize
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{fm} \hlkwb{<-} \hlkwd{lm}\hlstd{(kid_score} \hlopt{~} \hlstd{mom_hs,} \hlkwc{data}\hlstd{=kidiq)}
+\hlkwd{round}\hlstd{(}\hlkwd{summary}\hlstd{(fm)}\hlopt{$}\hlstd{coef,} \hlnum{3}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+##             Estimate Std. Error t value Pr(>|t|)
+## (Intercept)   77.548      2.059  37.670        0
+## mom_hsyes     11.771      2.322   5.069        0
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+\pause
+
+Kids with mothers who finished high school tend to score on average 11.8 points higher on the IQ test compared to kids whose mothers did not finish high school.
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+\frametitle{Interpreting uncertainty in an SLR coefficient}
+
+\scriptsize
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{confint}\hlstd{(fm)}
+\end{alltt}
+\begin{verbatim}
+##                 2.5 %   97.5 %
+## (Intercept) 73.502246 81.59453
+## mom_hsyes    7.206598 16.33592
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+Kids with mothers who finished high school tend to score on average 11.8 points higher on the IQ test compared to kids whose mothers did not finish high school (95\% CI: 7.2 - 16.3).
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+\frametitle{What percent of the variation is explained by a model?}
+
+
+$R^2$ is a common metric. It is defined as the percent of variation in the outcome described by a model:
+
+\begin{eqnarray*}
+ R^2 & = & \frac{\text{explained variability in }y}{\text{total variability in }y} \\
+     & = & 1-\frac{\text{unexplained variability in }y}{\text{total variability in }y} \\
+     & = & 1-\frac{\text{variation of model residuals}}{\text{total variability in }y} \\
+\end{eqnarray*}
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+\frametitle{What percent of the variation in kid IQ is explained by mom HS?}
+
+
+\begin{eqnarray*}
+ R^2 & = & 1-\frac{\text{variation of model residuals}}{\text{total variability in }y} \\
+     & = & 1- \frac{\sum_i (y_i - \hat y_i)^2}{\sum_i (y_i - \bar y_i)^2}
+\end{eqnarray*}
+
+\scriptsize
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlnum{1} \hlopt{-} \hlkwd{sum}\hlstd{(} \hlkwd{resid}\hlstd{(fm)}\hlopt{^}\hlnum{2} \hlstd{)} \hlopt{/} \hlkwd{sum}\hlstd{( (kidiq}\hlopt{$}\hlstd{kid_score}\hlopt{-}\hlkwd{mean}\hlstd{(kidiq}\hlopt{$}\hlstd{kid_score))}\hlopt{^}\hlnum{2} \hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.0561294
+\end{verbatim}
+\begin{alltt}
+\hlkwd{summary}\hlstd{(fm)}\hlopt{$}\hlstd{r.squared}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.0561294
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+\frametitle{Interpreting an MLR coefficient}
+
+What does this model look like in terms of math?
+
+\scriptsize
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{fm1} \hlkwb{<-} \hlkwd{lm}\hlstd{(kid_score} \hlopt{~} \hlstd{mom_hs} \hlopt{+} \hlstd{mom_iq} \hlopt{+} \hlstd{mom_age,} \hlkwc{data}\hlstd{=kidiq)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+\frametitle{Interpreting an MLR coefficient}
+
+What is the correct interpretation of the coefficient for mom's high school status?
+
+\scriptsize
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{coef}\hlstd{(fm1)}
+\end{alltt}
+\begin{verbatim}
+## (Intercept)   mom_hsyes      mom_iq     mom_age 
+##  20.9846620   5.6471512   0.5625443   0.2247505
+\end{verbatim}
+\begin{alltt}
+\hlkwd{confint}\hlstd{(fm1)}
+\end{alltt}
+\begin{verbatim}
+##                  2.5 %     97.5 %
+## (Intercept)  3.0394352 38.9298887
+## mom_hsyes    1.2097371 10.0845653
+## mom_iq       0.4433466  0.6817419
+## mom_age     -0.4253280  0.8748289
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+{\bf Controlling for a mom's age and score on an IQ test}, kids with mothers who finished high school scored on average 5.6 points higher on the IQ test compared to kids whose mothers did not finish high school (95\% CI: 1.2 - 10.1).
+
+Could also say, {\bf holding a mom's age and IQ test score constant}, kids with mothers...
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+\frametitle{How much variation is explained now?}
+
+\begin{eqnarray*}
+ R^2 & = & 1-\frac{\text{variation of model residuals}}{\text{total variability in }y} \\
+     & = & 1- \frac{\sum_i (y_i - \hat y_i)^2}{\sum_i (y_i - \bar y_i)^2}
+\end{eqnarray*}
+
+\scriptsize
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlnum{1} \hlopt{-} \hlkwd{sum}\hlstd{(} \hlkwd{resid}\hlstd{(fm1)}\hlopt{^}\hlnum{2} \hlstd{)} \hlopt{/} \hlkwd{sum}\hlstd{( (kidiq}\hlopt{$}\hlstd{kid_score}\hlopt{-}\hlkwd{mean}\hlstd{(kidiq}\hlopt{$}\hlstd{kid_score))}\hlopt{^}\hlnum{2} \hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.2149895
+\end{verbatim}
+\begin{alltt}
+\hlkwd{summary}\hlstd{(fm1)}\hlopt{$}\hlstd{r.squared}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.2149895
+\end{verbatim}
+\begin{alltt}
+\hlkwd{summary}\hlstd{(fm1)}\hlopt{$}\hlstd{adj.r.squared}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.2095127
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+\frametitle{$R^2$ vs. adjusted $R^2$}
+
+\renewcommand\arraystretch{1.25}
+\begin{center}
+\begin{tabular}{l | c  c}
+			& $R^2$	& Adjusted $R^2$ \\
+\hline
+Model 1 (Single-predictor)	& 0.056	& 0.054 \\
+Model 2 (Multiple)			& 0.215	& 0.210
+\end{tabular}
+\end{center}
+
+
+\begin{itemize}
+
+\item When \underline{any} variable is added to the model $R^2$ increases.
+
+\item But if the added variable doesn't really provide any new information, or is completely unrelated, adjusted $R^2$ does not increase.
+
+\end{itemize}
+
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+\frametitle{Adjusted $R^2$}
+
+
+\begin{eqnarray*}
+ R^2_{adj} & = & 1-\frac{\text{variation of model residuals}}{\text{total variability in }y} \cdot \frac{n - 1}{n - p - 1}
+\end{eqnarray*}
+where $n$ is the number of cases and $p$ is the number of predictors (explanatory variables) in the model.
+
+\begin{itemize}
+
+\item Because $p$ is never negative, $R^2_{adj}$ will always be smaller than $R^2$.
+\item $R^2_{adj}$ applies a (arbitrary, but useful) penalty for the number of predictors included in the model.
+\item Therefore, one model selection criteria could be to choose models with higher $R^2_{adj}$ over others.
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]
+\frametitle{Taking stock}
+
+\begin{itemize}
+\item First model: ``mom finishing high school is really important.''
+\item Second model: ``meh. mom finishing high school is still important, but not as important after you account for her age and IQ score.''
+\item This is an example of ``confounding'': predictor variables are correlated with each other and only looking at a subset of them can mask the true association.
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]
+\frametitle{Model diagnostics}
+
+\begin{enumerate}
+\item Check basic model assumptions.
+\item Look at fitted relationships.
+\item Look at predictions from the fitted model.
+\end{enumerate}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]
+\frametitle{1. Check model assumptions}
+
+A smooth line through the residuals vs fitted plot should roughly have mean=0.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{plot}\hlstd{(fm1,} \hlkwc{which} \hlstd{=} \hlnum{1}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-9-1} 
+\end{knitrout}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]
+\frametitle{1. Check model assumptions}
+
+Points that have high residual value (in either direction) and high leverage should be examined.
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{plot}\hlstd{(fm1,} \hlkwc{which} \hlstd{=} \hlnum{5}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-10-1} 
+\end{knitrout}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]
+\frametitle{2. Look at fitted relationships}
+
+{\bf Added variable plots} for the outcome $Y$ and one predictor $X$ show residuals from $Y\sim Z$ plotted against the residuals from $X\sim Z$, where $Z$ are the other predictor variables. In this way, the plot shows the part of $Y$ and $X$ that are not explained by a linear relationship on the other variables. By mathematical definition the regression line through this plot has the same slope as the coefficient on $X$.
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]
+\frametitle{2. Added variable plots}
+
+\scriptsize
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{coef}\hlstd{(fm1)}
+\end{alltt}
+\begin{verbatim}
+## (Intercept)   mom_hsyes      mom_iq     mom_age 
+##  20.9846620   5.6471512   0.5625443   0.2247505
+\end{verbatim}
+\begin{alltt}
+\hlstd{car}\hlopt{::}\hlkwd{avPlots}\hlstd{(fm1)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-11-1} 
+\end{knitrout}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]
+\frametitle{3. Look at model predictions}
+
+Note that predictions can be for the mean value of a particular covariate profile (type="confidence"), or for a new observed data point value (type = "prediction")
+\scriptsize
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{newdata} \hlkwb{<-} \hlkwd{data.frame}\hlstd{(}\hlkwc{mom_hs} \hlstd{=} \hlstr{"yes"}\hlstd{,} \hlkwc{mom_iq} \hlstd{=} \hlnum{100}\hlstd{,} \hlkwc{mom_age} \hlstd{=} \hlnum{27}\hlstd{)}
+\hlkwd{predict}\hlstd{(fm1,} \hlkwc{newdata} \hlstd{= newdata,} \hlkwc{interval} \hlstd{=} \hlstr{"confidence"}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+##       fit      lwr      upr
+## 1 88.9545 85.74326 92.16575
+\end{verbatim}
+\begin{alltt}
+\hlkwd{predict}\hlstd{(fm1,} \hlkwc{newdata} \hlstd{= newdata,} \hlkwc{interval} \hlstd{=} \hlstr{"prediction"}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+##       fit      lwr      upr
+## 1 88.9545 53.14235 124.7666
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
