@@ -3,8 +3,6 @@ library(tidyverse)
 library(lubridate)
 library(ggridges)
 
-Sys.setenv(SPOTIFY_CLIENT_ID = '6cb1ccd66fef44e082064ee3c74cd56d')
-Sys.setenv(SPOTIFY_CLIENT_SECRET = '0b1880256d454fff87772a6682e61d5e')
 
 access_token <- get_spotify_access_token()
 
