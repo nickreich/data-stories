@@ -12,7 +12,7 @@ Note: some of the content of this file is based on [the `spotifyr` help files](h
 
 ## Your assignment
 
-You should create a new `.R` script file (note, DO NOT create a `.Rmd` file). Make a new directory for "in-class code" in your root directory for this project. You could call it `class-code` or something like that. Save this R file in that directory. Copy the relevant and necessary code from below into your script as you go, editing as needed.
+You should create a new `.R` script file (note, DO NOT create a `.Rmd` file). If you don't already have one, make a new directory for "in-class code" in your root directory for this project. You could call it `class-code` or something like that. To be organized about it all, you are encouraged to make this a separate folder from where you store your assignments. Save this R file in that directory. Copy the relevant and necessary code from below into your script as you go, editing as needed.
 
 Goals for this exercise
 
@@ -24,15 +24,15 @@ Goals for this exercise
 ## Setting up things with Spotify
 
 1. If you don't already have one make yourself a Spotify account. You don't need to pay for a subscription, a free account should work fine.
-2. Register your account with [the Spotify for Developers system](https://developer.spotify.com/dashboard/login).
-3. Once you've linked your account as a Spotify "developer" then you should be able to visit [this Dashboard page](https://developer.spotify.com/dashboard/applications) and see a green button to "Create an app". Click that green button.
+2. Register your account with [the Spotify for Developers system](https://developer.spotify.com/dashboard/login). You might also have to verify your email.
+3. Once you've linked your account as a Spotify "developer" then you should be able to visit [this Dashboard page](https://developer.spotify.com/dashboard) and see a button to "Create an app". Click that button.
 4. The details/name of the app that you create are not important. Name it something like "access for spotifyr", or something else of your choosing.
 5. Once the app has been created you should see it in your dashboard page. If you click on the app, you should see an "Edit settings" button. Click on this and in the "Redirect URLs" section, add this text: `http://localhost:1410/`.
 6. Note also that under the name of your app you should see a long alphanumeric string of letters after the words "Client ID". You should also see green text that says "SHOW CLIENT SECRET". If you click on that, you will see a second long string called "Client Secret". You will need both of these items further down
 
 ## Installing the necessary packages
 
-The following packages will be used in this tutorial. Note that the following lines will install packages and you should run them once in your console and should NOT include them in your final Rmd file, as then the packages would be installed every time the file is knit. You only need to install them once and LOAD them via `library()` every time the file is knit.
+The following packages will be used in this tutorial. Note that the following lines will install packages and you should run them once in your console and should NOT include them in your final R file, as then the packages would be installed every time the file is run You only need to install them once and LOAD them via `library()` every time the file is knit.
 
 ```{r install, eval=FALSE}
 install.packages("spotifyr")
@@ -53,8 +53,6 @@ library(ggridges)
 Additionally, copy your "Client ID" and "Client Secret" mentioned above, and put them in below where it says `xxx`. The following lines of code identify yourself to and authorize you to access the API.
 
 ```{r, include=FALSE}
-Sys.setenv(SPOTIFY_CLIENT_ID = '6cb1ccd66fef44e082064ee3c74cd56d')
-Sys.setenv(SPOTIFY_CLIENT_SECRET = '0b1880256d454fff87772a6682e61d5e')
 access_token <- get_spotify_access_token()
 ```
 
