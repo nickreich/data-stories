@@ -3,7 +3,7 @@
 %% Nicholas Reich: nick [at] schoolph.umass.edu
 
 
-\documentclass[table]{beamer}\usepackage[]{graphicx}\usepackage[]{color}
+\documentclass[table]{beamer}\usepackage[]{graphicx}\usepackage[]{xcolor}
 % maxwidth is the original width if it is less than linewidth
 % otherwise use linewidth (to make sure the graphics do not exceed the margin)
 \makeatletter
@@ -60,7 +60,7 @@
 
 %	The following variables are assumed by the standard preamble:
 %	Global variable containing module name:
-\title{Conceptual introduction to \tt ggplot}
+\title{Key concepts in data viz and {\tt ggplot}}
 %	Global variable containing module shortname:
 %		(Currently unused, may be used in future.)
 \newcommand{\ModuleShortname}{introRegression}
@@ -95,6 +95,227 @@
 %		beamer preamble.
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+
+\centering
+\Huge Types of data graphics
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Using graphics to explore data}
+
+\begin{itemize}
+    \item The most valuable graphics are often the simple ones you make for yourself.
+    \item Exploratory graphics can introduce you to a dataset.
+    \item Key goal: understand the variation.
+    \item What do you want to know about these data?
+\end{itemize}
+
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{data}\hlstd{(airquality)}
+\hlkwd{head}\hlstd{(airquality)}
+\end{alltt}
+\begin{verbatim}
+##   Ozone Solar.R Wind Temp Month Day
+## 1    41     190  7.4   67     5   1
+## 2    36     118  8.0   72     5   2
+## 3    12     149 12.6   74     5   3
+## 4    18     313 11.5   62     5   4
+## 5    NA      NA 14.3   56     5   5
+## 6    28      NA 14.9   66     5   6
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Exploratory summaries: airquality data}
+
+Understanding what the rows and columns are
+
+\scriptsize
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{nrow}\hlstd{(airquality)}
+\end{alltt}
+\begin{verbatim}
+## [1] 153
+\end{verbatim}
+\begin{alltt}
+\hlkwd{str}\hlstd{(airquality)}
+\end{alltt}
+\begin{verbatim}
+## 'data.frame':	153 obs. of  6 variables:
+##  $ Ozone  : int  41 36 12 18 NA 28 23 19 8 NA ...
+##  $ Solar.R: int  190 118 149 313 NA NA 299 99 19 194 ...
+##  $ Wind   : num  7.4 8 12.6 11.5 14.3 14.9 8.6 13.8 20.1 8.6 ...
+##  $ Temp   : int  67 72 74 62 56 66 65 59 61 69 ...
+##  $ Month  : int  5 5 5 5 5 5 5 5 5 5 ...
+##  $ Day    : int  1 2 3 4 5 6 7 8 9 10 ...
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Exploratory summaries: airquality data}
+
+Tabulating different values of the data using
+
+\scriptsize
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{stem}\hlstd{(airquality}\hlopt{$}\hlstd{Ozone)}
+\end{alltt}
+\begin{verbatim}
+## 
+##   The decimal point is 1 digit(s) to the right of the |
+## 
+##    0 | 1467778999
+##    1 | 01112233334444666688889
+##    2 | 0000111123333334478889
+##    3 | 001222455667799
+##    4 | 01444556789
+##    5 | 0299
+##    6 | 134456
+##    7 | 13367889
+##    8 | 024559
+##    9 | 1677
+##   10 | 8
+##   11 | 058
+##   12 | 2
+##   13 | 5
+##   14 | 
+##   15 | 
+##   16 | 8
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Exploratory summaries: airquality data}
+
+Tabulating different values of the data
+
+\scriptsize
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{table}\hlstd{(airquality}\hlopt{$}\hlstd{Month)}
+\end{alltt}
+\begin{verbatim}
+## 
+##  5  6  7  8  9 
+## 31 30 31 31 30
+\end{verbatim}
+\begin{alltt}
+\hlkwd{with}\hlstd{(airquality,} \hlkwd{table}\hlstd{(Month, Day))}
+\end{alltt}
+\begin{verbatim}
+##      Day
+## Month 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27
+##     5 1 1 1 1 1 1 1 1 1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1
+##     6 1 1 1 1 1 1 1 1 1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1
+##     7 1 1 1 1 1 1 1 1 1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1
+##     8 1 1 1 1 1 1 1 1 1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1
+##     9 1 1 1 1 1 1 1 1 1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1
+##      Day
+## Month 28 29 30 31
+##     5  1  1  1  1
+##     6  1  1  1  0
+##     7  1  1  1  1
+##     8  1  1  1  1
+##     9  1  1  1  0
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Univariate graphics: airquality data}
+
+{\bf Univariate graphics} show you the distribution of or the variation in the observations of a single variable.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-5-1} 
+\end{knitrout}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Bivariate graphics: airquality data}
+
+{\bf Bivariate graphics} show you the relationship between two variables in your dataset.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-6-1} 
+\end{knitrout}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Bivariate graphics: pairs plots!}
+
+Pairs plots are nice, but can take some time to render (especially for big datasets).
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{GGally}\hlopt{::}\hlkwd{ggpairs}\hlstd{(airquality)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-7-1} 
+\end{knitrout}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Multivariate graphics}
+
+{\bf Multivariate graphics} show you the relationship between multiple variables in your dataset. Rather than using some fancy "3D" plot, it is often better to use other features like color or shapes or facets to show a third or fourth variable.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-8-1} 
+\end{knitrout}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+
+\centering
+\Huge Using {\tt ggplot}
+
+
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -190,6 +411,26 @@ Or, asked another way, what aesthetics do we need for {\tt geom\_point}?
 }
 \end{frame}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{\tt{geom\_point}}
+
+\scriptsize
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{library}\hlstd{(ggplot2)}
+\hlkwd{theme_set}\hlstd{(}\hlkwd{theme_bw}\hlstd{())}
+\hlkwd{ggplot}\hlstd{(airquality)} \hlopt{+}
+  \hlkwd{geom_point}\hlstd{(}\hlkwd{aes}\hlstd{(}\hlkwc{x}\hlstd{=Temp,} \hlkwc{y}\hlstd{=Ozone,} \hlkwc{color}\hlstd{=}\hlkwd{factor}\hlstd{(Month),} \hlkwc{size}\hlstd{=Wind))}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-9-1} 
+\end{knitrout}
+
+
+\end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}[fragile]{\tt{geom\_line}}
@@ -208,6 +449,28 @@ Or, asked another way, what aesthetics do we need for {\tt geom\_line}?
 \end{itemize}
 }
 \end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{\tt{geom\_line}}
+
+\scriptsize
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{airquality}\hlopt{$}\hlstd{Date} \hlkwb{<-} \hlstd{lubridate}\hlopt{::}\hlkwd{ymd}\hlstd{(}\hlkwd{paste}\hlstd{(}\hlnum{1973}\hlstd{, airquality}\hlopt{$}\hlstd{Month, airquality}\hlopt{$}\hlstd{Day))}
+\hlkwd{ggplot}\hlstd{(airquality,} \hlkwd{aes}\hlstd{(}\hlkwc{x}\hlstd{=Date,} \hlkwc{y}\hlstd{=Temp))} \hlopt{+}
+  \hlkwd{geom_line}\hlstd{()} \hlopt{+} \hlkwd{geom_point}\hlstd{(}\hlkwd{aes}\hlstd{(}\hlkwc{color}\hlstd{=Ozone))} \hlopt{+}
+  \hlkwd{scale_color_gradient}\hlstd{(}\hlkwc{low}\hlstd{=}\hlstr{"green"}\hlstd{,} \hlkwc{high}\hlstd{=}\hlstr{"red"}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-10-1} 
+\end{knitrout}
+
+
+\end{frame}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -260,7 +523,7 @@ A figure from \href{http://www.pnas.org/content/112/16/4999.full.pdf}{``Cities, 
 
 \begin{frame}[fragile]{Note-catcher}
 
-We have made the data from the CO2 emissions figure available on Moodle. As a group, you will be asked to complete the following tasks:
+We have made the data from the CO2 emissions figure available on Canvas. As a group, you will be asked to complete the following tasks:
 
 \begin{enumerate}
     \item Recreate the figure as close as possible to the original.
@@ -268,7 +531,7 @@ We have made the data from the CO2 emissions figure available on Moodle. As a gr
     \item Post your final figures on the Note-catcher document.
 \end{enumerate}
 
-At the end of class, the class will vote on which figure is (1) closest to the original and (2) the best improvement.
+The class will vote on which figure is (1) closest to the original and (2) the best improvement. Extra credit on a future homework assignment will be awarded to all members at the table(s) that win the votes.
 
 \begin{block}{NOTE}
 Everyone should be doing some coding here, and having a version of the graphic working on their laptop! Make sure it's not just 1-2 people typing the code and having it work for them.

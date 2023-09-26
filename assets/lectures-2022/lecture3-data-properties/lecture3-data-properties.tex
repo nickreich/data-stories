@@ -102,9 +102,9 @@
 \begin{frame}{Foundational concepts for data}
 
 
-\begin{block}{Unit of analysis}
+\begin{block}{Unit of observation}
 \bi
-	\myitem observational level at which data is collected and/or analyzed.
+	\myitem What uniquely defines a row of your dataset.
 \ei
 \end{block}
 
@@ -128,17 +128,15 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}{Unit of analysis or observation}
+\begin{frame}{Unit of observation}
 
-{\bf Conceptually}: the smallest unit at which data is collected and able to be analyzed. Note: this may be determined by design or convenience (what data happens to be available).
-
-\vspace{4em}
-
-{\bf In practice}: The unit that defines a row of your data frame.
+The minimum set of features that uniquely define a row of your data frame.
 
 \vspace{4em}
 
-{\bf For example}: If you have one observation for every state and every week, those together define your ``unit of observation'', or what makes every row in your dataset unique. You might call it a ``state-week''.
+Sometimes this is simple: a single song, a single person, a geographic location.
+
+
 % Multiple terms for this concept:
 %
 % \begin{itemize}
@@ -146,7 +144,18 @@
 %   \item ``observation'': prefered
 % \end{itemize}
 
+\end{frame}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Unit of observation}
+
+The minimum set of features that uniquely define a row of your data frame.
+
+\vspace{4em}
+
+But sometimes it is more complicated, like when you have multiple row for a person, or a song.
 
 \end{frame}
 
@@ -190,7 +199,7 @@ For the Sad Songs analysis:
 \bi
 	\myitem Each variable forms a column.
 	\myitem Each observation forms a row.
-	\myitem Each type of observational unit forms a table. (For more complicated analyses that may have several different ``units of analysis''.
+	\myitem Each type of observational unit forms a table.
 \ei
 \end{block}
 

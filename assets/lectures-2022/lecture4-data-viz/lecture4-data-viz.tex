@@ -3,7 +3,7 @@
 %% Nicholas Reich: nick [at] schoolph.umass.edu
 
 
-\documentclass[table]{beamer}\usepackage[]{graphicx}\usepackage[]{color}
+\documentclass[table]{beamer}\usepackage[]{graphicx}\usepackage[]{xcolor}
 % maxwidth is the original width if it is less than linewidth
 % otherwise use linewidth (to make sure the graphics do not exceed the margin)
 \makeatletter
@@ -17,9 +17,6 @@
 \makeatother
 
 \definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
-\makeatletter
-\@ifundefined{AddToHook}{}{\AddToHook{package/xcolor/after}{\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}}}
-\makeatother
 \newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
 \newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
 \newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
@@ -54,14 +51,6 @@
 \definecolor{messagecolor}{rgb}{0, 0, 0}
 \definecolor{warningcolor}{rgb}{1, 0, 1}
 \definecolor{errorcolor}{rgb}{1, 0, 0}
-\makeatletter
-\@ifundefined{AddToHook}{}{\AddToHook{package/xcolor/after}{
-\definecolor{shadecolor}{rgb}{.97, .97, .97}
-\definecolor{messagecolor}{rgb}{0, 0, 0}
-\definecolor{warningcolor}{rgb}{1, 0, 1}
-\definecolor{errorcolor}{rgb}{1, 0, 0}
-}}
-\makeatother
 \newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
 
 \usepackage{alltt}
@@ -293,6 +282,57 @@ e.g. points, lines, tiles ...
 % \end{column}
 % \end{columns}
 % \end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Research on reducing stereotyping from data viz}
+
+\begin{block}{Deficit thinking}
+``by emphasizing direct comparisons between groups, [data visualizations] create the impression that the groups with the worst outcomes (often marginalized groups) are personally deficient relative to the groups with the best outcomes (often majority groups).''
+\end{block}
+
+\includegraphics[width=.75\textwidth]{figure-static/blakely-deficit-framed-line-chart-example-redraw.png}
+
+\tiny (Figure credit: \href{https://3iap.com/what-can-go-wrong-racial-equity-data-visualization-deficit-thinking-VV8acXLQQnWvvg4NLP9LTA/}{Eli Holder and Pieta Blakely})
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Research on reducing stereotyping from data viz}
+
+\begin{block}{Show the variability!}
+The insight by this recent work is that showing the individual-level variability behind the individual summary numbers might reduce the degree to which consumers of data viz engage in deficit thinking.
+\end{block}
+
+\includegraphics[width=.75\textwidth]{figure-static/bar-vs-jitter-exp1.png}
+
+\tiny (Figure credit: \href{https://3iap.com/what-can-go-wrong-racial-equity-data-visualization-deficit-thinking-VV8acXLQQnWvvg4NLP9LTA/}{Eli Holder and Pieta Blakely})
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Research on reducing stereotyping from data viz}
+
+\begin{block}{Results from experiment show modest decreases in deficit thinking}
+``Personal attribution with Prediction Intervals was significantly lower than with Dot Plots.''
+
+However, I add that the differences are not that large in real terms (~44\% vs ~ 51\%), and the population studied was data-literate volunteers from Mechanical Turk (not terribly representative sample).
+\end{block}
+
+\includegraphics[width=\textwidth]{figure-static/exp2-result-summary.png}
+
+\tiny (Figure credit: \href{https://3iap.com/dispersion-disparity-equity-centered-data-visualization-research-project-Wi-58RCVQNSz6ypjoIoqOQ/}{Eli Holder and Pieta Blakely})
+
+
+\end{frame}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

@@ -10,7 +10,7 @@
 
 %	The following variables are assumed by the standard preamble:
 %	Global variable containing module name:
-\title{Conceptual introduction to \tt ggplot}
+\title{Key concepts in data viz and {\tt ggplot}}
 %	Global variable containing module shortname:
 %		(Currently unused, may be used in future.)
 \newcommand{\ModuleShortname}{introRegression}
@@ -45,6 +45,158 @@
 %		beamer preamble.
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+
+\centering
+\Huge Types of data graphics
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Using graphics to explore data}
+
+\begin{itemize}
+    \item The most valuable graphics are often the simple ones you make for yourself.
+    \item Exploratory graphics can introduce you to a dataset.
+    \item Key goal: understand the variation.
+    \item What do you want to know about these data?
+\end{itemize}
+
+
+<<>>=
+data(airquality)
+head(airquality)
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Exploratory summaries: airquality data}
+
+Understanding what the rows and columns are
+
+\scriptsize
+<<>>=
+nrow(airquality)
+
+str(airquality)
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Exploratory summaries: airquality data}
+
+Tabulating different values of the data using
+
+\scriptsize
+<<>>=
+stem(airquality$Ozone)
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Exploratory summaries: airquality data}
+
+Tabulating different values of the data
+
+\scriptsize
+<<>>=
+table(airquality$Month)
+
+with(airquality, table(Month, Day))
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Univariate graphics: airquality data}
+
+{\bf Univariate graphics} show you the distribution of or the variation in the observations of a single variable.
+
+<<echo=FALSE, warning=FALSE, message=FALSE, fig.height=4>>=
+library(ggplot2)
+library(gridExtra)
+theme_set(theme_bw())
+
+p <- ggplot(airquality)
+p1 <- p + geom_density(aes(Ozone)) + ggtitle("A density plot")
+p2 <- p + geom_histogram(aes(x=Ozone)) + ggtitle("A histogram")
+
+grid.arrange(p1, p2, nrow=1)
+@
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Bivariate graphics: airquality data}
+
+{\bf Bivariate graphics} show you the relationship between two variables in your dataset.
+
+<<echo=FALSE,warning=FALSE, message=FALSE, fig.height=4>>=
+p3 <- p + geom_boxplot(aes(x=factor(Month), y=Ozone)) + ggtitle("A boxplot")
+
+p4 <- ggplot(airquality, aes(x=Temp, y=Ozone)) + geom_point() + ggtitle("A scatterplot")
+
+grid.arrange(p3, p4, nrow=1)
+
+
+# p2 + geom_point() + geom_smooth()
+# p2 + geom_point() + geom_smooth(se=FALSE)
+#
+# p3 <- ggplot(airquality,
+#             aes(x=Temp, y=Ozone, color=factor(Month)))
+# p3 + geom_point() + geom_smooth(se=FALSE)
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Bivariate graphics: pairs plots!}
+
+Pairs plots are nice, but can take some time to render (especially for big datasets).
+<<fig.height=4, warning=FALSE, message=FALSE>>=
+GGally::ggpairs(airquality)
+@
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Multivariate graphics}
+
+{\bf Multivariate graphics} show you the relationship between multiple variables in your dataset. Rather than using some fancy "3D" plot, it is often better to use other features like color or shapes or facets to show a third or fourth variable.
+
+<<echo=FALSE, fig.height=4, warning=FALSE, message=FALSE>>=
+ggplot(airquality, aes(x=Temp, y=Ozone, shape=factor(Month), color=Day)) +
+  geom_point()
+@
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+
+\centering
+\Huge Using {\tt ggplot}
+
+
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -140,6 +292,21 @@ Or, asked another way, what aesthetics do we need for {\tt geom\_point}?
 }
 \end{frame}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{\tt{geom\_point}}
+
+\scriptsize
+<<fig.height=4, warning=FALSE, message=FALSE>>=
+library(ggplot2)
+theme_set(theme_bw())
+ggplot(airquality) +
+  geom_point(aes(x=Temp, y=Ozone, color=factor(Month), size=Wind))
+@
+
+
+\end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}[fragile]{\tt{geom\_line}}
@@ -158,6 +325,23 @@ Or, asked another way, what aesthetics do we need for {\tt geom\_line}?
 \end{itemize}
 }
 \end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{\tt{geom\_line}}
+
+\scriptsize
+<<fig.height=4, warning=FALSE, message=FALSE>>=
+airquality$Date <- lubridate::ymd(paste(1973, airquality$Month, airquality$Day))
+ggplot(airquality, aes(x=Date, y=Temp)) +
+  geom_line() + geom_point(aes(color=Ozone)) +
+  scale_color_gradient(low="green", high="red")
+@
+
+
+\end{frame}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -210,7 +394,7 @@ A figure from \href{http://www.pnas.org/content/112/16/4999.full.pdf}{``Cities, 
 
 \begin{frame}[fragile]{Note-catcher}
 
-We have made the data from the CO2 emissions figure available on Moodle. As a group, you will be asked to complete the following tasks:
+We have made the data from the CO2 emissions figure available on Canvas. As a group, you will be asked to complete the following tasks:
 
 \begin{enumerate}
     \item Recreate the figure as close as possible to the original.
@@ -218,7 +402,7 @@ We have made the data from the CO2 emissions figure available on Moodle. As a gr
     \item Post your final figures on the Note-catcher document.
 \end{enumerate}
 
-At the end of class, the class will vote on which figure is (1) closest to the original and (2) the best improvement.
+The class will vote on which figure is (1) closest to the original and (2) the best improvement. Extra credit on a future homework assignment will be awarded to all members at the table(s) that win the votes.
 
 \begin{block}{NOTE}
 Everyone should be doing some coding here, and having a version of the graphic working on their laptop! Make sure it's not just 1-2 people typing the code and having it work for them.
